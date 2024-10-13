@@ -11,22 +11,27 @@ body {
     color: #fff; /* Weißer Text, damit er sich vom Hintergrund abhebt */
 }
 
-/* Entferne den schwarzen Balken im Header */
+/* Header sollte transparent sein, sodass das Hintergrundbild sichtbar bleibt */
 header {
-    background-color: transparent; /* Transparent, damit das Hintergrundbild sichtbar bleibt */
+    background-color: transparent; /* Transparent, damit kein schwarzer Balken erscheint */
     color: #fff; /* Weißer Text */
-    padding: 20px 0;
+    padding: 0; /* Entferne Padding, um unnötigen Abstand zu vermeiden */
     text-align: center;
+    position: relative;
+    z-index: 1; /* Stellt sicher, dass Header-Inhalt über dem Hintergrundbild ist */
 }
 
 header h1 {
-    margin: 0;
+    margin: 20px 0; /* Gib dem Titel etwas Platz */
     font-size: 2.5rem;
 }
 
+/* Navigation transparent und in Weiß */
 nav ul {
     list-style: none;
     padding: 0;
+    margin: 0;
+    background-color: transparent; /* Transparenter Hintergrund */
 }
 
 nav ul li {
