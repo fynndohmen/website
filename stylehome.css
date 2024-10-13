@@ -61,14 +61,14 @@ section h2 {
     margin-top: 0;
 }
 
-/* E-Mail-Link in Mittelgrau */
+/* E-Mail-Link in dunklerem Grau */
 a[href^="mailto"] {
-    color: #aaa; /* Mittelgrau für E-Mail-Links */
+    color: #666; /* Dunkleres Grau für E-Mail-Links */
     text-decoration: none;
 }
 
 a[href^="mailto"]:hover {
-    color: #ccc; /* Helleres Grau bei Hover */
+    color: #888; /* Etwas helleres Grau bei Hover */
     text-decoration: underline;
 }
 
