@@ -3,13 +3,13 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #000; /* Schwarzer Hintergrund */
-    color: #fff; /* Weißer Text */
+    background-color: #fff; /* Weißer Hintergrund */
+    color: #000; /* Schwarzer Text */
 }
 
 header {
-    background-color: #000; /* Schwarzer Hintergrund */
-    color: #fff; /* Weißer Text */
+    background-color: #fff; /* Weißer Hintergrund */
+    color: #000; /* Schwarzer Text */
     padding: 10px 0;
     text-align: center;
 }
@@ -30,7 +30,7 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #fff; /* Weißer Text */
+    color: #000; /* Schwarzer Text */
     text-decoration: none;
 }
 
@@ -42,9 +42,9 @@ nav ul li a:hover {
 section {
     padding: 20px;
     margin: 20px;
-    background-color: #333; /* Dunkelgrauer Hintergrund für Abschnitte */
+    background-color: #f4f4f4; /* Heller Grauton für Abschnitte */
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(255,255,255,0.1); /* Weißer Schatten */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Dunkler Schatten */
 }
 
 section h2 {
@@ -55,8 +55,8 @@ section h2 {
 footer {
     text-align: center;
     padding: 10px;
-    background-color: #000; /* Schwarzer Hintergrund */
-    color: #fff; /* Weißer Text */
+    background-color: #fff; /* Weißer Hintergrund */
+    color: #000; /* Schwarzer Text */
     position: fixed;
     bottom: 0;
     width: 100%;
