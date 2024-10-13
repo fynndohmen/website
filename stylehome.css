@@ -61,6 +61,17 @@ section h2 {
     margin-top: 0;
 }
 
+/* E-Mail-Link in Mittelgrau */
+a[href^="mailto"] {
+    color: #aaa; /* Mittelgrau für E-Mail-Links */
+    text-decoration: none;
+}
+
+a[href^="mailto"]:hover {
+    color: #ccc; /* Helleres Grau bei Hover */
+    text-decoration: underline;
+}
+
 /* Footer-Stile */
 footer {
     text-align: center;
