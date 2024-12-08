@@ -52,13 +52,15 @@ nav ul li a:hover {
 section {
     padding: 20px;
     margin: 20px;
-    background-color: rgba(255, 255, 255, 0.3); /* Etwas dunkleres transparentes Weiß */
+    background-color: rgba(255, 255, 255, 0.3); /* Transparent für Seiten außer Projects */
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(255,255,255,0.05); /* Sehr leichter weißer Schatten */
 }
 
-section h2 {
-    margin-top: 0;
+/* Transparenten Hintergrund nur auf Projects entfernen */
+.projects-page section {
+    background-color: transparent; /* Entferne den transparenten Box-Hintergrund */
+    box-shadow: none; /* Entferne den Schatten */
 }
 
 /* Kategorien-Stile für die Projects-Seite */
@@ -71,8 +73,8 @@ section h2 {
 
 .category {
     text-align: center;
-    background-color: rgba(255, 255, 255, 0.7); /* Helleres transparentes Weiß */
-    border: 1px solid #fff; /* Weißer Rand */
+    background-color: #fff; /* Absolut weißer Hintergrund */
+    border: 1px solid #ddd; /* Hellgrauer Rand */
     padding: 20px;
     border-radius: 8px;
     flex: 1; /* Jede Kategorie nimmt gleich viel Platz ein */
@@ -82,15 +84,15 @@ section h2 {
 }
 
 .category img {
-    max-width: 80%; /* Bildbreite auf 80% der Kategorie begrenzen */
-    height: auto; /* Verhältnis beibehalten */
+    width: 33%; /* Reduziere die Breite der Bilder auf ein Drittel */
+    height: auto; /* Behalte die Proportionen bei */
     display: block; /* Verhindert zusätzlichen Abstand um das Bild */
     margin: 10px auto; /* Zentriert das Bild innerhalb der Box */
     border-radius: 8px; /* Runde die Ecken der Bilder */
 }
 
 .category:hover {
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2); /* Leichter Schlagschatten bei Hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Leichter Schlagschatten bei Hover */
 }
 
 .category a {
@@ -121,7 +123,7 @@ section h2 {
     }
 
     .category img {
-        max-width: 100%; /* Bilder passen sich der kleineren Breite an */
+        width: 50%; /* Bilder auf 50% Breite anpassen für kleinere Bildschirme */
     }
 }
 
