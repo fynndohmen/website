@@ -61,6 +61,56 @@ section h2 {
     margin-top: 0;
 }
 
+/* Kategorien-Stile für die Projects-Seite */
+.categories {
+    display: flex; /* Flexbox für nebeneinander liegende Kategorien */
+    justify-content: space-between; /* Gleichmäßiger Abstand zwischen Kategorien */
+    margin: 20px 0;
+    gap: 20px; /* Abstand zwischen den Kategorien */
+}
+
+.category {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Halbtransparenter Hintergrund */
+    border: 1px solid #fff; /* Weißer Rand */
+    padding: 20px;
+    border-radius: 8px;
+    flex: 1; /* Jede Kategorie nimmt gleich viel Platz ein */
+    max-width: 30%; /* Optionale Begrenzung der Breite */
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.category:hover {
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2); /* Leichter Schlagschatten bei Hover */
+}
+
+.category a {
+    text-decoration: none;
+    color: #fff; /* Weißer Text */
+}
+
+.category h3 {
+    margin-bottom: 10px;
+}
+
+.category p {
+    font-size: 14px;
+    color: #ccc; /* Hellgrauer Text */
+}
+
+/* Responsive Design für kleinere Bildschirme */
+@media (max-width: 768px) {
+    .categories {
+        flex-direction: column; /* Kategorien untereinander anzeigen */
+        align-items: center; /* Zentrieren */
+    }
+
+    .category {
+        max-width: 90%; /* Breite anpassen */
+        margin-bottom: 20px; /* Abstand zwischen Kategorien */
+    }
+}
+
 /* E-Mail-Link in dunklerem Grau */
 a[href^="mailto"] {
     color: #666; /* Dunkleres Grau für E-Mail-Links */
