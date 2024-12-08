@@ -41,11 +41,12 @@ nav ul li {
 
 nav ul li a {
     color: #fff; /* Weißer Text */
-    text-decoration: none;
+    text-decoration: none; /* Entfernt die Unterstreichung */
 }
 
 nav ul li a:hover {
-    text-decoration: underline;
+    color: #ddd; /* Ändert die Farbe bei Hover */
+    text-decoration: none; /* Beibehalten: Keine Unterstreichung */
 }
 
 /* Abschnitts-Stile */
@@ -132,7 +133,7 @@ a[href^="mailto"] {
 
 a[href^="mailto"]:hover {
     color: #888; /* Etwas helleres Grau bei Hover */
-    text-decoration: underline;
+    text-decoration: none; /* Entfernt Unterstreichung bei Hover */
 }
 
 /* Footer-Stile */
