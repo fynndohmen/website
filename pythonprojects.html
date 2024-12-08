@@ -6,7 +6,7 @@
     <title>Linux Blog</title>
     <link rel="stylesheet" href="stylehome.css">
 </head>
-<body>
+<body class="linux-page">
     <header>
         <h1>Linux Blog</h1>
         <nav>
@@ -19,7 +19,7 @@
     </header>
 
     <section id="blog-posts">
-        <!-- Blog-Einträge werden hier dynamisch geladen -->
+        <!-- Blog posts will be dynamically loaded here -->
     </section>
 
     <footer>
@@ -27,28 +27,35 @@
     </footer>
 
     <script>
-        // Lade die JSON-Daten und zeige sie auf der Seite an
-        fetch('blogposts.json')
-            .then(response => response.json())
+        // Load the JSON data and display it on the page
+        fetch('pythonprojectsblogposts.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
                 const blogContainer = document.getElementById('blog-posts');
-                
-                // Filtere nur die Linux-Einträge
-                const linuxPosts = data.filter(post => post.title.toLowerCase().includes("linux"));
 
-                // Sortiere nach Datum (neueste zuerst)
-                linuxPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+                // Sort posts by date (newest first)
+                data.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-                linuxPosts.forEach(post => {
+                data.forEach(post => {
                     const postElement = document.createElement('div');
                     postElement.classList.add('blog-post');
 
-                    // Titel
+                    // Title
                     const title = document.createElement('h2');
                     title.textContent = post.title;
                     postElement.appendChild(title);
 
-                    // Bilder
+                    // Short description
+                    const shortDescription = document.createElement('p');
+                    shortDescription.textContent = post.content[0];
+                    postElement.appendChild(shortDescription);
+
+                    // Images
                     post.images.forEach(image => {
                         const img = document.createElement('img');
                         img.src = image;
@@ -57,14 +64,14 @@
                         postElement.appendChild(img);
                     });
 
-                    // Inhalte
-                    post.content.forEach(paragraph => {
+                    // Detailed description
+                    post.description.forEach(paragraph => {
                         const para = document.createElement('p');
                         para.textContent = paragraph;
                         postElement.appendChild(para);
                     });
 
-                    // Datum
+                    // Date
                     const date = document.createElement('small');
                     date.textContent = `Posted on: ${post.date}`;
                     postElement.appendChild(date);
@@ -74,6 +81,10 @@
             })
             .catch(error => {
                 console.error('Error loading blog posts:', error);
+
+                // Display error message to the user
+                const blogContainer = document.getElementById('blog-posts');
+                blogContainer.innerHTML = '<p>Sorry, we could not load the blog posts at this time. Please try again later.</p>';
             });
     </script>
 </body>
