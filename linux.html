@@ -29,6 +29,20 @@
     <script>
         // Lade die JSON-Daten und zeige sie auf der Seite an
         fetch('linuxblogposts.json')
+    .then(response => {
+        console.log("Response Status:", response.status);
+        return response.json();
+    })
+    .then(data => {
+        console.log("Loaded Data:", data);
+        const blogContainer = document.getElementById('blog-posts');
+        const linuxPosts = data.filter(post => post.title.toLowerCase().includes("linux"));
+        console.log("Filtered Posts:", linuxPosts);
+    })
+    .catch(error => {
+        console.error('Error loading blog posts:', error);
+    });
+
             .then(response => response.json())
             .then(data => {
                 const blogContainer = document.getElementById('blog-posts');
