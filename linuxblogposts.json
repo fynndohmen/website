@@ -1,29 +1,17 @@
-[
-    {
-        "title": "Introduction to Linux",
-        "content": [
-            "Linux is a family of open-source Unix-like operating systems based on the Linux kernel.",
-            "It is widely used in servers, desktops, and embedded systems."
-        ],
-        "images": ["linux_image1.jpg", "linux_image2.jpg"],
-        "date": "2024-12-01"
-    },
-    {
-        "title": "Understanding Algorithms",
-        "content": [
-            "An algorithm is a step-by-step procedure to solve a problem.",
-            "It forms the backbone of computer programming and computational tasks."
-        ],
-        "images": ["algorithm_image1.jpg"],
-        "date": "2024-12-05"
-    },
-    {
-        "title": "Python for Data Science",
-        "content": [
-            "Python is a powerful programming language used for data analysis, machine learning, and more.",
-            "Its rich libraries make it a popular choice for developers."
-        ],
-        "images": ["python_image1.jpg", "python_image2.jpg"],
-        "date": "2024-12-07"
-    }
-]
+{
+    "title": "update.sh",
+    "content": [
+        "This Bash script automates the update and maintenance process for an Arch Linux system."
+    ],
+    "images": ["update_script.png"],
+    "description": [
+        "The script performs a series of steps to ensure the system is up-to-date:",
+        "1. It updates the Arch Linux keyring to ensure that the package sources are trusted.",
+        "2. It synchronizes the package database using `sudo pacman -Syy` to download the latest package information.",
+        "3. A full system update is performed with `sudo pacman -Syu`.",
+        "4. The script removes orphaned packages, which are no longer needed, using `pacman -Qtdq` and `pacman -Rns`.",
+        "5. It cleans the package cache to free up disk space.",
+        "6. Finally, it checks again for available updates and completes the process."
+    ],
+    "date": "2024-12-08"
+}
