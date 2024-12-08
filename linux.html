@@ -27,7 +27,7 @@
     </footer>
 
     <script>
-        // Fetch the JSON data and display it on the page
+        // Load the JSON data and display it on the page
         fetch('linuxblogposts.json')
             .then(response => {
                 if (!response.ok) {
@@ -37,14 +37,11 @@
             })
             .then(data => {
                 const blogContainer = document.getElementById('blog-posts');
-                
-                // Remove the filter to display all blog posts
-                const linuxPosts = data;
 
-                // Sort by date (newest first)
-                linuxPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+                // Display all posts from the JSON
+                data.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-                linuxPosts.forEach(post => {
+                data.forEach(post => {
                     const postElement = document.createElement('div');
                     postElement.classList.add('blog-post');
 
@@ -79,6 +76,10 @@
             })
             .catch(error => {
                 console.error('Error loading blog posts:', error);
+
+                // Display error message to the user
+                const blogContainer = document.getElementById('blog-posts');
+                blogContainer.innerHTML = '<p>Sorry, we could not load the blog posts at this time. Please try again later.</p>';
             });
     </script>
 </body>
