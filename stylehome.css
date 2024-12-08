@@ -137,100 +137,6 @@ nav ul li a:hover {
     text-decoration: none; /* Keine Unterstreichung */
 }
 
-/* Algorithms Seite */
-.algorithms-page #blog-posts {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.algorithms-page .blog-post {
-    width: 50%; /* 50% der Bildschirmbreite */
-    margin: 20px 0;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #fff; /* Entferne transparente Box */
-    color: #000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: left;
-}
-
-.algorithms-page .blog-post h2 {
-    color: #333;
-    margin-bottom: 10px;
-    text-decoration: none; /* Keine Unterstreichung */
-}
-
-.algorithms-page .blog-post p {
-    margin: 10px 0;
-    color: #555;
-    line-height: 1.6;
-    text-decoration: none; /* Keine Unterstreichung */
-}
-
-.algorithms-page .blog-post img {
-    max-width: 100%;
-    height: auto;
-    margin: 10px 0;
-    border-radius: 8px;
-}
-
-.algorithms-page .blog-post small {
-    display: block;
-    margin-top: 10px;
-    font-size: 12px;
-    color: #777;
-    text-decoration: none; /* Keine Unterstreichung */
-}
-
-/* Python Projects Seite */
-.python-projects-page #blog-posts {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.python-projects-page .blog-post {
-    width: 50%; /* 50% der Bildschirmbreite */
-    margin: 20px 0;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #fff; /* Entferne transparente Box */
-    color: #000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: left;
-}
-
-.python-projects-page .blog-post h2 {
-    color: #333;
-    margin-bottom: 10px;
-    text-decoration: none; /* Keine Unterstreichung */
-}
-
-.python-projects-page .blog-post p {
-    margin: 10px 0;
-    color: #555;
-    line-height: 1.6;
-    text-decoration: none; /* Keine Unterstreichung */
-}
-
-.python-projects-page .blog-post img {
-    max-width: 100%;
-    height: auto;
-    margin: 10px 0;
-    border-radius: 8px;
-}
-
-.python-projects-page .blog-post small {
-    display: block;
-    margin-top: 10px;
-    font-size: 12px;
-    color: #777;
-    text-decoration: none; /* Keine Unterstreichung */
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .projects-page .categories {
@@ -248,16 +154,12 @@ nav ul li a:hover {
         width: 50%;
     }
 
-    .linux-page .blog-post,
-    .algorithms-page .blog-post,
-    .python-projects-page .blog-post {
+    .linux-page .blog-post {
         width: 90%; /* Volle Breite auf kleinen Bildschirmen */
         padding: 15px;
     }
 
-    .linux-page .blog-post h2,
-    .algorithms-page .blog-post h2,
-    .python-projects-page .blog-post h2 {
+    .linux-page .blog-post h2 {
         font-size: 1.5rem;
     }
 }
