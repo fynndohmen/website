@@ -81,6 +81,13 @@ section h2 {
     color: #000; /* Schwarze Schrift */
 }
 
+.category img {
+    max-width: 80%; /* Bildbreite auf 80% der Kategorie begrenzen */
+    height: auto; /* Verhältnis beibehalten */
+    margin: 10px 0; /* Abstand oberhalb und unterhalb des Bildes */
+    border-radius: 8px; /* Runde die Ecken der Bilder */
+}
+
 .category:hover {
     box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2); /* Leichter Schlagschatten bei Hover */
 }
@@ -110,6 +117,10 @@ section h2 {
     .category {
         max-width: 90%; /* Breite anpassen */
         margin-bottom: 20px; /* Abstand zwischen Kategorien */
+    }
+
+    .category img {
+        max-width: 100%; /* Bilder passen sich der kleineren Breite an */
     }
 }
 
