@@ -11,4 +11,160 @@ body {
     color: #fff; /* Weißer Text, damit er sich vom Hintergrund abhebt */
 }
 
-/*
+/* Header sollte transparent sein, sodass das Hintergrundbild sichtbar bleibt */
+header {
+    background-color: transparent; /* Transparent, damit kein schwarzer Balken erscheint */
+    color: #fff; /* Weißer Text */
+    padding: 0; /* Entferne Padding, um unnötigen Abstand zu vermeiden */
+    text-align: center;
+    position: relative;
+    z-index: 1; /* Stellt sicher, dass Header-Inhalt über dem Hintergrundbild ist */
+}
+
+header h1 {
+    margin: 20px 0; /* Gib dem Titel etwas Platz */
+    font-size: 2.5rem;
+}
+
+/* Navigation transparent und in Weiß */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: transparent; /* Transparenter Hintergrund */
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff; /* Weißer Text */
+    text-decoration: none; /* Entfernt die Unterstreichung */
+}
+
+nav ul li a:hover {
+    color: #ddd; /* Ändert die Farbe bei Hover */
+    text-decoration: none; /* Beibehalten: Keine Unterstreichung */
+}
+
+/* Abschnitts-Stile */
+section {
+    padding: 20px;
+    margin: 20px;
+    background-color: rgba(255, 255, 255, 0.3); /* Transparent für Seiten außer Projects */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255,255,255,0.05); /* Sehr leichter weißer Schatten */
+}
+
+/* Transparenten Hintergrund nur auf Projects entfernen */
+.projects-page section {
+    background-color: transparent; /* Entferne den transparenten Box-Hintergrund */
+    box-shadow: none; /* Entferne den Schatten */
+}
+
+/* Kategorien-Stile für die Projects-Seite */
+.categories {
+    display: flex; /* Flexbox für nebeneinander liegende Kategorien */
+    justify-content: space-between; /* Gleichmäßiger Abstand zwischen Kategorien */
+    margin: 20px 0;
+    gap: 20px; /* Abstand zwischen den Kategorien */
+}
+
+.category {
+    text-align: center;
+    background-color: #fff; /* Absolut weißer Hintergrund */
+    border: 1px solid #ddd; /* Hellgrauer Rand */
+    padding: 20px;
+    border-radius: 8px;
+    flex: 1; /* Jede Kategorie nimmt gleich viel Platz ein */
+    max-width: 30%; /* Optionale Begrenzung der Breite */
+    transition: box-shadow 0.3s ease-in-out;
+    color: #000; /* Schwarze Schrift */
+    text-decoration: none; /* Entfernt Unterstreichung für gesamte Box */
+}
+
+.category img {
+    width: 33%; /* Reduziere die Breite der Bilder auf ein Drittel */
+    height: auto; /* Behalte die Proportionen bei */
+    display: block; /* Verhindert zusätzlichen Abstand um das Bild */
+    margin: 10px auto; /* Zentriert das Bild innerhalb der Box */
+    border-radius: 8px; /* Runde die Ecken der Bilder */
+}
+
+.category:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Leichter Schlagschatten bei Hover */
+}
+
+/* Entferne Unterstreichungen für Titel und Beschreibungen */
+.category h3, .category p {
+    text-decoration: none; /* Keine Unterstreichung */
+    color: inherit; /* Verwende die ursprüngliche Schriftfarbe */
+}
+
+.category a {
+    text-decoration: none; /* Entfernt die Unterstreichung für den Link */
+    color: inherit; /* Vererbt die Schriftfarbe */
+}
+
+/* Stile für Blogeinträge */
+.blog-post {
+    margin: 20px 0; /* Abstand zwischen den Blogeinträgen */
+    padding: 20px;
+    border: 1px solid #ddd; /* Hellgrauer Rand */
+    border-radius: 8px; /* Abgerundete Ecken */
+    background-color: #fff; /* Weißer Hintergrund */
+    color: #000; /* Schwarze Schrift */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Leichter Schlagschatten */
+}
+
+.blog-post h2 {
+    color: #333; /* Dunklere Farbe für Titel */
+    margin-bottom: 10px;
+}
+
+.blog-post p {
+    margin: 10px 0; /* Abstand zwischen Absätzen */
+    color: #555; /* Hellere Schriftfarbe für Text */
+    line-height: 1.6; /* Angenehmer Zeilenabstand */
+}
+
+.blog-post img {
+    max-width: 100%; /* Bilder füllen den verfügbaren Platz */
+    height: auto; /* Verhältnis bleibt erhalten */
+    margin: 10px 0; /* Abstand zwischen Text und Bild */
+    border-radius: 8px; /* Runde die Ecken der Bilder */
+}
+
+.blog-post small {
+    display: block;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #777; /* Leichte Schriftfarbe für das Datum */
+}
+
+/* Responsive Design für kleinere Bildschirme */
+@media (max-width: 768px) {
+    .categories {
+        flex-direction: column; /* Kategorien untereinander anzeigen */
+        align-items: center; /* Zentrieren */
+    }
+
+    .category {
+        max-width: 90%; /* Breite anpassen */
+        margin-bottom: 20px; /* Abstand zwischen Kategorien */
+    }
+
+    .category img {
+        width: 50%; /* Bilder auf 50% Breite anpassen für kleinere Bildschirme */
+    }
+
+    .blog-post {
+        padding: 15px;
+    }
+
+    .blog-post h2 {
+        font-size: 1.5rem;
+    }
+}
