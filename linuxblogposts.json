@@ -1,17 +1,19 @@
-{
-    "title": "update.sh",
-    "content": [
-        "This Bash script automates the update and maintenance process for an Arch Linux system."
-    ],
-    "images": ["update_script.png"],
-    "description": [
-        "The script performs a series of steps to ensure the system is up-to-date:",
-        "1. It updates the Arch Linux keyring to ensure that the package sources are trusted.",
-        "2. It synchronizes the package database using `sudo pacman -Syy` to download the latest package information.",
-        "3. A full system update is performed with `sudo pacman -Syu`.",
-        "4. The script removes orphaned packages, which are no longer needed, using `pacman -Qtdq` and `pacman -Rns`.",
-        "5. It cleans the package cache to free up disk space.",
-        "6. Finally, it checks again for available updates and completes the process."
-    ],
-    "date": "2024-12-08"
-}
+[
+    {
+        "title": "update.sh",
+        "content": [
+            "This Bash script automates the update and maintenance process for an Arch Linux system."
+        ],
+        "images": ["update_script.png"],
+        "description": [
+            "The script performs a series of steps to ensure the system is up-to-date:",
+            "1. It updates the Arch Linux keyring to ensure that the package sources are trusted.",
+            "2. It synchronizes the package database using `sudo pacman -Syy` to download the latest package information.",
+            "3. A full system update is performed with `sudo pacman -Syu`.",
+            "4. The script removes orphaned packages, which are no longer needed, using `pacman -Qtdq` and `pacman -Rns`.",
+            "5. It cleans the package cache to free up disk space.",
+            "6. Finally, it checks again for available updates and completes the process."
+        ],
+        "date": "2024-12-08"
+    }  
+]
