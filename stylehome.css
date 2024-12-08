@@ -53,64 +53,21 @@ nav ul li a:hover {
 section {
     padding: 20px;
     margin: 20px;
-    background-color: rgba(255, 255, 255, 0.3); /* Transparent für Seiten außer Projects */
+    background-color: rgba(255, 255, 255, 0.3); /* Transparent für Seiten außer Linux */
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(255,255,255,0.05); /* Sehr leichter weißer Schatten */
 }
 
-/* Transparenten Hintergrund nur auf Projects entfernen */
-.projects-page section {
-    background-color: transparent; /* Entferne den transparenten Box-Hintergrund */
-    box-shadow: none; /* Entferne den Schatten */
+/* Entferne den transparenten Hintergrund nur auf der Linux-Seite */
+#blog-posts {
+    background-color: transparent; /* Entfernt die transparente Box */
+    box-shadow: none; /* Entfernt den Schatten */
 }
 
-/* Kategorien-Stile für die Projects-Seite */
-.categories {
-    display: flex; /* Flexbox für nebeneinander liegende Kategorien */
-    justify-content: space-between; /* Gleichmäßiger Abstand zwischen Kategorien */
-    margin: 20px 0;
-    gap: 20px; /* Abstand zwischen den Kategorien */
-}
-
-.category {
-    text-align: center;
-    background-color: #fff; /* Absolut weißer Hintergrund */
-    border: 1px solid #ddd; /* Hellgrauer Rand */
-    padding: 20px;
-    border-radius: 8px;
-    flex: 1; /* Jede Kategorie nimmt gleich viel Platz ein */
-    max-width: 30%; /* Optionale Begrenzung der Breite */
-    transition: box-shadow 0.3s ease-in-out;
-    color: #000; /* Schwarze Schrift */
-    text-decoration: none; /* Entfernt Unterstreichung für gesamte Box */
-}
-
-.category img {
-    width: 33%; /* Reduziere die Breite der Bilder auf ein Drittel */
-    height: auto; /* Behalte die Proportionen bei */
-    display: block; /* Verhindert zusätzlichen Abstand um das Bild */
-    margin: 10px auto; /* Zentriert das Bild innerhalb der Box */
-    border-radius: 8px; /* Runde die Ecken der Bilder */
-}
-
-.category:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Leichter Schlagschatten bei Hover */
-}
-
-/* Entferne Unterstreichungen für Titel und Beschreibungen */
-.category h3, .category p {
-    text-decoration: none; /* Keine Unterstreichung */
-    color: inherit; /* Verwende die ursprüngliche Schriftfarbe */
-}
-
-.category a {
-    text-decoration: none; /* Entfernt die Unterstreichung für den Link */
-    color: inherit; /* Vererbt die Schriftfarbe */
-}
-
-/* Stile für Blogeinträge */
+/* Blogeintrag auf 50% des Bildschirms zentrieren */
 .blog-post {
-    margin: 20px 0; /* Abstand zwischen den Blogeinträgen */
+    margin: 20px auto; /* Zentriere den Blogeintrag horizontal */
+    width: 50%; /* Blogeintrag nimmt 50% der Breite ein */
     padding: 20px;
     border: 1px solid #ddd; /* Hellgrauer Rand */
     border-radius: 8px; /* Abgerundete Ecken */
@@ -119,17 +76,20 @@ section {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Leichter Schlagschatten */
 }
 
+/* Titel des Blogeintrags */
 .blog-post h2 {
     color: #333; /* Dunklere Farbe für Titel */
     margin-bottom: 10px;
 }
 
+/* Inhalt des Blogeintrags */
 .blog-post p {
     margin: 10px 0; /* Abstand zwischen Absätzen */
     color: #555; /* Hellere Schriftfarbe für Text */
     line-height: 1.6; /* Angenehmer Zeilenabstand */
 }
 
+/* Bilder im Blogeintrag */
 .blog-post img {
     max-width: 100%; /* Bilder füllen den verfügbaren Platz */
     height: auto; /* Verhältnis bleibt erhalten */
@@ -137,6 +97,7 @@ section {
     border-radius: 8px; /* Runde die Ecken der Bilder */
 }
 
+/* Datum des Blogeintrags */
 .blog-post small {
     display: block;
     margin-top: 10px;
@@ -161,6 +122,7 @@ section {
     }
 
     .blog-post {
+        width: 90%; /* Blogeintrag nimmt 90% der Breite ein auf kleineren Bildschirmen */
         padding: 15px;
     }
 
