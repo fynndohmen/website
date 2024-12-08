@@ -52,7 +52,7 @@ nav ul li a:hover {
 section {
     padding: 20px;
     margin: 20px;
-    background-color: rgba(255, 255, 255, 0.1); /* Heller, fast unsichtbarer Hintergrund für Abschnitte */
+    background-color: rgba(255, 255, 255, 0.3); /* Etwas dunkleres transparentes Weiß */
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(255,255,255,0.05); /* Sehr leichter weißer Schatten */
 }
@@ -71,13 +71,14 @@ section h2 {
 
 .category {
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.5); /* Halbtransparenter Hintergrund */
+    background-color: rgba(255, 255, 255, 0.7); /* Helleres transparentes Weiß */
     border: 1px solid #fff; /* Weißer Rand */
     padding: 20px;
     border-radius: 8px;
     flex: 1; /* Jede Kategorie nimmt gleich viel Platz ein */
     max-width: 30%; /* Optionale Begrenzung der Breite */
     transition: box-shadow 0.3s ease-in-out;
+    color: #000; /* Schwarze Schrift */
 }
 
 .category:hover {
@@ -86,16 +87,17 @@ section h2 {
 
 .category a {
     text-decoration: none;
-    color: #fff; /* Weißer Text */
+    color: #000; /* Schwarzer Text */
 }
 
 .category h3 {
     margin-bottom: 10px;
+    color: #000; /* Schwarze Überschrift */
 }
 
 .category p {
     font-size: 14px;
-    color: #ccc; /* Hellgrauer Text */
+    color: #000; /* Schwarzer Text */
 }
 
 /* Responsive Design für kleinere Bildschirme */
