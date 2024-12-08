@@ -1,94 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Blog</title>
-    <link rel="stylesheet" href="stylehome.css">
-</head>
-<body>
-    <header>
-        <h1>Linux Blog</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+<script>
+    // Lade die JSON-Daten und zeige sie auf der Seite an
+    fetch('linuxblogposts.json')
+        .then(response => {
+            console.log("Response Status:", response.status);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Loaded Data:", data);
 
-    <section id="blog-posts">
-        <!-- Blog-Einträge werden hier dynamisch geladen -->
-    </section>
+            const blogContainer = document.getElementById('blog-posts');
 
-    <footer>
-        <p>&copy; 2024 Your Name. All rights reserved.</p>
-    </footer>
+            // Filtere nur die Linux-Einträge
+            const linuxPosts = data.filter(post => post.title.toLowerCase().includes("linux"));
+            console.log("Filtered Posts:", linuxPosts);
 
-    <script>
-        // Lade die JSON-Daten und zeige sie auf der Seite an
-        fetch('linuxblogposts.json')
-    .then(response => {
-        console.log("Response Status:", response.status);
-        return response.json();
-    })
-    .then(data => {
-        console.log("Loaded Data:", data);
-        const blogContainer = document.getElementById('blog-posts');
-        const linuxPosts = data.filter(post => post.title.toLowerCase().includes("linux"));
-        console.log("Filtered Posts:", linuxPosts);
-    })
-    .catch(error => {
-        console.error('Error loading blog posts:', error);
-    });
+            // Sortiere nach Datum (neueste zuerst)
+            linuxPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-            .then(response => response.json())
-            .then(data => {
-                const blogContainer = document.getElementById('blog-posts');
-                
-                // Filtere nur die Linux-Einträge
-                const linuxPosts = data.filter(post => post.title.toLowerCase().includes("linux"));
+            linuxPosts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.classList.add('blog-post');
 
-                // Sortiere nach Datum (neueste zuerst)
-                linuxPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+                // Titel
+                const title = document.createElement('h2');
+                title.textContent = post.title;
+                postElement.appendChild(title);
 
-                linuxPosts.forEach(post => {
-                    const postElement = document.createElement('div');
-                    postElement.classList.add('blog-post');
-
-                    // Titel
-                    const title = document.createElement('h2');
-                    title.textContent = post.title;
-                    postElement.appendChild(title);
-
-                    // Bilder
-                    post.images.forEach(image => {
-                        const img = document.createElement('img');
-                        img.src = image;
-                        img.alt = post.title;
-                        img.classList.add('blog-image');
-                        postElement.appendChild(img);
-                    });
-
-                    // Inhalte
-                    post.content.forEach(paragraph => {
-                        const para = document.createElement('p');
-                        para.textContent = paragraph;
-                        postElement.appendChild(para);
-                    });
-
-                    // Datum
-                    const date = document.createElement('small');
-                    date.textContent = `Posted on: ${post.date}`;
-                    postElement.appendChild(date);
-
-                    blogContainer.appendChild(postElement);
+                // Bilder
+                post.images.forEach(image => {
+                    const img = document.createElement('img');
+                    img.src = image;
+                    img.alt = post.title;
+                    img.classList.add('blog-image');
+                    postElement.appendChild(img);
                 });
-            })
-            .catch(error => {
-                console.error('Error loading blog posts:', error);
+
+                // Inhalte
+                post.content.forEach(paragraph => {
+                    const para = document.createElement('p');
+                    para.textContent = paragraph;
+                    postElement.appendChild(para);
+                });
+
+                // Datum
+                const date = document.createElement('small');
+                date.textContent = `Posted on: ${post.date}`;
+                postElement.appendChild(date);
+
+                blogContainer.appendChild(postElement);
             });
-    </script>
-</body>
-</html>
+        })
+        .catch(error => {
+            console.error('Error loading blog posts:', error);
+        });
+</script>
