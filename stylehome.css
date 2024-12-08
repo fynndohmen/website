@@ -40,12 +40,12 @@ nav ul li {
 
 nav ul li a {
     color: #fff;
-    text-decoration: none;
+    text-decoration: none; /* Entfernt Unterstreichungen */
 }
 
 nav ul li a:hover {
     color: #ddd;
-    text-decoration: none;
+    text-decoration: none; /* Entfernt Unterstreichungen beim Hover */
 }
 
 /* Projects Seite */
@@ -67,6 +67,7 @@ nav ul li a:hover {
     max-width: 30%;
     transition: box-shadow 0.3s ease-in-out;
     color: #000;
+    text-decoration: none; /* Entfernt Unterstreichung der Box */
 }
 
 .projects-page .category img {
@@ -78,6 +79,15 @@ nav ul li a:hover {
 
 .projects-page .category:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.projects-page .category a {
+    text-decoration: none; /* Entfernt Unterstreichungen bei Links */
+    color: inherit; /* Übernimmt die Textfarbe */
+}
+
+.projects-page .category a:hover {
+    text-decoration: none; /* Keine Unterstreichung beim Hover */
 }
 
 /* Linux Seite */
@@ -102,12 +112,14 @@ nav ul li a:hover {
 .linux-page .blog-post h2 {
     color: #333;
     margin-bottom: 10px;
+    text-decoration: none; /* Keine Unterstreichung */
 }
 
 .linux-page .blog-post p {
     margin: 10px 0;
     color: #555;
     line-height: 1.6;
+    text-decoration: none; /* Keine Unterstreichung */
 }
 
 .linux-page .blog-post img {
@@ -122,6 +134,7 @@ nav ul li a:hover {
     margin-top: 10px;
     font-size: 12px;
     color: #777;
+    text-decoration: none; /* Keine Unterstreichung */
 }
 
 /* Responsive Design */
