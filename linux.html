@@ -38,7 +38,7 @@
             .then(data => {
                 const blogContainer = document.getElementById('blog-posts');
 
-                // Display all posts from the JSON
+                // Sort posts by date (newest first)
                 data.sort((a, b) => new Date(b.date) - new Date(a.date));
 
                 data.forEach(post => {
@@ -50,6 +50,11 @@
                     title.textContent = post.title;
                     postElement.appendChild(title);
 
+                    // Short description
+                    const shortDescription = document.createElement('p');
+                    shortDescription.textContent = post.content[0];
+                    postElement.appendChild(shortDescription);
+
                     // Images
                     post.images.forEach(image => {
                         const img = document.createElement('img');
@@ -59,8 +64,8 @@
                         postElement.appendChild(img);
                     });
 
-                    // Content
-                    post.content.forEach(paragraph => {
+                    // Detailed description
+                    post.description.forEach(paragraph => {
                         const para = document.createElement('p');
                         para.textContent = paragraph;
                         postElement.appendChild(para);
