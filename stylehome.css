@@ -84,7 +84,8 @@ section h2 {
 .category img {
     max-width: 80%; /* Bildbreite auf 80% der Kategorie begrenzen */
     height: auto; /* Verhältnis beibehalten */
-    margin: 10px 0; /* Abstand oberhalb und unterhalb des Bildes */
+    display: block; /* Verhindert zusätzlichen Abstand um das Bild */
+    margin: 10px auto; /* Zentriert das Bild innerhalb der Box */
     border-radius: 8px; /* Runde die Ecken der Bilder */
 }
 
