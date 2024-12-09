@@ -57,4 +57,21 @@
         ],
         "date": "2024-12-09"
     }
+    {
+    "title": "Archiving Log Files Automatically",
+    "content": [
+        "This Bash script automates the process of compressing and archiving log files older than 7 days."
+    ],
+    "images": ["zarchive_logs_script.png"],
+    "description": [
+        "The script performs the following steps to manage log files effectively:",
+        "1. **Find Log Files:** It searches for files in the `/var/log` directory that match the patterns `*.log` or `*.log.old` and are older than 7 days.",
+        "2. **Exclude Certain Logs:** Critical system log files like `wtmp`, `lastlog`, and `btmp` are excluded to ensure they remain accessible.",
+        "3. **Compress Logs:** Each matching file is compressed using `gzip` to save disk space.",
+        "4. **Move to Archive Directory:** The compressed files are moved to the `/var/log/archive` directory for better organization.",
+        "This script is particularly useful for system administrators to manage disk space and keep log files organized automatically."
+    ],
+    "date": "2024-12-09"
+}
+
 ]
