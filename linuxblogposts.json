@@ -21,7 +21,7 @@
         "content": [
             "This Bash script provides a robust solution for backing up your files with an optional custom name, efficient log management, and a straightforward approach to maintaining a clean backup process."
         ],
-        "images": ["backup_script.png"],
+        "images": ["zbackup_script.png"],
         "description": [
             "### Key Features of the Backup Script:",
             "1. **Customizable Backup Names:**",
