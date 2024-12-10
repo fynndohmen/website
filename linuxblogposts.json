@@ -69,7 +69,7 @@
         "2. **Exclude Certain Logs:** Critical system log files like `wtmp`, `lastlog`, and `btmp` are excluded to ensure they remain accessible.",
         "3. **Compress Logs:** Each matching file is compressed using `gzip` to save disk space.",
         "4. **Move to Archive Directory:** The compressed files are moved to the `/var/log/archive` directory for better organization.",
-        "This script is particularly useful for system administrators to manage disk space and keep log files organized automatically."
+        "This script is particularly useful for system administrators to manage disk space and keep log files organized automatically. "
     ],
     "date": "2024-12-09"
 }
