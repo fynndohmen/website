@@ -35,7 +35,37 @@
         "   - The function ensures that the sequence is not empty and the full sequence is present in the array before returning `True`."
     ],
     "date": "2024-12-09"
+},
+{
+    "title": "Determine the Winner of a Tournament",
+    "content": [
+        "This Python function calculates the winner of a tournament by processing match results and awarding points to teams based on their performance."
+    ],
+    "images": ["ztournament_winner.png"],
+    "description": [
+        "### Key Features of the Tournament Winner Script:",
+        "1. **Input Processing:**",
+        "   - Accepts a list of competitions, where each element contains two competing teams.",
+        "   - Accepts a results list that indicates the winner of each match. A value of `1` means the home team won, while `0` means the away team won.",
+        "2. **Points Calculation:**",
+        "   - Iterates through all matches, awarding 3 points to the winner of each competition.",
+        "   - Stores the points in a dictionary where the key is the team name, and the value is the total score.",
+        "3. **Determine the Winner:**",
+        "   - Identifies the team(s) with the highest total points after all competitions.",
+        "   - Handles tie situations by returning all teams with the highest score as co-winners.",
+        "### How It Works:",
+        "1. For each match in the `competitions` list, the script determines the winner based on the corresponding value in the `results` list.",
+        "2. Points are added to the winning team's total in the `points` dictionary.",
+        "3. After all matches, the script identifies the team(s) with the maximum score.",
+        "4. If one team has the highest score, it declares them as the winner. If there is a tie, it declares multiple winners.",
+        "### Benefits:",
+        "- Efficiently calculates the tournament winner even with large datasets.",
+        "- Handles tie-breaking scenarios gracefully.",
+        "- Provides clear and concise output with the winner or co-winners of the tournament."
+    ],
+    "date": "2024-12-10"
 }
+
 
     
 ]
