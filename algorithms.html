@@ -23,65 +23,78 @@
     </section>
 
     <script>
-        // Load the JSON data and display it on the page
-        fetch('algorithmsblogposts.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                const blogContainer = document.getElementById('blog-posts');
+        let currentPage = 1; // Start with the first JSON file
+        let isLoading = false; // Prevent multiple loads
 
-                // Sort posts by date (newest first)
-                data.sort((a, b) => new Date(b.date) - new Date(a.date));
+        function loadPage(page) {
+            if (isLoading) return;
+            isLoading = true;
 
-                data.forEach(post => {
-                    const postElement = document.createElement('div');
-                    postElement.classList.add('blog-post');
+            fetch(`algorithms_${page}.json`) // Load JSON file based on current page
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const blogContainer = document.getElementById('blog-posts');
 
-                    // Title
-                    const title = document.createElement('h2');
-                    title.textContent = post.title;
-                    postElement.appendChild(title);
+                    data.forEach(post => {
+                        const postElement = document.createElement('div');
+                        postElement.classList.add('blog-post');
 
-                    // Short description
-                    const shortDescription = document.createElement('p');
-                    shortDescription.textContent = post.content[0];
-                    postElement.appendChild(shortDescription);
+                        // Title
+                        const title = document.createElement('h2');
+                        title.textContent = post.title;
+                        postElement.appendChild(title);
 
-                    // Images
-                    post.images.forEach(image => {
-                        const img = document.createElement('img');
-                        img.src = image;
-                        img.alt = post.title;
-                        img.classList.add('blog-image');
-                        postElement.appendChild(img);
+                        // Short description
+                        const shortDescription = document.createElement('p');
+                        shortDescription.textContent = post.content[0];
+                        postElement.appendChild(shortDescription);
+
+                        // Images
+                        post.images.forEach(image => {
+                            const img = document.createElement('img');
+                            img.src = image;
+                            img.alt = post.title;
+                            img.classList.add('blog-image');
+                            postElement.appendChild(img);
+                        });
+
+                        // Detailed description
+                        post.description.forEach(paragraph => {
+                            const para = document.createElement('p');
+                            para.textContent = paragraph;
+                            postElement.appendChild(para);
+                        });
+
+                        // Date
+                        const date = document.createElement('small');
+                        date.textContent = `Posted on: ${post.date}`;
+                        postElement.appendChild(date);
+
+                        blogContainer.appendChild(postElement);
                     });
 
-                    // Detailed description
-                    post.description.forEach(paragraph => {
-                        const para = document.createElement('p');
-                        para.textContent = paragraph;
-                        postElement.appendChild(para);
-                    });
-
-                    // Date
-                    const date = document.createElement('small');
-                    date.textContent = `Posted on: ${post.date}`;
-                    postElement.appendChild(date);
-
-                    blogContainer.appendChild(postElement);
+                    isLoading = false; // Allow loading the next page
+                })
+                .catch(error => {
+                    console.error('Error loading blog posts:', error);
                 });
-            })
-            .catch(error => {
-                console.error('Error loading blog posts:', error);
+        }
 
-                // Display error message to the user
-                const blogContainer = document.getElementById('blog-posts');
-                blogContainer.innerHTML = '<p>Sorry, we could not load the blog posts at this time. Please try again later.</p>';
-            });
+        // Load the first page initially
+        loadPage(currentPage);
+
+        // Infinite scroll functionality
+        window.addEventListener('scroll', () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
+                currentPage++;
+                loadPage(currentPage);
+            }
+        });
     </script>
 </body>
 </html>
