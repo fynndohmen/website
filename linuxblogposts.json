@@ -71,7 +71,7 @@
         "4. **Move to Archive Directory:** The compressed files are moved to the `/var/log/archive` directory for better organization.",
         "This script is particularly useful for system administrators to manage disk space and keep log files organized automatically. "
     ],
-    "date": "2024-12-09"
+    "date": "2024-12-10"
 }
 
 ]
