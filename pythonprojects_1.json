@@ -1,29 +1,36 @@
 [
     {
-        "title": "Introduction to Linux",
+        "title": "Python Tic-Tac-Toe Game",
         "content": [
-            "Linux is a family of open-source Unix-like operating systems based on the Linux kernel.",
-            "It is widely used in servers, desktops, and embedded systems."
+            "This Python script implements a simple yet functional Tic-Tac-Toe game. Two players can play the game alternately on a 3x3 board. The program handles user inputs, checks for a winner, and declares a draw when no more moves are possible."
         ],
-        "images": ["linux_image1.jpg", "linux_image2.jpg"],
-        "date": "2024-12-01"
-    },
-    {
-        "title": "Understanding Algorithms",
-        "content": [
-            "An algorithm is a step-by-step procedure to solve a problem.",
-            "It forms the backbone of computer programming and computational tasks."
+        "images": ["python_projects_pics/tic_tac_toe.png"],
+        "description": [
+            "### Key Features of the Code:",
+            "1. **Board Display:** The `display` function creates a formatted string to represent the Tic-Tac-Toe board and prints it for players after every move.",
+            "2. **Winner Check:** The `check_winner` function checks rows, columns, and diagonals for a winning condition and ends the game if a player wins. It also declares a draw if no spaces are left.",
+            "3. **Player Moves:** The `play` function ensures that players can only place their marks on empty spaces, prompting them to try again if the field is already occupied.",
+            "4. **Game Loop:** The `while True` loop alternates between the two players, allowing them to make moves, updates the board, and checks for game-ending conditions.",
+            "### How It Works:",
+            "- The board is initialized as a 3x3 grid filled with `.` to indicate empty spaces.",
+            "- Players take turns entering their moves as coordinates (e.g., `0 1` for row 0 and column 1).",
+            "- After each move, the board is displayed, and the program checks if the move led to a win or a draw.",
+            "- The game ends when one player wins or all spaces are occupied.",
+            "### Example Use:",
+            "1. Start the game, and the empty board is displayed:",
+            "   ```",
+            "   ...",
+            "   ...",
+            "   ...",
+            "   ```",
+            "2. Player `O` makes the first move: `0 0`",
+            "   ```",
+            "   O..",
+            "   ...",
+            "   ...",
+            "   ```",
+            "3. Players alternate turns until the game ends with a win or a draw."
         ],
-        "images": ["algorithm_image1.jpg"],
-        "date": "2024-12-05"
-    },
-    {
-        "title": "Python for Data Science",
-        "content": [
-            "Python is a powerful programming language used for data analysis, machine learning, and more.",
-            "Its rich libraries make it a popular choice for developers."
-        ],
-        "images": ["python_image1.jpg", "python_image2.jpg"],
-        "date": "2024-12-07"
+        "date": "2024-12-09"
     }
 ]
