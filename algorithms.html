@@ -16,6 +16,7 @@
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
+        <input type="text" id="search-bar" placeholder="Search by tags..." oninput="searchPosts()" />
     </header>
 
     <section id="blog-posts">
@@ -24,6 +25,7 @@
 
     <script>
         let currentPage = 1;
+        let allPosts = [];
         const blogContainer = document.getElementById('blog-posts');
         let loading = false;
 
@@ -34,47 +36,12 @@
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 const data = await response.json();
-                
-                // Sort posts by date (newest first)
-                data.sort((a, b) => new Date(b.date) - new Date(a.date)); // New to Old
 
-                data.forEach(post => {
-                    const postElement = document.createElement('div');
-                    postElement.classList.add('blog-post');
+                // Add posts to allPosts for searching
+                allPosts = allPosts.concat(data);
 
-                    // Title
-                    const title = document.createElement('h2');
-                    title.textContent = post.title;
-                    postElement.appendChild(title);
-
-                    // Short description
-                    const shortDescription = document.createElement('p');
-                    shortDescription.textContent = post.content[0];
-                    postElement.appendChild(shortDescription);
-
-                    // Images
-                    post.images.forEach(image => {
-                        const img = document.createElement('img');
-                        img.src = image; // Using full paths from JSON
-                        img.alt = post.title;
-                        img.classList.add('blog-image');
-                        postElement.appendChild(img);
-                    });
-
-                    // Detailed description
-                    post.description.forEach(paragraph => {
-                        const para = document.createElement('p');
-                        para.textContent = paragraph;
-                        postElement.appendChild(para);
-                    });
-
-                    // Date
-                    const date = document.createElement('small');
-                    date.textContent = `Posted on: ${post.date}`;
-                    postElement.appendChild(date);
-
-                    blogContainer.appendChild(postElement);
-                });
+                // Render posts
+                renderPosts(data);
             } catch (error) {
                 console.error('Error loading blog posts:', error);
 
@@ -83,6 +50,55 @@
                     blogContainer.innerHTML = '<p>Sorry, we could not load the blog posts at this time. Please try again later.</p>';
                 }
             }
+        }
+
+        function renderPosts(posts) {
+            blogContainer.innerHTML = ''; // Clear existing posts
+            posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.classList.add('blog-post');
+
+                // Title
+                const title = document.createElement('h2');
+                title.textContent = post.title;
+                postElement.appendChild(title);
+
+                // Short description
+                const shortDescription = document.createElement('p');
+                shortDescription.textContent = post.content[0];
+                postElement.appendChild(shortDescription);
+
+                // Images
+                post.images.forEach(image => {
+                    const img = document.createElement('img');
+                    img.src = image; // Using full paths from JSON
+                    img.alt = post.title;
+                    img.classList.add('blog-image');
+                    postElement.appendChild(img);
+                });
+
+                // Detailed description
+                post.description.forEach(paragraph => {
+                    const para = document.createElement('p');
+                    para.textContent = paragraph;
+                    postElement.appendChild(para);
+                });
+
+                // Date
+                const date = document.createElement('small');
+                date.textContent = `Posted on: ${post.date}`;
+                postElement.appendChild(date);
+
+                blogContainer.appendChild(postElement);
+            });
+        }
+
+        function searchPosts() {
+            const searchInput = document.getElementById('search-bar').value.toLowerCase();
+            const filteredPosts = allPosts.filter(post =>
+                post.tags.some(tag => tag.toLowerCase().includes(searchInput))
+            );
+            renderPosts(filteredPosts);
         }
 
         function handleScroll() {
