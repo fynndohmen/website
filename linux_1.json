@@ -1,29 +1,77 @@
 [
     {
-        "title": "Introduction to Linux",
+        "title": "update.sh",
         "content": [
-            "Linux is a family of open-source Unix-like operating systems based on the Linux kernel.",
-            "It is widely used in servers, desktops, and embedded systems."
+            "This Bash script automates the update and maintenance process for an Arch Linux system."
         ],
-        "images": ["linux_image1.jpg", "linux_image2.jpg"],
-        "date": "2024-12-01"
+        "images": ["linux_pics/update_script.png"],
+        "description": [
+            "The script performs a series of steps to ensure the system is up-to-date:",
+            "1. It updates the Arch Linux keyring to ensure that the package sources are trusted.",
+            "2. It synchronizes the package database using `sudo pacman -Syy` to download the latest package information.",
+            "3. A full system update is performed with `sudo pacman -Syu`.",
+            "4. The script removes orphaned packages, which are no longer needed, using `pacman -Qtdq` and `pacman -Rns`.",
+            "5. It cleans the package cache to free up disk space.",
+            "6. Finally, it checks again for available updates and completes the process."
+        ],
+        "date": "2024-12-08"
     },
     {
-        "title": "Understanding Algorithms",
+        "title": "Customizable Backup Script with Log Rotation",
         "content": [
-            "An algorithm is a step-by-step procedure to solve a problem.",
-            "It forms the backbone of computer programming and computational tasks."
+            "This Bash script provides a robust solution for backing up your files with an optional custom name, efficient log management, and a straightforward approach to maintaining a clean backup process."
         ],
-        "images": ["algorithm_image1.jpg"],
-        "date": "2024-12-05"
+        "images": ["linux_pics/backup_script.png"],
+        "description": [
+            "### Key Features of the Backup Script:",
+            "1. **Customizable Backup Names:**",
+            "   - The script prompts you to name your backup. If no name is provided, it defaults to a timestamp-based name (e.g., `2024-12-09_14-30-00`).",
+            "   - This flexibility allows for easy organization and retrieval of backups.",
+            "2. **Backup Process:**",
+            "   - The `rsync` command ensures that your files from the source directory (`/home/user/documents`) are efficiently copied to the backup destination while maintaining the file structure.",
+            "   - The destination is dynamically created based on the name you provide or the default timestamp.",
+            "3. **Detailed Logging:**",
+            "   - Each backup process generates a detailed log stored in `/var/log`. The log tracks the success or failure of the backup operation, as well as any errors that occur during the file synchronization.",
+            "4. **Log Rotation:**",
+            "   - To avoid clutter, the script retains only the last 100 logs. Older logs are automatically deleted using a combination of `ls` and `xargs` commands.",
+            "   - This ensures that your log directory remains clean and manageable over time.",
+            "### How It Works:",
+            "1. The user is prompted to provide a custom name for the backup. If left blank, the script generates a name based on the current date and time.",
+            "2. The script creates a backup directory in `/backup/documents` using the provided or default name.",
+            "3. Files from the source directory (`/home/user/documents`) are synchronized to the backup destination using `rsync`.",
+            "4. After the backup, a log file is created in `/var/log` to record the details of the operation.",
+            "5. The script performs log rotation, retaining only the 100 most recent logs and deleting older ones.",
+            "### Example Use:",
+            "1. Run the script:",
+            "   ```bash",
+            "   ./backup_script.sh",
+            "   ```",
+            "2. When prompted, you can enter a custom name for the backup or press Enter to use the default timestamp-based naming.",
+            "3. The script creates the backup and generates a log file with details of the operation.",
+            "4. Log rotation ensures that the `/var/log` directory is not overwhelmed by old log files.",
+            "### Benefits:",
+            "- Reliable and efficient file synchronization using `rsync`.",
+            "- Flexibility in naming backups for better organization.",
+            "- Automated log rotation for improved system maintenance.",
+            "This script is an essential tool for anyone looking to automate their backup process on Linux while maintaining a clean log directory."
+        ],
+        "date": "2024-12-09"
     },
     {
-        "title": "Python for Data Science",
-        "content": [
-            "Python is a powerful programming language used for data analysis, machine learning, and more.",
-            "Its rich libraries make it a popular choice for developers."
-        ],
-        "images": ["python_image1.jpg", "python_image2.jpg"],
-        "date": "2024-12-07"
-    }
+    "title": "Archiving Log Files Automatically",
+    "content": [
+        "This Bash script automates the process of compressing and archiving log files older than 7 days."
+    ],
+    "images": ["linux_pics/archive_logs_script.png"],
+    "description": [
+        "The script performs the following steps to manage log files effectively:",
+        "1. **Find Log Files:** It searches for files in the `/var/log` directory that match the patterns `*.log` or `*.log.old` and are older than 7 days.",
+        "2. **Exclude Certain Logs:** Critical system log files like `wtmp`, `lastlog`, and `btmp` are excluded to ensure they remain accessible.",
+        "3. **Compress Logs:** Each matching file is compressed using `gzip` to save disk space.",
+        "4. **Move to Archive Directory:** The compressed files are moved to the `/var/log/archive` directory for better organization.",
+        "This script is particularly useful for system administrators to manage disk space and keep log files organized automatically. "
+    ],
+    "date": "2024-12-10"
+}
+
 ]
