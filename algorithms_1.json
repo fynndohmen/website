@@ -4,7 +4,7 @@
         "content": [
             "This Python function efficiently finds two numbers in a list that sum to a given target."
         ],
-        "images": ["ztwoNumberSum.png"],
+        "images": ["algorithms_pics/twoNumberSum.png"],
         "description": [
             "This code uses a dictionary to track numbers as it iterates through the array. Here's how it works:",
             "1. A dictionary called `seen` is initialized to store numbers that have been processed.",
@@ -20,7 +20,7 @@
     "content": [
         "This Python function checks if a given sequence is a subsequence of a larger array."
     ],
-    "images": ["zvalidate_subsequence.png"],
+    "images": ["algorithms_pics/validate_subsequence.png"],
     "description": [
         "### Explanation of the Code:",
         "1. **Function Purpose:**",
@@ -41,7 +41,7 @@
     "content": [
         "This Python function calculates the winner of a tournament by processing match results and awarding points to teams based on their performance."
     ],
-    "images": ["ztournament_winner.png"],
+    "images": ["algorithms_pics/tournament_winner.png"],
     "description": [
         "### Key Features of the Tournament Winner Script:",
         "1. **Input Processing:**",
@@ -70,7 +70,7 @@
     "content": [
         "This Python script determines the smallest amount of change that cannot be constructed using a given set of coin denominations."
     ],
-    "images": ["znon_constructible_change.png"],
+    "images": ["algorithms_pics/non_constructible_change.png"],
     "description": [
         "### Key Features of the Script:",
         "1. **Input Processing:**",
@@ -101,7 +101,7 @@
     "content": [
         "This Python script demonstrates how to transpose a matrix, which involves flipping rows and columns."
     ],
-    "images": ["zmatrix_transpose.png"],
+    "images": ["algorithms_pics/matrix_transpose.png"],
     "description": [
         "### Key Features of the Matrix Transposition Script:",
         "1. **Input Handling:**",
