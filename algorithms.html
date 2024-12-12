@@ -40,8 +40,11 @@
                 // Add posts to allPosts for searching
                 allPosts = allPosts.concat(data);
 
-                // Render posts
-                renderPosts(data);
+                // Sort all posts by date (newest to oldest) after adding new data
+                allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                // Render sorted posts
+                renderPosts(allPosts);
             } catch (error) {
                 console.error('Error loading blog posts:', error);
 
@@ -98,6 +101,8 @@
             const filteredPosts = allPosts.filter(post =>
                 post.tags.some(tag => tag.toLowerCase().includes(searchInput))
             );
+
+            // Render only the filtered posts
             renderPosts(filteredPosts);
         }
 
