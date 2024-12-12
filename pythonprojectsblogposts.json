@@ -4,7 +4,7 @@
         "content": [
             "This Python script implements a simple yet functional Tic-Tac-Toe game. Two players can play the game alternately on a 3x3 board. The program handles user inputs, checks for a winner, and declares a draw when no more moves are possible."
         ],
-        "images": ["ztic_tac_toe.png"],
+        "images": ["python_projects_pics/tic_tac_toe.png"],
         "description": [
             "### Key Features of the Code:",
             "1. **Board Display:** The `display` function creates a formatted string to represent the Tic-Tac-Toe board and prints it for players after every move.",
