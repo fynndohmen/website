@@ -23,17 +23,18 @@
     </section>
 
     <script>
-        // Load the JSON data and display it on the page
-        fetch('linuxblogposts.json')
-            .then(response => {
+        let currentPage = 1;
+        const blogContainer = document.getElementById('blog-posts');
+        let loading = false;
+
+        async function fetchPosts(page) {
+            try {
+                const response = await fetch(`linux_${page}.json`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                return response.json();
-            })
-            .then(data => {
-                const blogContainer = document.getElementById('blog-posts');
-
+                const data = await response.json();
+                
                 // Sort posts by date (newest first)
                 data.sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -74,14 +75,29 @@
 
                     blogContainer.appendChild(postElement);
                 });
-            })
-            .catch(error => {
+            } catch (error) {
                 console.error('Error loading blog posts:', error);
 
                 // Display error message to the user
-                const blogContainer = document.getElementById('blog-posts');
-                blogContainer.innerHTML = '<p>Sorry, we could not load the blog posts at this time. Please try again later.</p>';
-            });
+                if (page === 1) {
+                    blogContainer.innerHTML = '<p>Sorry, we could not load the blog posts at this time. Please try again later.</p>';
+                }
+            }
+        }
+
+        function handleScroll() {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 && !loading) {
+                loading = true;
+                currentPage++;
+                fetchPosts(currentPage).then(() => {
+                    loading = false;
+                });
+            }
+        }
+
+        // Load initial posts and attach scroll event
+        fetchPosts(currentPage);
+        window.addEventListener('scroll', handleScroll);
     </script>
 </body>
 </html>
