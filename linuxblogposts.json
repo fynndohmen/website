@@ -4,7 +4,7 @@
         "content": [
             "This Bash script automates the update and maintenance process for an Arch Linux system."
         ],
-        "images": ["zupdate_script.png"],
+        "images": ["linux_pics/update_script.png"],
         "description": [
             "The script performs a series of steps to ensure the system is up-to-date:",
             "1. It updates the Arch Linux keyring to ensure that the package sources are trusted.",
@@ -21,7 +21,7 @@
         "content": [
             "This Bash script provides a robust solution for backing up your files with an optional custom name, efficient log management, and a straightforward approach to maintaining a clean backup process."
         ],
-        "images": ["zbackup_script.png"],
+        "images": ["linux_pics/backup_script.png"],
         "description": [
             "### Key Features of the Backup Script:",
             "1. **Customizable Backup Names:**",
@@ -62,7 +62,7 @@
     "content": [
         "This Bash script automates the process of compressing and archiving log files older than 7 days."
     ],
-    "images": ["zarchive_logs_script.png"],
+    "images": ["linux_pics/archive_logs_script.png"],
     "description": [
         "The script performs the following steps to manage log files effectively:",
         "1. **Find Log Files:** It searches for files in the `/var/log` directory that match the patterns `*.log` or `*.log.old` and are older than 7 days.",
