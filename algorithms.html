@@ -55,7 +55,7 @@
                     // Images
                     post.images.forEach(image => {
                         const img = document.createElement('img');
-                        img.src = image;
+                        img.src = image; // Using full paths from JSON
                         img.alt = post.title;
                         img.classList.add('blog-image');
                         postElement.appendChild(img);
