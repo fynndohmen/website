@@ -95,10 +95,32 @@
         "- Provides a simple yet effective solution to a common computational problem."
     ],
     "date": "2024-12-11"
-}
-
-
-
-    
+},
+{
+    "title": "Matrix Transposition in Python",
+    "content": [
+        "This Python script demonstrates how to transpose a matrix, which involves flipping rows and columns."
+    ],
+    "images": ["zmatrix_transpose.png"],
+    "description": [
+        "### Key Features of the Matrix Transposition Script:",
+        "1. **Input Handling:**",
+        "   - Accepts a 2D list (matrix) where each inner list represents a row of the matrix.",
+        "2. **Logic for Transposition:**",
+        "   - Iterates through the columns of the matrix.",
+        "   - For each column, constructs a new row by extracting the corresponding elements from each original row.",
+        "3. **Output:**",
+        "   - Returns a new 2D list where rows and columns have been swapped.",
+        "### How It Works:",
+        "1. The script calculates the number of rows and columns in the input matrix.",
+        "2. A nested loop iterates over each column (`j`) and extracts elements from all rows (`i`).",
+        "3. The extracted elements are added to a new row, which is then appended to the transposed matrix.",
+        "4. The result is printed row by row, showing the transposed matrix.",
+        "### Benefits:",
+        "- Provides a clear and simple method to transpose any rectangular matrix.",
+        "- Useful for applications in data analysis, image processing, and scientific computations."
+    ],
+    "date": "2024-12-10"
+}   
 ]
 
