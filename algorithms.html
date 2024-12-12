@@ -5,6 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Algorithms</title>
     <link rel="stylesheet" href="stylehome.css">
+    <style>
+        /* Container für Blogposts und Sidebar */
+        .content-container {
+            display: flex;
+            align-items: flex-start; /* Blogposts und Sidebar oben ausrichten */
+            position: relative;
+        }
+
+        /* Blogpost-Spalte */
+        #blog-posts {
+            flex: 3; /* Größere Breite für Blogposts */
+            margin-right: 20px; /* Abstand zur Sidebar */
+        }
+
+        /* Fixierte Sidebar für die Suchleiste */
+        .search-bar-container {
+            flex: 1; /* Kleinere Breite für die Sidebar */
+            position: sticky;
+            top: 20px; /* Abstand vom oberen Rand */
+            align-self: flex-start; /* Positioniert die Suchleiste oben */
+        }
+
+        .search-bar-container input {
+            width: 100%; /* Suchleiste soll die gesamte Breite der Sidebar einnehmen */
+            padding: 10px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body class="linux-page">
     <header>
@@ -16,12 +45,20 @@
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
-        <input type="text" id="search-bar" placeholder="Search by tags..." oninput="searchPosts()" />
     </header>
 
-    <section id="blog-posts">
-        <!-- Blog posts will be dynamically loaded here -->
-    </section>
+    <!-- Container für Blogposts und Sidebar -->
+    <div class="content-container">
+        <!-- Blogposts -->
+        <section id="blog-posts">
+            <!-- Blog posts will be dynamically loaded here -->
+        </section>
+
+        <!-- Fixierte Suchleiste -->
+        <aside class="search-bar-container">
+            <input type="text" id="search-bar" placeholder="Search by tags..." oninput="searchPosts()" />
+        </aside>
+    </div>
 
     <script>
         let currentPage = 1;
