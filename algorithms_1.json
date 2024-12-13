@@ -139,9 +139,7 @@
         "   - It traverses the tree while updating the closest value if the current node's value is nearer to the target.",
         "   - Depending on whether the target is smaller or larger than the current node's value, it moves to the left or right subtree, respectively.",
         "3. **Output:**",
-        "   - Returns the value in the BST that is closest to the target.",
-        "4. **Efficiency:**",
-        "   - The function has a time complexity of O(h), where h is the height of the tree. In a balanced BST, this is O(log n)."
+        "   - Returns the value in the BST that is closest to the target."
     ],
     "date": "2024-12-13"
 }
