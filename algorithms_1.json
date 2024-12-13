@@ -143,7 +143,7 @@
         "4. **Efficiency:**",
         "   - The function has a time complexity of O(h), where h is the height of the tree. In a balanced BST, this is O(log n)."
     ],
-    "date": "2024-12-12"
+    "date": "2024-12-13"
 }
 
 
