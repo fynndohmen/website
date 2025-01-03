@@ -32,5 +32,40 @@
             "3. Players alternate turns until the game ends with a win or a draw."
         ],
         "date": "2024-12-09"
-    }
+    },
+    {
+    "title": "Building a To-Do List Application with Python and Tkinter",
+    "content": [
+        "This blogpost walks you through the process of creating a simple To-Do List application using Python and the Tkinter library for the graphical user interface (GUI). The application allows users to add tasks, mark them as completed, and delete tasks. Tasks are saved persistently using a JSON file."
+    ],
+    "images": [
+        "website_pics/todo_list_ui.png",
+        "website_pics/todo_list_code.png"
+    ],
+    "description": [
+        "### Key Features of the To-Do List Application:",
+        "1. **Graphical User Interface:** The application uses Tkinter to provide a simple, user-friendly GUI.",
+        "2. **Task Management:** Users can add new tasks, view open tasks, mark tasks as completed, and delete tasks.",
+        "3. **Separation of Logic:** The application is divided into multiple modules: `views.py` handles the GUI, `controllers.py` manages the control logic, and `models.py` handles the data and storage logic.",
+        "4. **Persistent Storage:** Tasks are stored in a JSON file (`database.json`), ensuring that tasks persist across sessions.",
+        "",
+        "### How the Code Works:",
+        "1. **Starting the Application:** The application begins by loading existing tasks from `database.json` using the `load_from_storage` function in `models.py`.",
+        "2. **Adding a Task:** When the user enters a task and clicks the 'Add task' button, the `add_task` function in `views.py` calls `handle_add_task` from `controllers.py`, which updates the task list and saves it to the JSON file.",
+        "3. **Marking a Task as Completed:** The user can select a task from the open tasks list and click 'Mark as completed'. This triggers the `mark_task_completed` function, which updates the task's status and moves it to the completed tasks list.",
+        "4. **Deleting a Task:** The user can delete tasks from either the open or completed lists by selecting the task and clicking 'Delete task'. This action removes the task from the list and updates the JSON file.",
+        "",
+        "### Code Structure:",
+        "- **main.py:** The entry point of the application, which initializes the GUI and starts the Tkinter event loop.",
+        "- **app/views.py:** Manages the graphical user interface and handles user interactions.",
+        "- **app/controllers.py:** Contains the control logic that connects the GUI with the data layer.",
+        "- **app/models.py:** Manages task data, including adding, updating, deleting, and saving tasks.",
+        "- **data/database.json:** Stores tasks persistently in JSON format.",
+        "",
+        "### GitHub Repository:",
+        "You can find the complete source code for this project on [GitHub](https://github.com/yourusername/todo-list-app)."
+    ],
+    "date": "2025-01-04"
+}
+
 ]
