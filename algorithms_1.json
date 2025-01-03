@@ -162,12 +162,9 @@
         "   - For each node, the current sum is updated by adding the node's value.",
         "   - When a leaf node (node with no children) is reached, the current branch sum is added to the `result` list.",
         "3. **Output:**",
-        "   - The function returns a list of integers representing the sums of all branches from the root to each leaf.",
-        "4. **Efficiency:**",
-        "   - The time complexity is O(N), where N is the number of nodes in the binary tree, as each node is visited once.",
-        "   - The space complexity is O(H), where H is the height of the tree, due to the recursive call stack."
+        "   - The function returns a list of integers representing the sums of all branches from the root to each leaf."
     ],
-    "date": "2024-12-12"
+    "date": "2025-01-03"
 }
 
 ]
