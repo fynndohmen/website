@@ -62,7 +62,7 @@
         "- **data/database.json:** Stores tasks persistently in JSON format.",
         "",
         "### GitHub Repository:",
-        "You can find the complete source code for this project on [GitHub](https://github.com/yourusername/todo-list-app)."
+        "You can find the complete source code for this project on [GitHub](https://github.com/fynndohmen/To-Do-List.git)."
     ],
     "date": "2025-01-04"
 }
