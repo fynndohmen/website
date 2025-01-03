@@ -39,8 +39,7 @@
         "This blogpost walks you through the process of creating a simple To-Do List application using Python and the Tkinter library for the graphical user interface (GUI). The application allows users to add tasks, mark them as completed, and delete tasks. Tasks are saved persistently using a JSON file."
     ],
     "images": [
-        "website_pics/todo_list_ui.png",
-        "website_pics/todo_list_code.png"
+        "python_projects_pics/To-Do_List.png"
     ],
     "description": [
         "### Key Features of the To-Do List Application:",
