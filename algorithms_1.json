@@ -164,7 +164,7 @@
         "3. **Output:**",
         "   - The function returns a list of integers representing the sums of all branches from the root to each leaf."
     ],
-    "date": "2025-01-03"
+    "date": "2024-12-14"
 },
     {
     "title": "Calculating Node Depths in a Binary Search Tree (BST)",
@@ -190,7 +190,7 @@
         "2. The `nodeDepths()` function is called with the root node.",
         "3. The function recursively computes the sum of depths by traversing all nodes in the tree."
     ],
-    "date": "2025-01-04"
+    "date": "2024-12-15"
 },
     {
     "title": "Evaluating an Expression Tree in Python",
@@ -220,7 +220,7 @@
         "3. **Output:**",
         "   - The function returns the result of evaluating the expression represented by the tree."
     ],
-    "date": "2025-01-04"
+    "date": "2024-12-16"
 }
 
 
