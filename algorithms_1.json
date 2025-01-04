@@ -191,7 +191,38 @@
         "3. The function recursively computes the sum of depths by traversing all nodes in the tree."
     ],
     "date": "2025-01-04"
+},
+    {
+    "title": "Evaluating an Expression Tree in Python",
+    "content": [
+        "This Python script evaluates an expression tree where each internal node represents an operator, and each leaf node represents an operand."
+    ],
+    "images": [
+        "algorithms_pics/expression_tree.png"
+    ],
+    "description": [
+        "### Key Features of the Expression Tree Evaluation Script:",
+        "1. **Binary Tree Structure:**",
+        "   - Each node in the binary tree contains a `value`, `left`, and `right` pointers.",
+        "   - Leaf nodes (nodes without children) contain positive integers representing operands.",
+        "   - Internal nodes contain negative integers representing operators:",
+        "     - `-1`: Addition (`+`)",
+        "     - `-2`: Subtraction (`-`)",
+        "     - `-3`: Division (`/`)",
+        "     - `-4`: Multiplication (`*`)",
+        "",
+        "2. **Recursive Evaluation Logic:**",
+        "   - The function `evaluateExpressionTree()` recursively traverses the tree.",
+        "   - If a leaf node is reached (value >= 0), it directly returns the node's value.",
+        "   - If an internal node is reached (value < 0), it evaluates the left and right subtrees recursively.",
+        "   - Based on the operator at the current node, it performs the corresponding arithmetic operation on the values returned by the left and right subtrees.",
+        "",
+        "3. **Output:**",
+        "   - The function returns the result of evaluating the expression represented by the tree."
+    ],
+    "date": "2025-01-04"
 }
+
 
 
 ]
