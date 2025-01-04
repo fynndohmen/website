@@ -165,7 +165,34 @@
         "   - The function returns a list of integers representing the sums of all branches from the root to each leaf."
     ],
     "date": "2025-01-03"
+},
+    {
+    "title": "Calculating Node Depths in a Binary Search Tree (BST)",
+    "content": [
+        "This Python script calculates the sum of the depths of all nodes in a binary search tree (BST) using recursion."
+    ],
+    "images": [
+        "algorithms_pics/node_depths.png"
+    ],
+    "description": [
+        "### Key Features of the Node Depth Calculation Script:",
+        "1. **Binary Search Tree Structure:**",
+        "   - Each node in the BST contains a `value` and two child nodes: `left` and `right`.",
+        "2. **Recursive Logic for Depth Calculation:**",
+        "   - The function `nodeDepths()` takes two arguments: the root node and the current depth (initially set to 0).",
+        "   - At each step, the function adds the current depth to the sum and calls itself recursively for the left and right subtrees with an incremented depth.",
+        "   - The base case is reached when a `None` node is encountered, returning 0.",
+        "3. **Output:**",
+        "   - Returns the total sum of depths of all nodes in the BST.",
+        "",
+        "### How the Code Works:",
+        "1. A binary search tree is created by initializing the `BST` class and linking nodes to form the tree.",
+        "2. The `nodeDepths()` function is called with the root node.",
+        "3. The function recursively computes the sum of depths by traversing all nodes in the tree."
+    ],
+    "date": "2025-01-04"
 }
+
 
 ]
 
