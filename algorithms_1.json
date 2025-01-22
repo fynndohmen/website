@@ -221,7 +221,26 @@
         "   - The function returns the result of evaluating the expression represented by the tree."
     ],
     "date": "2024-12-16"
+},
+{
+    "title": "Calculating Minimum Waiting Time for Queries",
+    "content": [
+        "This Python script calculates the minimum total waiting time for a series of tasks or queries when they are executed in sequence."
+    ],
+    "images": ["algorithms_pics/minimum_waiting_time.png"],
+    "description": [
+        "### Key Features of the Minimum Waiting Time Script:",
+        "1. **Sorting for Optimization:**",
+        "   - The function begins by sorting the query durations in ascending order. This ensures that shorter queries are processed first, minimizing the waiting time for longer queries.",
+        "2. **Logic for Calculating Waiting Time:**",
+        "   - A cumulative sum (`cumulative_duration`) is maintained to keep track of the total duration of queries that have been processed so far.",
+        "   - For each query, the cumulative duration is added to the total waiting time before being updated with the current query's duration.",
+        "3. **Output:**",
+        "   - The function returns the minimum total waiting time for all queries."
+    ],
+    "date": "2025-01-04"
 }
+
 
 
 
