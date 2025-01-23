@@ -239,7 +239,27 @@
         "   - The function returns the minimum total waiting time for all queries."
     ],
     "date": "2025-01-04"
+},
+    {
+    "title": "Maximizing Speed with the Tandem Bicycle Problem",
+    "content": [
+        "This Python script calculates the maximum or minimum possible total speed of pairs of cyclists on a tandem bicycle."
+    ],
+    "images": ["algorithms_pics/tandem_bicycle.png"],
+    "description": [
+        "### Key Features of the Tandem Bicycle Script:",
+        "1. **Input and Sorting:**",
+        "   - The function takes two lists of cyclist speeds, `redShirtSpeeds` and `blueShirtSpeeds`, and a boolean `fastest` to determine whether the goal is to maximize or minimize total speed.",
+        "   - Both speed lists are sorted in ascending order. If `fastest` is `True`, the `blueShirtSpeeds` list is reversed into descending order to pair the fastest cyclist with the slowest one for maximum speed.",
+        "2. **Pairing Cyclists:**",
+        "   - The script iterates through the sorted lists, pairing cyclists from `redShirtSpeeds` and `blueShirtSpeeds`.",
+        "   - For each pair, the higher speed is selected to maximize the total speed of the tandem bicycle.",
+        "3. **Output:**",
+        "   - The function returns the total speed of the paired cyclists based on the pairing strategy determined by the `fastest` parameter."
+    ],
+    "date": "2025-01-05"
 }
+
 
 
 
