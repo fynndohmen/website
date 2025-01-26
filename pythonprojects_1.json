@@ -72,7 +72,7 @@
         "This Python application demonstrates a functional calculator with a graphical user interface (GUI) built using the Tkinter library. The calculator supports basic arithmetic operations, advanced features like square root and squaring, and a toggleable dark mode for a customizable user experience."
     ],
     "images": [
-        "projects_pics/calculator.png"
+        "python_projects_pics/calculator.png"
     ],
     "description": [
         "### Features of the Calculator Application:",
