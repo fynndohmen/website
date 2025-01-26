@@ -83,7 +83,9 @@
         "3. **Clear Functionality:**",
         "   - Reset the calculator display and start fresh with a single click.",
         "4. **Dark Mode:**",
-        "   - Toggle between a light and dark theme to suit user preference."
+        "   - Toggle between a light and dark theme to suit user preference.",
+        "### GitHub Repository:",
+        "You can find the complete source code for this project on [GitHub](https://github.com/fynndohmen/Calculator.git)."
     ],
     "date": "2025-01-04"
 }
