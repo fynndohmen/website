@@ -65,6 +65,28 @@
         "You can find the complete source code for this project on [GitHub](https://github.com/fynndohmen/To-Do-List.git)."
     ],
     "date": "2025-01-04"
+},
+{
+    "title": "Simple Calculator App",
+    "content": [
+        "This Python application demonstrates a functional calculator with a graphical user interface (GUI) built using the Tkinter library. The calculator supports basic arithmetic operations, advanced features like square root and squaring, and a toggleable dark mode for a customizable user experience."
+    ],
+    "images": [
+        "projects_pics/calculator.png"
+    ],
+    "description": [
+        "### Features of the Calculator Application:",
+        "1. **Basic Arithmetic:**",
+        "   - Perform operations such as addition, subtraction, multiplication, and division with ease.",
+        "2. **Advanced Functions:**",
+        "   - Includes support for square root and squaring calculations.",
+        "3. **Clear Functionality:**",
+        "   - Reset the calculator display and start fresh with a single click.",
+        "4. **Dark Mode:**",
+        "   - Toggle between a light and dark theme to suit user preference."
+    ],
+    "date": "2025-01-04"
 }
+
 
 ]
