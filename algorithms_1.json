@@ -299,7 +299,31 @@
         "   - Returns the middle node of the linked list. If the list has an even number of nodes, the second middle node is returned."
     ],
     "date": "2025-01-07"
+},
+    {
+    "title": "Finding the Nth Fibonacci Number Using Iteration",
+    "content": [
+        "This Python script calculates the Nth Fibonacci number using an iterative approach to ensure efficiency and simplicity."
+    ],
+    "images": [
+        "algorithms_pics/nth_fibonacci.png"
+    ],
+    "description": [
+        "### Key Features of the Script:",
+        "1. **Fibonacci Sequence:**",
+        "   - The Fibonacci sequence starts with 0 and 1, and each subsequent number is the sum of the previous two numbers.",
+        "2. **Iterative Calculation:**",
+        "   - Instead of using recursion, the script uses a loop to calculate the sequence iteratively, which avoids excessive memory usage or stack overflow issues.",
+        "3. **Logic Flow:**",
+        "   - For the first Fibonacci number (`n = 1`), it returns 0.",
+        "   - For the second Fibonacci number (`n = 2`), it returns 1.",
+        "   - For `n > 2`, the script calculates the sequence by summing the last two numbers in the list until the Nth number is reached.",
+        "4. **Output:**",
+        "   - The function returns the Nth Fibonacci number as specified by the input."
+    ],
+    "date": "2025-01-04"
 }
+
 
     
 
