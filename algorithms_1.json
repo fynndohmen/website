@@ -322,7 +322,32 @@
         "   - The function returns the Nth Fibonacci number as specified by the input."
     ],
     "date": "2025-01-08"
+},
+    {
+    "title": "Calculating Product Sums of Nested Arrays in Python",
+    "content": [
+        "This Python script computes the product sum of a nested array. The product sum is calculated by summing all elements of the array, with elements inside nested arrays being multiplied by their depth."
+    ],
+    "images": [
+        "algorithms_pics/product_sum.png"
+    ],
+    "description": [
+        "### Key Features of the Product Sum Script:",
+        "1. **Recursive Approach:**",
+        "   - The function `productSum()` uses recursion to handle nested arrays. When an element is a list, the function calls itself with an incremented depth.",
+        "2. **Depth Multiplier:**",
+        "   - For every level of nesting, the sum of elements is multiplied by the current depth. This adds weight to elements that are deeper in the array structure.",
+        "3. **Handling Mixed Structures:**",
+        "   - The function can handle arrays with a mix of integers and nested arrays, processing them seamlessly.",
+        "### How It Works:",
+        "1. The script initializes the `result` to 0 and iterates over the elements of the input array.",
+        "2. If an element is a list, the function recursively calculates its product sum with an incremented depth.",
+        "3. If an element is an integer, it is added directly to the `result`.",
+        "4. After iterating through the array, the cumulative sum is multiplied by the current depth and returned."
+    ],
+    "date": "2025-01-09"
 }
+
 
 
     
