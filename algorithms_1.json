@@ -265,8 +265,7 @@
         "This Python script efficiently removes duplicate values from a sorted linked list."
     ],
     "images": [
-        "algorithms_pics/remove_duplicates_linkedlist1.png",
-        "algorithms_pics/remove_duplicates_linkedlist2.png"
+        "algorithms_pics/remove_duplicates_linkedlist.png"
     ],
     "description": [
         "### Key Features of the Script:",
