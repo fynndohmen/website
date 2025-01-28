@@ -371,7 +371,7 @@
         "   - If the middle element equals the target, return its index.",
         "   - If the middle element is less than the target, move the `left` pointer to `mid + 1` to search the right half.",
         "   - If the middle element is greater than the target, move the `right` pointer to `mid - 1` to search the left half.",
-        "4. Repeat steps 2-3 until the `left` pointer exceeds the `right` pointer, indicating that the target is not in the array. "
+        "4. Repeat steps 2-3 until the `left` pointer exceeds the `right` pointer, indicating that the target is not in the array."
     ],
     "date": "2025-01-10"
 }
