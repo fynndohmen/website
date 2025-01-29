@@ -1,1 +1,23 @@
- 
+[
+{
+    "title": "Finding the Closest Value in a Binary Search Tree (BST)",
+    "content": [
+        "This Python function efficiently finds the value in a Binary Search Tree (BST) that is closest to a given target value."
+    ],
+    "images": ["algorithms_pics/find_closest_bst0.png", "algorithms_pics/find_closest_bst1.png"],
+    "description": [
+        "### Key Features of the Closest Value in BST Function:",
+        "1. **Binary Search Tree Properties:**",
+        "   - Each node in a BST has a value and two child nodes: `left` and `right`.",
+        "   - The left child node contains values smaller than the parent node.",
+        "   - The right child node contains values greater than the parent node.",
+        "2. **Logic for Finding the Closest Value:**",
+        "   - The function starts at the root node and initializes the `closest` variable to infinity.",
+        "   - It traverses the tree while updating the closest value if the current node's value is nearer to the target.",
+        "   - Depending on whether the target is smaller or larger than the current node's value, it moves to the left or right subtree, respectively.",
+        "3. **Output:**",
+        "   - Returns the value in the BST that is closest to the target."
+    ],
+    "date": "2024-12-13"
+}
+]
