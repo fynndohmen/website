@@ -381,8 +381,7 @@
         "This Python function efficiently identifies the three largest numbers in an array while maintaining their order."
     ],
     "images": [
-        "algorithms_pics/three_largest_numbers1.png",
-        "algorithms_pics/three_largest_numbers2.png"
+        "algorithms_pics/three_largest_numbers.png"
     ],
     "description": [
         "### Key Features of the Three Largest Numbers Algorithm:",
