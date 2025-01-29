@@ -1,1 +1,43 @@
- 
+[
+{
+    "title": "Removing Duplicates from a Linked List in Python",
+    "content": [
+        "This Python script efficiently removes duplicate values from a sorted linked list."
+    ],
+    "images": [
+        "algorithms_pics/remove_duplicates_linkedlist.png"
+    ],
+    "description": [
+        "### Key Features of the Script:",
+        "1. **Input Structure:**",
+        "   - A `LinkedList` class is used to represent nodes in the linked list. Each node contains a `value` and a `next` pointer to the subsequent node.",
+        "2. **Logic for Removing Duplicates:**",
+        "   - The script iterates through the linked list, comparing the value of the current node with the next node.",
+        "   - If duplicate nodes are found, the `next` pointer of the current node is updated to skip the duplicate nodes and point to the next distinct node.",
+        "3. **Output:**",
+        "   - The function returns the modified linked list with duplicates removed, preserving the sorted order."
+    ],
+    "date": "2025-01-06"
+},
+{
+    "title": "Finding the Middle Node in a Linked List",
+    "content": [
+        "This Python script demonstrates how to efficiently find the middle node of a singly linked list using the two-pointer technique."
+    ],
+    "images": [
+        "algorithms_pics/middle_node.png"
+    ],
+    "description": [
+        "### Key Features of the Script:",
+        "1. **Input Handling:**",
+        "   - Accepts a singly linked list as input, represented by nodes connected via the `next` pointer.",
+        "2. **Two-Pointer Technique:**",
+        "   - Two pointers (`slow_pointer` and `fast_pointer`) are initialized at the head of the linked list.",
+        "   - The `fast_pointer` moves two steps at a time, while the `slow_pointer` moves one step at a time.",
+        "   - When the `fast_pointer` reaches the end of the list, the `slow_pointer` will be at the middle node.",
+        "3. **Output:**",
+        "   - Returns the middle node of the linked list. If the list has an even number of nodes, the second middle node is returned."
+    ],
+    "date": "2025-01-07"
+}
+]
