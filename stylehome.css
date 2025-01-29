@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('website_pics/background.jpg'); /* Pfad zum Hintergrundbild */
+    background-image: url('website_pics/background.jpg'); /* Background image */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -48,7 +48,7 @@ nav ul li a:hover {
     text-decoration: none;
 }
 
-/* Intro Box für Home und Contact */
+/* Intro Box */
 .intro-box {
     background-color: white;
     border: 1px solid #ddd;
@@ -70,13 +70,12 @@ nav ul li a:hover {
     color: #555;
 }
 
-/* Projects Seite */
+/* Projects Page */
 .projects-page .categories {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
     gap: 20px;
     padding: 20px;
-    justify-content: center;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -89,36 +88,56 @@ nav ul li a:hover {
     transition: box-shadow 0.3s ease-in-out;
     color: #000;
     text-decoration: none;
+    border-radius: 8px;
 }
 
-/* Standard Icon-Größe auf der Projects-Seite */
+/* Default Icon Size for Projects Page */
 .projects-page .category img {
     width: 40px;
     height: auto;
     margin-bottom: 10px;
 }
 
-/* **Anpassung für algorithmcategories.html (Icons können hier skaliert werden)** */
-.algorithmcategories-page .category img {  /* Hier in Zeile 66 die Skalierung ändern */
-    width: 100px; /* Standardwert, anpassen nach Bedarf */
+/* Algorithm Categories (Icons can be scaled here) */
+.algorithmcategories-page .categories {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.algorithmcategories-page .category {
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    transition: box-shadow 0.3s ease-in-out;
+    color: #000;
+    text-decoration: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.algorithmcategories-page .category img {
+    width: 80px; /* Adjust icon size for Algorithm Categories */
     height: auto;
     margin-bottom: 10px;
 }
 
-.projects-page .category:hover {
+.projects-page .category:hover,
+.algorithmcategories-page .category:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.projects-page .category a {
+.projects-page .category a,
+.algorithmcategories-page .category a {
     text-decoration: none;
     color: inherit;
 }
 
-.projects-page .category a:hover {
-    text-decoration: none;
-}
-
-/* Linux Seite */
+/* Linux Page */
 .linux-page #blog-posts {
     display: flex;
     flex-direction: column;
@@ -162,18 +181,21 @@ nav ul li a:hover {
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-    .projects-page .categories {
-        grid-template-columns: repeat(2, 1fr);
+    .projects-page .categories,
+    .algorithmcategories-page .categories {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns */
     }
 }
 
 @media (max-width: 768px) {
-    .projects-page .categories {
-        grid-template-columns: repeat(1, 1fr);
+    .projects-page .categories,
+    .algorithmcategories-page .categories {
+        grid-template-columns: repeat(1, 1fr); /* 1 column */
         padding: 0;
     }
 
-    .projects-page .category {
+    .projects-page .category,
+    .algorithmcategories-page .category {
         max-width: 90%;
         margin-bottom: 20px;
     }
