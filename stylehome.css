@@ -4,11 +4,11 @@ body {
     margin: 0;
     padding: 0;
     background-image: url('website_pics/background.jpg'); /* Pfad zum Hintergrundbild */
-    background-size: cover; /* Deckt den gesamten Bildschirm ab */
-    background-position: center; /* Zentriert das Bild */
-    background-repeat: no-repeat; /* Verhindert, dass das Bild wiederholt wird */
-    background-attachment: fixed; /* Das Bild bleibt beim Scrollen fixiert */
-    color: #fff; /* Weißer Text, damit er sich vom Hintergrund abhebt */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #fff;
 }
 
 /* Header */
@@ -40,12 +40,12 @@ nav ul li {
 
 nav ul li a {
     color: #fff;
-    text-decoration: none; /* Entfernt Unterstreichungen */
+    text-decoration: none;
 }
 
 nav ul li a:hover {
     color: #ddd;
-    text-decoration: none; /* Entfernt Unterstreichungen beim Hover */
+    text-decoration: none;
 }
 
 /* Intro Box für Home und Contact */
@@ -62,28 +62,25 @@ nav ul li a:hover {
 .intro-box h2 {
     margin-top: 0;
     color: #333;
-    font-family: 'Arial', sans-serif;
 }
 
 .intro-box p {
     font-size: 16px;
     line-height: 1.6;
     color: #555;
-    font-family: 'Arial', sans-serif;
 }
 
-/* Categories Grid (3 Spalten) */
+/* Projects Seite */
 .projects-page .categories {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 Spalten */
-    gap: 20px; /* Abstand zwischen den Boxen */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
     padding: 20px;
     justify-content: center;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-/* Einzelne Kategorie-Box */
 .projects-page .category {
     text-align: center;
     background-color: #fff;
@@ -94,8 +91,16 @@ nav ul li a:hover {
     text-decoration: none;
 }
 
+/* Standard Icon-Größe auf der Projects-Seite */
 .projects-page .category img {
     width: 40px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+/* **Anpassung für algorithmcategories.html (Icons können hier skaliert werden)** */
+.algorithmcategories-page .category img {  /* Hier in Zeile 66 die Skalierung ändern */
+    width: 60px; /* Standardwert, anpassen nach Bedarf */
     height: auto;
     margin-bottom: 10px;
 }
@@ -121,7 +126,7 @@ nav ul li a:hover {
 }
 
 .linux-page .blog-post {
-    width: 50%; /* 50% der Bildschirmbreite */
+    width: 50%;
     margin: 20px 0;
     padding: 20px;
     border: 1px solid #ddd;
@@ -134,14 +139,12 @@ nav ul li a:hover {
 .linux-page .blog-post h2 {
     color: #333;
     margin-bottom: 10px;
-    text-decoration: none;
 }
 
 .linux-page .blog-post p {
     margin: 10px 0;
     color: #555;
     line-height: 1.6;
-    text-decoration: none;
 }
 
 .linux-page .blog-post img {
@@ -155,19 +158,18 @@ nav ul li a:hover {
     margin-top: 10px;
     font-size: 12px;
     color: #777;
-    text-decoration: none;
 }
 
-/* Responsive Design für kleinere Bildschirme */
+/* Responsive Design */
 @media (max-width: 1024px) {
     .projects-page .categories {
-        grid-template-columns: repeat(2, 1fr); /* 2 Spalten bei mittelgroßen Bildschirmen */
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 768px) {
     .projects-page .categories {
-        grid-template-columns: repeat(1, 1fr); /* 1 Spalte bei kleinen Bildschirmen */
+        grid-template-columns: repeat(1, 1fr);
         padding: 0;
     }
 
