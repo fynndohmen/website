@@ -1,1 +1,51 @@
-
+[
+{
+    "title": "Implementing Binary Search in Python",
+    "content": [
+        "This Python script demonstrates an efficient implementation of the binary search algorithm, which is used to find the position of a target element in a sorted array."
+    ],
+    "images": [
+        "algorithms_pics/binary_search.png"
+    ],
+    "description": [
+        "### Key Features of the Binary Search Script:",
+        "1. **Divide-and-Conquer Approach:**",
+        "   - The algorithm divides the array into halves repeatedly, narrowing down the search space until the target is found or the search space is empty.",
+        "2. **Input Parameters:**",
+        "   - The function takes a sorted array and a target value as input. The array must be sorted for the binary search to work correctly.",
+        "3. **Output:**",
+        "   - The function returns the index of the target element if it exists in the array.",
+        "   - If the target element is not found, the function returns `-1`.",
+        "### How It Works:",
+        "1. Initialize two pointers: `left` at the start of the array and `right` at the end of the array.",
+        "2. Calculate the middle index of the current search range and retrieve the middle element.",
+        "3. Compare the middle element with the target:",
+        "   - If the middle element equals the target, return its index.",
+        "   - If the middle element is less than the target, move the `left` pointer to `mid + 1` to search the right half.",
+        "   - If the middle element is greater than the target, move the `right` pointer to `mid - 1` to search the left half.",
+        "4. Repeat steps 2-3 until the `left` pointer exceeds the `right` pointer, indicating that the target is not in the array."
+    ],
+    "date": "2025-01-10"
+},
+{
+    "title": "Finding the Three Largest Numbers in an Array",
+    "content": [
+        "This Python function efficiently identifies the three largest numbers in an array while maintaining their order."
+    ],
+    "images": [
+        "algorithms_pics/three_largest_numbers.png"
+    ],
+    "description": [
+        "### Key Features of the Three Largest Numbers Algorithm:",
+        "1. **Tracking the Three Largest Numbers:**",
+        "   - A list of three values is initialized with negative infinity to store the three largest numbers.",
+        "2. **Iterating Through the Array:**",
+        "   - The function goes through each number in the array and updates the list of three largest numbers accordingly.",
+        "3. **Shifting and Updating Values:**",
+        "   - If a new number is larger than any of the stored values, it is placed in the correct position while shifting the others to maintain order.",
+        "4. **Efficiently Maintaining Order:**",
+        "   - The function ensures that the three largest numbers are always sorted correctly by using a helper function to shift elements when necessary."
+    ],
+    "date": "2025-01-11"
+}
+]
