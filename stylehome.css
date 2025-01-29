@@ -100,7 +100,7 @@ nav ul li a:hover {
 
 /* **Anpassung für algorithmcategories.html (Icons können hier skaliert werden)** */
 .algorithmcategories-page .category img {  /* Hier in Zeile 66 die Skalierung ändern */
-    width: 60px; /* Standardwert, anpassen nach Bedarf */
+    width: 100px; /* Standardwert, anpassen nach Bedarf */
     height: auto;
     margin-bottom: 10px;
 }
