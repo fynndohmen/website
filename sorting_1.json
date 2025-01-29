@@ -1,1 +1,26 @@
+[
+  {
+    "title": "Bubble Sort Algorithm in Python",
+    "content": [
+        "This Python function implements the Bubble Sort algorithm, a simple sorting technique that repeatedly swaps adjacent elements if they are in the wrong order."
+    ],
+    "images": [
+        "algorithms_pics/bubble_sort.png"
+    ],
+    "description": [
+        "### Key Features of the Bubble Sort Algorithm:",
+        "1. **Iterative Sorting Approach:** The algorithm iterates over the list multiple times, gradually placing larger elements towards the end.",
+        "2. **Swapping Mechanism:** If two adjacent elements are out of order, they are swapped to ensure the correct sequence.",
+        "3. **Pass-by-Pass Sorting:** After each full pass, the largest unsorted element moves to its correct position.",
+        "4. **Stable Sorting Algorithm:** Bubble Sort maintains the relative order of equal elements, making it a stable sorting method.",
+        "",
+        "### How It Works:",
+        "1. The algorithm runs two nested loops: an outer loop for multiple passes and an inner loop for comparing adjacent elements.",
+        "2. Each iteration moves the largest unsorted element to its correct position at the end of the array.",
+        "3. The process continues until no more swaps are needed, ensuring the array is fully sorted.",
+        "4. The sorted array is returned at the end of the function execution."
+    ],
+    "date": "2025-01-12"
+}
+]
 
