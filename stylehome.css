@@ -72,31 +72,32 @@ nav ul li a:hover {
     font-family: 'Arial', sans-serif;
 }
 
-/* Projects Seite */
+/* Categories Grid (3 Spalten) */
 .projects-page .categories {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 20px; /* Abstand zu den Seitenkanten */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 Spalten */
     gap: 20px; /* Abstand zwischen den Boxen */
-    padding: 0 20px; /* Zusätzliche Innenabstände */
+    padding: 20px;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
+/* Einzelne Kategorie-Box */
 .projects-page .category {
     text-align: center;
     background-color: #fff;
     border: 1px solid #ddd;
     padding: 20px;
-    flex: 1;
-    max-width: 30%;
     transition: box-shadow 0.3s ease-in-out;
     color: #000;
-    text-decoration: none; /* Entfernt Unterstreichung der Box */
+    text-decoration: none;
 }
 
 .projects-page .category img {
-    width: 18%;
+    width: 40px;
     height: auto;
-    margin: 10px auto;
+    margin-bottom: 10px;
 }
 
 .projects-page .category:hover {
@@ -104,12 +105,12 @@ nav ul li a:hover {
 }
 
 .projects-page .category a {
-    text-decoration: none; /* Entfernt Unterstreichungen bei Links */
-    color: inherit; /* Übernimmt die Textfarbe */
+    text-decoration: none;
+    color: inherit;
 }
 
 .projects-page .category a:hover {
-    text-decoration: none; /* Keine Unterstreichung beim Hover */
+    text-decoration: none;
 }
 
 /* Linux Seite */
@@ -133,14 +134,14 @@ nav ul li a:hover {
 .linux-page .blog-post h2 {
     color: #333;
     margin-bottom: 10px;
-    text-decoration: none; /* Keine Unterstreichung */
+    text-decoration: none;
 }
 
 .linux-page .blog-post p {
     margin: 10px 0;
     color: #555;
     line-height: 1.6;
-    text-decoration: none; /* Keine Unterstreichung */
+    text-decoration: none;
 }
 
 .linux-page .blog-post img {
@@ -154,15 +155,20 @@ nav ul li a:hover {
     margin-top: 10px;
     font-size: 12px;
     color: #777;
-    text-decoration: none; /* Keine Unterstreichung */
+    text-decoration: none;
 }
 
-/* Responsive Design */
+/* Responsive Design für kleinere Bildschirme */
+@media (max-width: 1024px) {
+    .projects-page .categories {
+        grid-template-columns: repeat(2, 1fr); /* 2 Spalten bei mittelgroßen Bildschirmen */
+    }
+}
+
 @media (max-width: 768px) {
     .projects-page .categories {
-        flex-direction: column;
-        align-items: center;
-        padding: 0; /* Entferne seitliches Padding auf kleinen Bildschirmen */
+        grid-template-columns: repeat(1, 1fr); /* 1 Spalte bei kleinen Bildschirmen */
+        padding: 0;
     }
 
     .projects-page .category {
@@ -170,12 +176,8 @@ nav ul li a:hover {
         margin-bottom: 20px;
     }
 
-    .projects-page .category img {
-        width: 50%;
-    }
-
     .linux-page .blog-post {
-        width: 90%; /* Volle Breite auf kleinen Bildschirmen */
+        width: 90%;
         padding: 15px;
     }
 
