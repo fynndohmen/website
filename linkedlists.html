@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linked Lists</title>
+    <link rel="stylesheet" href="stylehome.css">
+</head>
+<body class="linux-page">
+    <header>
+        <h1>Linked Lists</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="blog-posts">
+        <!-- Blog posts will be dynamically loaded here -->
+    </section>
+
+    <script>
+        let currentPage = 1;
+        let allPosts = [];
+        const blogContainer = document.getElementById('blog-posts');
+        let loading = false;
+
+        async function fetchPosts(page) {
+            try {
+                const response = await fetch(`linkedlists_${page}.json`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+
+                // Add posts to allPosts for consistent sorting and rendering
+                allPosts = allPosts.concat(data);
+
+                // Sort all posts by date (newest to oldest)
+                allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                // Render posts
+                renderPosts(allPosts);
+            } catch (error) {
+                console.error('Error loading blog posts:', error);
+
+                // Display error message to the user
+                if (page === 1) {
+                    blogContainer.innerHTML = '<p>Sorry, we could not load the blog posts at this time. Please try again later.</p>';
+                }
+            }
+        }
+
+        function renderPosts(posts) {
+            blogContainer.innerHTML = ''; // Clear existing posts
+            posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.classList.add('blog-post');
+
+                // Title
+                const title = document.createElement('h2');
+                title.textContent = post.title;
+                postElement.appendChild(title);
+
+                // Short description
+                const shortDescription = document.createElement('p');
+                shortDescription.textContent = post.content[0];
+                postElement.appendChild(shortDescription);
+
+                // Images
+                post.images.forEach(image => {
+                    const img = document.createElement('img');
+                    img.src = image; // Using full paths from JSON
+                    img.alt = post.title;
+                    img.classList.add('blog-image');
+                    postElement.appendChild(img);
+                });
+
+                // Detailed description
+                post.description.forEach(paragraph => {
+                    const para = document.createElement('p');
+                    para.textContent = paragraph;
+                    postElement.appendChild(para);
+                });
+
+                // Date
+                const date = document.createElement('small');
+                date.textContent = `Posted on: ${post.date}`;
+                postElement.appendChild(date);
+
+                blogContainer.appendChild(postElement);
+            });
+        }
+
+        function handleScroll() {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 && !loading) {
+                loading = true;
+                currentPage++;
+                fetchPosts(currentPage).then(() => {
+                    loading = false;
+                });
+            }
+        }
+
+        // Load initial posts and attach scroll event
+        fetchPosts(currentPage);
+        window.addEventListener('scroll', handleScroll);
+    </script>
+</body>
+</html>
