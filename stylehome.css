@@ -97,7 +97,7 @@ nav ul li a:hover {
 
 /* Standard Icon-Größe auf der Projects-Seite */
 .projects-page .category img {
-    width: 40px;
+    width: 80px;
     height: auto;
     margin-bottom: 10px;
 }
