@@ -1,1 +1,22 @@
+{
+    "title": "Depth-First Search (DFS) Traversal in a Tree",
+    "content": [
+        "This Python implementation demonstrates the Depth-First Search (DFS) traversal of a tree using recursion."
+    ],
+    "images": ["algorithms_pics/depth_first_search.png"],
+    "description": [
+        "### How the Depth-First Search Works:",
+        "1. **Node Class:**",
+        "   - Each node has a `name` and a list of `children`.",
+        "   - The `addChild()` method allows adding child nodes dynamically.",
+        "2. **DFS Traversal:**",
+        "   - The function `depthFirstSearch()` starts at the root node.",
+        "   - The current node is added to the result list.",
+        "   - The function recursively calls DFS on each child node before moving to the next sibling.",
+        "3. **Traversal Order:**",
+        "   - DFS explores as deep as possible along each branch before backtracking.",
+        "   - The traversal follows a top-to-bottom, left-to-right pattern for each subtree."
+    ],
+    "date": "2025-01-13"
+}
 
