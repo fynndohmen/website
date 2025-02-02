@@ -5,8 +5,7 @@
         "This Python function determines whether a given string is a palindrome."
     ],
     "images": [
-        "algorithms_pics/palindrome_check1.png",
-        "algorithms_pics/palindrome_check2.png"
+        "algorithms_pics/palindrome_check.png"
     ],
     "description": [
         "A palindrome is a word, phrase, or sequence that reads the same forward and backward.",
