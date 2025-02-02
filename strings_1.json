@@ -15,6 +15,6 @@
         "3. If any pair does not match, the function returns `False`, indicating the string is not a palindrome.",
         "4. If all characters match, the function returns `True`, confirming the string is a palindrome."
     ],
-    "date": "2025-01-29"
+    "date": "2025-01-14"
 }
 ]
