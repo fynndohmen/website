@@ -16,5 +16,24 @@
         "4. If all characters match, the function returns `True`, confirming the string is a palindrome."
     ],
     "date": "2025-01-14"
+},
+{
+    "title": "Encrypting Text with Caesar Cipher in Python",
+    "content": [
+        "This Python function implements the Caesar Cipher encryption technique, shifting each letter in a string by a given key."
+    ],
+    "images": ["algorithms_pics/caesar_cipher.png"],
+    "description": [
+        "### How the Caesar Cipher Works:",
+        "1. **Letter Shifting:**",
+        "   - Each letter in the string is shifted forward by a given key value.",
+        "   - If the end of the alphabet is reached, the shifting continues from the beginning (e.g., 'z' with a shift of 2 becomes 'b').",
+        "2. **Modulo Operation:**",
+        "   - To keep shifts within the bounds of the alphabet, the function uses modulo `26`.",
+        "3. **ASCII Manipulation:**",
+        "   - The function converts each character into its ASCII code using `ord()`, modifies it, and converts it back using `chr()`. This ensures an efficient transformation."
+    ],
+    "date": "2025-01-15"
 }
+
 ]
