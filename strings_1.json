@@ -1,1 +1,21 @@
-
+[
+  {
+    "title": "Checking if a String is a Palindrome",
+    "content": [
+        "This Python function determines whether a given string is a palindrome."
+    ],
+    "images": [
+        "algorithms_pics/palindrome_check1.png",
+        "algorithms_pics/palindrome_check2.png"
+    ],
+    "description": [
+        "A palindrome is a word, phrase, or sequence that reads the same forward and backward.",
+        "This function checks for palindromes by comparing characters from the beginning and end of the string.",
+        "1. The function first converts the string into a list of characters.",
+        "2. It iterates through the first half of the string, comparing each character with its corresponding character from the end.",
+        "3. If any pair does not match, the function returns `False`, indicating the string is not a palindrome.",
+        "4. If all characters match, the function returns `True`, confirming the string is a palindrome."
+    ],
+    "date": "2025-01-29"
+}
+]
