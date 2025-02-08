@@ -34,6 +34,24 @@
         "   - The function converts each character into its ASCII code using `ord()`, modifies it, and converts it back using `chr()`. This ensures an efficient transformation."
     ],
     "date": "2025-01-15"
+},
+{
+    "title": "Run-Length Encoding in Python",
+    "content": [
+        "This Python function compresses a string using run-length encoding (RLE), a simple form of data compression."
+    ],
+    "images": ["algorithms_pics/run_length_encoding.png"],
+    "description": [
+        "### How Run-Length Encoding Works:",
+        "1. **Concept:** Run-length encoding replaces consecutive duplicate characters in a string with a count followed by the character itself.",
+        "2. **Processing the String:**",
+        "   - The function iterates through the string, counting consecutive identical characters.",
+        "   - If the sequence exceeds 9 characters, it is split into multiple segments since a single digit is used to represent the count.",
+        "3. **Output Format:** The compressed string consists of alternating numbers and characters representing the character count and the character itself."
+    ],
+    "date": "2025-01-30"
 }
+
+
 
 ]
