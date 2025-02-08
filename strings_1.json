@@ -49,8 +49,26 @@
         "   - If the sequence exceeds 9 characters, it is split into multiple segments since a single digit is used to represent the count.",
         "3. **Output Format:** The compressed string consists of alternating numbers and characters representing the character count and the character itself."
     ],
-    "date": "2025-01-30"
+    "date": "2025-01-16"
+},
+  {
+    "title": "Finding Common Characters in Multiple Strings",
+    "content": [
+        "This Python function identifies characters that appear in every string within a given list."
+    ],
+    "images": ["algorithms_pics/common_characters.png"],
+    "description": [
+        "### How the Function Works:",
+        "1. **Initializing the Character Set:**",
+        "   - The function starts with a set of characters from the first string.",
+        "2. **Finding Common Characters:**",
+        "   - It iterates through the remaining strings and keeps only the characters that exist in all of them.",
+        "3. **Returning the Result:**",
+        "   - The final set of common characters is converted to a list and returned."
+    ],
+    "date": "2025-01-17"
 }
+
 
 
 
