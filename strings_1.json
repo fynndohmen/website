@@ -67,9 +67,26 @@
         "   - The final set of common characters is converted to a list and returned."
     ],
     "date": "2025-01-17"
+},
+  {
+    "title": "Checking if a Document Can Be Created from Given Characters",
+    "content": [
+        "This Python function verifies whether a given document can be formed using characters from a provided string."
+    ],
+    "images": ["algorithms_pics/generate_document.png"],
+    "description": [
+        "### Explanation of the Function:",
+        "1. **Character Frequency Count:**",
+        "   - The function first counts the occurrences of each character in the `characters` string and stores them in a dictionary.",
+        "2. **Verification Process:**",
+        "   - It then iterates through the `document` string, checking if each character is available in sufficient quantity.",
+        "3. **Handling Character Shortages:**",
+        "   - If a required character is missing or insufficient, the function immediately returns `False`.",
+        "4. **Reducing Character Counts:**",
+        "   - If a character is found in the `characters` string, its count is reduced to reflect that it has been used.",
+        "5. **Final Result:**",
+        "   - If all characters in the document can be matched with available characters, the function returns `True`."
+    ],
+    "date": "2025-02-18"
 }
-
-
-
-
 ]
