@@ -107,6 +107,27 @@
         "   - If no character appears exactly once, the function returns `-1`."
     ],
     "date": "2025-01-19"
+},
+  {
+    "title": "Finding Semordnilap Pairs in a List of Words",
+    "content": [
+        "This Python function finds pairs of words in a list that are semordnilaps—words that spell another valid word when reversed."
+    ],
+    "images": ["algorithms_pics/semordnilap.png"],
+    "description": [
+        "### How the Function Works:",
+        "1. **Using a Set for Quick Lookups:**",
+        "   - All words from the input list are stored in a set for fast access.",
+        "2. **Iterating Through the Words:**",
+        "   - Each word is reversed and checked if it exists in the set.",
+        "   - If the reversed word is found and it is not the same as the original word, the pair is added to the results.",
+        "3. **Avoiding Duplicate Pairs:**",
+        "   - Once a semordnilap pair is found, both words are removed from the set to prevent duplication in the output.",
+        "4. **Returning the List of Pairs:**",
+        "   - The function returns a list of semordnilap pairs found in the input list."
+    ],
+    "date": "2025-01-20"
 }
+
 
 ]
