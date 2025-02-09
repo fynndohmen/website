@@ -87,7 +87,7 @@
         "5. **Final Result:**",
         "   - If all characters in the document can be matched with available characters, the function returns `True`."
     ],
-    "date": "2025-02-18"
+    "date": "2025-01-18"
 },
 {
     "title": "Finding the First Non-Repeating Character in a String",
