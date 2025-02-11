@@ -41,7 +41,28 @@
         "   - This process continues until all elements are sorted."
     ],
     "date": "2025-01-13"
+},
+  {
+    "title": "Sorting an Array Using Selection Sort",
+    "content": [
+        "Selection Sort is a simple comparison-based sorting algorithm that repeatedly selects the smallest element from an unsorted section and moves it to its correct position."
+    ],
+    "images": ["algorithms_pics/selection_sort.png"],
+    "description": [
+        "### How Selection Sort Works:",
+        "1. **Finding the Minimum:** The algorithm iterates through the array and finds the smallest element.",
+        "2. **Swapping Elements:** It swaps the smallest element found with the first unsorted element.",
+        "3. **Repeating the Process:** The process continues for the remaining unsorted section until the entire array is sorted.",
+        "",
+        "### Steps in the Code:",
+        "1. The algorithm loops through each element in the array.",
+        "2. For each element, it searches for the smallest element in the remaining unsorted part of the array.",
+        "3. Once found, it swaps the smallest element with the current element at the correct position.",
+        "4. The process repeats until the array is sorted."
+    ],
+    "date": "2025-01-14"
 }
+
 
 ]
 
