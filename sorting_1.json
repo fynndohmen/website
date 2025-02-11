@@ -21,6 +21,27 @@
         "4. The sorted array is returned at the end of the function execution."
     ],
     "date": "2025-01-12"
+},
+  {
+    "title": "Sorting an Array Using Insertion Sort",
+    "content": [
+        "This Python function implements the Insertion Sort algorithm, a simple and intuitive sorting technique."
+    ],
+    "images": ["algorithms_pics/insertion_sort.png"],
+    "description": [
+        "### How the Insertion Sort Algorithm Works:",
+        "1. **Iterating Through the Array:**",
+        "   - The function loops through the array, treating the first element as a sorted sublist.",
+        "2. **Comparing Elements:**",
+        "   - Each new element is compared to the elements in the sorted sublist.",
+        "   - If an element in the sorted part is larger than the current element, it is shifted one position to the right.",
+        "3. **Placing the Key in the Correct Position:**",
+        "   - The current element (key) is inserted in its correct position within the sorted sublist.",
+        "4. **Repeating Until Sorted:**",
+        "   - This process continues until all elements are sorted."
+    ],
+    "date": "2025-01-13"
 }
+
 ]
 
