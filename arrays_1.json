@@ -11,7 +11,13 @@
             "2. For each number in the array, the difference between the target sum and the current number is calculated.",
             "3. If this difference exists in the dictionary `seen`, it means the pair of numbers that sum to the target has been found, and the function returns them.",
             "4. If the difference is not found, the current number is added to the dictionary for future reference.",
-            "5. If no pair is found after iterating through the array, an empty list is returned."
+            "5. If no pair is found after iterating through the array, an empty list is returned.",
+            "",
+            "**Time Complexity (O(n)):**",
+            "The function iterates through the array once (O(n)). For each element, it performs constant-time operations: calculating the difference, checking the dictionary for the difference (O(1) average), and adding the number to the dictionary (O(1) average). Thus, the overall time complexity is O(n).",
+            "",
+            "**Space Complexity (O(n)):**",
+            "In the worst case, where no two numbers sum to the target, the dictionary `seen` stores every number from the input array. Therefore, the space complexity grows linearly with the input size, resulting in O(n)."
         ],
         "date": "2024-12-08"
     },
