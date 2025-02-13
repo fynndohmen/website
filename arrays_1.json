@@ -21,7 +21,7 @@
         ],
         "date": "2024-12-08"
     },
-    {
+{
     "title": "Validating a Subsequence",
     "content": [
         "This Python function checks if a given sequence is a subsequence of a larger array."
@@ -32,16 +32,29 @@
         "1. **Function Purpose:**",
         "   - The function `isValidSubsequence()` takes two arguments: an array and a sequence.",
         "   - It returns `True` if the sequence is a valid subsequence of the array, otherwise it returns `False`.",
+        "",
         "2. **How It Works:**",
         "   - The function iterates through the array and tries to match elements with the sequence. It keeps track of the position in the sequence with the variable `seqidx`.",
         "   - Each time an element in the array matches the current element in the sequence, `seqidx` is incremented to check the next element in the sequence.",
         "   - If the entire sequence is matched by the end of the array, the function returns `True`.",
         "   - If the sequence is not completely matched or the array is exhausted, it returns `False`.",
+        "",
         "3. **Edge Case:**",
-        "   - The function ensures that the sequence is not empty and the full sequence is present in the array before returning `True`."
+        "   - The function ensures that the sequence is not empty and the full sequence is present in the array before returning `True`.",
+        "",
+        "### Complexity Analysis:",
+        "**Time Complexity (O(n)):**",
+        "- The function loops through the array once (`for i in range(len(array))`), which results in a linear time complexity O(n), where *n* is the length of the array.",
+        "- In each iteration, only constant-time operations (comparisons and index increments) are performed.",
+        "- The loop may terminate early if the entire sequence is found before reaching the end of the array, but in the worst case, it still remains O(n).",
+        "",
+        "**Space Complexity (O(1)):**",
+        "- The function only uses a few variables (`seqidx`, `i`), which require constant space.",
+        "- No additional data structures are used, so the space complexity remains O(1)."
     ],
     "date": "2024-12-09"
-    },
+},
+
 {
     "title": "Determine the Winner of a Tournament",
     "content": [
