@@ -12,9 +12,9 @@ body {
 }
 
 /* Blogpost-Seiten: Hintergrund des body ändern */
-.linux-page body {
-    background-color: #E45A4E; /* Sehr helles Grau */
-    background-image: none; /* Hintergrundbild entfernen */
+body.linux-page {
+    background-color: #eaeaea !important; /* Etwas dunkleres Grau */
+    background-image: none !important; /* Hintergrundbild entfernen */
 }
 
 /* Header */
