@@ -13,7 +13,7 @@ body {
 
 /* Blogpost-Seiten: Hintergrund des body ändern */
 .linux-page body {
-    background-color: #f9f9f9; /* Sehr helles Grau */
+    background-color: #f0f0f0; /* Sehr helles Grau */
     background-image: none; /* Hintergrundbild entfernen */
 }
 
