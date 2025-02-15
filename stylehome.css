@@ -11,6 +11,12 @@ body {
     color: #fff;
 }
 
+/* Blogpost-Seiten: Hintergrund des body ändern */
+.linux-page body {
+    background-color: #f9f9f9; /* Sehr helles Grau */
+    background-image: none; /* Hintergrundbild entfernen */
+}
+
 /* Header */
 header {
     background-color: transparent;
@@ -132,7 +138,7 @@ nav ul li a:hover {
     margin: 20px 0;
     padding: 20px;
     border: 1px solid #ddd;
-    background-color: #f9f9f9;
+    background-color: #fff;
     color: #000;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: left;
