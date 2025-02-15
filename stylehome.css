@@ -3,6 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f9f9f9; /* Sehr helles Grau für Blogpost-Hintergrund */
     background-image: url('website_pics/background2.jpg'); /* Pfad zum Hintergrundbild */
     background-size: cover;
     background-position: center;
@@ -70,18 +71,22 @@ nav ul li a:hover {
     color: #555;
 }
 
+/* Blogpost-Hintergrund */
+.linux-page body, .blog-page body {
+    background-color: #f9f9f9; /* Sehr helles Grau */
+}
+
 /* Categories Grid (Projects Page und Algorithm Categories) */
 .projects-page .categories,
 .algorithmcategories-page .categories {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 Spalten */
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-/* Kategorie-Box (eckig) */
 .projects-page .category,
 .algorithmcategories-page .category {
     text-align: center;
@@ -91,33 +96,13 @@ nav ul li a:hover {
     transition: box-shadow 0.3s ease-in-out;
     color: #000;
     text-decoration: none;
-    border-radius: 0; /* Keine abgerundeten Ecken */
+    border-radius: 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Standard Icon-Größe auf der Projects-Seite */
-.projects-page .category img {
-    width: 80px;
-    height: auto;
-    margin-bottom: 10px;
-}
-
-/* Icon-Größe auf der Algorithm Categories Seite */
-.algorithmcategories-page .category img {
-    width: 80px; /* Standardwert, anpassen nach Bedarf */
-    height: auto;
-    margin-bottom: 10px;
 }
 
 .projects-page .category:hover,
 .algorithmcategories-page .category:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.projects-page .category a,
-.algorithmcategories-page .category a {
-    text-decoration: none;
-    color: inherit;
 }
 
 /* Linux Page */
@@ -149,47 +134,24 @@ nav ul li a:hover {
     line-height: 1.6;
 }
 
-.linux-page .blog-post img {
-    max-width: 100%;
-    height: auto;
-    margin: 10px 0;
-}
-
-.linux-page .blog-post small {
-    display: block;
-    margin-top: 10px;
-    font-size: 12px;
-    color: #777;
-}
-
 /* Responsive Design */
 @media (max-width: 1024px) {
     .projects-page .categories,
     .algorithmcategories-page .categories {
-        grid-template-columns: repeat(2, 1fr); /* 2 Spalten */
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 768px) {
     .projects-page .categories,
     .algorithmcategories-page .categories {
-        grid-template-columns: repeat(1, 1fr); /* 1 Spalte */
+        grid-template-columns: repeat(1, 1fr);
         padding: 0;
-    }
-
-    .projects-page .category,
-    .algorithmcategories-page .category {
-        max-width: 90%;
-        margin-bottom: 20px;
     }
 
     .linux-page .blog-post {
         width: 90%;
         padding: 15px;
-    }
-
-    .linux-page .blog-post h2 {
-        font-size: 1.5rem;
     }
 
     .intro-box {
