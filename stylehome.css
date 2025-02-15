@@ -11,12 +11,6 @@ body {
     color: #fff;
 }
 
-/* Blogpost-Seiten: Hintergrund des body ändern */
-body.linux-page {
-    background-color: #eaeaea !important; /* Etwas dunkleres Grau */
-    background-image: none !important; /* Hintergrundbild entfernen */
-}
-
 /* Header */
 header {
     background-color: transparent;
