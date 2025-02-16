@@ -11,13 +11,25 @@
         "   - Each node in a BST has a value and two child nodes: `left` and `right`.",
         "   - The left child node contains values smaller than the parent node.",
         "   - The right child node contains values greater than the parent node.",
+        "",
         "2. **Logic for Finding the Closest Value:**",
         "   - The function starts at the root node and initializes the `closest` variable to infinity.",
         "   - It traverses the tree while updating the closest value if the current node's value is nearer to the target.",
         "   - Depending on whether the target is smaller or larger than the current node's value, it moves to the left or right subtree, respectively.",
+        "",
         "3. **Output:**",
-        "   - Returns the value in the BST that is closest to the target."
+        "   - Returns the value in the BST that is closest to the target.",
+        "",
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- In the average and best cases (balanced BST), the time complexity is **O(log n)**, as each step reduces the search space by half.",
+        "- In the worst case (unbalanced BST, resembling a linked list), the time complexity is **O(n)** because the function may traverse the entire tree.",
+        "",
+        "**Space Complexity:**",
+        "- The space complexity for this iterative solution is **O(1)** because only a few variables (e.g., `closest`, `currentNode`) are used.",
+        "- In a recursive approach, the space complexity would be **O(h)**, where `h` is the height of the tree (up to **O(n)** in the worst case)."
     ],
     "date": "2024-12-13"
 }
+
 ]
