@@ -149,20 +149,32 @@
         "### Key Features of the Matrix Transposition Script:",
         "1. **Input Handling:**",
         "   - Accepts a 2D list (matrix) where each inner list represents a row of the matrix.",
+        "",
         "2. **Logic for Transposition:**",
         "   - Iterates through the columns of the matrix.",
         "   - For each column, constructs a new row by extracting the corresponding elements from each original row.",
+        "",
         "3. **Output:**",
         "   - Returns a new 2D list where rows and columns have been swapped.",
+        "",
         "### How It Works:",
         "1. The script calculates the number of rows and columns in the input matrix.",
         "2. A nested loop iterates over each column (`j`) and extracts elements from all rows (`i`).",
         "3. The extracted elements are added to a new row, which is then appended to the transposed matrix.",
         "4. The result is printed row by row, showing the transposed matrix.",
-        "### Benefits:",
-        "- Provides a clear and simple method to transpose any rectangular matrix.",
-        "- Useful for applications in data analysis, image processing, and scientific computations."
+        "",
+        "### Complexity Analysis:",
+        "**Time Complexity (O(rows × cols)):**",
+        "- The outer loop iterates through each column (cols times).",
+        "- The inner loop iterates through each row (rows times).",
+        "- Since every element in the matrix is accessed exactly once, the total time complexity is **O(rows × cols)**.",
+        "",
+        "**Space Complexity (O(rows × cols)):**",
+        "- The script constructs a new 2D list to store the transposed matrix.",
+        "- The size of this new matrix matches the number of columns by the number of rows of the input.",
+        "- Therefore, the space complexity is **O(rows × cols)**."
     ],
     "date": "2024-12-12"
-}  
+}
+
 ]
