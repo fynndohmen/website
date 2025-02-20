@@ -77,8 +77,7 @@
     ],
     "date": "2024-12-15"
 }
-,
-    {
+,{
     "title": "Evaluating an Expression Tree in Python",
     "content": [
         "This Python script evaluates an expression tree where each internal node represents an operator, and each leaf node represents an operand."
@@ -104,7 +103,17 @@
         "   - Based on the operator at the current node, it performs the corresponding arithmetic operation on the values returned by the left and right subtrees.",
         "",
         "3. **Output:**",
-        "   - The function returns the result of evaluating the expression represented by the tree."
+        "   - The function returns the result of evaluating the expression represented by the tree.",
+        "",
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- Each node in the tree is visited exactly once, performing a constant-time operation at each node.",
+        "- Given that there are `n` nodes in the tree, the overall time complexity is **O(n)**.",
+        "",
+        "**Space Complexity:**",
+        "- The space complexity is determined by the recursion depth, which depends on the height of the tree.",
+        "- **Best/Average Case (Balanced Tree):** The height is **O(log n)**, so the space complexity is **O(log n)**.",
+        "- **Worst Case (Unbalanced Tree):** The height is **O(n)**, so the space complexity is **O(n)**."
     ],
     "date": "2024-12-16"
 }
