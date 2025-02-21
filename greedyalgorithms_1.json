@@ -26,10 +26,17 @@
         "**Space Complexity:**",
         "- The sorting is done in-place, requiring no additional space beyond the input list.",
         "- Only a few integer variables (`total_waiting_time`, `cumulative_duration`) are used, resulting in constant **O(1)** space usage.",
-        "- Therefore, the overall space complexity is **O(1)**."
+        "- Therefore, the overall space complexity is **O(1)**.",
+        "",
+        "### Why This is a Greedy Algorithm:",
+        "- The algorithm makes **locally optimal choices** at each step by always processing the shortest query first.",
+        "- Sorting the queries in ascending order ensures that each task contributes the least possible waiting time to subsequent tasks.",
+        "- Since each decision (processing the shortest query first) leads to the **globally optimal solution** (minimum total waiting time), this follows the greedy algorithm paradigm.",
+        "- Greedy algorithms work well for this problem because **once a shorter task is processed, it cannot be rearranged to achieve a better result**."
     ],
     "date": "2025-01-04"
 }
+
 ,
     {
     "title": "Maximizing Speed with the Tandem Bicycle Problem",
