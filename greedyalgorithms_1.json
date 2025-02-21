@@ -35,10 +35,8 @@
         "- Greedy algorithms work well for this problem because **once a shorter task is processed, it cannot be rearranged to achieve a better result**."
     ],
     "date": "2025-01-04"
-}
-
-,
-    {
+},
+{
     "title": "Maximizing Speed with the Tandem Bicycle Problem",
     "content": [
         "This Python script calculates the maximum or minimum possible total speed of pairs of cyclists on a tandem bicycle."
@@ -49,12 +47,33 @@
         "1. **Input and Sorting:**",
         "   - The function takes two lists of cyclist speeds, `redShirtSpeeds` and `blueShirtSpeeds`, and a boolean `fastest` to determine whether the goal is to maximize or minimize total speed.",
         "   - Both speed lists are sorted in ascending order. If `fastest` is `True`, the `blueShirtSpeeds` list is reversed into descending order to pair the fastest cyclist with the slowest one for maximum speed.",
+        "",
         "2. **Pairing Cyclists:**",
         "   - The script iterates through the sorted lists, pairing cyclists from `redShirtSpeeds` and `blueShirtSpeeds`.",
         "   - For each pair, the higher speed is selected to maximize the total speed of the tandem bicycle.",
+        "",
         "3. **Output:**",
-        "   - The function returns the total speed of the paired cyclists based on the pairing strategy determined by the `fastest` parameter."
+        "   - The function returns the total speed of the paired cyclists based on the pairing strategy determined by the `fastest` parameter.",
+        "",
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- The function sorts both `redShirtSpeeds` and `blueShirtSpeeds`, each requiring **O(n log n)** time due to Timsort.",
+        "- If `fastest` is `True`, reversing `blueShirtSpeeds` requires **O(n)** time.",
+        "- The iteration through both lists to compute the total speed requires **O(n)** time.",
+        "- Since sorting dominates, the overall time complexity is **O(n log n)**.",
+        "",
+        "**Space Complexity:**",
+        "- Sorting is done in-place, requiring no additional memory beyond the input lists.",
+        "- Only a few integer variables (`totalSpeed`, loop indices) are used, leading to a constant **O(1)** space usage.",
+        "- Therefore, the overall space complexity is **O(1)**.",
+        "",
+        "### Why This is a Greedy Algorithm:",
+        "- The algorithm makes **locally optimal choices** at each step by always selecting the fastest available cyclist for the tandem.",
+        "- By sorting and optionally reversing `blueShirtSpeeds`, it ensures that each pair contributes the maximum possible speed.",
+        "- Greedy algorithms work well here because **once a pairing decision is made, it cannot be improved by reordering**.",
+        "- This guarantees that the final solution is the globally optimal one for maximizing or minimizing the total tandem speed."
     ],
     "date": "2025-01-05"
 }
+
 ]
