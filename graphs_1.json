@@ -1,3 +1,4 @@
+[
 {
     "title": "Depth-First Search (DFS) Traversal in a Tree",
     "content": [
@@ -9,14 +10,30 @@
         "1. **Node Class:**",
         "   - Each node has a `name` and a list of `children`.",
         "   - The `addChild()` method allows adding child nodes dynamically.",
+        "",
         "2. **DFS Traversal:**",
         "   - The function `depthFirstSearch()` starts at the root node.",
         "   - The current node is added to the result list.",
         "   - The function recursively calls DFS on each child node before moving to the next sibling.",
+        "",
         "3. **Traversal Order:**",
         "   - DFS explores as deep as possible along each branch before backtracking.",
-        "   - The traversal follows a top-to-bottom, left-to-right pattern for each subtree."
+        "   - The traversal follows a top-to-bottom, left-to-right pattern for each subtree.",
+        "",
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- Each node is visited exactly once during traversal.",
+        "- Since there are `n` nodes in the tree, the total time complexity is **O(n)**.",
+        "",
+        "**Space Complexity:**",
+        "- The space complexity depends on the recursion depth and the result list.",
+        "- **Result List:** Stores all nodes, requiring **O(n)** space.",
+        "- **Recursive Call Stack:**",
+        "  - **Balanced Tree:** The recursion depth is **O(log n)**, leading to **O(log n)** space.",
+        "  - **Unbalanced Tree (Linked List Structure):** The recursion depth is **O(n)**, leading to **O(n)** space.",
+        "- Overall, the worst-case space complexity is **O(n)** due to the result list and recursion depth in an unbalanced tree."
     ],
     "date": "2025-01-13"
 }
 
+]
