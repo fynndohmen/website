@@ -131,6 +131,7 @@ nav ul li a:hover {
     width: 50%;
     margin: 20px 0;
     padding: 20px;
+    box-sizing: border-box;
     border: 1px solid #ddd;
     background-color: #e0e0e0; /* Ändere dies in ein helles Grau */
     color: #333; /* Textfarbe dunkler machen für besseren Kontrast */
@@ -140,10 +141,12 @@ nav ul li a:hover {
 
 .linux-page .blog-post img.blog-image {
     display: block;
-    width: calc(100% + 40px); /* Vergrößert das Bild um das Padding auszugleichen */
-    height: auto;
-    margin: 0 -20px; /* Zieht das Bild nach außen, ohne den Text zu beeinflussen */
-    padding: 0;
+    width: 100%; /* Bild passt sich dynamisch dem Container an */
+    max-width: 100%; /* Verhindert Überdehnung */
+    height: auto; /* Proportionen beibehalten */
+    margin-left: -20px; /* Gleiche den Padding-Wert der .blog-post Box aus */
+    margin-right: -20px; /* Beidseitiger Ausgleich */
+}
 }
 
 .linux-page .blog-post h2 {
