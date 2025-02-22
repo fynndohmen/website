@@ -139,16 +139,16 @@ nav ul li a:hover {
     text-align: left;
 }
 
-/* 🔥 Bild-Breite korrigieren (Bündig machen) */
+/* 🔥 Bild jetzt flexibel & zoomt mit */
 .linux-page .blog-post img.blog-image {
     display: block;
-    width: calc(100% + 40px); /* Umfasst den Padding-Bereich */
-    max-width: none; /* Entfernt Begrenzung */
+    width: 100%; /* Bild skaliert mit Container */
+    max-width: 100%; /* Verhindert Überdehnung */
     height: auto;
-    margin: 0 -20px; /* Bild nach links & rechts ausdehnen */
-    padding: 0;
+    object-fit: contain; /* Sorgt für richtige Proportionen */
 }
 
+/* Text-Formatierungen */
 .linux-page .blog-post h2 {
     color: #000000;
     margin-bottom: 10px;
