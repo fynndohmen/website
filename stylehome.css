@@ -145,7 +145,7 @@ nav ul li a:hover {
     width: calc(100% + 40px); /* Umfasst den Padding-Bereich */
     max-width: none; /* Entfernt Begrenzung */
     height: auto;
-    margin: 20px -20px; /* 20px Abstand oben & unten, aber links/rechts bündig */
+    margin: 40px -40px; /* 20px Abstand oben & unten, aber links/rechts bündig */
     padding: 0;
 }
 
