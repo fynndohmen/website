@@ -52,7 +52,7 @@ nav ul li a:hover {
 .intro-box {
     background-color: white;
     border: 1px solid #ddd;
-    padding: 20px; /* Korrektur */
+    padding: 20px;
     margin: 20px auto;
     max-width: 600px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -104,7 +104,7 @@ nav ul li a:hover {
 
 /* Icon-Größe auf der Algorithm Categories Seite */
 .algorithmcategories-page .category img {
-    width: 80px; /* Standardwert, anpassen nach Bedarf */
+    width: 80px;
     height: auto;
     margin-bottom: 10px;
 }
@@ -133,17 +133,17 @@ nav ul li a:hover {
     padding: 20px;
     box-sizing: border-box;
     border: 1px solid #ddd;
-    background-color: #e0e0e0; /* Ändere dies in ein helles Grau */
-    color: #333; /* Textfarbe dunkler machen für besseren Kontrast */
+    background-color: #e0e0e0; /* Helles Grau */
+    color: #333;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: left;
 }
 
-/* 🔥 WICHTIG: Korrektur der Bildgröße & Position */
+/* 🔥 Bild-Breite korrigieren (Bündig machen) */
 .linux-page .blog-post img.blog-image {
     display: block;
     width: calc(100% + 40px); /* Umfasst den Padding-Bereich */
-    max-width: 100%; /* Verhindert Überdehnung */
+    max-width: none; /* Entfernt Begrenzung */
     height: auto;
     margin: 0 -20px; /* Bild nach links & rechts ausdehnen */
     padding: 0;
@@ -198,7 +198,7 @@ nav ul li a:hover {
     }
 
     .intro-box {
-        padding: 10px; /* Korrektur */
+        padding: 10px;
         margin: 0;
         width: 100%;
     }
