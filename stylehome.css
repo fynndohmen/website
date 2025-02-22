@@ -132,11 +132,12 @@ nav ul li a:hover {
     margin: 20px 0;
     padding: 20px;
     border: 1px solid #ddd;
-    background-color: #f9f9f9;
-    color: #f9f9f9;
+    background-color: #e0e0e0; /* Ändere dies in ein helles Grau */
+    color: #333; /* Textfarbe dunkler machen für besseren Kontrast */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: left;
 }
+
 
 .linux-page .blog-post h2 {
     color: #333;
