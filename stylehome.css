@@ -145,8 +145,13 @@ nav ul li a:hover {
     width: calc(100% + 40px); /* Umfasst den Padding-Bereich */
     max-width: none; /* Entfernt Begrenzung */
     height: auto;
-    margin: 40px -20px; /* 20px Abstand oben & unten, aber links/rechts bündig */
+    margin: 40px -20px 0 -20px; /* 20px Abstand oben & unten, aber links/rechts bündig */
     padding: 0;
+}
+
+/* Entfernt Abstand NUR zwischen zwei Bildern */
+.linux-page .blog-post img.blog-image + img.blog-image {
+    margin-top: 0;
 }
 
 /* Text-Formatierungen */
