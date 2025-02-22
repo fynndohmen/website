@@ -149,9 +149,14 @@ nav ul li a:hover {
     padding: 0;
 }
 
-/* Entfernt Abstand NUR zwischen zwei Bildern */
+/* Entfernt Abstand zwischen zwei aufeinanderfolgenden Bildern */
 .linux-page .blog-post img.blog-image + img.blog-image {
     margin-top: 0;
+}
+
+/* Stellt sicher, dass nach dem letzten Bild 40px Abstand zum Text bleibt */
+.linux-page .blog-post img.blog-image:last-of-type {
+    margin-bottom: 40px;
 }
 
 /* Text-Formatierungen */
