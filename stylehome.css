@@ -194,7 +194,9 @@ nav ul li a:hover {
     }
 
     .intro-box {
-        max-width: 90%;
-        margin: 10px auto;
-    }
+    padding: 10; /* Kein Innenabstand */
+    margin: 0; /* Kein Außenabstand */
+    width: 100%; /* Volle Breite */
+}
+
 }
