@@ -150,13 +150,13 @@ nav ul li a:hover {
 }
 
 .linux-page .blog-post h2 {
-    color: #333;
+    color: #000000;
     margin-bottom: 10px;
 }
 
 .linux-page .blog-post p {
     margin: 10px 0;
-    color: #555;
+    color: #000000;
     line-height: 1.6;
 }
 
