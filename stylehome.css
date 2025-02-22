@@ -52,7 +52,7 @@ nav ul li a:hover {
 .intro-box {
     background-color: white;
     border: 1px solid #ddd;
-    padding: 20px;
+    padding: 20px; /* Korrektur */
     margin: 20px auto;
     max-width: 600px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -139,14 +139,14 @@ nav ul li a:hover {
     text-align: left;
 }
 
+/* 🔥 WICHTIG: Korrektur der Bildgröße & Position */
 .linux-page .blog-post img.blog-image {
     display: block;
-    width: 100%; /* Bild passt sich dynamisch dem Container an */
+    width: calc(100% + 40px); /* Umfasst den Padding-Bereich */
     max-width: 100%; /* Verhindert Überdehnung */
-    height: auto; /* Proportionen beibehalten */
-    margin-left: -20px; /* Gleiche den Padding-Wert der .blog-post Box aus */
-    margin-right: -20px; /* Beidseitiger Ausgleich */
-}
+    height: auto;
+    margin: 0 -20px; /* Bild nach links & rechts ausdehnen */
+    padding: 0;
 }
 
 .linux-page .blog-post h2 {
@@ -158,12 +158,6 @@ nav ul li a:hover {
     margin: 10px 0;
     color: #555;
     line-height: 1.6;
-}
-
-.linux-page .blog-post img {
-    max-width: 100%;
-    height: auto;
-    margin: 0px;
 }
 
 .linux-page .blog-post small {
@@ -204,9 +198,8 @@ nav ul li a:hover {
     }
 
     .intro-box {
-    padding: 10; /* Kein Innenabstand */
-    margin: 0; /* Kein Außenabstand */
-    width: 100%; /* Volle Breite */
-}
-
+        padding: 10px; /* Korrektur */
+        margin: 0;
+        width: 100%;
+    }
 }
