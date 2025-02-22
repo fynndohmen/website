@@ -138,17 +138,6 @@ nav ul li a:hover {
     text-align: left;
 }
 
-.linux-page .blog-post img.blog-image {
-    display: block;  /* Entfernt zusätzlichen Inline-Space */
-    width: 100%;  /* Bild nimmt die gesamte Breite des Containers ein */
-    height: auto;  /* Beibehaltung der Proportionen */
-    margin-left: 0;  /* Entfernt linken Außenabstand */
-    margin-right: 0;  /* Entfernt rechten Außenabstand */
-    padding: 0;  /* Kein Innenabstand */
-}
-
-
-
 .linux-page .blog-post h2 {
     color: #333;
     margin-bottom: 10px;
@@ -163,7 +152,7 @@ nav ul li a:hover {
 .linux-page .blog-post img {
     max-width: 100%;
     height: auto;
-    margin: 10px 0;
+    margin: 0px;
 }
 
 .linux-page .blog-post small {
