@@ -138,6 +138,15 @@ nav ul li a:hover {
     text-align: left;
 }
 
+.linux-page .blog-post img.blog-image {
+    display: block;
+    width: calc(100% + 40px); /* Erweitert das Bild, um das Padding des Containers auszugleichen */
+    height: auto;
+    margin: 0 -20px; /* Negativer Außenabstand gleicht das Padding aus */
+    padding: 0; /* Kein zusätzliches Padding */
+}
+
+
 .linux-page .blog-post h2 {
     color: #333;
     margin-bottom: 10px;
