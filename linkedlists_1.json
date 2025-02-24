@@ -44,13 +44,25 @@
         "### Key Features of the Script:",
         "1. **Input Handling:**",
         "   - Accepts a singly linked list as input, represented by nodes connected via the `next` pointer.",
+        "",
         "2. **Two-Pointer Technique:**",
         "   - Two pointers (`slow_pointer` and `fast_pointer`) are initialized at the head of the linked list.",
         "   - The `fast_pointer` moves two steps at a time, while the `slow_pointer` moves one step at a time.",
         "   - When the `fast_pointer` reaches the end of the list, the `slow_pointer` will be at the middle node.",
+        "",
         "3. **Output:**",
-        "   - Returns the middle node of the linked list. If the list has an even number of nodes, the second middle node is returned."
+        "   - Returns the middle node of the linked list. If the list has an even number of nodes, the second middle node is returned.",
+        "",
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- The function iterates through the linked list using the `fast_pointer`, which moves twice as fast as `slow_pointer`.",
+        "- Since each node is visited at most once, the overall time complexity is **O(n)**, where `n` is the number of nodes in the list.",
+        "",
+        "**Space Complexity:**",
+        "- The function modifies no additional data structures and only uses two pointer variables (`slow_pointer` and `fast_pointer`).",
+        "- Therefore, the overall space complexity is **O(1)**, as the function runs in constant space."
     ],
     "date": "2025-01-07"
 }
+
 ]
