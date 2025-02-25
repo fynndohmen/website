@@ -1,27 +1,47 @@
  [
-   {
+  {
     "title": "Finding the Nth Fibonacci Number Using Iteration",
+    
     "content": [
         "This Python script calculates the Nth Fibonacci number using an iterative approach to ensure efficiency and simplicity."
     ],
+    
     "images": [
         "algorithms_pics/nth_fibonacci.png"
     ],
+    
     "description": [
         "### Key Features of the Script:",
+        
         "1. **Fibonacci Sequence:**",
         "   - The Fibonacci sequence starts with 0 and 1, and each subsequent number is the sum of the previous two numbers.",
+        
         "2. **Iterative Calculation:**",
-        "   - Instead of using recursion, the script uses a loop to calculate the sequence iteratively, which avoids excessive memory usage or stack overflow issues.",
+        "   - Instead of using recursion, the script uses a loop to calculate the sequence iteratively.",
+        "   - This approach avoids excessive memory usage or stack overflow issues.",
+        
         "3. **Logic Flow:**",
         "   - For the first Fibonacci number (`n = 1`), it returns 0.",
         "   - For the second Fibonacci number (`n = 2`), it returns 1.",
-        "   - For `n > 2`, the script calculates the sequence by summing the last two numbers in the list until the Nth number is reached.",
+        "   - For `n > 2`, the script calculates the sequence by summing the last two numbers until the Nth number is reached.",
+        
         "4. **Output:**",
-        "   - The function returns the Nth Fibonacci number as specified by the input."
+        "   - The function returns the Nth Fibonacci number as specified by the input.",
+        
+        "### Complexity Analysis:",
+        
+        "**Time Complexity:**",
+        "- The function iterates through the sequence using a single loop.",
+        "- Since the loop runs `n-2` times, the overall time complexity is **O(n)**.",
+        
+        "**Space Complexity:**",
+        "- The function only uses two integer variables (`prev` and `curr`).",
+        "- Since no additional lists or recursive calls are used, the space complexity is **O(1)**."
     ],
+    
     "date": "2025-01-08"
-},
+}
+,
     {
     "title": "Calculating Product Sums of Nested Arrays in Python",
     "content": [
