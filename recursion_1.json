@@ -1,5 +1,43 @@
  [
   {
+    "title": "Calculating the Nth Fibonacci Number Using Recursion",
+    
+    "content": [
+        "This Python script demonstrates how to calculate the Nth Fibonacci number using a recursive approach."
+    ],
+    
+    "images": [
+        "algorithms_pics/recursive_fibonacci.png"
+    ],
+    
+    "description": [
+        "### Key Features of the Script:",
+        
+        "1. **Fibonacci Sequence:**",
+        "   - The Fibonacci sequence starts with 0 and 1, and each subsequent number is the sum of the previous two numbers.",
+        
+        "2. **Recursive Approach:**",
+        "   - The function calls itself recursively to compute the Fibonacci number at position `n`.",
+        "   - The base cases are defined: `gertNthFib(1) = 0` and `gertNthFib(2) = 1`.",
+        "   - For `n > 2`, the function returns `gertNthFib(n-1) + gertNthFib(n-2)`, simulating the Fibonacci sequence.",
+        
+        "3. **Output:**",
+        "   - The function returns the Nth Fibonacci number as specified by the input.",
+        
+        "### Complexity Analysis:",
+        
+        "**Time Complexity:**",
+        "- Each call to `gertNthFib(n)` results in two additional recursive calls until the base case is reached.",
+        "- This results in an **exponential time complexity of O(2^n)**, making it inefficient for large values of `n`.",
+        
+        "**Space Complexity:**",
+        "- The recursive approach uses a call stack proportional to `n`, leading to a space complexity of **O(n)** in the worst case.",
+        "- Since no additional data structures are used, only recursive stack memory is required."
+    ],
+    
+    "date": "2025-01-07"
+},
+  {
     "title": "Finding the Nth Fibonacci Number Using Iteration",
     
     "content": [
