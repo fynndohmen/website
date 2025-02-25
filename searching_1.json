@@ -1,32 +1,52 @@
 [
 {
     "title": "Implementing Binary Search in Python",
+    
     "content": [
         "This Python script demonstrates an efficient implementation of the binary search algorithm, which is used to find the position of a target element in a sorted array."
     ],
+    
     "images": [
         "algorithms_pics/binary_search.png"
     ],
+    
     "description": [
         "### Key Features of the Binary Search Script:",
+        
         "1. **Divide-and-Conquer Approach:**",
         "   - The algorithm divides the array into halves repeatedly, narrowing down the search space until the target is found or the search space is empty.",
+        
         "2. **Input Parameters:**",
         "   - The function takes a sorted array and a target value as input. The array must be sorted for the binary search to work correctly.",
+        
         "3. **Output:**",
         "   - The function returns the index of the target element if it exists in the array.",
         "   - If the target element is not found, the function returns `-1`.",
+        
         "### How It Works:",
+        
         "1. Initialize two pointers: `left` at the start of the array and `right` at the end of the array.",
         "2. Calculate the middle index of the current search range and retrieve the middle element.",
         "3. Compare the middle element with the target:",
         "   - If the middle element equals the target, return its index.",
         "   - If the middle element is less than the target, move the `left` pointer to `mid + 1` to search the right half.",
         "   - If the middle element is greater than the target, move the `right` pointer to `mid - 1` to search the left half.",
-        "4. Repeat steps 2-3 until the `left` pointer exceeds the `right` pointer, indicating that the target is not in the array."
+        "4. Repeat steps 2-3 until the `left` pointer exceeds the `right` pointer, indicating that the target is not in the array.",
+        
+        "### Complexity Analysis:",
+        
+        "**Time Complexity:**",
+        "- In each iteration, the search space is halved, reducing the problem size from `n` to `n/2`, `n/4`, ..., down to `1`.",
+        "- Since the maximum number of iterations is `log₂(n)`, the time complexity is **O(log n)**.",
+        
+        "**Space Complexity:**",
+        "- The function uses a fixed number of variables (`left`, `right`, `mid`), leading to a space complexity of **O(1)**.",
+        "- No additional data structures are used, as the search operates directly on the input array."
     ],
+    
     "date": "2025-01-10"
-},
+}
+,
 {
     "title": "Finding the Three Largest Numbers in an Array",
     "content": [
