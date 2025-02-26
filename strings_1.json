@@ -2,21 +2,36 @@
   {
     "title": "Checking if a String is a Palindrome",
     "content": [
-        "This Python function determines whether a given string is a palindrome."
+        "This Python function determines whether a given string is a palindrome using an efficient two-pointer technique."
     ],
     "images": [
         "algorithms_pics/palindrome_check.png"
     ],
     "description": [
+        "### What is a Palindrome?",
         "A palindrome is a word, phrase, or sequence that reads the same forward and backward.",
-        "This function checks for palindromes by comparing characters from the beginning and end of the string.",
-        "1. The function first converts the string into a list of characters.",
-        "2. It iterates through the first half of the string, comparing each character with its corresponding character from the end.",
-        "3. If any pair does not match, the function returns `False`, indicating the string is not a palindrome.",
-        "4. If all characters match, the function returns `True`, confirming the string is a palindrome."
+        "For example, 'racecar' and 'madam' are palindromes, while 'hello' is not.",
+        
+        "### How the Function Works:",
+        "1. The function initializes two pointers: `leftIdx` at the start and `rightIdx` at the end of the string.",
+        "2. A while loop runs as long as `leftIdx` is less than `rightIdx`.",
+        "3. In each iteration, the characters at `leftIdx` and `rightIdx` are compared.",
+        "   - If they are different, the function returns `False`, meaning the string is not a palindrome.",
+        "   - If they match, the pointers move toward the center (`leftIdx += 1`, `rightIdx -= 1`).",
+        "4. If all character comparisons pass, the function returns `True`, confirming the string is a palindrome.",
+        
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- The function iterates through at most half of the string (`n/2` comparisons).",
+        "- Each comparison takes `O(1)`, so the overall time complexity is **O(n)**.",
+        
+        "**Space Complexity:**",
+        "- The function operates directly on the input string without creating additional data structures.",
+        "- Since only a few integer variables (`leftIdx`, `rightIdx`) are used, the space complexity is **O(1)**."
     ],
     "date": "2025-01-14"
-},
+}
+,
 {
     "title": "Encrypting Text with Caesar Cipher in Python",
     "content": [
