@@ -99,10 +99,20 @@
         "2. **Processing the String:**",
         "   - The function iterates through the string, counting consecutive identical characters.",
         "   - If the sequence exceeds 9 characters, it is split into multiple segments since a single digit is used to represent the count.",
-        "3. **Output Format:** The compressed string consists of alternating numbers and characters representing the character count and the character itself."
+        "3. **Output Format:** The compressed string consists of alternating numbers and characters representing the character count and the character itself.",
+        
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- The function iterates through the input string once, making it **O(n)**.",
+        "- Each character is processed at most twice (once in the main loop and potentially in the `while` loop for long sequences), but this remains linear.",
+        
+        "**Space Complexity:**",
+        "- The output string can be at most **twice the length of the input** (e.g., `AAAAAAAAAA` → `9A1A`).",
+        "- This results in a worst-case space complexity of **O(n)**."
     ],
     "date": "2025-01-16"
-},
+}
+,
   {
     "title": "Finding Common Characters in Multiple Strings",
     "content": [
