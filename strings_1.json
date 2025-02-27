@@ -43,13 +43,50 @@
         "1. **Letter Shifting:**",
         "   - Each letter in the string is shifted forward by a given key value.",
         "   - If the end of the alphabet is reached, the shifting continues from the beginning (e.g., 'z' with a shift of 2 becomes 'b').",
-        "2. **Modulo Operation:**",
-        "   - To keep shifts within the bounds of the alphabet, the function uses modulo `26`.",
-        "3. **ASCII Manipulation:**",
-        "   - The function converts each character into its ASCII code using `ord()`, modifies it, and converts it back using `chr()`. This ensures an efficient transformation."
+        
+        "2. **Step-by-Step Explanation of the Transformation Formula:**",
+        "   The function modifies each character using the formula:",
+        "   ```python",
+        "   chr(((ord(char) - ord('a') + key) % 26) + ord('a'))",
+        "   ```",
+        "   Let's break it down step by step:",
+        
+        "   - **Step 1:** Convert the character to its ASCII value using `ord(char)`. For example, `ord('x')` returns `120`.",
+        "   - **Step 2:** Subtract `ord('a')` (which is `97`) to get a zero-based index. For 'x':",
+        "     ```",
+        "     ord('x') - ord('a') = 120 - 97 = 23",
+        "     ```",
+        "   - **Step 3:** Add the shift `key` to shift the letter forward. Assuming `key = 2`:",
+        "     ```",
+        "     23 + 2 = 25",
+        "     ```",
+        "   - **Step 4:** Use modulo `26` to ensure the result stays within bounds of the alphabet. If the key moves beyond 'z', it wraps around:",
+        "     ```",
+        "     (23 + 2) % 26 = 25",
+        "     ```",
+        "   - **Step 5:** Convert the result back to an ASCII value by adding `ord('a')`. This ensures it remains a lowercase letter:",
+        "     ```",
+        "     25 + 97 = 122  → chr(122) = 'z'",
+        "     ```",
+        
+        "3. **Modulo Operation for Wrap-Around:**",
+        "   - The modulo `26` ensures that shifting a letter past 'z' wraps around to 'a'.",
+        "   - Example: shifting 'y' by 3 results in 'b':",
+        "     ```",
+        "     (ord('y') - ord('a') + 3) % 26 + ord('a') = 'b'",
+        "     ```",
+
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- The function iterates through the string once, processing each character in `O(1)`. Since there are `n` characters, the total time complexity is **O(n)**.",
+        
+        "**Space Complexity:**",
+        "- The function stores the transformed characters in a list and joins them into a new string, requiring **O(n) space**.",
+        "- Since no extra data structures are used apart from the result storage, the space complexity remains **O(n)**."
     ],
     "date": "2025-01-15"
-},
+}
+,
 {
     "title": "Run-Length Encoding in Python",
     "content": [
