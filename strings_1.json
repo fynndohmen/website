@@ -189,10 +189,21 @@
         "   - The function makes a second pass through the string to check for the first character with a frequency of `1`.",
         "   - When found, the function returns the index of that character.",
         "3. **Returning -1 if No Unique Character Exists:**",
-        "   - If no character appears exactly once, the function returns `-1`."
+        "   - If no character appears exactly once, the function returns `-1`.",
+        
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- The function makes two passes through the string: one to count character frequencies (`O(n)`) and one to find the first unique character (`O(n)`).",
+        "- Since both operations run in linear time, the overall time complexity is **O(n)**.",
+        
+        "**Space Complexity:**",
+        "- In the worst case (if all characters are unique), the dictionary stores `O(n)` entries, making the space complexity **O(n)**.",
+        "- However, if the input consists only of **English lowercase letters (a-z)**, the dictionary can store at most **26 entries**, which is a constant amount.",
+        "- In this case, the space complexity simplifies to **O(1)**, as the maximum number of unique characters is bounded."
     ],
     "date": "2025-01-19"
-},
+}
+,
   {
     "title": "Finding Semordnilap Pairs in a List of Words",
     "content": [
