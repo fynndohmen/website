@@ -204,7 +204,7 @@
     "date": "2025-01-19"
 }
 ,
-  {
+{
     "title": "Finding Semordnilap Pairs in a List of Words",
     "content": [
         "This Python function finds pairs of words in a list that are semordnilaps—words that spell another valid word when reversed."
@@ -220,10 +220,21 @@
         "3. **Avoiding Duplicate Pairs:**",
         "   - Once a semordnilap pair is found, both words are removed from the set to prevent duplication in the output.",
         "4. **Returning the List of Pairs:**",
-        "   - The function returns a list of semordnilap pairs found in the input list."
+        "   - The function returns a list of semordnilap pairs found in the input list.",
+        
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- The function iterates through `n` words, and for each word, it reverses it (`O(m)`) and checks if it exists in the set (`O(1)`).",
+        "- Since the reversal takes `O(m)`, and the lookup is `O(1)`, the total complexity is **O(n * m)**, where `n` is the number of words and `m` is the average word length.",
+        
+        "**Space Complexity:**",
+        "- The function stores all `n` words in a set, requiring **O(n * m)** space in the worst case, where `m` is the maximum length of a word.",
+        "- The result list `pairs` may also store up to `O(n)` words, but this does not exceed `O(n * m)`. Thus, the overall space complexity remains **O(n * m)**.",
+        "- Additionally, each word is reversed during processing, which requires temporary `O(m)` space per word, but this does not change the overall worst-case complexity."
     ],
     "date": "2025-01-20"
 }
+
 
 
 ]
