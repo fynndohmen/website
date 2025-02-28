@@ -113,7 +113,7 @@
     "date": "2025-01-16"
 }
 ,
-  {
+ {
     "title": "Finding Common Characters in Multiple Strings",
     "content": [
         "This Python function identifies characters that appear in every string within a given list."
@@ -126,10 +126,21 @@
         "2. **Finding Common Characters:**",
         "   - It iterates through the remaining strings and keeps only the characters that exist in all of them.",
         "3. **Returning the Result:**",
-        "   - The final set of common characters is converted to a list and returned."
+        "   - The final set of common characters is converted to a list and returned.",
+        
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- The function converts the first string into a set, which takes **O(m)** time, where `m` is the length of the first string.",
+        "- For each of the remaining `n - 1` strings, it creates a set (`O(k)`) and intersects it with the existing character set (`O(min(m, k))`).",
+        "- Since this operation is performed for `n` strings, the overall complexity is **O(n * k)**, where `k` is the average string length.",
+        
+        "**Space Complexity:**",
+        "- The main memory usage comes from storing the `common_chars` set, which has at most `O(m)` elements.",
+        "- The function does not use extra space proportional to the number of strings, making the total space complexity **O(m)**."
     ],
     "date": "2025-01-17"
-},
+}
+,
   {
     "title": "Checking if a Document Can Be Created from Given Characters",
     "content": [
