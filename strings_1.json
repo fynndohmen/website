@@ -158,10 +158,22 @@
         "4. **Reducing Character Counts:**",
         "   - If a character is found in the `characters` string, its count is reduced to reflect that it has been used.",
         "5. **Final Result:**",
-        "   - If all characters in the document can be matched with available characters, the function returns `True`."
+        "   - If all characters in the document can be matched with available characters, the function returns `True`.",
+        
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- The function processes the `characters` string once to build the frequency dictionary (**O(c)**).",
+        "- It then iterates through the `document` string, checking availability in the dictionary (**O(d)**).",
+        "- Both operations combined result in an overall time complexity of **O(c + d)**.",
+        
+        "**Space Complexity:**",
+        "- The function stores character counts in a dictionary, requiring **O(c) space**, where `c` is the number of unique characters in `characters`.",
+        "- Apart from the dictionary, only a few variables are used, keeping additional space usage at **O(1)**.",
+        "- Overall, the worst-case space complexity remains **O(c)**."
     ],
     "date": "2025-01-18"
-},
+}
+,
 {
     "title": "Finding the First Non-Repeating Character in a String",
     "content": [
