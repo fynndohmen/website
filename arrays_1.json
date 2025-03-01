@@ -175,6 +175,41 @@
         "- Therefore, the space complexity is **O(rows × cols)**."
     ],
     "date": "2024-12-12"
+},
+    {
+    "title": "Finding All Unique Triplets That Sum to a Target Value",
+    "content": [
+        "This Python function finds all unique triplets in an array that sum up to a given target value."
+    ],
+    "images": ["algorithms_pics/three_number_sum.png"],
+    "description": [
+        "### How the Function Works:",
+        "1. **Sorting the Array:**",
+        "   - The array is sorted in ascending order to allow an efficient two-pointer technique.",
+        "2. **Iterating Through Each Element:**",
+        "   - The function loops through the array, treating each element as a potential first number of a triplet.",
+        "3. **Using the Two-Pointer Technique:**",
+        "   - For each element, two pointers (`left` and `right`) are initialized at the next and last index, respectively.",
+        "   - The sum of the three numbers is calculated.",
+        "4. **Checking Conditions:**",
+        "   - If the sum matches `targetSum`, the triplet is stored, and both pointers are adjusted.",
+        "   - If the sum is less than `targetSum`, the left pointer is moved forward to increase the sum.",
+        "   - If the sum is greater than `targetSum`, the right pointer is moved backward to decrease the sum.",
+        "5. **Returning the Result:**",
+        "   - The function returns a list of all unique triplets that sum to `targetSum`.",
+        
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- Sorting the array takes **O(n log n)**.",
+        "- The main loop runs **O(n)** times, and within each iteration, the two-pointer approach takes **O(n)**.",
+        "- This results in an overall time complexity of **O(n²)**.",
+        
+        "**Space Complexity:**",
+        "- If only the input array is stored and modified in place, the space complexity is **O(n)**.",
+        "- However, if we consider the worst case, where many triplets are found and stored, the space complexity could grow up to **O(n²)**."
+    ],
+    "date": "2025-03-01"
 }
+
 
 ]
