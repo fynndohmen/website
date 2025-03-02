@@ -209,7 +209,43 @@
         "- However, if we consider the worst case, where many triplets are found and stored, the space complexity could grow up to **O(n²)**."
     ],
     "date": "2025-03-01"
+},
+    {
+    "title": "Finding the Pair with the Smallest Difference in Two Arrays",
+    "content": [
+        "This Python function finds the pair of numbers (one from each array) that have the smallest absolute difference."
+    ],
+    "images": ["algorithms_pics/smallest_difference.png"],
+    "description": [
+        "### How the Function Works:",
+        "1. **Sorting the Arrays:**",
+        "   - Both input arrays are sorted to enable an efficient two-pointer approach.",
+        "2. **Initializing Two Pointers:**",
+        "   - One pointer starts at the beginning of `arrayOne`, and the other at the beginning of `arrayTwo`.",
+        "3. **Comparing Elements and Adjusting Pointers:**",
+        "   - The function calculates the absolute difference between the current elements.",
+        "   - If an exact match is found (difference = 0), the function immediately returns the pair.",
+        "   - If the first number is smaller, its pointer is moved forward to increase the value.",
+        "   - If the second number is smaller, its pointer is moved forward instead.",
+        "4. **Updating the Smallest Difference:**",
+        "   - The function keeps track of the smallest difference found so far.",
+        "   - If a new pair with a smaller difference is found, it updates the stored result.",
+        "5. **Returning the Closest Pair:**",
+        "   - Once all elements are processed, the pair with the smallest difference is returned.",
+        
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- Sorting `arrayOne` takes **O(n log n)**, and sorting `arrayTwo` takes **O(m log m)**.",
+        "- The two-pointer approach iterates through both arrays in **O(n + m)**.",
+        "- Overall, the total time complexity is **O(n log n + m log m)**.",
+        
+        "**Space Complexity:**",
+        "- Since sorting is performed in-place, the function does not require extra memory beyond a few variables.",
+        "- The result list stores only two numbers, making the worst-case space complexity **O(1)**."
+    ],
+    "date": "2025-03-02"
 }
+
 
 
 ]
