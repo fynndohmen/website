@@ -272,7 +272,38 @@
         "- Since the function operates in-place without using additional memory, the space complexity is **O(1)**."
     ],
     "date": "2025-03-03"
+},
+    {
+    "title": "Checking If an Array Is Monotonic in Python",
+    "content": [
+        "This Python function determines whether a given array is monotonic, meaning it is either entirely non-increasing or non-decreasing."
+    ],
+    "images": ["algorithms_pics/is_monotonic.png"],
+    "description": [
+        "### How the Function Works:",
+        "1. **Handling Small Arrays Efficiently:**",
+        "   - If the array contains two or fewer elements, it is always monotonic and the function returns `True` immediately.",
+        "2. **Tracking Trends Using Two Boolean Variables:**",
+        "   - Two boolean variables, `increasing` and `decreasing`, are initialized to `True`.",
+        "   - These will be updated while iterating through the array.",
+        "3. **Iterating Through the Array:**",
+        "   - The function loops through the array and compares each element with the next one.",
+        "   - If a decreasing trend is found, `increasing` is set to `False`.",
+        "   - If an increasing trend is found, `decreasing` is set to `False`.",
+        "4. **Returning the Result:**",
+        "   - If the array remains either fully increasing (`increasing == True`) or fully decreasing (`decreasing == True`), it is monotonic and the function returns `True`.",
+        "   - Otherwise, it returns `False`.",
+        
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- The function iterates through the array once, making the time complexity **O(n)**, where `n` is the length of the array.",
+        
+        "**Space Complexity:**",
+        "- Since the function only uses a few boolean variables and no extra data structures, the space complexity is **O(1)**."
+    ],
+    "date": "2025-01-24"
 }
+
 
 
 
