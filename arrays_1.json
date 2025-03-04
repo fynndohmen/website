@@ -244,7 +244,36 @@
         "- The result list stores only two numbers, making the worst-case space complexity **O(1)**."
     ],
     "date": "2025-03-02"
+},
+    {
+    "title": "Moving a Specific Element to the End of an Array",
+    "content": [
+        "This Python function efficiently moves all occurrences of a given element to the end of an array while maintaining the relative order of the other elements."
+    ],
+    "images": ["algorithms_pics/move_element_to_end.png"],
+    "description": [
+        "### How the Function Works:",
+        "1. **Using Two Pointers for Efficiency:**",
+        "   - The function initializes two pointers: `i` at the start and `j` at the end of the array.",
+        "2. **Shifting the Right Pointer (`j`):**",
+        "   - If `array[j]` is already equal to `toMove`, it is skipped by decrementing `j`.",
+        "3. **Swapping Elements if Necessary:**",
+        "   - If `array[i]` is equal to `toMove`, it is swapped with `array[j]`, ensuring that `toMove` moves towards the end.",
+        "4. **Moving the Left Pointer (`i`):**",
+        "   - The `i` pointer moves forward, continuing until `i` meets `j`.",
+        "5. **Returning the Modified Array:**",
+        "   - Once all `toMove` elements have been relocated, the modified array is returned.",
+        
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- The function processes each element at most once, making the time complexity **O(n)**, where `n` is the length of the array.",
+        
+        "**Space Complexity:**",
+        "- Since the function operates in-place without using additional memory, the space complexity is **O(1)**."
+    ],
+    "date": "2025-03-03"
 }
+
 
 
 
