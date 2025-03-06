@@ -302,7 +302,40 @@
         "- Since the function only uses a few boolean variables and no extra data structures, the space complexity is **O(1)**."
     ],
     "date": "2025-03-04"
+},
+    {
+    "title": "Traversing a 2D Array in Spiral Order Using Python",
+    "content": [
+        "This Python function extracts elements from a 2D array in a spiral order, starting from the top-left corner and moving inward."
+    ],
+    "images": ["algorithms_pics/spiral_traverse.png"],
+    "description": [
+        "### How the Function Works:",
+        "1. **Handling Edge Cases:**",
+        "   - If the input array is empty, the function returns an empty list immediately.",
+        "2. **Defining Boundaries:**",
+        "   - Four boundary variables (`top`, `bottom`, `left`, `right`) are initialized to track the limits of traversal.",
+        "3. **Spiral Traversal Logic:**",
+        "   - The function iterates through the matrix layer by layer while `top` ≤ `bottom` and `left` ≤ `right`.",
+        "   - It follows four sequential steps:",
+        "     - **Traverse from Left to Right** (Top Row)",
+        "     - **Traverse from Top to Bottom** (Right Column)",
+        "     - **Traverse from Right to Left** (Bottom Row, if applicable)",
+        "     - **Traverse from Bottom to Top** (Left Column, if applicable)",
+        "   - After each pass, the corresponding boundary is adjusted inward to prevent revisiting elements.",
+        "4. **Returning the Result:**",
+        "   - The function accumulates elements in a result list and returns the list when traversal is complete.",
+        
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- The function visits each element in the 2D array exactly once, making the time complexity **O(n)**, where `n` is the total number of elements.",
+        
+        "**Space Complexity:**",
+        "- The function stores the result in a list containing all `n` elements, making the space complexity **O(n)**."
+    ],
+    "date": "2025-03-05"
 }
+
 
 
 
