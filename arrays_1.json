@@ -334,11 +334,39 @@
         "- The function stores the result in a list containing all `n` elements, making the space complexity **O(n)**."
     ],
     "date": "2025-03-05"
+},
+    {
+    "title": "Finding the Longest Peak in an Array Using Python",
+    "content": [
+        "This Python function efficiently finds the longest peak in an array. A peak is defined as a sequence of increasing numbers followed by a sequence of decreasing numbers."
+    ],
+    "images": ["algorithms_pics/longest_peak.png"],
+    "description": [
+        "### How the Function Works:",
+        "1. **Identifying a Peak:**",
+        "   - A peak is detected when an element is greater than both its left and right neighbors (`array[i - 1] < array[i] > array[i + 1]`).",
+        "2. **Expanding the Peak:**",
+        "   - Once a peak is found, the function expands left and right to determine the full length of the peak.",
+        "   - The left expansion continues while numbers are increasing (`array[left] > array[left - 1]`).",
+        "   - The right expansion continues while numbers are decreasing (`array[right] > array[right + 1]`).",
+        "3. **Updating the Longest Peak:**",
+        "   - The peak length is calculated as `right - left + 1`.",
+        "   - If this peak is the longest found so far, it updates the stored `longest_peak` value.",
+        "4. **Skipping Processed Peaks:**",
+        "   - After processing a peak, the function jumps ahead by setting `i = right + 1` to avoid unnecessary checks.",
+        "5. **Returning the Result:**",
+        "   - The function returns the length of the longest peak found in the array.",
+        
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- Each element is visited at most once, making the time complexity **O(n)**, where `n` is the length of the array.",
+        
+        "**Space Complexity:**",
+        "- The function operates in-place and only uses a few integer variables, making the space complexity **O(1)**."
+    ],
+    "date": "2025-03-06"
 }
 
-
-
-
-
+    
 
 ]
