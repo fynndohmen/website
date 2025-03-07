@@ -365,7 +365,36 @@
         "- The function operates in-place and only uses a few integer variables, making the space complexity **O(1)**."
     ],
     "date": "2025-03-06"
+},
+    {
+    "title": "Computing Array Products Without Division in Python",
+    "content": [
+        "This Python function calculates an array where each element at index `i` is the product of all elements in the input array except the one at `i`, without using division."
+    ],
+    "images": ["algorithms_pics/array_of_products.png"],
+    "description": [
+        "### How the Function Works:",
+        "1. **Initializing the Output Array:**",
+        "   - A result array of the same size as the input array is created and initialized with `1`s.",
+        "2. **Calculating Prefix Products:**",
+        "   - A left-to-right pass calculates the cumulative product of all elements before each index.",
+        "   - This is stored in the result array, ensuring that each index holds the product of elements to its left.",
+        "3. **Calculating Suffix Products:**",
+        "   - A right-to-left pass computes the cumulative product of all elements after each index.",
+        "   - Each value in the result array is multiplied by this suffix product, completing the calculation.",
+        "4. **Returning the Final Result:**",
+        "   - The function returns the fully computed product array, where each element is the product of all other elements except itself.",
+        
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- The function iterates through the array twice (once for prefix products, once for suffix products), leading to **O(n)** time complexity.",
+        
+        "**Space Complexity:**",
+        "- The function stores an output array of the same size as the input, making the space complexity **O(n)**."
+    ],
+    "date": "2025-04-07"
 }
+
 
     
 
