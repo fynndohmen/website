@@ -393,7 +393,36 @@
         "- The function stores an output array of the same size as the input, making the space complexity **O(n)**."
     ],
     "date": "2025-04-07"
+},
+    {
+    "title": "Finding the First Duplicate Value in an Array",
+    "content": [
+        "This Python function efficiently finds the first duplicate value in an array using an in-place marking technique."
+    ],
+    "images": ["algorithms_pics/first_duplicate_value.png"],
+    "description": [
+        "### How the Function Works:",
+        "1. **Using Absolute Values for Indexing:**",
+        "   - Since the input array contains only positive integers within a known range (1 to `n` where `n` is the array length), we can use element values as indices.",
+        "2. **Marking Visited Elements:**",
+        "   - As the function iterates through the array, it checks if the value at index `abs(value) - 1` is negative.",
+        "   - If negative, it means this index has already been visited, and the function immediately returns `abs(value)`, which is the first duplicate.",
+        "3. **Modifying the Array in Place:**",
+        "   - If the value at index `abs(value) - 1` is positive, the function negates it to mark that this index has been visited.",
+        "4. **Returning the First Duplicate:**",
+        "   - If a duplicate is found, it is returned immediately.",
+        "   - If no duplicates exist, the function returns `-1`.",
+        
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- The function iterates through the array only once, making the time complexity **O(n)**.",
+        
+        "**Space Complexity:**",
+        "- Since the function modifies the input array in place and does not use extra data structures, the space complexity is **O(1)**."
+    ],
+    "date": "2025-03-08"
 }
+
 
 
     
