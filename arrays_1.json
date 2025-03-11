@@ -421,7 +421,39 @@
         "- Since the function modifies the input array in place and does not use extra data structures, the space complexity is **O(1)**."
     ],
     "date": "2025-03-08"
+},
+{
+    "title": "Merging Overlapping Intervals in Python",
+    "content": [
+        "This Python function merges overlapping intervals from a given list of intervals, ensuring that overlapping ranges are combined into a single interval."
+    ],
+    "images": ["algorithms_pics/merge_overlapping_intervals.png"],
+    "description": [
+        "### How the Function Works:",
+        "1. **Sorting the Intervals:**",
+        "   - The function first sorts the intervals based on their starting values to ensure a structured merging process.",
+        "2. **Initializing the Merged List:**",
+        "   - The first interval is added to the merged list as a reference for comparison.",
+        "3. **Iterating Through the Intervals:**",
+        "   - The function iterates through the sorted intervals, checking if the current interval overlaps with the last merged interval.",
+        "4. **Merging Overlapping Intervals:**",
+        "   - If an interval overlaps with the previous one (`start <= last_end`), the end of the last merged interval is updated to the maximum end value.",
+        "   - Otherwise, the current interval is added to the merged list as a separate entry.",
+        "5. **Returning the Merged Intervals:**",
+        "   - The final merged list contains only non-overlapping intervals, ensuring a condensed representation of the input ranges.",
+        
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- Sorting the intervals takes **O(n log n)** time.",
+        "- Iterating through the intervals takes **O(n)** time.",
+        "- Overall, the total time complexity is **O(n log n)** due to sorting.",
+        
+        "**Space Complexity:**",
+        "- The function stores the merged intervals in a separate list, leading to **O(n)** space complexity in the worst case (if no intervals overlap)."
+    ],
+    "date": "2025-03-09"
 }
+
 
 
 
