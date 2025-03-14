@@ -452,7 +452,36 @@
         "- The function stores the merged intervals in a separate list, leading to **O(n)** space complexity in the worst case (if no intervals overlap)."
     ],
     "date": "2025-03-09"
+},
+    {
+    "title": "Finding the Best Seat in a Row Using Python",
+    "content": [
+        "This Python function identifies the best available seat in a row by locating the largest empty space between occupied seats."
+    ],
+    "images": ["algorithms_pics/best_seat.png"],
+    "description": [
+        "### How the Function Works:",
+        "1. **Tracking the Largest Empty Space:**",
+        "   - The function iterates through the `seats` array to find consecutive `0`s, which represent available seats.",
+        "2. **Identifying Seat Groups:**",
+        "   - A `left` pointer marks the start of an empty space, and a `right` pointer scans forward until it encounters an occupied seat (`1`).",
+        "3. **Calculating Available Space:**",
+        "   - The number of empty seats in a segment is determined as `right - left - 1`.",
+        "4. **Finding the Middle of the Largest Space:**",
+        "   - If this space is larger than the previously found maximum, the best seat index is updated to the middle of this segment using `(left + right) // 2`.",
+        "5. **Returning the Best Seat Index:**",
+        "   - The function returns the best available seat index. If no empty seat is found, it returns `-1`.",
+        
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- The function scans the entire array once with a two-pointer approach, making the time complexity **O(n)**.",
+        
+        "**Space Complexity:**",
+        "- The function uses only a few integer variables and does not allocate extra space, making the space complexity **O(1)**."
+    ],
+    "date": "2025-03-10"
 }
+
 
 
 
