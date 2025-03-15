@@ -480,12 +480,33 @@
         "- The function uses only a few integer variables and does not allocate extra space, making the space complexity **O(1)**."
     ],
     "date": "2025-03-10"
+},{
+    "title": "Checking for a Zero-Sum Subarray in Python",
+    "content": [
+        "This Python function determines whether a given array contains a contiguous subarray whose sum equals zero."
+    ],
+    "images": ["algorithms_pics/zero_sum_subarray.png"],
+    "description": [
+        "### How the Function Works:",
+        "1. **Tracking the Cumulative Sum:**",
+        "   - The function iterates through the array while maintaining a `current_sum` that represents the sum of elements seen so far.",
+        "2. **Using a Hash Set for Efficient Lookup:**",
+        "   - A set `seen_sums` is used to store previously encountered cumulative sums.",
+        "   - The set is initialized with `0` to handle the case where a prefix sum itself is zero.",
+        "3. **Detecting a Zero-Sum Subarray:**",
+        "   - If `current_sum` is found in `seen_sums`, it means a subarray with a sum of zero exists.",
+        "   - This happens because encountering the same `current_sum` twice implies that the numbers between these occurrences sum to zero.",
+        "4. **Returning the Result:**",
+        "   - The function returns `True` as soon as a zero-sum subarray is found.",
+        "   - If no such subarray exists, it returns `False`.",
+        
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- The function iterates through the array once and performs constant-time operations (`O(1)`) for set lookups and insertions, resulting in an overall time complexity of **O(n)**.",
+        
+        "**Space Complexity:**",
+        "- The function stores at most `n+1` cumulative sums in a set, making the worst-case space complexity **O(n)**."
+    ],
+    "date": "2025-03-11"
 }
-
-
-
-
-
-    
-
 ]
