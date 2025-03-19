@@ -508,5 +508,36 @@
         "- The function stores at most `n+1` cumulative sums in a set, making the worst-case space complexity **O(n)**."
     ],
     "date": "2025-03-11"
+},
+    {
+    "title": "Finding Two Missing Numbers Using XOR in Python",
+    "content": [
+        "This Python function efficiently finds two missing numbers from a sequence using the XOR operation. The function leverages bitwise operations to achieve an optimal solution without using extra space."
+    ],
+    "images": ["algorithms_pics/missing_numbers.png"],
+    "description": [
+        "### How the Function Works:",
+        "1. **Computing the XOR of All Expected and Given Numbers:**",
+        "   - The function initializes `solutionXOR` as `0` and XORs all numbers from `0` to `n+2` (since two numbers are missing).",
+        "   - It also XORs all numbers in the given list `nums`.",
+        "   - The result is the XOR of the two missing numbers because all present numbers cancel out.",
+        "2. **Finding the Rightmost Set Bit:**",
+        "   - The function extracts the **rightmost set bit** from `solutionXOR` using `solutionXOR & -solutionXOR`.",
+        "   - This bit distinguishes the two missing numbers because they must differ in at least one binary position.",
+        "3. **Separating the Numbers into Two Groups:**",
+        "   - The function iterates again and groups numbers based on whether this bit is set or not.",
+        "   - Using XOR within each group isolates the two missing numbers.",
+        "4. **Returning the Missing Numbers in Sorted Order:**",
+        "   - The final missing numbers are sorted before being returned.",
+        
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- The function iterates through the numbers **twice**, making the overall time complexity **O(n)**.",
+        
+        "**Space Complexity:**",
+        "- The function only uses a few integer variables (`solutionXOR`, `solution`, `setBit`), leading to **O(1)** space complexity."
+    ],
+    "date": "2025-03-12"
 }
+
 ]
