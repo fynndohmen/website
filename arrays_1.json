@@ -596,7 +596,39 @@
         "- The algorithm only uses a few integer variables (`count`, `answer`), leading to **O(1)** space complexity."
     ],
     "date": "2025-03-14"
+},
+    {
+    "title": "Finding the Best Sweet and Savory Dish Combination in Python",
+    "content": [
+        "This Python function selects the best combination of one sweet dish (negative value) and one savory dish (positive value) that comes closest to a given target without exceeding it."
+    ],
+    "images": ["algorithms_pics/sweet_and_savory.png"],
+    "description": [
+        "### How the Function Works:",
+        "1. **Separating Sweet and Savory Dishes:**",
+        "   - The function first separates negative values (sweet dishes) and positive values (savory dishes).",
+        "   - It then sorts sweet dishes by absolute value and savory dishes in ascending order.",
+        "2. **Two-Pointer Approach for Finding the Best Pair:**",
+        "   - Two pointers (`sweetIndex` and `savoryIndex`) are initialized at the start of both lists.",
+        "   - The function iterates through the lists, summing a sweet and a savory dish.",
+        "3. **Updating the Best Pair:**",
+        "   - If the sum is **less than or equal to the target**, the function checks if this pair is the closest match so far and updates `bestPair` if needed.",
+        "   - The savory pointer moves forward to explore larger sums.",
+        "   - If the sum **exceeds the target**, the sweet pointer moves forward to attempt a smaller sum.",
+        "4. **Returning the Best Pair:**",
+        "   - The function returns the best pair found that does not exceed the target.",
+        
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- Sorting both lists takes **O(n log n)**, and the two-pointer traversal runs in **O(n)**.",
+        "- The overall time complexity is **O(n log n)** due to sorting.",
+        
+        "**Space Complexity:**",
+        "- The function creates two separate lists for sweet and savory dishes, leading to **O(n)** space complexity."
+    ],
+    "date": "2025-03-14"
 }
+
 
 
 ]
