@@ -538,6 +538,35 @@
         "- The function only uses a few integer variables (`solutionXOR`, `solution`, `setBit`), leading to **O(1)** space complexity."
     ],
     "date": "2025-03-12"
+},
+{
+    "title": "Finding the Majority Element Using Bitwise Operations in Python",
+    "content": [
+        "This Python function determines the majority element in an array using bitwise operations. A majority element is a number that appears more than half the time in the array."
+    ],
+    "images": ["algorithms_pics/majority_element.png"],
+    "description": [
+        "### How the Function Works:",
+        "1. **Bitwise Representation of Numbers:**",
+        "   - Instead of using traditional frequency counting, the function processes each bit position individually.",
+        "2. **Iterating Through 32 Bits:**",
+        "   - The function loops through all 32-bit positions (assuming a standard integer size) to reconstruct the majority element bit by bit.",
+        "3. **Counting '1' Bits for Each Position:**",
+        "   - For each bit position, it counts how many numbers in the array have a `1` in that position.",
+        "   - If the count is greater than half the array size, it means the majority element has this bit set.",
+        "4. **Reconstructing the Majority Element:**",
+        "   - If a bit position has more `1`s than `0`s, that bit is added to the result using bitwise shifting.",
+        "5. **Returning the Majority Element:**",
+        "   - After processing all bits, the result represents the majority element in the array.",
+        
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- The function iterates through **32 bits** and scans the array **once per bit**, leading to a total time complexity of **O(32n) ≈ O(n)**.",
+        
+        "**Space Complexity:**",
+        "- The function uses only a few integer variables (`answer`, `currentBitValue`, `onesCount`), making the space complexity **O(1)**."
+    ],
+    "date": "2025-03-13"
 }
 
 ]
