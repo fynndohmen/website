@@ -567,6 +567,36 @@
         "- The function uses only a few integer variables (`answer`, `currentBitValue`, `onesCount`), making the space complexity **O(1)**."
     ],
     "date": "2025-03-13"
+},
+{
+    "title": "Finding the Majority Element Using the Boyer-Moore Voting Algorithm in Python",
+    "content": [
+        "This Python function efficiently determines the majority element in an array using the Boyer-Moore Voting Algorithm. A majority element is defined as a number that appears more than half the time in the array."
+    ],
+    "images": ["algorithms_pics/majority_element_boyer_moore.png"],
+    "description": [
+        "### How the Function Works:",
+        "1. **Using a Counter to Track the Majority Candidate:**",
+        "   - The function maintains a `count` variable to track the majority element candidate (`answer`).",
+        "2. **Iterating Through the Array:**",
+        "   - If `count == 0`, the current number becomes the new `answer`.",
+        "   - If the current number matches `answer`, `count` is increased.",
+        "   - If the current number differs from `answer`, `count` is decreased.",
+        "3. **Why This Works:**",
+        "   - If a majority element exists, it will remain the `answer` by the end of the loop.",
+        "   - The algorithm effectively cancels out non-majority elements, ensuring that the true majority element persists.",
+        "4. **Returning the Majority Element:**",
+        "   - Once the loop completes, `answer` contains the majority element.",
+        
+        "### Complexity Analysis:",
+        "**Time Complexity:**",
+        "- The function makes a **single pass** through the array, resulting in **O(n)** time complexity.",
+        
+        "**Space Complexity:**",
+        "- The algorithm only uses a few integer variables (`count`, `answer`), leading to **O(1)** space complexity."
+    ],
+    "date": "2025-03-14"
 }
+
 
 ]
