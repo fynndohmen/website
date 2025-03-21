@@ -6,19 +6,6 @@
     <title>Binary Trees</title>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="stylehome.css">
-    <style>
-        .title-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 10px;
-        }
-
-        .category-icon {
-            width: 32px;
-            height: 32px;
-        }
-    </style>
 </head>
 <body class="linux-page">
     <header>
@@ -66,14 +53,14 @@
                 const postElement = document.createElement('div');
                 postElement.classList.add('blog-post');
 
-                // Title container with icon
+                // Title with Icon
                 const titleContainer = document.createElement('div');
-                titleContainer.classList.add('title-container');
+                titleContainer.classList.add('post-title');
 
                 const icon = document.createElement('img');
-                icon.src = 'website_pics/binarytrees_logo.png';
-                icon.alt = 'Binary Trees Icon';
-                icon.classList.add('category-icon');
+                icon.src = "website_pics/binarytrees_logo.png"; // fallback icon
+                icon.alt = "Category Icon";
+                icon.classList.add('title-icon');
 
                 const title = document.createElement('h2');
                 title.textContent = post.title;
@@ -82,10 +69,12 @@
                 titleContainer.appendChild(title);
                 postElement.appendChild(titleContainer);
 
+                // Short description
                 const shortDescription = document.createElement('p');
                 shortDescription.textContent = post.content[0];
                 postElement.appendChild(shortDescription);
 
+                // Images
                 post.images.forEach(image => {
                     const img = document.createElement('img');
                     img.src = image;
@@ -94,12 +83,14 @@
                     postElement.appendChild(img);
                 });
 
+                // Detailed description
                 post.description.forEach(paragraph => {
                     const para = document.createElement('p');
                     para.textContent = paragraph;
                     postElement.appendChild(para);
                 });
 
+                // Date
                 const date = document.createElement('small');
                 date.textContent = `Posted on: ${post.date}`;
                 postElement.appendChild(date);
