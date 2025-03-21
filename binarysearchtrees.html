@@ -6,19 +6,6 @@
     <title>Binary Search Trees</title>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="stylehome.css">
-    <style>
-        .title-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 10px;
-        }
-
-        .category-icon {
-            width: 32px;
-            height: 32px;
-        }
-    </style>
 </head>
 <body class="linux-page">
     <header>
@@ -49,6 +36,7 @@
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 const data = await response.json();
+
                 allPosts = allPosts.concat(data);
                 allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
                 renderPosts(allPosts);
@@ -62,17 +50,18 @@
 
         function renderPosts(posts) {
             blogContainer.innerHTML = '';
+
             posts.forEach(post => {
                 const postElement = document.createElement('div');
                 postElement.classList.add('blog-post');
 
-                // Title container with icon
+                // Title Row: Icon + Text
                 const titleContainer = document.createElement('div');
                 titleContainer.classList.add('title-container');
 
                 const icon = document.createElement('img');
-                icon.src = 'website_pics/bst_logo.png'; // Dein Icon
-                icon.alt = 'BST Icon';
+                icon.src = 'website_pics/bst_logo.png';
+                icon.alt = 'Binary Search Trees Icon';
                 icon.classList.add('category-icon');
 
                 const title = document.createElement('h2');
@@ -96,7 +85,7 @@
                     postElement.appendChild(img);
                 });
 
-                // Description
+                // Detailed description
                 post.description.forEach(paragraph => {
                     const para = document.createElement('p');
                     para.textContent = paragraph;
