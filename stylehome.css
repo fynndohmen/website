@@ -3,7 +3,7 @@ body {
     font-family: 'Rubik', sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('website_pics/background4.png'); /* Pfad zum Hintergrundbild */
+    background-image: url('website_pics/background4.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -74,7 +74,7 @@ nav ul li a:hover {
 .projects-page .categories,
 .algorithmcategories-page .categories {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 Spalten */
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     padding: 20px;
     max-width: 1200px;
@@ -91,7 +91,7 @@ nav ul li a:hover {
     transition: box-shadow 0.3s ease-in-out;
     color: #000;
     text-decoration: none;
-    border-radius: 0; /* Keine abgerundeten Ecken */
+    border-radius: 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -120,7 +120,7 @@ nav ul li a:hover {
     color: inherit;
 }
 
-/* Linux Page */
+/* Linux Page & Blogposts */
 .linux-page #blog-posts {
     display: flex;
     flex-direction: column;
@@ -133,41 +133,53 @@ nav ul li a:hover {
     padding: 20px;
     box-sizing: border-box;
     border: 1px solid #ddd;
-    background-color: #F5F5F5; /* Helles Grau */
+    background-color: #F5F5F5;
     color: #333;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: left;
 }
 
-/* 🔥 Bild-Breite bleibt korrekt, aber jetzt mit 20px Abstand oben/unten */
+/* Titelzeile mit Icon */
+.post-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.title-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+/* Bilder */
 .linux-page .blog-post img.blog-image {
     display: block;
-    width: calc(100% + 40px); /* Umfasst den Padding-Bereich */
-    max-width: none; /* Entfernt Begrenzung */
+    width: calc(100% + 40px);
+    max-width: none;
     height: auto;
-    margin: 40px -20px 0 -20px; /* 20px Abstand oben & unten, aber links/rechts bündig */
+    margin: 40px -20px 0 -20px;
     padding: 0;
 }
 
-/* Entfernt Abstand zwischen zwei aufeinanderfolgenden Bildern */
 .linux-page .blog-post img.blog-image + img.blog-image {
     margin-top: 0;
 }
 
-/* Stellt sicher, dass nach dem letzten Bild 40px Abstand zum Text bleibt */
 .linux-page .blog-post img.blog-image:last-of-type {
     margin-bottom: 40px;
 }
 
-/* Text-Formatierungen */
+/* Textformatierung */
 .linux-page .blog-post h2 {
-    color: #000000;
+    color: #000;
     margin-bottom: 10px;
 }
 
 .linux-page .blog-post p {
     margin: 10px 0;
-    color: #000000;
+    color: #000;
     line-height: 1.6;
 }
 
@@ -182,14 +194,14 @@ nav ul li a:hover {
 @media (max-width: 1024px) {
     .projects-page .categories,
     .algorithmcategories-page .categories {
-        grid-template-columns: repeat(2, 1fr); /* 2 Spalten */
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 768px) {
     .projects-page .categories,
     .algorithmcategories-page .categories {
-        grid-template-columns: repeat(1, 1fr); /* 1 Spalte */
+        grid-template-columns: repeat(1, 1fr);
         padding: 0;
     }
 
