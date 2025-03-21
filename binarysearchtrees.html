@@ -36,7 +36,6 @@
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 const data = await response.json();
-
                 allPosts = allPosts.concat(data);
                 allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
                 renderPosts(allPosts);
@@ -50,19 +49,18 @@
 
         function renderPosts(posts) {
             blogContainer.innerHTML = '';
-
             posts.forEach(post => {
                 const postElement = document.createElement('div');
                 postElement.classList.add('blog-post');
 
-                // Title Row: Icon + Text
+                // Title with Icon
                 const titleContainer = document.createElement('div');
-                titleContainer.classList.add('title-container');
+                titleContainer.classList.add('post-title');
 
                 const icon = document.createElement('img');
-                icon.src = 'website_pics/bst_logo.png';
-                icon.alt = 'Binary Search Trees Icon';
-                icon.classList.add('category-icon');
+                icon.src = post.icon || "website_pics/bst_logo.png"; // fallback icon
+                icon.alt = "Category Icon";
+                icon.classList.add('title-icon');
 
                 const title = document.createElement('h2');
                 title.textContent = post.title;
