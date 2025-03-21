@@ -6,6 +6,19 @@
     <title>Binary Trees</title>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="stylehome.css">
+    <style>
+        .title-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .category-icon {
+            width: 32px;
+            height: 32px;
+        }
+    </style>
 </head>
 <body class="linux-page">
     <header>
@@ -36,19 +49,11 @@
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 const data = await response.json();
-
-                // Add posts to allPosts for consistent sorting and rendering
                 allPosts = allPosts.concat(data);
-
-                // Sort all posts by date (newest to oldest)
                 allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-                // Render posts
                 renderPosts(allPosts);
             } catch (error) {
                 console.error('Error loading blog posts:', error);
-
-                // Display error message to the user
                 if (page === 1) {
                     blogContainer.innerHTML = '<p>Sorry, we could not load the blog posts at this time. Please try again later.</p>';
                 }
@@ -56,38 +61,45 @@
         }
 
         function renderPosts(posts) {
-            blogContainer.innerHTML = ''; // Clear existing posts
+            blogContainer.innerHTML = '';
             posts.forEach(post => {
                 const postElement = document.createElement('div');
                 postElement.classList.add('blog-post');
 
-                // Title
+                // Title container with icon
+                const titleContainer = document.createElement('div');
+                titleContainer.classList.add('title-container');
+
+                const icon = document.createElement('img');
+                icon.src = 'website_pics/binarytrees_logo.png';
+                icon.alt = 'Binary Trees Icon';
+                icon.classList.add('category-icon');
+
                 const title = document.createElement('h2');
                 title.textContent = post.title;
-                postElement.appendChild(title);
 
-                // Short description
+                titleContainer.appendChild(icon);
+                titleContainer.appendChild(title);
+                postElement.appendChild(titleContainer);
+
                 const shortDescription = document.createElement('p');
                 shortDescription.textContent = post.content[0];
                 postElement.appendChild(shortDescription);
 
-                // Images
                 post.images.forEach(image => {
                     const img = document.createElement('img');
-                    img.src = image; // Using full paths from JSON
+                    img.src = image;
                     img.alt = post.title;
                     img.classList.add('blog-image');
                     postElement.appendChild(img);
                 });
 
-                // Detailed description
                 post.description.forEach(paragraph => {
                     const para = document.createElement('p');
                     para.textContent = paragraph;
                     postElement.appendChild(para);
                 });
 
-                // Date
                 const date = document.createElement('small');
                 date.textContent = `Posted on: ${post.date}`;
                 postElement.appendChild(date);
@@ -106,7 +118,6 @@
             }
         }
 
-        // Load initial posts and attach scroll event
         fetchPosts(currentPage);
         window.addEventListener('scroll', handleScroll);
     </script>
