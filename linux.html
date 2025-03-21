@@ -43,10 +43,21 @@
                     const postElement = document.createElement('div');
                     postElement.classList.add('blog-post');
 
-                    // Title
+                    // Title with Icon
+                    const titleContainer = document.createElement('div');
+                    titleContainer.classList.add('post-title');
+
+                    const icon = document.createElement('img');
+                    icon.src = "website_pics/linux_logo.png"; // fallback icon
+                    icon.alt = "Category Icon";
+                    icon.classList.add('title-icon');
+
                     const title = document.createElement('h2');
                     title.textContent = post.title;
-                    postElement.appendChild(title);
+
+                    titleContainer.appendChild(icon);
+                    titleContainer.appendChild(title);
+                    postElement.appendChild(titleContainer);
 
                     // Short description
                     const shortDescription = document.createElement('p');
