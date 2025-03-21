@@ -36,7 +36,6 @@
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 const data = await response.json();
-
                 allPosts = allPosts.concat(data);
                 allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
                 renderPosts(allPosts);
@@ -54,26 +53,28 @@
                 const postElement = document.createElement('div');
                 postElement.classList.add('blog-post');
 
-                // ICON + TITLE in one row
+                // Title with Icon
                 const titleContainer = document.createElement('div');
-                titleContainer.classList.add('title-container');
+                titleContainer.classList.add('post-title');
 
                 const icon = document.createElement('img');
-                icon.src = 'website_pics/graphs_logo.png';
-                icon.alt = 'Graphs Icon';
-                icon.classList.add('category-icon');
-                titleContainer.appendChild(icon);
+                icon.src = "website_pics/graphs_logo.png"; // fallback icon
+                icon.alt = "Category Icon";
+                icon.classList.add('title-icon');
 
                 const title = document.createElement('h2');
                 title.textContent = post.title;
-                titleContainer.appendChild(title);
 
+                titleContainer.appendChild(icon);
+                titleContainer.appendChild(title);
                 postElement.appendChild(titleContainer);
 
+                // Short description
                 const shortDescription = document.createElement('p');
                 shortDescription.textContent = post.content[0];
                 postElement.appendChild(shortDescription);
 
+                // Images
                 post.images.forEach(image => {
                     const img = document.createElement('img');
                     img.src = image;
@@ -82,12 +83,14 @@
                     postElement.appendChild(img);
                 });
 
+                // Detailed description
                 post.description.forEach(paragraph => {
                     const para = document.createElement('p');
                     para.textContent = paragraph;
                     postElement.appendChild(para);
                 });
 
+                // Date
                 const date = document.createElement('small');
                 date.textContent = `Posted on: ${post.date}`;
                 postElement.appendChild(date);
