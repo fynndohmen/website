@@ -71,7 +71,41 @@
     "- O(1) auxiliary space for iterative methods, O(h) stack space for recursive removal where h is tree height."
   ],
   "date": "2025-03-16"
+},
+    {
+  "title": "Validating a Binary Search Tree (BST) in Python",
+  "content": [
+    "This Python function checks whether a given binary tree satisfies the properties of a Binary Search Tree (BST)."
+  ],
+  "images": [
+    "algorithms_pics/bst_validation.png"
+  ],
+  "description": [
+    "### How the Function Works:",
+    "1. **What Makes a Tree a Valid BST?**",
+    "- In a valid BST, every node must satisfy two conditions:",
+    "  - All values in the left subtree are strictly less than the node’s value.",
+    "  - All values in the right subtree are greater than or equal to the node’s value.",
+    "- These rules must hold recursively for every node in the tree.",
+    
+    "2. **Recursive Validation with Min/Max Constraints:**",
+    "- A helper function `validateBstHelper()` is used to traverse the tree recursively.",
+    "- It ensures that each node’s value lies within a valid range defined by `minValue` and `maxValue`.",
+    "- The left child is checked with an updated upper bound, and the right child with an updated lower bound.",
+    
+    "3. **Why This Approach is Reliable:**",
+    "- Unlike an in-order traversal check, this method directly validates BST rules at each node.",
+    "- It immediately detects violations deep in the tree structure, even if the overall order appears correct.",
+    
+    "### Complexity Analysis:",
+    "**Time Complexity:** O(n) — Each node is visited once.",
+    "**Space Complexity:**",
+    "- O(log n) for a balanced tree due to recursion depth.",
+    "- O(n) in the worst case (e.g., a skewed tree)."
+  ],
+  "date": "2025-03-17"
 }
+
 
 
 ]
