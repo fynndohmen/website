@@ -30,6 +30,48 @@
         "- In a recursive approach, the space complexity would be **O(h)**, where `h` is the height of the tree (up to **O(n)** in the worst case)."
     ],
     "date": "2024-12-13"
+},{
+  "title": "Implementing a Binary Search Tree (BST) in Python",
+  "content": [
+    "This Python class implements a Binary Search Tree (BST) with support for insertion, search, and removal operations. The BST is a fundamental data structure that stores elements in an ordered manner, allowing efficient lookups and updates."
+  ],
+  "images": [
+    "algorithms_pics/bst_construction1.png",
+    "algorithms_pics/bst_construction2.png"
+  ],
+  "description": [
+    "### Key Features of the BST Class:",
+
+    "1. **Insert Method (`insert`)**",
+    "- Adds a new value to the BST while maintaining the binary search property.",
+    "- Traverses the tree from the root, placing the new value in the appropriate position based on comparisons.",
+
+    "2. **Search Method (`contains`)**",
+    "- Checks whether a given value exists in the BST.",
+    "- Starts at the root and follows the left or right child depending on whether the target value is smaller or larger.",
+
+    "3. **Remove Method (`remove`)**",
+    "- Removes a node from the BST while preserving the structure.",
+    "- Handles three cases: node with two children, one child, or no children.",
+    "- For a node with two children, it replaces the node's value with the smallest value from its right subtree (in-order successor).",
+    "- For root deletions with one child, it adjusts the root node to simulate in-place removal.",
+
+    "4. **Helper Method (`getMinValue`)**",
+    "- Traverses to the leftmost node of a subtree to find the minimum value (used during removal).",
+
+    "### Complexity Analysis:",
+
+    "**Time Complexity (Average Case):**",
+    "- Insertion, Search, and Deletion: O(log n)",
+
+    "**Time Complexity (Worst Case):**",
+    "- If the BST becomes unbalanced (e.g., resembles a linked list), operations degrade to O(n)",
+
+    "**Space Complexity:**",
+    "- O(1) auxiliary space for iterative methods, O(h) stack space for recursive removal where h is tree height."
+  ],
+  "date": "2025-03-16"
 }
+
 
 ]
