@@ -104,7 +104,43 @@
     "- O(n) in the worst case (e.g., a skewed tree)."
   ],
   "date": "2025-03-17"
+},
+    {
+  "title": "BST Traversals in Python: In-Order, Pre-Order, and Post-Order",
+  "content": [
+    "This Python code demonstrates the three fundamental depth-first traversal methods for Binary Search Trees (BSTs): in-order, pre-order, and post-order."
+  ],
+  "images": [
+    "algorithms_pics/bst_traversal.png"
+  ],
+  "description": [
+    "### In-Order Traversal (`inOrderTraverse`):",
+    "- Traverses the left subtree, visits the current node, then traverses the right subtree.",
+    "- For Binary Search Trees (BSTs), this traversal returns the node values in sorted order.",
+    "- Useful when you need to extract values from a BST in ascending order.",
+
+    "### Pre-Order Traversal (`preOrderTraverse`):",
+    "- Visits the current node first, then traverses the left and right subtrees.",
+    "- This is useful for tasks like copying a Binary Search Tree (BST) or serializing it.",
+    "- Follows the pattern: **Root → Left → Right**.",
+
+    "### Post-Order Traversal (`postOrderTraverse`):",
+    "- Traverses the left and right subtrees first, then visits the current node.",
+    "- Often used for deleting or freeing nodes in a Binary Search Tree (BST), or for evaluating expression trees.",
+    "- Follows the pattern: **Left → Right → Root**.",
+
+    "Each function accepts a BST and an array, recursively fills the array with node values in the correct order, and returns it.",
+
+    "### Complexity Analysis:",
+    "**Time Complexity:** O(n) — Each node in the BST is visited exactly once.",
+
+    "**Space Complexity:**",
+    "- O(n) for the array containing all node values.",
+    "- O(h) auxiliary space for the recursion stack, where h is the height of the BST (O(log n) for balanced BSTs, O(n) for unbalanced ones)."
+  ],
+  "date": "2025-03-18"
 }
+
 
 
 
