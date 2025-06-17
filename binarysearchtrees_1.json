@@ -139,6 +139,37 @@
     "- O(h) auxiliary space for the recursion stack, where h is the height of the BST (O(log n) for balanced BSTs, O(n) for unbalanced ones)."
   ],
   "date": "2025-03-18"
+},
+{
+  "title": "Creating a Minimal Height BST from a Sorted Array",
+  "content": [
+    "This Python function constructs a Binary Search Tree (BST) with minimal height from a sorted array. This technique ensures the tree is as balanced as possible, optimizing search efficiency."
+  ],
+  "images": [
+    "algorithms_pics/min_height_bst.png"
+  ],
+  "description": [
+    "### Core Idea Behind Minimal Height BST Construction:",
+    "1. **Balanced BST Structure**",
+    "- A BST with minimal height ensures that operations like search, insert, and delete can be performed efficiently.",
+    "- By choosing the middle element of the array as the root and recursively applying the same logic to the subarrays, the BST remains balanced.",
+
+    "2. **Recursive Construction Approach**",
+    "- The function `constructMinHeightBst()` is used to build the tree recursively.",
+    "- At each recursive step, it picks the middle element of the current subarray and inserts it into the BST.",
+    "- This ensures a roughly balanced distribution of nodes across the left and right subtrees.",
+
+    "3. **Tree Construction Process**",
+    "- Start with the full sorted array and determine the middle index.",
+    "- Insert the middle value into the BST using the `insert()` method.",
+    "- Recursively construct the left and right subtrees using the left and right halves of the array.",
+    "- The recursion stops when the subarray is exhausted.",
+
+    "### Complexity Analysis:",
+    "**Time Complexity:** O(n log n) — The function inserts `n` elements into the BST, and each insertion takes O(log n) time on average.",
+    "**Space Complexity:** O(n) — Due to the recursive call stack and the storage of all `n` nodes in the BST."
+  ],
+  "date": "2025-06-14"
 }
 
 
