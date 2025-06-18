@@ -204,8 +204,48 @@
     "**Time Complexity:** O(h + k) — Where `h` is the height of the tree. In the worst case (unbalanced BST), this could be up to O(n), but for a balanced tree, it's roughly O(log n + k).",
     "**Space Complexity:** O(h) — Due to recursion stack from tree traversal."
   ],
-  "date": "2025-06-18"
+  "date": "2025-06-19"
+},
+{
+  "title": "Reconstructing a BST from Preorder Traversal",
+  "content": [
+    "This Python algorithm reconstructs a Binary Search Tree (BST) from its preorder traversal using recursion and value bounds."
+  ],
+  "images": [
+    "algorithms_pics/bst_reconstruction.png"
+  ],
+  "description": [
+    "### Why Preorder Traversal Reconstruction?",
+    "- A preorder traversal of a BST lists nodes in the order: **Root → Left → Right**.",
+    "- Given only this list, it’s possible to reconstruct the original BST if the BST property is preserved (left < root < right).",
+
+    "### How the Algorithm Works:",
+    "1. **Tracking Index with `TreeInfo`**",
+    "- A helper class `TreeInfo` holds the current index (`rootIdx`) in the preorder list.",
+    "- This ensures that each recursive call knows which value to consider as the root of the current subtree.",
+
+    "2. **Bounded Recursion**",
+    "- The core idea is to use a range (`lowerBound`, `upperBound`) to determine whether a value fits in the current subtree.",
+    "- If a value is out of range, it does not belong in that subtree, and recursion returns `None`.",
+    "- The root value splits the range for left and right subtrees recursively.",
+
+    "3. **Building the Tree**",
+    "- Starting from index 0, the function builds the tree top-down:",
+    "  - The first value is used as the root.",
+    "  - It recursively builds the left subtree using values less than the root.",
+    "  - Then it builds the right subtree using values greater than or equal to the root.",
+
+    "### Complexity Analysis:",
+    "**Time Complexity:** O(n) — Each node is processed once in a single pass.",
+    
+    "**Space Complexity:**",
+    "- O(n) total space:",
+    "  - O(h) auxiliary space for the recursion stack, where `h` is the height of the BST (O(log n) for balanced trees, O(n) in the worst case).",
+    "  - O(n) for the space required to actually store the reconstructed BST with `n` nodes."
+  ],
+  "date": "2025-06-19"
 }
+
 
 
 
