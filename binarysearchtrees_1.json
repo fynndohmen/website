@@ -170,6 +170,41 @@
     "**Space Complexity:** O(n) — Due to the recursive call stack and the storage of all `n` nodes in the BST."
   ],
   "date": "2025-06-17"
+},
+{
+  "title": "Finding the K-th Largest Value in a BST (Binary Search Tree)",
+  "content": [
+    "This Python algorithm efficiently retrieves the k-th largest value in a Binary Search Tree (BST) using a reverse in-order traversal."
+  ],
+  "images": [
+    "algorithms_pics/kth_largest_bst.png"
+  ],
+  "description": [
+    "### Why Reverse In-Order Traversal?",
+    "- A standard in-order traversal of a BST visits nodes in **ascending order**.",
+    "- A **reverse in-order traversal** (Right → Node → Left) visits nodes in **descending order**.",
+    "- This makes it ideal for finding the k-th largest element, as the traversal directly yields the largest values first.",
+
+    "### How the Algorithm Works:",
+    "1. **TreeInfo Class**",
+    "- Holds two pieces of information during traversal:",
+    "  - `numberOfNodesVisited`: Counts how many nodes have been visited.",
+    "  - `latestVisitedNodeValue`: Stores the current candidate for the k-th largest value.",
+
+    "2. **Reverse Traversal with Early Stopping**",
+    "- The function recursively visits the right subtree first (largest values).",
+    "- After each node visit, it increments the counter and updates the latest visited value.",
+    "- Once `k` nodes have been visited, the traversal stops early for efficiency.",
+
+    "3. **Function Entry Point**",
+    "- The public function `findKthLargestValueInBst()` sets up the tracking object and initiates the traversal.",
+    "- It returns the k-th largest node's value as stored in `latestVisitedNodeValue`.",
+
+    "### Complexity Analysis:",
+    "**Time Complexity:** O(h + k) — Where `h` is the height of the tree. In the worst case (unbalanced BST), this could be up to O(n), but for a balanced tree, it's roughly O(log n + k).",
+    "**Space Complexity:** O(h) — Due to recursion stack from tree traversal."
+  ],
+  "date": "2025-06-18"
 }
 
 
