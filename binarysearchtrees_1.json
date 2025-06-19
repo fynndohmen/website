@@ -172,6 +172,43 @@
   "date": "2025-06-17"
 },
 {
+  "title": "Efficiently Building a Minimal Height BST from a Sorted Array (O(n) Time)",
+  "content": [
+    "This implementation constructs a Binary Search Tree (BST) with minimal height directly from a sorted array — in linear time, O(n), by avoiding the use of repeated insertions."
+  ],
+  "images": [
+    "algorithms_pics/min_height_bst_optimized.png"
+  ],
+  "description": [
+    "### Overview:",
+    "This solution efficiently builds a minimal height Binary Search Tree (BST) from a sorted array by directly linking child nodes rather than inserting values one by one.",
+    
+    "### How It Works:",
+    "1. The array is sorted, so the middle element at each step is chosen as the root of the current (sub)tree.",
+    "2. The left and right halves of the array are then recursively used to build the left and right subtrees.",
+    "3. Instead of inserting each value with the `.insert()` method, which traverses the tree and takes O(log n) time per insertion, the tree nodes are connected directly during recursion.",
+    
+    "### Key Advantages over Traditional Insert-Based Construction:",
+    "**Insert-Based Approach:**",
+    "- Uses `bst.insert(value)` repeatedly during recursion.",
+    "- Each insertion takes O(log n) time (on average).",
+    "- Total Time Complexity: **O(n log n)** for `n` insertions.",
+    
+    "**Direct Linkage Approach (this implementation):**",
+    "- Avoids insertion logic by manually setting `.left` and `.right` pointers during recursion.",
+    "- Each node is visited exactly once, and no tree traversal is needed.",
+    "- Total Time Complexity: **O(n)**.",
+    
+    "### Complexity Analysis:",
+    "**Time Complexity:** O(n) — Every node is created once, and linking is done in constant time per node.",
+    "**Space Complexity:** O(n) — Due to the recursion stack and storage of all nodes in the BST.",
+    
+    "### Use Case:",
+    "This approach is ideal when building a BST from a static, sorted dataset where balance and performance are key, such as for search-heavy applications or as a preprocessing step for efficient lookups."
+  ],
+  "date": "2025-06-18"
+},
+{
   "title": "Finding the K-th Largest Value in a BST (Binary Search Tree)",
   "content": [
     "This Python algorithm efficiently retrieves the k-th largest value in a Binary Search Tree (BST) using a reverse in-order traversal."
