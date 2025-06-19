@@ -116,5 +116,86 @@
         "- **Worst Case (Unbalanced Tree):** The height is **O(n)**, so the space complexity is **O(n)**."
     ],
     "date": "2024-12-16"
+},
+    {
+  "title": "Inverting a Binary Tree in Python (Breadth-First Approach)",
+  "content": [
+    "This Python function performs an inversion (mirror operation) on a binary tree using a breadth-first traversal approach. The result is a mirrored version of the original binary tree structure."
+  ],
+  "images": [
+    "algorithms_pics/invert_binary_tree.png"
+  ],
+  "description": [
+    "### What Does Inverting a Binary Tree Mean?",
+    "- Inverting (or mirroring) a binary tree means swapping the left and right children of all nodes in the tree.",
+    "- The structure of the tree is flipped horizontally.",
+    
+    "### How the Function Works:",
+    "1. **Breadth-First Traversal:**",
+    "   - The function uses a queue to traverse the tree level by level.",
+    "   - It starts at the root and proceeds to its children and so on.",
+    
+    "2. **Swapping Logic:**",
+    "   - For each node visited, it calls `swapLeftAndRight`, a helper function that swaps the `left` and `right` pointers of that node.",
+    "   - This is done for all nodes, ensuring the entire tree is mirrored.",
+    
+    "3. **Edge Cases:**",
+    "   - If a node is `None`, it’s simply skipped to avoid errors.",
+    
+    "### Why Use Breadth-First Traversal?",
+    "- It avoids the risk of deep recursion stack overflow (as seen in depth-first recursion).",
+    "- It's efficient and intuitive when modifying nodes in-place level by level.",
+    
+    "### Complexity Analysis:",
+    "**Time Complexity:** O(n) — Every node in the binary tree is visited and processed once.",
+    
+    "**Space Complexity:**",
+    "- O(n) in the worst case for the queue, when the tree is a full binary tree and the queue stores all nodes at the last level.",
+    
+    "### Use Case:",
+    "Inverting a binary tree is a common interview question and has practical applications in graphics, mirrored data structures, and testing symmetry in algorithms."
+  ],
+  "date": "2025-06-21"
+},
+{
+  "title": "Inverting a Binary Tree Recursively in Python",
+  "content": [
+    "This Python function demonstrates how to invert a binary tree using a recursive approach, flipping its structure horizontally by swapping left and right child nodes."
+  ],
+  "images": [
+    "algorithms_pics/invert_bst_recursive.png"
+  ],
+  "description": [
+    "### What Does Inverting a Binary Tree Mean?",
+    "- Inverting (or mirroring) a binary tree involves swapping the left and right children of every node in the tree.",
+    "- The resulting structure is a horizontal mirror image of the original tree.",
+
+    "### How the Recursive Inversion Works:",
+    "1. The function checks whether the current node is `None`. If so, it returns immediately (base case).",
+    "2. It swaps the left and right child nodes of the current node.",
+    "3. Then it recursively applies the same process to the left and right subtrees.",
+
+    "### Code Behavior:",
+    "- This recursive function does **not** use any additional data structures like queues or stacks explicitly.",
+    "- Instead, it relies on the **call stack** of the recursion to traverse the tree.",
+
+    "### Advantage Over Iterative Approach:",
+    "- Compared to the iterative solution that uses a queue, this recursive approach is cleaner and often easier to read.",
+    "- Most importantly, it has a better **space complexity** in many cases.",
+
+    "### Complexity Analysis:",
+    "**Time Complexity:**",
+    "- O(n), where n is the number of nodes in the tree — every node is visited once.",
+
+    "**Space Complexity:**",
+    "- O(h), where h is the height of the tree (due to the recursion stack).",
+    "- In a balanced binary tree, this results in O(log n) space.",
+    "- In the worst case (e.g., a skewed tree), space complexity becomes O(n).",
+
+    "### Summary:",
+    "- This recursive solution is an elegant and efficient way to horizontally flip a binary tree using minimal additional memory."
+  ],
+  "date": "2025-06-22"
 }
+
 ]
