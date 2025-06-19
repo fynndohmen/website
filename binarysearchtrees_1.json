@@ -282,46 +282,7 @@
   ],
   "date": "2025-06-20"
 },
-{
-  "title": "Inverting a Binary Tree in Python (Breadth-First Approach)",
-  "content": [
-    "This Python function performs an inversion (mirror operation) on a binary tree using a breadth-first traversal approach. The result is a mirrored version of the original binary tree structure."
-  ],
-  "images": [
-    "algorithms_pics/invert_binary_tree.png"
-  ],
-  "description": [
-    "### What Does Inverting a Binary Tree Mean?",
-    "- Inverting (or mirroring) a binary tree means swapping the left and right children of all nodes in the tree.",
-    "- The structure of the tree is flipped horizontally.",
-    
-    "### How the Function Works:",
-    "1. **Breadth-First Traversal:**",
-    "   - The function uses a queue to traverse the tree level by level.",
-    "   - It starts at the root and proceeds to its children and so on.",
-    
-    "2. **Swapping Logic:**",
-    "   - For each node visited, it calls `swapLeftAndRight`, a helper function that swaps the `left` and `right` pointers of that node.",
-    "   - This is done for all nodes, ensuring the entire tree is mirrored.",
-    
-    "3. **Edge Cases:**",
-    "   - If a node is `None`, it’s simply skipped to avoid errors.",
-    
-    "### Why Use Breadth-First Traversal?",
-    "- It avoids the risk of deep recursion stack overflow (as seen in depth-first recursion).",
-    "- It's efficient and intuitive when modifying nodes in-place level by level.",
-    
-    "### Complexity Analysis:",
-    "**Time Complexity:** O(n) — Every node in the binary tree is visited and processed once.",
-    
-    "**Space Complexity:**",
-    "- O(n) in the worst case for the queue, when the tree is a full binary tree and the queue stores all nodes at the last level.",
-    
-    "### Use Case:",
-    "Inverting a binary tree is a common interview question and has practical applications in graphics, mirrored data structures, and testing symmetry in algorithms."
-  ],
-  "date": "2025-06-21"
-}
+
 
 
 
