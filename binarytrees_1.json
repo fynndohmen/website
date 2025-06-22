@@ -196,6 +196,60 @@
     "- This recursive solution is an elegant and efficient way to horizontally flip a binary tree using minimal additional memory."
   ],
   "date": "2025-06-22"
+},
+{
+  "title": "Calculating the Diameter of a Binary Tree in Python",
+  "content": [
+    "This Python function calculates the diameter of a binary tree, which is the length of the longest path between any two nodes in the tree."
+  ],
+  "images": [
+    "algorithms_pics/binary_tree_diameter.png"
+  ],
+  "description": [
+    "### What Is the Diameter of a Binary Tree?",
+    "- The **diameter** is the longest path between any two nodes in the tree.",
+    "- This path may or may not pass through the root node.",
+    "- It is measured in number of edges (not nodes).",
+
+    "### How the Algorithm Works:",
+    "- The function uses **post-order traversal** (left, right, root) to calculate the height and diameter of each subtree.",
+    "- For each node, we compute:",
+    "",
+    "**1. `leftTreeInfo` and `rightTreeInfo`:**",
+    "- These are the results of recursively calculating the diameter and height for the left and right child nodes.",
+    "",
+    "**2. `longestPathThroughRoot = leftTreeInfo.height + rightTreeInfo.height`**",
+    "- This is the path that passes through the current node, going down to the deepest node in both subtrees.",
+    "- It represents the number of edges that connect the deepest node in the left subtree to the deepest in the right.",
+    "",
+    "**3. `maxDiameterSoFar = max(leftTreeInfo.diameter, rightTreeInfo.diameter)`**",
+    "- This tracks the maximum diameter found so far in either subtree, without necessarily passing through the current node.",
+    "",
+    "**4. `currentDiameter = max(longestPathThroughRoot, maxDiameterSoFar)`**",
+    "- The diameter at the current node is the maximum between the longest path through the current node and the largest diameter already found in its subtrees.",
+    "",
+    "**5. `currentHeight = 1 + max(leftTreeInfo.height, rightTreeInfo.height)`**",
+    "- The height of the current node is one more than the maximum of its children's heights.",
+    "- This height is needed to compute diameters further up the tree.",
+    "",
+    "### TreeInfo Class:",
+    "- A simple helper class that stores two properties for each node:",
+    "  - `diameter`: The largest diameter found in the subtree rooted at this node.",
+    "  - `height`: The height of the current node.",
+    "",
+    "### Complexity Analysis:",
+    "**Time Complexity:** O(n)",
+    "- Every node is visited once, and constant work is done per node.",
+    "",
+    "**Space Complexity:** O(h)",
+    "- Where `h` is the height of the tree (due to recursive stack).",
+    "- In the worst case (unbalanced tree), this is O(n). In a balanced tree, it's O(log n).",
+    "",
+    "### Summary:",
+    "- This recursive solution effectively tracks both height and diameter to calculate the longest path in a single traversal."
+  ],
+  "date": "2025-06-23"
 }
+
 
 ]
