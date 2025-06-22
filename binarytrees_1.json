@@ -249,7 +249,50 @@
     "- This recursive solution effectively tracks both height and diameter to calculate the longest path in a single traversal."
   ],
   "date": "2025-06-23"
+},
+{
+  "title": "Finding the In-Order Successor in a Binary Tree",
+  "content": [
+    "This Python function determines the in-order successor of a given node in a binary tree where each node also has a reference to its parent. The in-order successor is the node that comes immediately after the given node in an in-order traversal."
+  ],
+  "images": [
+    "algorithms_pics/binary_tree_successor.png"
+  ],
+  "description": [
+    "### Understanding the In-Order Successor:",
+    "In an in-order traversal of a binary tree, the nodes are visited in the order: **Left → Node → Right**.",
+    "",
+    "The successor of a node is the next node that would be visited during this traversal.",
+    "",
+    "### Core Logic of `findSuccessor(tree, node)`:",
+    "1. **Right Subtree Exists:**",
+    "   - If the node has a right child, then the in-order successor is the **leftmost descendant of that right child**.",
+    "   - This is efficiently found by calling `getLeftmostChild(node.right)`.",
+    "",
+    "2. **No Right Subtree:**",
+    "   - If the node does not have a right child, we traverse **upward via the parent** until we find a node that is a left child of its parent.",
+    "   - The parent of that node is the in-order successor.",
+    "",
+    "### Helper Functions:",
+    "**`getLeftmostChild(node)`**",
+    "- Receives a subtree root and returns its leftmost descendant.",
+    "- Traverses left from the input node until a node with no left child is reached.",
+    "",
+    "**`getRightmostParent(node)`**",
+    "- Traverses up the tree using the parent references.",
+    "- Continues upward while the current node is a right child of its parent.",
+    "- Returns the first parent where the current node is a left child.",
+    "",
+    "### Complexity Analysis:",
+    "**Time Complexity:** O(h), where `h` is the height of the tree.",
+    "- In the worst case, the algorithm may have to traverse all the way down to the leftmost or up to the root.",
+    "",
+    "**Space Complexity:** O(1)",
+    "- The algorithm operates in constant space without recursion or extra data structures."
+  ],
+  "date": "2025-06-24"
 }
+
 
 
 ]
