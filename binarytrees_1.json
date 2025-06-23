@@ -291,7 +291,49 @@
     "- The algorithm operates in constant space without recursion or extra data structures."
   ],
   "date": "2025-06-24"
+},
+{
+  "title": "Checking if a Binary Tree is Height-Balanced in Python",
+  "content": [
+    "This Python algorithm checks whether a given binary tree is height-balanced. A height-balanced binary tree is one in which the difference in height between the left and right subtrees of every node is at most 1."
+  ],
+  "images": [
+    "algorithms_pics/height_balanced_binary_tree.png"
+  ],
+  "description": [
+    "### What Is a Height-Balanced Binary Tree?",
+    "- A binary tree is height-balanced if, for every node in the tree:",
+    "  - The height of the left and right subtrees differ by **no more than 1**.",
+    "  - Both subtrees are also height-balanced.",
+    "",
+    "### How the Algorithm Works:",
+    "1. **Recursive Post-Order Traversal:**",
+    "   - The helper function `getTreeInfo(node)` traverses the tree from the bottom up.",
+    "   - It first collects the height and balance status of the left and right subtrees.",
+    "",
+    "2. **Combining Subtree Information:**",
+    "   - For each node, it checks if both subtrees are balanced and their height difference is at most 1.",
+    "   - If these conditions hold, the current node is considered balanced.",
+    "",
+    "3. **Returning TreeInfo:**",
+    "   - Each recursive call returns a `TreeInfo` object with two pieces of data:",
+    "     - `isBalanced`: whether the subtree rooted at the node is balanced.",
+    "     - `height`: the height of the subtree rooted at the node.",
+    "",
+    "### Base Case:",
+    "- An empty subtree (`None`) is considered balanced and has a height of -1. This helps simplify the logic.",
+    "",
+    "### Complexity Analysis:",
+    "**Time Complexity:** O(n)",
+    "- Each node is visited exactly once.",
+    "",
+    "**Space Complexity:** O(h)",
+    "- Where `h` is the height of the tree, due to the recursion stack.",
+    "- In the worst case (a skewed tree), this could be O(n). In a balanced tree, it's O(log n)."
+  ],
+  "date": "2025-06-25"
 }
+
 
 
 
