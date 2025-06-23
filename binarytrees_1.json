@@ -332,7 +332,41 @@
     "- In the worst case (a skewed tree), this could be O(n). In a balanced tree, it's O(log n)."
   ],
   "date": "2025-06-25"
+},
+{
+  "title": "Merging Two Binary Trees in Python",
+  "content": [
+    "This Python function merges two binary trees into a single tree by summing the values of overlapping nodes. It performs the merge in-place by modifying the first tree directly."
+  ],
+  "images": [
+    "algorithms_pics/merge_binary_trees.png"
+  ],
+  "description": [
+    "### How the Merging Works:",
+    "1. **Base Cases:**",
+    "- If one of the nodes is `None`, the function simply returns the other node.",
+    "- This ensures that non-overlapping parts of the trees are preserved.",
+    "",
+    "2. **Merging Nodes:**",
+    "- If both nodes exist at a given position, their values are added together and stored in the first tree’s node.",
+    "- The function then recursively merges the left and right children.",
+    "",
+    "3. **In-Place Update:**",
+    "- The merge is done in-place on `tree1`, meaning no new nodes are created unless needed from `tree2`.",
+    "- This is memory-efficient, as it reuses the existing structure of the first tree whenever possible.",
+    "",
+    "### Complexity Analysis:",
+    "**Time Complexity:** O(n)",
+    "- Each node in the overlapping portion of the two trees is visited exactly once.",
+    "- `n` is the number of nodes in the smaller of the two trees (since the merge stops where one tree ends).",
+    "",
+    "**Space Complexity:** O(h)",
+    "- `h` is the height of the tree, accounting for the maximum depth of the recursive call stack.",
+    "- In the worst case of completely unbalanced trees, it could be O(n), but in a balanced case, it's O(log n)."
+  ],
+  "date": "2025-06-26"
 }
+
 
 
 
