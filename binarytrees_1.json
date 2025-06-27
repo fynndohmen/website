@@ -407,6 +407,53 @@
     "- In the worst case (unbalanced tree), it could be O(n), but typically O(log n) for balanced trees."
   ],
   "date": "2025-06-27"
+},
+{
+  "title": "Recursive Check for Symmetrical Binary Trees in Python",
+  "content": [
+    "This Python function checks whether a binary tree is symmetrical around its center using a clean and efficient recursive approach."
+  ],
+  "images": [
+    "algorithms_pics/symmetrical_tree_recursive.png"
+  ],
+  "description": [
+    "### What Is a Symmetrical Tree?",
+    "- A binary tree is symmetrical if the left and right subtrees are **mirror images** of each other.",
+    "- In a mirror image, the left child of one subtree must match the right child of the other subtree and vice versa.",
+    "",
+    "### How the Recursive Function Works:",
+    "1. The `symmetricalTree` function simply calls a helper function `treesAreMirrored`, comparing the left and right subtrees of the root.",
+    "",
+    "2. In `treesAreMirrored`, if **both `left` and `right` are not `None`** and their values match, it recursively checks two pairs:",
+    "- `left.left` with `right.right`",
+    "- `left.right` with `right.left`",
+    "- This ensures a mirror comparison at each level of the tree.",
+    "",
+    "### The `return left == right` Condition:",
+    "If the first condition doesn't hold (i.e., one or both nodes are `None` or the values don’t match), the function returns `left == right`.",
+    "This handles **three specific scenarios**:",
+    "",
+    "**Case 1: Both `left` and `right` are `None`**",
+    "- This is valid — the mirror structure is intact at this leaf level.",
+    "- `left == right` returns `True` because `None == None`.",
+    "",
+    "**Case 2: Only one of `left` or `right` is `None`**",
+    "- The structure is broken; one side is missing a node.",
+    "- `left == right` returns `False`.",
+    "",
+    "**Case 3: `left` and `right` are different non-`None` nodes**",
+    "- They either have different values (which is already handled earlier) or they are different objects.",
+    "- `left == right` returns `False`, preventing incorrect symmetry.",
+    "",
+    "### Complexity Analysis:",
+    "**Time Complexity:** O(n)",
+    "- Every node in the tree is visited exactly once.",
+    "",
+    "**Space Complexity:** O(h)",
+    "- Where `h` is the height of the tree, due to recursion stack usage.",
+    "- In a balanced tree, this is O(log n); in the worst case (e.g., a skewed tree), it becomes O(n)."
+  ],
+  "date": "2025-06-28"
 }
 
 
