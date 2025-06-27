@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heaps</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="stylehome.css">
+</head>
+<body class="linux-page">
+    <header>
+        <h1>Heaps</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="blog-posts">
+        <!-- Blog posts will be dynamically loaded here -->
+    </section>
+
+    <script>
+        let currentPage = 1;
+        let allPosts = [];
+        const blogContainer = document.getElementById('blog-posts');
+        let loading = false;
+
+        async function fetchPosts(page) {
+            try {
+                const response = await fetch(`heaps_${page}.json`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                allPosts = allPosts.concat(data);
+                allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+                renderPosts(allPosts);
+            } catch (error) {
+                console.error('Error loading blog posts:', error);
+                if (page === 1) {
+                    blogContainer.innerHTML = '<p>Sorry, we could not load the blog posts at this time. Please try again later.</p>';
+                }
+            }
+        }
+
+        function renderPosts(posts) {
+            blogContainer.innerHTML = '';
+            posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.classList.add('blog-post');
+
+                // Title with Icon
+                const titleContainer = document.createElement('div');
+                titleContainer.classList.add('post-title');
+
+                const icon = document.createElement('img');
+                icon.src = "website_pics/heaps_logo.png"; // fallback icon
+                icon.alt = "Category Icon";
+                icon.classList.add('title-icon');
+
+                const title = document.createElement('h2');
+                title.textContent = post.title;
+
+                titleContainer.appendChild(icon);
+                titleContainer.appendChild(title);
+                postElement.appendChild(titleContainer);
+
+                // Short description
+                const shortDescription = document.createElement('p');
+                shortDescription.textContent = post.content[0];
+                postElement.appendChild(shortDescription);
+
+                // Images
+                post.images.forEach(image => {
+                    const img = document.createElement('img');
+                    img.src = image;
+                    img.alt = post.title;
+                    img.classList.add('blog-image');
+                    postElement.appendChild(img);
+                });
+
+                // Detailed description
+                post.description.forEach(paragraph => {
+                    const para = document.createElement('p');
+                    para.textContent = paragraph;
+                    postElement.appendChild(para);
+                });
+
+                // Date (intentionally excluded)
+                // const date = document.createElement('small');
+                // date.textContent = `Posted on: ${post.date}`;
+                // postElement.appendChild(date);
+
+                blogContainer.appendChild(postElement);
+            });
+        }
+
+        function handleScroll() {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 && !loading) {
+                loading = true;
+                currentPage++;
+                fetchPosts(currentPage).then(() => {
+                    loading = false;
+                });
+            }
+        }
+
+        fetchPosts(currentPage);
+        window.addEventListener('scroll', handleScroll);
+    </script>
+</body>
+</html>
