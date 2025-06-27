@@ -87,7 +87,7 @@ nav ul li a:hover {
     text-align: center;
     background-color: #fff;
     border: 1px solid #ddd;
-    padding: 20px;
+    padding: 12px;
     transition: box-shadow 0.3s ease-in-out;
     color: #000;
     text-decoration: none;
@@ -97,7 +97,7 @@ nav ul li a:hover {
 
 /* Standard Icon-Größe auf der Projects-Seite */
 .projects-page .category img {
-    width: 80px;
+    width: 60px;
     height: auto;
     margin-bottom: 10px;
 }
