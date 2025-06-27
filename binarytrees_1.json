@@ -454,7 +454,50 @@
     "- In a balanced tree, this is O(log n); in the worst case (e.g., a skewed tree), it becomes O(n)."
   ],
   "date": "2025-06-28"
+},
+{
+  "title": "Can a Binary Tree Be Split Into Two Equal Halves?",
+  "content": [
+    "This Python function checks whether a binary tree can be split into two parts such that both resulting trees have equal sum of node values. The split must occur by removing a single edge."
+  ],
+  "images": ["algorithms_pics/split_binary_tree.png"],
+  "description": [
+    "### Problem Overview:",
+    "- Given a binary tree, the task is to determine whether it's possible to split it into two subtrees with **equal sums**.",
+    "- The only allowed operation is to **remove a single edge** from the tree.",
+    "",
+    "### Core Idea:",
+    "1. **Calculate Total Tree Sum:**",
+    "- First, compute the total sum of all node values using a recursive helper `getTreeSum()`.",
+    "- If this total sum is odd, we can immediately return 0, because an equal split isn't possible.",
+    "",
+    "2. **Target Subtree Sum:**",
+    "- The sum we want in either of the two resulting subtrees is exactly **half** the total sum: `desiredSubtreeSum = total / 2`.",
+    "",
+    "3. **Recursive Tree Traversal with `trySubtrees()`:**",
+    "- This function walks the tree in a **post-order traversal** style (left → right → node), aggregating the sum of each subtree.",
+    "- At every node, it checks whether the sum of that subtree equals the `desiredSubtreeSum`.",
+    "- If such a subtree is found, it means we can split the tree at the parent edge and return `True`.",
+    "",
+    "4. **Return Value:**",
+    "- If a valid split is found, return the value of `desiredSubtreeSum`.",
+    "- Otherwise, return `0` to indicate no such split is possible.",
+    "",
+    "### Complexity Analysis:",
+    "**Time Complexity:** O(n)",
+    "- Each node is visited exactly once during the tree sum and during the `trySubtrees` traversal.",
+    "",
+    "**Space Complexity:** O(h)",
+    "- Where `h` is the height of the tree due to recursive calls.",
+    "- For a balanced tree, this is O(log n), and in the worst case (completely skewed), it's O(n).",
+    "",
+    "### Why This Works:",
+    "- Instead of storing all subtree sums, we **track and compare them during traversal**, making the algorithm efficient.",
+    "- The check `currentTreeSum == desiredSubtreeSum` enables early detection without unnecessary computation."
+  ],
+  "date": "2025-06-29"
 }
+
 
 
 
