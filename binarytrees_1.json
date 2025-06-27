@@ -496,6 +496,50 @@
     "- The check `currentTreeSum == desiredSubtreeSum` enables early detection without unnecessary computation."
   ],
   "date": "2025-06-29"
+},
+{
+  "title": "Maximum Subset Sum with No Adjacent Elements",
+  "content": [
+    "This Python function solves the problem of finding the maximum sum of non-adjacent elements in an array. It ensures that no two selected elements are next to each other."
+  ],
+  "images": ["algorithms_pics/max_subset_sum.png"],
+  "description": [
+    "### Problem Statement:",
+    "- Given an array of integers, return the maximum sum of non-adjacent elements.",
+    "- You may not pick two elements that are next to each other.",
+    "- The array can include negative numbers, but the result should reflect the best possible sum under the constraint.",
+    "",
+    "---",
+    "### First Approach: Using a DP Array",
+    "This method uses an auxiliary array (`maxSums`) to store the maximum sum at each position.",
+    "",
+    "**How it works:**",
+    "1. Initialize `maxSums[0] = array[0]` and `maxSums[1] = max(array[0], array[1])`.",
+    "2. For each index `i` from 2 to end of array:",
+    "   - Either take the current element and add it to `maxSums[i-2]`, or skip it and carry forward `maxSums[i-1]`.",
+    "   - Set `maxSums[i] = max(maxSums[i-1], maxSums[i-2] + array[i])`.",
+    "3. The final value in `maxSums[-1]` is the result.",
+    "",
+    "**Time Complexity:** O(n) — one pass through the array.",
+    "**Space Complexity:** O(n) — due to the `maxSums` array.",
+    "",
+    "---",
+    "### Second Approach: Optimized Space with Two Variables",
+    "This method optimizes space by maintaining only two variables: `first` and `second`.",
+    "",
+    "**How it works:**",
+    "1. Initialize `second = array[0]` and `first = max(array[0], array[1])`.",
+    "2. For each element from index 2 onward:",
+    "   - Compute `current = max(first, second + array[i])`.",
+    "   - Update `second = first` and `first = current`.",
+    "3. At the end, `first` contains the maximum sum.",
+    "",
+    "**Time Complexity:** O(n) — iterates through array once.",
+    "**Space Complexity:** O(1) — only a constant amount of memory is used.",
+    "",
+    "This version is more efficient in terms of space and should be preferred in most real-world scenarios."
+  ],
+  "date": "2025-06-30"
 }
 
 
