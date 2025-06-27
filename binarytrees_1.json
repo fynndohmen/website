@@ -365,7 +365,50 @@
     "- In the worst case of completely unbalanced trees, it could be O(n), but in a balanced case, it's O(log n)."
   ],
   "date": "2025-06-26"
+},
+{
+  "title": "Checking if a Binary Tree is Symmetrical Using an Iterative Approach",
+  "content": [
+    "This Python function checks whether a binary tree is symmetrical around its center using an iterative depth-first traversal approach."
+  ],
+  "images": [
+    "algorithms_pics/symmetrical_tree.png"
+  ],
+  "description": [
+    "### What is a Symmetrical Tree?",
+    "- A binary tree is **symmetrical** if the left and right subtrees are mirror images of each other.",
+    "- This means for every node on the left, there is a corresponding node on the right with the same value and structure — but flipped.",
+    "",
+    "### How the Function Works:",
+    "1. **Initialization**",
+    "- Two stacks are initialized: `stackLeft` with the left child and `stackRight` with the right child of the root node.",
+    "",
+    "2. **Iterative Comparison**",
+    "- In each loop iteration, one node is popped from each stack.",
+    "- If **both nodes are `None`**, the subtrees at that point are symmetrical, and the loop continues with the next pair. This is why the `continue` statement is used — it skips further checks in that iteration.",
+    "- If **only one node is `None`**, or the values do not match, the tree is **not symmetrical**.",
+    "",
+    "3. **Stack Updates**",
+    "- The left child of the left node and the right child of the right node are compared next.",
+    "- Similarly, the right child of the left node and the left child of the right node are also paired for comparison.",
+    "- This order ensures a **mirror comparison** of the two subtrees.",
+    "",
+    "### Why Use `continue`?",
+    "- The `continue` statement is critical in the loop when both nodes are `None`.",
+    "- In such cases, there is **nothing further to compare**, and we can move on without pushing more children or performing unnecessary checks.",
+    "- It keeps the function efficient and avoids deeper traversal into `None` nodes.",
+    "",
+    "### Complexity Analysis:",
+    "**Time Complexity:** O(n)",
+    "- Every node in the tree is visited once.",
+    "",
+    "**Space Complexity:** O(h)",
+    "- Where `h` is the height of the tree due to the use of stacks for traversal.",
+    "- In the worst case (unbalanced tree), it could be O(n), but typically O(log n) for balanced trees."
+  ],
+  "date": "2025-06-27"
 }
+
 
 
 
