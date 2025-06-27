@@ -23,7 +23,7 @@ header {
 
 header h1 {
     margin: 20px 0;
-    font-size: 2.5rem;
+    font-size: 2.2rem;
 }
 
 nav ul {
@@ -75,13 +75,13 @@ nav ul li a:hover {
 .algorithmcategories-page .categories {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    padding: 20px;
+    gap: 16px;
+    padding: 10px 20px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-/* Kategorie-Box (eckig) */
+/* Kategorie-Box (angepasst für 12 Boxen ohne Scroll) */
 .projects-page .category,
 .algorithmcategories-page .category {
     text-align: center;
@@ -93,22 +93,25 @@ nav ul li a:hover {
     text-decoration: none;
     border-radius: 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-height: 100px;
 }
 
-/* Standard Icon-Größe auf der Projects-Seite */
-.projects-page .category img {
+/* Icon-Größe angepasst */
+.projects-page .category img,
+.algorithmcategories-page .category img {
     width: 60px;
     height: auto;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
 }
 
-/* Icon-Größe auf der Algorithm Categories Seite */
-.algorithmcategories-page .category img {
-    width: 80px;
-    height: auto;
-    margin-bottom: 10px;
+/* Titel-Schriftgröße leicht reduziert */
+.projects-page .category h3,
+.algorithmcategories-page .category h3 {
+    font-size: 1.05rem;
+    margin: 8px 0 0 0;
 }
 
+/* Hover */
 .projects-page .category:hover,
 .algorithmcategories-page .category:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
