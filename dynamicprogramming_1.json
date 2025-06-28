@@ -39,7 +39,9 @@
     "**Time Complexity:** O(n) — iterates through array once.",
     "**Space Complexity:** O(1) — only a constant amount of memory is used.",
     "",
-    "This version is more efficient in terms of space and should be preferred in most real-world scenarios."
+    "---",
+    "**Why This Is Dynamic Programming:**",
+    "This problem follows the principles of dynamic programming because it breaks the problem into smaller subproblems (maximum sum up to each index), stores the results of those subproblems (either in an array or variables), and uses those stored results to build up the solution efficiently without recomputing. The decision at each index depends on previously computed optimal results, which is a core characteristic of dynamic programming."
   ],
   "date": "2025-06-30"
 }
