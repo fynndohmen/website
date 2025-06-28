@@ -73,7 +73,7 @@
     "**Why This Is Dynamic Programming:**",
     "This algorithm solves a problem by breaking it into overlapping subproblems — the number of ways to make change for smaller amounts — and stores the results of those subproblems in the `ways` array. It reuses those stored results to build up solutions to larger subproblems. This bottom-up approach with memoization is a hallmark of dynamic programming."
   ],
-  "date": "2025-06-31"
+  "date": "2025-07-01"
 }
 
 
