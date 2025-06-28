@@ -22,8 +22,8 @@ header {
 }
 
 header h1 {
-    margin: 15px 0 10px;
-    font-size: 2rem;
+    margin: 20px 0;
+    font-size: 2.5rem;
 }
 
 nav ul {
@@ -35,7 +35,7 @@ nav ul {
 
 nav ul li {
     display: inline;
-    margin: 0 10px;
+    margin: 0 15px;
 }
 
 nav ul li a {
@@ -70,48 +70,45 @@ nav ul li a:hover {
     color: #555;
 }
 
-/* Categories Grid */
+/* Categories Grid (Projects Page und Algorithm Categories) */
 .projects-page .categories,
 .algorithmcategories-page .categories {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    padding: 10px 15px;
-    max-width: 1100px;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
-/* Kategorie-Box */
+/* Kategorie-Box (eckig) */
 .projects-page .category,
 .algorithmcategories-page .category {
     text-align: center;
     background-color: #fff;
     border: 1px solid #ddd;
-    padding: 10px;
+    padding: 20px;
     transition: box-shadow 0.3s ease-in-out;
     color: #000;
     text-decoration: none;
     border-radius: 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    min-height: 85px;
 }
 
-/* Icon-Größe kleiner */
-.projects-page .category img,
-.algorithmcategories-page .category img {
-    width: 48px;
+/* Standard Icon-Größe auf der Projects-Seite */
+.projects-page .category img {
+    width: 80px;
     height: auto;
-    margin-bottom: 4px;
+    margin-bottom: 10px;
 }
 
-/* Titel-Schriftgröße kleiner */
-.projects-page .category h3,
-.algorithmcategories-page .category h3 {
-    font-size: 0.95rem;
-    margin: 4px 0 0;
+/* Icon-Größe auf der Algorithm Categories Seite */
+.algorithmcategories-page .category img {
+    width: 80px;
+    height: auto;
+    margin-bottom: 10px;
 }
 
-/* Hover */
 .projects-page .category:hover,
 .algorithmcategories-page .category:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -211,7 +208,7 @@ nav ul li a:hover {
     .projects-page .category,
     .algorithmcategories-page .category {
         max-width: 90%;
-        margin-bottom: 15px;
+        margin-bottom: 20px;
     }
 
     .linux-page .blog-post {
