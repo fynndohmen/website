@@ -62,19 +62,25 @@
     "- `ways[0]` is set to 1 because there is exactly one way to make `0` — by choosing no coins.",
     "- The outer loop iterates over each denomination in `denoms`.",
     "- The inner loop iterates over all amounts from `1` to `n`.",
-    "- For every amount greater than or equal to the current denomination, we update the ways to make that amount by adding the number of ways to make `amount - denom`.",
     "",
-    "This means we're building up the solution to the full amount by using previously computed solutions to smaller subproblems.",
+    "**What exactly happens in the inner loop?**",
+    "- For each amount `amount` from `1` to `n`, the algorithm checks if the current coin `denom` can contribute to that amount (i.e., `denom <= amount`).",
+    "- If it can, it means we can form `amount` by first forming `amount - denom`, and then adding the current coin `denom`.",
+    "- The value `ways[amount - denom]` represents the number of ways to make `amount - denom`, so all of those ways become valid ways to make `amount` when we include `denom`.",
+    "- Thus, we add `ways[amount - denom]` to `ways[amount]`.",
+    "",
+    "This process builds up the total number of combinations for each amount in a bottom-up manner, reusing previously computed values.",
     "",
     "**Time Complexity:** O(n * d), where `n` is the target amount and `d` is the number of denominations.",
     "**Space Complexity:** O(n) for the `ways` array.",
     "",
     "---",
     "**Why This Is Dynamic Programming:**",
-    "This algorithm solves a problem by breaking it into overlapping subproblems — the number of ways to make change for smaller amounts — and stores the results of those subproblems in the `ways` array. It reuses those stored results to build up solutions to larger subproblems. This bottom-up approach with memoization is a hallmark of dynamic programming."
+    "This algorithm solves a complex problem by breaking it down into overlapping subproblems — specifically, the number of ways to make smaller amounts. It stores the results of these subproblems in the `ways` array and reuses them to build up solutions to larger amounts. This bottom-up reuse of prior results is a classic dynamic programming technique."
   ],
   "date": "2025-07-01"
-},
+}
+,
 {
   "title": "Minimum Number of Coins for Change",
   "content": [
