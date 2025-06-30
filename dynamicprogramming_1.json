@@ -74,7 +74,52 @@
     "This algorithm solves a problem by breaking it into overlapping subproblems — the number of ways to make change for smaller amounts — and stores the results of those subproblems in the `ways` array. It reuses those stored results to build up solutions to larger subproblems. This bottom-up approach with memoization is a hallmark of dynamic programming."
   ],
   "date": "2025-07-01"
+},
+{
+  "title": "Minimum Number of Coins for Change",
+  "content": [
+    "This Python function determines the minimum number of coins needed to make a specific amount of change using given coin denominations. It now returns `-1` if the amount cannot be formed with the available coins."
+  ],
+  "images": ["algorithms_pics/min_coins_change.png"],
+  "description": [
+    "### Problem Statement:",
+    "- Given an integer `n` (target amount) and a list of coin denominations `denoms`, compute the minimum number of coins required to make `n`.",
+    "- If it is not possible to form `n` with the given denominations, return `-1`.",
+    "",
+    "---",
+    "### How the Algorithm Works:",
+    "- An array `numOfCoins` of size `n + 1` is initialized with all values set to `float('inf')`, except for index `0`, which is set to `0`.",
+    "- `numOfCoins[i]` represents the minimum number of coins needed to make amount `i`.",
+    "",
+    "The outer loop iterates over each coin denomination.",
+    "The inner loop iterates through every amount from `0` to `n`.",
+    "",
+    "### Key Logic in the Inner Loop:",
+    "```python",
+    "if denom <= amount:",
+    "    numOfCoins[amount] = min(numOfCoins[amount], 1 + numOfCoins[amount - denom])",
+    "```",
+    "- This checks if the current coin can contribute to the current amount.",
+    "- If so, it updates the number of coins needed to reach that amount by comparing the current best value with one more coin plus the number of coins needed for the remaining amount (`amount - denom`).",
+    "",
+    "---",
+    "### Final Return Statement:",
+    "```python",
+    "return numOfCoins[n] if numOfCoins[n] != float('inf') else -1",
+    "```",
+    "- After processing all denominations and amounts, if `numOfCoins[n]` is still infinity, that means no combination was found to form amount `n` — in that case, return `-1`.",
+    "- Otherwise, return the computed minimum number of coins.",
+    "",
+    "**Time Complexity:** O(n * d), where `n` is the target amount and `d` is the number of denominations.",
+    "**Space Complexity:** O(n) — for the `numOfCoins` array.",
+    "",
+    "---",
+    "**Why This Is Dynamic Programming:**",
+    "This algorithm uses a bottom-up approach to solve a problem by building solutions to all smaller subproblems first. It stores intermediate results (minimum coins for smaller amounts) and reuses them, avoiding redundant work. This optimal substructure and overlapping subproblems pattern is a hallmark of dynamic programming."
+  ],
+  "date": "2025-07-02"
 }
+
 
 
 ]
