@@ -126,6 +126,54 @@
   "date": "2025-07-02"
 },
 {
+  "title": "Calculating Levenshtein Distance (Edit Distance) in Python",
+  "content": [
+    "This Python function calculates the Levenshtein Distance between two strings — the minimum number of single-character edits (insertions, deletions, or substitutions) needed to transform one string into another."
+  ],
+  "images": ["algorithms_pics/levenshtein_distance.png"],
+  "description": [
+    "### Problem Statement:",
+    "- Given two strings `str1` and `str2`, compute the minimum number of edit operations required to convert `str1` into `str2`.",
+    "- Allowed operations are:",
+    "  - Insertion",
+    "  - Deletion",
+    "  - Substitution",
+    "",
+    "---",
+    "### How the Algorithm Works:",
+    "- A 2D matrix `edits` is used where `edits[i][j]` stores the Levenshtein Distance between the first `i` characters of `str2` and the first `j` characters of `str1`.",
+    "- The matrix is initialized such that the first row and first column represent the cost of converting an empty string to the respective prefix.",
+    "",
+    "**Initialization:**",
+    "- `edits[0][j] = j` for all `j`: cost of inserting all characters of `str1`.",
+    "- `edits[i][0] = i` for all `i`: cost of deleting all characters of `str2`.",
+    "",
+    "**Core Logic:**",
+    "- For every character pair `(str2[i-1], str1[j-1])`, we compare and update the edit cost:",
+    "  - If the characters match, no operation is needed: `edits[i][j] = edits[i-1][j-1]`.",
+    "  - Otherwise, choose the operation with the lowest accumulated cost:",
+    "    1. **Substitution:** `edits[i-1][j-1] + 1` — replace `str1[j-1]` with `str2[i-1]`.",
+    "    2. **Insertion:** `edits[i][j-1] + 1` — insert `str2[i-1]` into `str1`.",
+    "    3. **Deletion:** `edits[i-1][j] + 1` — delete `str1[j-1]`.",
+    "- Hence, the update is: `edits[i][j] = 1 + min(substitution, insertion, deletion)`.",
+    "",
+    "**Why are these three operations valid?**",
+    "- These reflect all the possible ways we can resolve a mismatch at position `(i, j)`: either change the character, add a character, or remove one.",
+    "- Dynamic programming ensures that we always build on previously computed minimal costs to arrive at the most efficient solution.",
+    "",
+    "**Final Result:**",
+    "- The bottom-right cell `edits[len(str2)][len(str1)]` contains the total minimum edit distance.",
+    "",
+    "**Time Complexity:** O(n * m), where `n` and `m` are the lengths of the two strings.",
+    "**Space Complexity:** O(n * m) — due to the 2D matrix used.",
+    "",
+    "---",
+    "**Why This Is Dynamic Programming:**",
+    "This problem is solved by dividing it into smaller overlapping subproblems — computing the edit distance for prefixes of both strings. Each subproblem builds upon previously solved subproblems, stored in a table to avoid redundant computation. This reuse of results to construct a solution incrementally is a defining feature of dynamic programming."
+  ],
+  "date": "2025-07-03"
+},
+{
   "title": "Levenshtein Distance with Optimized Space in Python",
   "content": [
     "This implementation calculates the Levenshtein Distance (Edit Distance) between two strings while optimizing space complexity. It improves upon the standard dynamic programming approach by using only two 1D arrays instead of a full 2D matrix."
