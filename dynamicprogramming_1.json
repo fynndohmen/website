@@ -124,7 +124,59 @@
     "This algorithm uses a bottom-up approach to solve a problem by building solutions to all smaller subproblems first. It stores intermediate results (minimum coins for smaller amounts) and reuses them, avoiding redundant work. This optimal substructure and overlapping subproblems pattern is a hallmark of dynamic programming."
   ],
   "date": "2025-07-02"
+},
+{
+  "title": "Levenshtein Distance with Optimized Space in Python",
+  "content": [
+    "This implementation calculates the Levenshtein Distance (Edit Distance) between two strings while optimizing space complexity. It improves upon the standard dynamic programming approach by using only two 1D arrays instead of a full 2D matrix."
+  ],
+  "images": ["algorithms_pics/levenshtein_distance_optimized.png"],
+  "description": [
+    "### Problem Statement:",
+    "- Given two strings `str1` and `str2`, determine the minimum number of edit operations (insertions, deletions, or substitutions) required to convert one string into the other.",
+    "- The algorithm aims to reduce memory usage while maintaining accurate computation.",
+    "",
+    "---",
+    "### Key Differences from the Classic DP Solution:",
+    "In the classic approach, a 2D matrix of size `(len(str2) + 1) x (len(str1) + 1)` is created. This solution, however, uses only two 1D arrays, each of length `min(len(str1), len(str2)) + 1`, to alternate between current and previous rows.",
+    "",
+    "### Step-by-Step Explanation of the Optimized Version:",
+    "1. **String Selection for Optimization:**",
+    "- To minimize space, the shorter string is assigned to `small`, and the longer one to `big`.",
+    "- This ensures the 1D arrays are as small as possible.",
+    "",
+    "2. **Array Initialization:**",
+    "- `evenEdits` represents the current state of edit distances at even iterations.",
+    "- `oddEdits` is used during odd iterations.",
+    "- Both arrays hold only one row of the full DP matrix, with `evenEdits` initially filled with `[0, 1, 2, ..., len(small)]`, representing edit distances from an empty string to increasing prefixes.",
+    "",
+    "3. **Main Loop Over the Longer String (`big`):**",
+    "- For each character in `big`, we calculate a new row of edit distances (`currentEdits`) based on the previous one (`previousEdits`).",
+    "- The first element of `currentEdits` is set to `i`, which represents the cost of deleting all characters from `big[:i]` to match an empty string.",
+    "- The `if i % 2 == 1` block determines whether to use `oddEdits` or `evenEdits` for writing and reading.",
+    "",
+    "4. **Nested Loop Over the Shorter String (`small`):**",
+    "- If characters match (`big[i - 1] == small[j - 1]`), no operation is needed; reuse the diagonal value: `currentEdits[j] = previousEdits[j - 1]`.",
+    "- If they differ, take the minimum cost of the three possible operations:",
+    "   - **Substitution:** `previousEdits[j - 1] + 1`",
+    "   - **Deletion:** `previousEdits[j] + 1`",
+    "   - **Insertion:** `currentEdits[j - 1] + 1`",
+    "",
+    "5. **Result Selection:**",
+    "- After all iterations, return the last element of either `evenEdits` or `oddEdits` depending on the parity of `len(big)`.",
+    "",
+    "---",
+    "### Complexity Analysis:",
+    "**Time Complexity:** O(n * m), where `n` and `m` are the lengths of the two input strings.",
+    "**Space Complexity:** O(min(n, m)) — only two rows (arrays) of the matrix are maintained at any time.",
+    "",
+    "---",
+    "**Why This Is Dynamic Programming:**",
+    "This solution still solves overlapping subproblems by building up a table of minimal edits between substrings. It reuses previously computed solutions and uses memoization via a rolling array pattern. The key difference is that instead of storing the entire matrix, only the essential information from the previous step is kept, demonstrating space-efficient dynamic programming."
+  ],
+  "date": "2025-07-03"
 }
+
 
 
 
