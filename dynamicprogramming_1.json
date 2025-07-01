@@ -174,7 +174,7 @@
     "**Why This Is Dynamic Programming:**",
     "This solution still solves overlapping subproblems by building up a table of minimal edits between substrings. It reuses previously computed solutions and uses memoization via a rolling array pattern. The key difference is that instead of storing the entire matrix, only the essential information from the previous step is kept, demonstrating space-efficient dynamic programming."
   ],
-  "date": "2025-07-03"
+  "date": "2025-07-04"
 }
 
 
