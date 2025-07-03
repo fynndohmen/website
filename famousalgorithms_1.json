@@ -48,7 +48,7 @@
     "**Why This Is Dynamic Programming:**",
     "Kadane’s Algorithm builds on the idea of solving subproblems — the best subarray sum ending at each index — and combining those sub-results to find the overall solution. This reuse of intermediate results and optimal substructure is characteristic of dynamic programming."
   ],
-  "date": "2025-06-30"
+  "date": "2025-07-06"
 }
 
 ]
