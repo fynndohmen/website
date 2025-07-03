@@ -1,1 +1,54 @@
-placeholder
+[
+{
+  "title": "Kadane's Algorithm: Maximum Subarray Sum",
+  "content": [
+    "Kadane’s Algorithm efficiently finds the maximum sum of a contiguous subarray within a one-dimensional array of numbers."
+  ],
+  "images": ["algorithms_pics/kadanes_algorithm.png"],
+  "description": [
+    "### Problem Statement:",
+    "- Given an array of integers, find the **maximum sum** of any **contiguous subarray**.",
+    "- The array can include both positive and negative numbers.",
+    "",
+    "---",
+    "### How Kadane’s Algorithm Works:",
+    "- The algorithm uses two variables to keep track of important values while iterating through the array:",
+    "  1. `maxEndingHere`: the maximum sum of a subarray ending at the current position.",
+    "  2. `maxSoFar`: the maximum sum found so far in the entire array.",
+    "",
+    "### Step-by-Step Logic:",
+    "**Initialization:**",
+    "- Both `maxEndingHere` and `maxSoFar` are initialized to the first element of the array.",
+    "",
+    "**Main Loop:**",
+    "- For each element `num` in the array (starting from index 1), two actions are performed:",
+    "",
+    "```python",
+    "maxEndingHere = max(num, maxEndingHere + num)",
+    "```",
+    "- This line decides whether to:",
+    "  - Start a new subarray from the current number (`num`), or",
+    "  - Extend the previous subarray by adding the current number to `maxEndingHere`.",
+    "- It always chooses the option that results in the greater sum.",
+    "",
+    "```python",
+    "maxSoFar = max(maxSoFar, maxEndingHere)",
+    "```",
+    "- This updates the global maximum `maxSoFar` if the new `maxEndingHere` is greater.",
+    "",
+    "**Final Output:**",
+    "- Once all elements have been processed, `maxSoFar` holds the maximum subarray sum.",
+    "",
+    "---",
+    "### Complexity Analysis:",
+    "**Time Complexity:** O(n) — the array is traversed once.",
+    "**Space Complexity:** O(1) — only constant extra space is used.",
+    "",
+    "---",
+    "**Why This Is Dynamic Programming:**",
+    "Kadane’s Algorithm builds on the idea of solving subproblems — the best subarray sum ending at each index — and combining those sub-results to find the overall solution. This reuse of intermediate results and optimal substructure is characteristic of dynamic programming."
+  ],
+  "date": "2025-06-30"
+}
+
+]
