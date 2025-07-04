@@ -49,6 +49,61 @@
     "Kadane’s Algorithm builds on the idea of solving subproblems — the best subarray sum ending at each index — and combining those sub-results to find the overall solution. This reuse of intermediate results and optimal substructure is characteristic of dynamic programming."
   ],
   "date": "2025-07-06"
+},
+{
+  "title": "Stable Internships: Solving the Stable Matching Problem",
+  "content": [
+    "This Python function implements a variation of the Stable Marriage Problem — commonly known as the Stable Matching Problem — to assign interns to teams based on mutual preferences."
+  ],
+  "images": ["algorithms_pics/stable_matching.png"],
+  "description": [
+    "### Problem Statement:",
+    "- Given two equally sized lists: one representing interns and one representing teams.",
+    "- Each intern ranks the teams in order of preference.",
+    "- Each team ranks the interns in order of preference.",
+    "- The goal is to match each intern to one team such that the final set of pairings is **stable** — meaning no intern and team prefer each other over their current matches.",
+    "",
+    "---",
+    "### Algorithm Overview:",
+    "- The algorithm is a modified version of the **Gale-Shapley algorithm**.",
+    "- Interns propose to teams in the order of their preference lists.",
+    "- Each team accepts the best intern so far (according to their preference) and may drop a previous match if a better one proposes.",
+    "",
+    "---",
+    "### Detailed Explanation:",
+    "1. **Setup:**",
+    "   - `chosenInterns` keeps track of which intern is currently matched to which team.",
+    "   - `freeInterns` starts with all interns unassigned.",
+    "   - `currentInternChoices` tracks the next team each intern will propose to.",
+    "   - `teamMaps` converts each team’s preference list into a dictionary for fast rank lookup.",
+    "",
+    "2. **Proposal Loop:**",
+    "   - While there are unassigned interns, take one and let them propose to their next preferred team.",
+    "   - If the team is free, the intern is assigned.",
+    "   - If the team already has an intern, the team compares the new and old interns:",
+    "     - If the new intern ranks higher, they replace the old one (who goes back into the pool).",
+    "     - If not, the new intern tries the next team on their list in the next iteration.",
+    "",
+    "3. **Result:**",
+    "   - When the loop ends, all interns are matched and no unstable pairs exist.",
+    "",
+    "---",
+    "### Key Properties:",
+    "- **Stability:** No pair (intern, team) exists where both prefer each other over their current match.",
+    "- **Termination:** The algorithm always finishes in a finite number of steps.",
+    "- **Optimality:** The result is optimal for the proposing side (interns in this case).",
+    "",
+    "---",
+    "### Complexity Analysis:",
+    "**Time Complexity:** O(n²), where `n` is the number of interns (or teams).",
+    "- Each intern may propose to every team in the worst case.",
+    "**Space Complexity:** O(n²) for storing preference maps and match information.",
+    "",
+    "---",
+    "This matching algorithm is widely used in real-world applications, such as matching medical students to hospitals, assigning students to schools, or pairing job applicants to companies."
+  ],
+  "date": "2025-07-07"
 }
+
 
 ]
