@@ -103,7 +103,57 @@
     "This matching algorithm is widely used in real-world applications, such as matching medical students to hospitals, assigning students to schools, or pairing job applicants to companies."
   ],
   "date": "2025-07-07"
+},
+{
+  "title": "Union-Find Data Structure with Path Compression and Union by Rank",
+  "content": [
+    "This Python implementation of the Union-Find (also known as Disjoint Set Union - DSU) data structure efficiently tracks a collection of disjoint sets. It supports two main operations: finding the representative (root) of a set and merging two sets together."
+  ],
+  "images": ["algorithms_pics/union_find.png"],
+  "description": [
+    "### Problem Context:",
+    "The Union-Find structure is commonly used in algorithms dealing with **connected components**, such as **Kruskal’s algorithm** for Minimum Spanning Trees, or in **cycle detection** within undirected graphs.",
+    "",
+    "---",
+    "### Components of the Union-Find Structure:",
+    "",
+    "1. **`createSet(value)`**",
+    "- Initializes a new set containing a single element.",
+    "- The value is its own parent, and its initial rank (tree depth) is set to 0.",
+    "",
+    "2. **`find(value)` with Path Compression**",
+    "- Returns the root representative of the set that contains `value`.",
+    "- Uses **path compression**, which flattens the tree by making every node point directly to the root. This dramatically speeds up future queries.",
+    "",
+    "3. **`union(valueOne, valueTwo)` with Union by Rank**",
+    "- Merges the sets containing `valueOne` and `valueTwo`.",
+    "- Uses **union by rank** to ensure that the smaller tree is attached to the larger one, minimizing depth.",
+    "- If ranks are equal, one tree becomes root and its rank increases.",
+    "",
+    "---",
+    "### Time and Space Complexity Analysis:",
+    "",
+    "**`createSet(value)`**",
+    "- Time Complexity: **O(1)** — Constant time to insert the value into two dictionaries.",
+    "- Space Complexity: **O(1)** per call — One entry added to each of the `parents` and `ranks` dictionaries.",
+    "",
+    "**`find(value)`**",
+    "- Time Complexity: **Amortized O(α(n))**, where **α(n)** is the inverse Ackermann function — extremely slow-growing and nearly constant for all practical input sizes.",
+    "- Space Complexity: **O(1)** auxiliary (aside from recursive call stack if implemented recursively).",
+    "",
+    "**`union(valueOne, valueTwo)`**",
+    "- Time Complexity: **Amortized O(α(n))**, because it calls `find` and does constant-time rank comparisons and updates.",
+    "- Space Complexity: **O(1)** — only performs dictionary updates.",
+    "",
+    "---",
+    "### Why It's Efficient:",
+    "- By combining **path compression** (during `find`) and **union by rank**, this implementation achieves nearly constant time per operation, even for a large number of elements and operations.",
+    "",
+    "This makes Union-Find one of the most powerful tools for managing dynamic connectivity and disjoint-set problems efficiently."
+  ],
+  "date": "2025-07-08"
 }
+
 
 
 ]
