@@ -34,6 +34,49 @@
         "- Overall, the worst-case space complexity is **O(n)** due to the result list and recursion depth in an unbalanced tree."
     ],
     "date": "2025-01-13"
+},
+{
+  "title": "Detecting a Single Cycle in an Array",
+  "content": [
+    "This Python function determines whether traversing through an array according to the values it contains forms a single cycle that visits every element exactly once before returning to the starting index."
+  ],
+  "images": ["algorithms_pics/single_cycle_check.png"],
+  "description": [
+    "### Problem Statement:",
+    "- Given an array of integers where each element represents a number of steps to jump forward or backward (circularly), determine if the traversal starting at index `0` visits every index exactly once and returns to `0` at the end.",
+    "- Positive numbers mean jumping forward, negative numbers mean jumping backward.",
+    "",
+    "---",
+    "### How the Algorithm Works:",
+    "1. **Initialization:**",
+    "   - Start at index `0` with a counter `numElementsVisited` set to 0.",
+    "",
+    "2. **Main Loop:**",
+    "   - Continue jumping through the array using the `getNextIdx()` helper function.",
+    "   - If you revisit index `0` **before** visiting all elements, return `False` since that means more than one cycle exists.",
+    "",
+    "3. **Cycle Completion Check:**",
+    "   - After visiting all elements, return whether you're back at index `0`. If so, a single valid cycle exists.",
+    "",
+    "### `getNextIdx(currentIdx, array)` Details:",
+    "- Calculates the next index in a circular manner using modulo arithmetic.",
+    "- It ensures wrapping around in both directions, including negative jumps.",
+    "- If the result is negative, it corrects the index by adding the array's length to keep it in valid range.",
+    "",
+    "### Key Observations:",
+    "- You must never return to index `0` before all elements are visited — this would split the cycle.",
+    "- The use of `% len(array)` ensures wrapping around.",
+    "- This algorithm ensures every node is part of exactly one cycle of full traversal.",
+    "",
+    "---",
+    "### Time and Space Complexity:",
+    "**Time Complexity:** O(n) — Each element is visited exactly once.",
+    "**Space Complexity:** O(1) — Only a few variables are used regardless of input size.",
+    "",
+    "This solution is efficient and elegant, offering a constant-space approach to solving cycle detection problems in circular arrays."
+  ],
+  "date": "2025-06-30"
 }
+
 
 ]
