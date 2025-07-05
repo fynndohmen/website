@@ -76,7 +76,58 @@
     "This solution is efficient and elegant, offering a constant-space approach to solving cycle detection problems in circular arrays."
   ],
   "date": "2025-07-09"
+},
+{
+  "title": "Breadth-First Search (BFS) Traversal in a Tree Structure",
+  "content": [
+    "This Python class implements a tree structure and performs a Breadth-First Search (BFS) traversal to collect node names in the order they are visited."
+  ],
+  "images": ["algorithms_pics/bfs_traversal.png"],
+  "description": [
+    "### What Is Breadth-First Search (BFS)?",
+    "- BFS is a tree or graph traversal algorithm that explores nodes level by level, starting from the root.",
+    "- It uses a **queue** data structure to keep track of nodes to visit next.",
+    "- This approach is ideal when the shortest path or shallowest node is desired.",
+    "",
+    "---",
+    "### How the BFS Method Works:",
+    "1. **Initialization:**",
+    "   - A queue is initialized with the root node (`self`).",
+    "   - An `array` is passed in to collect the names of visited nodes.",
+    "",
+    "2. **Traversal Loop:**",
+    "   - While the queue is not empty, remove the first node from the queue (`current`).",
+    "   - Append its `name` to the result `array`.",
+    "   - Add all its `children` to the end of the queue for later processing.",
+    "",
+    "3. **Termination:**",
+    "   - The loop continues until all reachable nodes have been visited.",
+    "   - The function returns the filled `array`, which represents the BFS order.",
+    "",
+    "---",
+    "### Class Structure Highlights:",
+    "**Node Class:**",
+    "- Each node stores a `name` and a list of `children`.",
+    "- The `addChild` method allows for easy tree construction by appending new `Node` instances.",
+    "",
+    "**breadthFirstSearch(array) Method:**",
+    "- Designed for use on any node (typically the root).",
+    "- Returns an ordered list of names based on BFS traversal.",
+    "",
+    "---",
+    "### Example Use Case:",
+    "- This BFS logic can be used to solve problems like organizational chart processing, finding the shortest path in unweighted graphs, or level-order printing of trees.",
+    "",
+    "---",
+    "### Time and Space Complexity:",
+    "**Time Complexity:** O(n) — Each node is visited exactly once.",
+    "**Space Complexity:** O(w) — Where `w` is the maximum width of the tree (i.e., the number of nodes at the largest level).",
+    "",
+    "This implementation is an efficient and intuitive way to traverse hierarchical data structures using Breadth-First Search."
+  ],
+  "date": "2025-07-10"
 }
+
 
 
 ]
