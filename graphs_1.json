@@ -126,7 +126,56 @@
     "This implementation is an efficient and intuitive way to traverse hierarchical data structures using Breadth-First Search."
   ],
   "date": "2025-07-10"
+},
+{
+  "title": "Calculating River Sizes in a Matrix",
+  "content": [
+    "This Python algorithm efficiently calculates the sizes of all rivers (connected groups of 1s) in a 2D matrix. A river is represented by adjacent 1s (up, down, left, right), and the goal is to return a list of their sizes."
+  ],
+  "images": ["algorithms_pics/river_sizes.png"],
+  "description": [
+    "### Problem Overview:",
+    "- You're given a 2D matrix of 0s and 1s, where 1 represents part of a river and 0 represents land.",
+    "- A river is a group of 1s that are connected horizontally or vertically.",
+    "- The task is to compute and return a list of sizes of all discovered rivers.",
+    "",
+    "---",
+    "### How the Algorithm Works:",
+    "1. **Initialization:**",
+    "   - Create a `visited` matrix of the same shape as `matrix`, initially filled with `False`.",
+    "   - Iterate over every cell in the matrix. If the cell has not been visited, call `traverseNode` on it.",
+    "",
+    "2. **River Traversal:**",
+    "- In `traverseNode`, a BFS-like approach is used to explore connected river parts.",
+    "- We initialize a queue (`nodesToExplore`) with the current coordinate `(i, j)`.",
+    "- While there are nodes to explore:",
+    "   - Pop the current node and check if it's already visited.",
+    "     - If it is, **`continue`** (skip further processing).",
+    "     - If not, mark it as visited.",
+    "   - If the cell value is `0`, skip it.",
+    "   - Otherwise, increment the current river size counter.",
+    "   - Append all unvisited neighbors of the current cell to `nodesToExplore`.",
+    "- After fully traversing a river, its size is added to the `sizes` list.",
+    "",
+    "---",
+    "### Why `if visited[i][j]: continue` is Necessary:",
+    "Even though we only add unvisited neighbors in `getUnvisitedNeighbors`, it's still possible for the same node to be added to the stack multiple times before it gets visited — especially in grid-based BFS or DFS.",
+    "- This happens because two adjacent river tiles might both consider the same neighbor in separate steps.",
+    "- Without the check, a node might be processed more than once, leading to incorrect river sizes.",
+    "- Therefore, this line ensures **each node is processed only once** even if it's added to the stack multiple times.",
+    "",
+    "---",
+    "### Time and Space Complexity:",
+    "**Time Complexity:** O(w × h), where `w` is the width and `h` is the height of the matrix — every node is visited once.",
+    "**Space Complexity:** O(w × h) for the `visited` matrix and, in the worst case, the stack/queue during traversal.",
+    "",
+    "---",
+    "### Conclusion:",
+    "This algorithm systematically explores the matrix using iterative depth-first search, tracks visited nodes to avoid double-counting, and builds the sizes of all connected components (rivers). It's an efficient solution to a classic connected-components problem on a grid."
+  ],
+  "date": "2025-07-11"
 }
+
 
 
 
