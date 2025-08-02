@@ -88,7 +88,58 @@
         "You can find the complete source code for this project on [GitHub](https://github.com/fynndohmen/Calculator.git)."
     ],
     "date": "2025-01-26"
+},
+{
+  "title": "Building a Live FinTS-Powered Expense Tracker in Python",
+  "content": [
+    "In this post, we present a dynamic Python expense tracker that connects directly to your bank via FinTS, automatically categorizes transactions, lets you manage and order your spending categories with a GUI, and generates rich, color-coded visualizations of your income, expenses, and balance in real time."
+  ],
+  "images": [
+    "screenshots/visualizer_chart.png",
+    "screenshots/category_manager_ui.png"
+  ],
+  "description": [
+    "### Key Features",
+    "- **Live Bank Integration**: Uses `fints_connector.py` to fetch your SEPA transactions and balance directly from your bank with FinTS-Pin/TAN.",
+    "- **Smart Categorization**: The `Categorizer` prompts just once per new description and saves mappings in `categories.json` for fully automated categorization thereafter.",
+    "- **Category Management GUI**: A Tkinter-based Category Manager (`category_manager.py`) lets you sort and group categories into **Fixed**, **Variable** and **Unassigned**, storing your preferences in `category_order.json`.",
+    "- **Automated Color Assignment**: `ColorManager` assigns distinct colors per category from a preset palette (falling back to random hex) and persists them in `category_colors.json`.",
+    "- **Real-Time Interactive Visualization**: The `Visualizer` builds a Plotly figure with:",
+    "  - A **stacked area chart** of monthly fixed and variable expenses,",
+    "  - A **constant income line**,",
+    "  - A **running account balance** pulled live,",
+    "  - **Daily cumulative expense lines** with markers and hover tooltips showing transaction details.",
+    "",
+    "### How It Works",
+    "1. **Startup & Live Fetch**",
+    "   - `main.py` initializes the FinTS connection (`FinTSConnector`), prompts for TAN when required, fetches all new transactions since the last sync, and retrieves current balances.",
+    "",
+    "2. **Automatic Categorization**",
+    "   - Any transaction without a stored `category` triggers `Categorizer.categorize_transaction`, which asks you once and writes the result to `categories.json`.",
+    "",
+    "3. **Category Management**",
+    "   - If `category_order.json` is missing or needs updating, the Category Manager GUI opens automatically for you to define and reorder categories.",
+    "",
+    "4. **Visualization**",
+    "   - `Visualizer.generate_chart` reads the live-fetched, categorized transactions and balance, computes monthly sums, and renders a multi-trace Plotly dashboard with consistent colors via `ColorManager`.",
+    "",
+    "### Why This Approach?",
+    "- **Fully Dynamic**: No manual file imports—data flows directly from your bank each run.",
+    "- **Modular Design**: Separates banking connector, categorization, GUI management, and plotting for easy maintenance and testing.",
+    "- **Persistent Settings**: JSON files (`categories.json`, `category_order.json`, `category_colors.json`) preserve your customizations across sessions.",
+    "- **Interactive Experience**: CLI TAN prompts, Tkinter UI, and Plotly tooltips give you control while automating the heavy lifting.",
+    "",
+    "### Getting Started",
+    "1. Clone the repo and install dependencies: `git clone https://github.com/fynndohmen/expense-tracker.git && cd expense-tracker && pip install fints-client plotly pandas python-dotenv tkinter`",
+    "2. Configure your `.env` with your FinTS credentials (BLZ, user ID, PIN, etc.).",
+    "3. Run `python main.py` to sync, categorize, and visualize your expenses in real time!",
+    "",
+    "Experience instant insights into your spending right from your bank account with this Python-based, FinTS-powered expense tracker."
+  ],
+  "date": "2025-08-03"
 }
 
 
+
 ]
+
