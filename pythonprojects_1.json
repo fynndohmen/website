@@ -95,8 +95,8 @@
     "In this post, we present a dynamic Python expense tracker that connects directly to your bank via FinTS, automatically categorizes transactions, lets you manage and order your spending categories with a GUI, and generates rich, color-coded visualizations of your income, expenses, and balance in real time."
   ],
   "images": [
-    "screenshots/visualizer_chart.png",
-    "screenshots/category_manager_ui.png"
+    "python_projects_pics/visualizer_chart.png",
+    "python_projects_pics/category_manager_ui.png"
   ],
   "description": [
     "### Key Features",
@@ -142,4 +142,5 @@
 
 
 ]
+
 
