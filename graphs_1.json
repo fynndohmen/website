@@ -174,7 +174,57 @@
     "This algorithm systematically explores the matrix using iterative depth-first search, tracks visited nodes to avoid double-counting, and builds the sizes of all connected components (rivers). It's an efficient solution to a classic connected-components problem on a grid."
   ],
   "date": "2025-07-11"
+},
+    {
+"title": "Youngest Common Ancestor (YCA) in an Ancestral Tree",
+"content": [
+"This Python solution finds the youngest (lowest) common ancestor of two descendants in a tree where each node holds a pointer to its parent (`ancestor`)."
+],
+"images": ["algorithms_pics/youngest_common_ancestor.png"],
+"description": [
+"### Problem Statement:",
+"- Given a tree with a known `topAncestor` (the root) and two nodes `descendantOne` and `descendantTwo`, find their **Youngest Common Ancestor (YCA)**—the deepest node that is an ancestor of both.",
+"- Each node has a single pointer `ancestor` to its parent; children pointers are not required.",
+"",
+"---",
+"### How the Algorithm Works:",
+"1. **Measure Depths:**",
+"   - `getDescendantDepth(node, topAncestor)` walks up via `ancestor` pointers to count how far `node` is from `topAncestor`.",
+"",
+"2. **Lift the Deeper Node:**",
+"   - Using `backtrackAncestralTree(lowerDescendant, higherDescendant, diff)`, move the deeper node up by `diff` steps so both nodes are at the same depth.",
+"",
+"3. **Climb in Lockstep:**",
+"   - Step both pointers upward together until they become equal. The meeting point is the **YCA**.",
+"",
+"---",
+"### Why This Works (Intuition):",
+"- If two nodes are at the same depth and you climb up one step at a time, they will first meet exactly at their youngest common ancestor.",
+"- Aligning depths ensures you don't overshoot: the first equality after alignment must be the YCA.",
+"",
+"---",
+"### Code Overview:",
+"- **`getYoungestCommonAncestor(topAncestor, descendantOne, descendantTwo)`**",
+"  - Computes depths, aligns levels, then returns the meeting node.",
+"- **`getDescendantDepth(descendant, topAncestor)`**",
+"  - Counts edges from `descendant` up to `topAncestor`.",
+"- **`backtrackAncestralTree(lowerDescendant, higherDescendant, diff)`**",
+"  - Lifts the deeper node by `diff`; then advances both until they coincide.",
+"",
+"---",
+"### Time and Space Complexity:",
+"**Time Complexity:** O(d) — where `d` is the distance from the deeper node up to the YCA (bounded by tree height). The algorithm performs two upward passes: one to measure depths, another to align and climb together.",
+"",
+"**Space Complexity:** O(1) — uses a constant number of pointers and counters.",
+"",
+"---",
+"### Takeaways:",
+"- Aligning depths converts the YCA problem into a simple synchronized climb.",
+"- Parent pointers alone are sufficient; no extra data structures or full tree traversal is needed."
+],
+"date": "2025-10-28"
 }
+
 
 
 
