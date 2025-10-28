@@ -223,6 +223,63 @@
 "- Parent pointers alone are sufficient; no extra data structures or full tree traversal is needed."
 ],
 "date": "2025-10-28"
+},
+    {
+"title": "Removing Islands in a Binary Matrix (Border-Connected Flood Fill)",
+"content": [
+"This Python implementation removes "islands" of 1s from a 2D binary matrix by preserving only the 1s that are connected (directly or indirectly) to the border."
+],
+"images": ["algorithms_pics/remove_islands1.png","algorithms_pics/remove_islands2.png"],
+"description": [
+"### Problem Statement:",
+"- You’re given a matrix of 0s and 1s.",
+"- An island is a connected component of 1s (4-directional: up, down, left, right) that does not touch the matrix border.",
+"- Convert all island cells to 0 while keeping every 1 that is connected to the border intact."
+,
+"---",
+"### How the Algorithm Works:",
+"1. Scan the border only:",
+" - Iterate through all cells but act only when a cell lies on the border and contains 1.",
+" - For each such cell, run a flood fill (iterative DFS) that marks every border-reachable 1 as 2.",
+"",
+"2. Final sweep:",
+" - Walk the whole matrix once:",
+" - Any remaining 1 is an island → set it to 0.",
+" - Any 2 was border-connected → revert it back to 1."
+,
+"---",
+"### Key Functions:",
+"- removeIslands(matrix)",
+" - Two-pass driver: border flood-fills, then converts stray 1s to 0 and 2s back to 1.",
+"- changeOnesConnectedToBorderToTwos(matrix, startRow, startCol)",
+" - Iterative DFS using a stack; marks visited cells as 2 to indicate border reachability.",
+"- getNeighbors(matrix, row, col)",
+" - Returns up to four in-bounds neighbors (up, down, left, right)."
+,
+"---",
+"### Why Mark with 2?",
+"- Distinguishes border-connected 1s from island 1s without a separate visited matrix.",
+"- Keeps memory overhead low: besides the DFS stack, marking is in-place.",
+"- Simplifies the final sweep: 1 → island → 0; 2 → safe → 1."
+,
+"---",
+"### Correctness Intuition:",
+"- The only 1s we ever mark are those reachable from a border 1 through a path of 1s.",
+"- After the marking phase, any unmarked 1 cannot be border-connected by definition and must be an island.",
+"- The final sweep eliminates precisely those unmarked 1s."
+,
+"---",
+"### Complexity:",
+"Time Complexity: O(w × h) — Each cell is processed a constant number of times across scanning, flood-fill, and the final sweep.",
+"Space Complexity: O(w × h) in the worst case due to the stack during flood fill (when many 1s are connected). Aside from the stack, the algorithm uses O(1) extra space by reusing the matrix (via the temporary value 2)."
+,
+"---",
+"### Implementation Notes:",
+"- The algorithm mutates the input matrix in place.",
+"- It uses an iterative DFS to avoid recursion-depth limits.",
+"- numCols = len(matrix[row]) lets it work with ragged rows; in a strict rectangular grid, all rows have equal length."
+],
+"date": "2025-10-28"
 }
 
 
