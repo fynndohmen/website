@@ -279,7 +279,7 @@
 "- It uses an iterative DFS to avoid recursion-depth limits.",
 "- numCols = len(matrix[row]) lets it work with ragged rows; in a strict rectangular grid, all rows have equal length."
 ],
-"date": "2025-10-28"
+"date": "2025-10-29"
 }
 
 
