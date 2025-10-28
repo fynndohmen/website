@@ -227,7 +227,7 @@
     {
 "title": "Removing Islands in a Binary Matrix (Border-Connected Flood Fill)",
 "content": [
-"This Python implementation removes "islands" of 1s from a 2D binary matrix by preserving only the 1s that are connected (directly or indirectly) to the border."
+"This Python implementation removes islands of 1s from a 2D binary matrix by preserving only the 1s that are connected (directly or indirectly) to the border."
 ],
 "images": ["algorithms_pics/remove_islands1.png","algorithms_pics/remove_islands2.png"],
 "description": [
