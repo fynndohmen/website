@@ -280,6 +280,57 @@
 "- numCols = len(matrix[row]) lets it work with ragged rows; in a strict rectangular grid, all rows have equal length."
 ],
 "date": "2025-10-29"
+},
+    {
+"title": "Cycle Detection in a Directed Graph with DFS Coloring",
+"content": [
+"This Python implementation determines whether a directed graph contains a cycle using a depth-first search (DFS) with white–gray–black node coloring."
+],
+"images": ["algorithms_pics/cycle_detection_dfs_coloring.png"],
+"description": [
+"### What Problem Are We Solving?",
+"- Input: a directed graph given as an adjacency list edges, where edges[i] lists the neighbors of node i.",
+"- Goal: return True if any directed cycle exists; otherwise False.",
+"- Works across disconnected graphs by scanning all nodes.",
+"",
+"---",
+"### How the Algorithm Works (White–Gray–Black):",
+"1. Color states:",
+" - WHITE (unvisited), GREY (in current DFS path), BLACK (fully explored).",
+"2. Scan all nodes:",
+" - For each WHITE node, start a DFS via traverseAndColorNodes.",
+"3. DFS rules:",
+" - Color current node GREY on entry.",
+" - For each neighbor:",
+" - If neighbor is GREY → we found a back edge → cycle detected.",
+" - If neighbor is WHITE → recurse.",
+" - If neighbor is BLACK → ignore (already safe).",
+" - When all neighbors are processed, color node BLACK and backtrack.",
+"",
+"---",
+"### Key Functions:",
+"- cycleInGraph(edges)",
+" - Initializes colors and iterates nodes, launching DFS from each WHITE node.",
+"- traverseAndColorNodes(node, edges, colors)",
+" - Performs the DFS with coloring and returns True at the first sign of a back edge.",
+"",
+"---",
+"### Correctness Intuition:",
+"- A node marked GREY is on the active recursion stack. Reaching a GREY neighbor means we can follow directed edges from that neighbor back to the current node, forming a cycle.",
+"- Nodes colored BLACK have had all outgoing paths checked; they cannot lead to a new cycle later.",
+"- By starting DFS from every WHITE node, we cover disconnected components.",
+"",
+"---",
+"### Edge Cases & Notes:",
+"- Self-loop (edge u → u) is detected immediately when visiting the neighbor color GREY (the node itself).",
+"- Multiple components are handled by the outer loop in cycleInGraph.",
+"",
+"---",
+"### Complexity:",
+"Time Complexity: O(V + E) — every vertex is colored at most once and each edge is inspected once.",
+"Space Complexity: O(V) — for the colors array and the recursion stack (worst-case depth O(V))."
+],
+"date": "2025-10-30"
 }
 
 
