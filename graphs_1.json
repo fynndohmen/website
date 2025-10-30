@@ -331,7 +331,58 @@
 "Space Complexity: O(V) — for the colors array and the recursion stack (worst-case depth O(V))."
 ],
 "date": "2025-10-30"
+},
+    {
+"title": "Minimum Passes to Convert Negatives in a Matrix (Single-Queue BFS)",
+"content": [
+"This Python solution computes the minimum number of passes required to turn all negative numbers in a matrix positive, where a negative becomes positive if it is adjacent (up, down, left, right) to a positive in the previous pass. It uses a single queue for a clean, level-by-level multi-source BFS."
+],
+"images": ["algorithms_pics/minimum_passes_matrix.png"],
+"description": [
+"### Problem Statement:",
+"- You’re given a matrix of integers (positive, zero, and negative).",
+"- In each **pass**, any negative number that is adjacent to a positive number becomes positive.",
+"- Return the **minimum number of passes** needed for all numbers to become non-negative, or **-1** if it’s impossible."
+,
+"---",
+"### How the Algorithm Works:",
+"1. **Seed the queue with all positives:**",
+"   - Collect coordinates of every positive cell and push them into a single queue. These are simultaneous sources for the BFS.",
+"",
+"2. **Level-order spread using one queue:**",
+"   - Each iteration processes exactly the current queue size (`currentSize`), representing one **pass**.",
+"   - For each popped cell, look at its four neighbors. If a neighbor is negative, flip it to positive and enqueue it.",
+"   - When the `currentSize` batch is finished, increment the pass counter; the queue now holds precisely the frontier for the next pass.",
+"",
+"3. **Final check:**",
+"   - After BFS completes, scan the matrix once. If any negative remains, return **-1**; otherwise return `passes - 1` (because the last increment happens after the final effective spread)."
+,
+"---",
+"### Key Functions:",
+"- **`minimumPassesOfMatrix(matrix)`**: Orchestrates the process and returns the final answer (`passes - 1` or `-1`).",
+"- **`convertNegatives(matrix)`**: Performs the single-queue, level-by-level BFS to flip reachable negatives.",
+"- **`getAllPositivePositions(matrix)`**: Finds all starting sources for the BFS.",
+"- **`getAdjacentPositions(row, col, matrix)`**: Returns valid neighbors (4-directional).",
+"- **`containsNegative(matrix)`**: Linear check for any remaining negatives."
+,
+"---",
+"### Why a Single Queue?",
+"- Using a single queue with a **fixed `currentSize` per loop** captures pass boundaries without juggling two separate queues.",
+"- It preserves the exact wavefront semantics of the spread: all flips caused by the same frontier count as one pass."
+,
+"---",
+"### Complexity:",
+"**Time Complexity:** O(w × h) — Each cell is enqueued and processed at most once; adjacency checks are constant per cell.",
+"**Space Complexity:** O(w × h) in the worst case for the queue when many cells are on the frontier simultaneously."
+,
+"---",
+"### Implementation Notes:",
+"- Zeros don’t flip neighbors but can be traversed as positions that don’t contribute to spreading positivity.",
+"- Returning `passes - 1` accounts for the final increment after processing the last frontier."
+],
+"date": "2025-10-31"
 }
+
 
 
 
