@@ -381,7 +381,55 @@
 "- Returning `passes - 1` accounts for the final increment after processing the last frontier."
 ],
 "date": "2025-10-31"
+},
+    {
+"title": "Two-Colorability (Bipartite Check) with Iterative DFS",
+"content": [
+"This Python routine decides whether an undirected graph is two-colorable (bipartite) by coloring nodes with two colors using a stack-based depth-first search."
+],
+"images": ["algorithms_pics/two_colorable.png"],
+"description": [
+"### What Problem Are We Solving?",
+"- Input: an adjacency list `edges`, where `edges[i]` lists all neighbors of node `i`.",
+"- Goal: return `True` if the graph is **bipartite** (vertices can be colored with two colors so that no edge connects same-colored vertices), else `False`.",
+"",
+"---",
+"### How the Algorithm Works (Stack-Based DFS Coloring):",
+"1. **Initialization:**",
+"   - `colors` holds `None` (uncolored) or a boolean color (`True`/`False`).",
+"   - Seed node `0` with `True` and push it onto a `stack`.",
+"",
+"2. **Iterative DFS:**",
+"   - While the stack isn’t empty, pop a `node`.",
+"   - For each `connection` in `edges[node]`:",
+"     - If `connection` is uncolored, color it with the **opposite** of `colors[node]` and push it.",
+"     - If it’s already colored **the same** as `node`, a conflict is found → return `False`.",
+"",
+"3. **Success:**",
+"   - If the traversal finishes without conflicts, return `True`.",
+"",
+"---",
+"### Why This Works:",
+"- Bipartite graphs are exactly those without **odd-length cycles**.",
+"- The DFS attempts a proper 2-coloring. If an odd cycle exists, some edge will connect two equally colored nodes, triggering the conflict check.",
+"",
+"---",
+"### Implementation Highlights:",
+"- Uses `None`/`True`/`False` for a compact color state.",
+"- Iterative DFS avoids recursion limits and mirrors the classic coloring proof.",
+"",
+"---",
+"### Edge Cases & Notes:",
+"- Works for empty graphs and single-node graphs (both bipartite).",
+"",
+"---",
+"### Complexity:",
+"**Time Complexity:** O(V + E) — each vertex/edge is processed at most once.",
+"**Space Complexity:** O(V) — for the `colors` array and the DFS stack."
+],
+"date": "2025-11-01"
 }
+
 
 
 
