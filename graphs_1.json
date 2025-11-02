@@ -428,56 +428,6 @@
 "**Space Complexity:** O(V) — for the `colors` array and the DFS stack."
 ],
 "date": "2025-11-01"
-},
-    {
-"title": "Optimal Task Pairing to Minimize Total Time (Greedy with Index Buckets)",
-"content": [
-"This Python solution pairs tasks for k workers so that the total time per worker is balanced. It sorts task durations and always pairs the shortest with the longest, returning the original indices of the paired tasks."
-],
-"images": ["algorithms_pics/task_assignment.png"],
-"description": [
-"### Problem Statement:",
-"- You’re given a list tasks of positive integers (durations) and an integer k where len(tasks) = 2k.",
-"- Assign exactly two tasks to each of the k workers.",
-"- Goal: pair tasks so that the maximum total time assigned to any worker is as small as possible.",
-"",
-"---",
-"### Key Idea (Greedy Optimality):",
-"- Sort the durations.",
-"- Pair the smallest remaining task with the largest remaining task.",
-"- Repeat from the outside in. This classic greedy pairing minimizes the worst (maximum) pair sum.",
-"",
-"---",
-"### How the Code Works:",
-"1. Index Buckets for Duplicates:",
-" - getTaskDurationsToIndices(tasks) builds a dictionary from duration → list of all indices where it occurs.",
-" - This lets us sort by duration but still recover the original indices (required by many interview specs).",
-"",
-"2. Sort Durations Once:",
-" - sortedTasks = sorted(tasks) gives the ascending order of durations.",
-"",
-"3. Two-Pointer Style Pairing:",
-" - For idx in 0..k-1:",
-" - Take task1Duration = sortedTasks[idx] (current smallest) and pop one original index for it.",
-" - Take task2Duration = sortedTasks[len(tasks)-1-idx] (current largest) and pop one original index for it.",
-" - Append the pair [task1Index, task2Index] to the result.",
-"",
-"---",
-"### Why Popping from Buckets?",
-"- Multiple tasks can have the same duration.",
-"- Storing lists of indices for each duration ensures we return valid, unique original positions even with duplicates.",
-"",
-"---",
-"### Complexity:",
-"Time Complexity: O(n log n) due to sorting, where n = 2k.",
-"Space Complexity: O(n) for the duration→indices buckets and the output.",
-"",
-"---",
-"### Takeaways:",
-"- Greedy pairing (smallest with largest) is optimal for minimizing the maximum pair sum.",
-"- Mapping durations to original indices cleanly handles duplicates and preserves required outputs."
-],
-"date": "2025-11-02"
 }
 
 
