@@ -1,1 +1,51 @@
-placeholder
+[
+{
+"title": "Min-Heap in Python: Build, Insert, Remove — All You Need",
+"content": [
+"This Python class implements a binary **min-heap** backed by an array. It supports efficient `buildHeap`, `insert`, `remove` (extract-min), `peek`, and the internal `siftDown`/`siftUp` operations."
+],
+"images": ["algorithms_pics/min_heap.png"],
+"description": [
+"### What’s a Min-Heap?",
+"- A complete binary tree where every node is **≤** its children.",
+"- Stored compactly in an array: for index `i`, children are `2i+1` and `2i+2`; parent is `(i-1)//2`.",
+"",
+"---",
+"### Class Overview:",
+"- **`__init__(array)`**: Builds a valid heap *in-place* from any list of numbers using `buildHeap`.",
+"- **`buildHeap(array)`**: Starts from the last parent `(len(array)-2)//2` and calls `siftDown` on each node in reverse order. This bottom-up strategy runs in **O(n)** time.",
+"- **`siftDown(currentIdx, endIdx, heap)`**: Restores the heap property when a node might be larger than its children. Repeatedly swaps with the smaller child while needed.",
+"- **`siftUp(currentIdx, heap)`**: Restores the heap property when a node might be smaller than its parent (used after insertion).",
+"- **`peek()`**: Returns the minimum element at index `0` (no removal).",
+"- **`remove()`**: Extracts the min: swap root with last, pop the last, then `siftDown(0, ...)` to fix the heap.",
+"- **`insert(value)`**: Append to the end and `siftUp` to its correct position.",
+"- **`swap(i, j, heap)`**: Small helper to exchange two positions in the backing array.",
+"",
+"---",
+"### Why `buildHeap` Is O(n):",
+"- Leaves need no work; shallow parents may sift many levels, deep parents sift at most a few.",
+"- Summing the limited work over all nodes yields a linear bound (classic heapify analysis).",
+"",
+"---",
+"### Operation Costs:",
+"- **`peek`**: O(1)",
+"- **`insert`**: O(log n) — at most the height of the heap.",
+"- **`remove`**: O(log n) — one `siftDown` along the height.",
+"- **`buildHeap`**: O(n) — bottom-up heapify.",
+"- **Space**: O(1) auxiliary (mutates the given array).",
+"",
+"---",
+"### Edge Notes:",
+"- Works with duplicates and any comparable numeric types.",
+"- If you need a max-heap, invert comparisons (or store negated values).",
+"- Heaps are great for *priority queues*, *streaming medians* (with two heaps), and *k-way merges*.",
+"",
+"---",
+"### Takeaways:",
+"- The array layout keeps the structure dense and cache-friendly.",
+"- Bottom-up heap construction is the fastest way to turn an unsorted list into a priority queue.",
+"- `siftDown` fixes potential violations downward (after removal/build), while `siftUp` fixes upward (after insertion)."
+],
+"date": "2025-11-03"
+}
+]
