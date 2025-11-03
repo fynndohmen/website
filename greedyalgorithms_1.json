@@ -124,6 +124,56 @@
 "- Mapping durations to original indices cleanly handles duplicates and preserves required outputs."
 ],
 "date": "2025-11-02"
+},
+
+ {
+"title": "Finding a Valid Starting City on a Circular Route (Gas Station Problem)",
+"content": [
+"This Python solution finds a city index from which you can start with an empty tank, collect fuel along the way, and complete the entire circular route without running out of gas. Here, mpg stands for miles per gallon."
+],
+"images": ["algorithms_pics/valid_starting_city.png"],
+"description": [
+"### Problem Statement:",
+"- You have n cities in a circle.",
+"- distances[i] = miles from city i to city (i + 1) % n.",
+"- fuel[i] = gallons available at city i.",
+"- mpg = miles per gallon (fuel efficiency).",
+"- Goal: return an index s such that starting at city s (with 0 fuel), refueling at each city, you can travel the full loop without going negative.",
+"",
+"---",
+"### How the Algorithm Works (Single Pass):",
+"1. Running balance of miles:",
+" - As you sweep cities 1..n-1, maintain milesRemaining.",
+" - At each step, add fuel[cityIdx - 1] * mpg and subtract distances[cityIdx - 1].",
+"",
+"2. Track the lowest dip:",
+" - Keep milesRemainingAtStartingCityCandidate, the minimum balance seen so far.",
+" - When the current balance becomes a new minimum, set the next city as the new starting candidate.",
+"",
+"3. Return the candidate:",
+" - After one pass, indexOfStartingCityCandidate is a valid start: it comes right after the lowest cumulative dip, so the remaining trip never goes negative.",
+"",
+"---",
+"### Why This Is a Greedy Algorithm:",
+"- Local choice: Whenever the running balance hits a new low, we greedily abandon all earlier starts and move the start to the next city. We don’t look ahead or backtrack.",
+"- Dominance argument: If starting at city a fails before city b, then any start between a and b also fails by at least as much before reaching b (they all inherit the same deficit). Thus once a deficit occurs, the best available local fix is to restart after the worst dip—no earlier start can beat that choice.",
+"- Optimal substructure: The remaining suffix after the minimum prefix-sum point is the subproblem with the highest possible buffer; solving it greedily yields a global solution.",
+"",
+"---",
+"### Code Highlights:",
+"- milesRemaining accumulates the net miles gain/loss fuel[i]*mpg - distances[i].",
+"- On each new minimum, update indexOfStartingCityCandidate = cityIdx.",
+"- One linear scan; no extra arrays or wrap-around loops.",
+"",
+"---",
+"### Complexity:",
+"Time: O(n) — single pass over the cities. \nSpace: O(1) — only a handful of variables.",
+"",
+"---",
+"### Edge Note:",
+"- A solution exists iff the total fuel (in miles) across all cities is at least the total distance. If not, no starting city can complete the loop."
+],
+"date": "2025-11-03"
 }
 
 ]
