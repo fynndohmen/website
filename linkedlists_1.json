@@ -129,6 +129,33 @@
 "- You don’t need random access by index (arrays are better for that)."
 ],
 "date": "2025-11-08"
+},
+    {
+"title": "Remove the K-th Node From the End (Two-Pointer Technique)",
+"content": [
+"This Python routine deletes the k-th node from the end of a singly linked list in one pass using a fast/slow pointer strategy and O(1) extra space."
+],
+"images": ["algorithms_pics/remove_kth_node_end.png"],
+"description": [
+"### Problem\n- Given the `head` of a singly linked list and an integer `k`, remove the **k-th node from the end**.\n- The function mutates the list **in place** (it doesn’t return a new head).",
+"",
+"---",
+"### Core Idea: Two Pointers, One Pass\n1. **Advance `second` by `k` nodes** while `first` stays at `head`.\n2. If `second` becomes `None` after this advance, the node to delete is **the head**. The code deletes it by **copying** the value of `head.next` into `head` and skipping the next node: \n   - `head.value = head.next.value`, `head.next = head.next.next`.\n3. Otherwise, **walk both pointers** (`first` and `second`) in lockstep until `second.next` is `None`. Now `first` sits **just before** the target node.\n4. **Skip the target**: `first.next = first.next.next`.",
+"",
+"---",
+"### Why It Works\n- After shifting `second` by `k` steps, the **gap** between `first` and `second` is exactly `k`. When `second` reaches the end, `first` must be right before the k-th node from the end.\n- Handling the head as a special case avoids needing a dummy node and keeps everything O(1).",
+"",
+"---",
+"### Edge Cases & Assumptions\n- `k` is valid (1 ≤ k ≤ length of list).\n- If the node to remove is the head, the implementation **overwrites** the head with its successor. (If the list has a single node and `k=1`, you’d typically handle this by setting `head` to `None` or using a dummy node; this snippet assumes inputs where `head.next` exists when removing head.)",
+"",
+"---",
+"### Complexity\n- **Time:** O(n) — single traversal.\n- **Space:** O(1) — only pointers are used.",
+"",
+"---",
+"### Takeaways\n- Two-pointer (fast/slow) patterns are perfect for “k-th from end” problems.\n- Overwriting the head node is a common in-place trick to avoid returning a new head."
+],
+"date": "2025-11-09"
 }
+
 
 ]
