@@ -212,7 +212,57 @@
 "- The dummy head pattern keeps the code simple and bug-resistant."
 ],
 "date": "2025-11-10"
+},
+    {
+"title": "Finding the Merge Point of Two Singly Linked Lists (Pointer Switching)",
+"content": [
+"This Python function returns the first node where two singly linked lists intersect (by reference), using a neat two-pointer trick that runs in linear time and constant space."
+],
+"images": ["algorithms_pics/merging_linked_lists.png"],
+"description": [
+"### Problem Statement:",
+"- You’re given two heads `linkedListOne` and `linkedListTwo`.",
+"- The lists may form a **Y-shape** (share a common tail).",
+"- Return the node where they first merge (same object in memory), or `None` if they never intersect.",
+"",
+"---",
+"### How the Algorithm Works:",
+"1. **Two runners:** Initialize `currentNodeOne` at `linkedListOne` and `currentNodeTwo` at `linkedListTwo`.",
+"2. **Advance with switching:**",
+"   - Move each pointer one step at a time.",
+"   - When a pointer reaches the end (`None`), **switch it to the head of the other list**.",
+"3. **Meet or end:** Continue until the two pointers are the **same node** (merge point) or both become `None` (no intersection).",
+"",
+"---",
+"### Why Switching Works (Intuition):",
+"- Let the unique prefixes be lengths `a` and `b`, and the shared tail be length `c`.",
+"- By switching heads at the end, each pointer travels `a + c + b` and `b + c + a` steps respectively—**the same total distance**.",
+"- Therefore they align at the first common node after at most `a + b + c` moves. If no tail is shared, both land on `None` simultaneously.",
+"",
+"---",
+"### Code Highlights:",
+"- Uses identity comparison (`is`) to detect the exact same node object.",
+"- Requires **no** length calculations, extra storage, or list modification.",
+"- Handles different list lengths naturally.",
+"",
+"---",
+"### Edge Cases & Notes:",
+"- If either head is `None`, the function returns `None`.",
+"- If lists don’t intersect, both pointers cycle once and finish at `None`.",
+"- This approach assumes acyclic lists. (If cycles exist, use a cycle-aware method first.)",
+"",
+"---",
+"### Complexity:",
+"**Time Complexity:** O(n + m) — each pointer traverses each list at most once.  \n**Space Complexity:** O(1) — only two pointers are used.",
+"",
+"---",
+"### Takeaways:",
+"- Pointer switching equalizes path lengths without precomputing them.",
+"- Clean, elegant solution for intersection detection with minimal code."
+],
+"date": "2025-11-11"
 }
+
 
 
 
