@@ -122,6 +122,53 @@
     ],
     
     "date": "2025-01-09"
+},
+  {
+"title": "Generating All Permutations (Recursive Build with Slicing)",
+"content": [
+"This Python routine produces every permutation of an input array using a clean recursive strategy that builds the current permutation while shrinking the remaining pool of elements."
+],
+"images": ["algorithms_pics/permutations_recursive.png"],
+"description": [
+"### Problem Statement:",
+"- Given an array of distinct (or even non-distinct) values, generate **all permutations**.",
+"- Return them as a list of lists, where each inner list is one ordering of the original elements.",
+"",
+"---",
+"### How the Algorithm Works:",
+"1. **Driver:** `getPermutations(array)` initializes a result list and calls `permutationsHelper(array, [], permutations)`.",
+"",
+"2. **State Representation:**",
+"   - `array`: the pool of elements **not yet used**.",
+"   - `currentPermutation`: the **partial permutation** being built.",
+"   - `permutations`: the **output collector**.",
+"",
+"3. **Base Case:**",
+"   - `if not len(array) and len(currentPermutation):`",
+"   - When there’s nothing left to choose (`array` empty), the current build is a **complete permutation** → append it.",
+"",
+"4. **Recursive Step:**",
+"   - Iterate `i` through the remaining elements.",
+"   - Choose `array[i]`, form:",
+"     - `newArray = array[:i] + array[i + 1:]` (all remaining except the chosen one),",
+"     - `newPermutation = currentPermutation + [array[i]]` (extend the path).",
+"   - Recurse on `(newArray, newPermutation)`; this explores the subtree where `array[i]` occupies the **next position**.",
+"",
+"---",
+"### Why It Enumerates Everything Exactly Once:",
+"- Each level fixes one more position in the permutation.",
+"- Slicing removes the chosen item, so deeper calls **cannot reuse** it.",
+"- The tree has branching factor equal to the remaining items count: `n, n-1, ..., 1` → exactly `n!` leaves.",
+"",
+"---",
+"### Complexity:",
+"- **Output size:** There are `n!` permutations; any correct algorithm must output them all.",
+"- **Time (rough):** `O(n · n!)` to visit leaves and build each permutation of length `n`.",
+"- **Time (with slicing overhead):** Due to `array[:i] + array[i+1:]` creating a fresh list at each step, the **upper bound** is `O(n^2 · n!)`.",
+"- **Space:** `O(n · n!)` for storing results; auxiliary recursion depth is `O(n)` plus temporary lists from slicing."
+],
+"date": "2025-11-10"
 }
+
 
 ]
