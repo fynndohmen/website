@@ -1,6 +1,6 @@
 /* Allgemeine Stile */
 body {
-    font-family: 'Helvetica', sans-serif;
+    font-family: 'Helvetica', sans-serif';
     margin: 0;
     padding: 0;
     background-color: #121212; /* fast schwarz */
@@ -139,24 +139,26 @@ nav ul li a:hover {
 
 /* Titelzeile mit Icon */
 .post-title {
-    display: flex;
+    display: inline-flex;       /* schrumpt auf Inhaltsbreite */
+    width: max-content;         /* Banner reicht nur so weit wie Icon+Titel */
     align-items: center;
     gap: 12px;
     margin-bottom: 10px;
-    position: relative;           /* für Banner-Positionierung */
+    position: relative;         /* für Banner-Positionierung */
     z-index: 0;
 }
 
-/* Weißer Banner NUR bis hinter Icon + Gap (Titel macht den Rest) */
+/* Einziger weißer Banner hinter Icon + Titel
+   Start links an der Box-Innenkante, Ende exakt am Titelende */
 .linux-page .blog-post .post-title::before {
     content: "";
     position: absolute;
-    left: -20px;                                  /* bis zur Innenkante der Box */
+    left: -20px;                 /* bis zur Innenkante der Box (Padding 20px) */
     top: 0;
     bottom: 0;
-    width: calc(20px + 50px + 12px);              /* Padding (20) + Icon (50) + Gap (12) */
+    width: calc(100% + 20px);    /* Breite = (Icon + Gap + Titel) + linkes Padding */
     background: #ffffff;
-    border-radius: 0 8px 8px 0;                   /* rechte Ecken abgerundet */
+    border-radius: 0 8px 8px 0;  /* rechts abgerundet, links gerade */
     z-index: 0;
 }
 
@@ -164,20 +166,16 @@ nav ul li a:hover {
     width: 50px;
     height: 50px;
     object-fit: contain;
-    position: relative;                           /* über dem Banner */
+    position: relative;          /* über dem Banner */
     z-index: 1;
 }
 
-/* Titel im eigenen weißen „Fortsetzungsbanner“ bis Textende */
+/* Titeltext: schwarz, aber ohne eigenen weißen Hintergrund */
 .linux-page .blog-post .post-title h2 {
-    color: #000;                                  /* schwarze Schrift im Banner */
-    background: #ffffff;                          /* weißer Hintergrund nur hinter dem Text */
-    display: inline-block;                        /* nur so breit wie der Text */
-    padding: 4px 8px;                             /* etwas Innenabstand */
-    margin: 0;                                    /* kein zusätzlicher Außenabstand in der Zeile */
-    border-radius: 0 8px 8px 0;                   /* rechts abrunden */
+    color: #000;
+    margin: 0;
     position: relative;
-    z-index: 1;                                   /* über dem Pseudo-Element */
+    z-index: 1;                  /* über dem Banner */
 }
 
 /* Bilder */
@@ -239,10 +237,10 @@ nav ul li a:hover {
         padding: 15px;
     }
 
-    /* Banner-Left-Offset an kleineres Padding (15px) anpassen */
+    /* Banner an kleineres Box-Padding (15px) anpassen */
     .linux-page .blog-post .post-title::before {
         left: -15px;
-        width: calc(15px + 50px + 12px);
+        width: calc(100% + 15px);
     }
 
     .linux-page .blog-post h2 {
