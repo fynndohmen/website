@@ -1,6 +1,6 @@
 /* Allgemeine Stile */
 body {
-    font-family: 'Helvetica', sans-serif';
+    font-family: 'Helvetica', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #121212; /* fast schwarz */
@@ -139,24 +139,25 @@ nav ul li a:hover {
 
 /* Titelzeile mit Icon */
 .post-title {
-    display: inline-flex;       /* schrumpt auf Inhaltsbreite */
+    display: inline-flex;       /* schrumpft auf Inhaltsbreite */
     width: max-content;         /* Banner reicht nur so weit wie Icon+Titel */
     align-items: center;
     gap: 12px;
     margin-bottom: 10px;
     position: relative;         /* für Banner-Positionierung */
     z-index: 0;
+    padding: 4px 12px 4px 0;    /* Abstand im Banner rechts (und etwas vertikal) */
 }
 
 /* Einziger weißer Banner hinter Icon + Titel
-   Start links an der Box-Innenkante, Ende exakt am Titelende */
+   Start links an der Box-Innenkante, Ende exakt am Titelende (inkl. Padding) */
 .linux-page .blog-post .post-title::before {
     content: "";
     position: absolute;
     left: -20px;                 /* bis zur Innenkante der Box (Padding 20px) */
     top: 0;
     bottom: 0;
-    width: calc(100% + 20px);    /* Breite = (Icon + Gap + Titel) + linkes Padding */
+    width: calc(100% + 20px);    /* Breite = (Icon + Gap + Titel + Post-Title-Padding) + linkes Padding */
     background: #ffffff;
     border-radius: 0 8px 8px 0;  /* rechts abgerundet, links gerade */
     z-index: 0;
@@ -170,10 +171,12 @@ nav ul li a:hover {
     z-index: 1;
 }
 
-/* Titeltext: schwarz, aber ohne eigenen weißen Hintergrund */
+/* Titel: wieder Rubik, schwarz, ohne eigenen weißen Hintergrund */
 .linux-page .blog-post .post-title h2 {
+    font-family: 'Rubik', 'Helvetica', sans-serif;  /* ursprüngliche Headline-Schrift */
     color: #000;
     margin: 0;
+    font-weight: 700;
     position: relative;
     z-index: 1;                  /* über dem Banner */
 }
@@ -237,7 +240,7 @@ nav ul li a:hover {
         padding: 15px;
     }
 
-    /* Banner an kleineres Box-Padding (15px) anpassen */
+    /* Banner-Offsets an kleineres Box-Padding (15px) anpassen */
     .linux-page .blog-post .post-title::before {
         left: -15px;
         width: calc(100% + 15px);
