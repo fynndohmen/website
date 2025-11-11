@@ -137,50 +137,39 @@ nav ul li a:hover {
     border-radius: 8px;
 }
 
-/* Titelzeile mit Icon */
+/* Titelzeile mit Icon (einziger weißer Banner) */
 .post-title {
-    display: inline-flex;          /* schrumpft auf Inhaltsbreite */
-    max-width: 100%;               /* nie breiter als Container-Inhalt */
-    flex-wrap: wrap;               /* Titel darf umbrechen */
+    display: inline-grid;                 /* schrumpft auf Inhaltsbreite */
+    grid-template-columns: 50px auto;    /* Icon fix, Titel auto (wrappt) */
+    column-gap: 12px;
     align-items: center;
-    gap: 12px;
+    max-width: calc(100% + 20px);        /* nie über den Post-Inhalt hinaus */
+    margin-left: -20px;                   /* Banner beginnt an Innenkante der Box */
+    padding-left: 20px;                   /* gleicht den negativen Rand aus */
+    padding-right: 12px;                  /* Luft rechts im Banner */
+    padding-top: 4px;
+    padding-bottom: 4px;
     margin-bottom: 10px;
-    position: relative;            /* für Banner-Positionierung */
-    z-index: 0;
-    padding: 4px 12px 4px 0;       /* etwas Innenabstand, rechts extra Platz */
+    background: #ffffff;                  /* der Banner */
+    border-radius: 0 8px 8px 0;           /* rechts rund, links gerade */
+    color: #000;
 }
 
-/* Einziger weißer Banner hinter Icon + Titel
-   Start links an der Box-Innenkante, Ende exakt am Titelende */
-.linux-page .blog-post .post-title::before {
-    content: "";
-    position: absolute;
-    left: -20px;                   /* bis zur Innenkante der Box (Padding 20px) */
-    top: 0;
-    bottom: 0;
-    width: calc(100% + 20px);      /* Bannerbreite = Icon + Gap + (umgebrochener) Titel + linkes Padding */
-    background: #ffffff;
-    border-radius: 0 8px 8px 0;    /* rechts abgerundet, links gerade */
-    z-index: 0;
-}
-
+/* Icon im Banner */
 .title-icon {
     width: 50px;
     height: 50px;
     object-fit: contain;
-    position: relative;            /* über dem Banner */
-    z-index: 1;
 }
 
-/* Titel: Rubik, schwarz, bricht um */
+/* Titeltext im Banner: startet neben dem Icon, wrappt unter gleicher Startkante */
 .linux-page .blog-post .post-title h2 {
     font-family: 'Rubik', 'Helvetica', sans-serif;
     color: #000;
     margin: 0;
     font-weight: 700;
     line-height: 1.2;
-    position: relative;
-    z-index: 1;                    /* über dem Banner */
+    overflow-wrap: break-word;           /* lange Wörter umbrechen */
 }
 
 /* Bilder */
@@ -242,10 +231,11 @@ nav ul li a:hover {
         padding: 15px;
     }
 
-    /* Banner-Offsets an kleineres Box-Padding (15px) anpassen */
-    .linux-page .blog-post .post-title::before {
-        left: -15px;
-        width: calc(100% + 15px);
+    /* Banner an kleineres Box-Padding (15px) anpassen */
+    .post-title {
+        margin-left: -15px;
+        padding-left: 15px;
+        max-width: calc(100% + 15px);
     }
 
     .linux-page .blog-post h2 {
