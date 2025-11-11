@@ -147,16 +147,16 @@ nav ul li a:hover {
     z-index: 0;
 }
 
-/* Weißer Banner hinter dem Icon (links gerade, rechts 8px Radius) */
+/* Weißer Banner hinter Icon + Titel (links gerade, rechts 8px Radius) */
 .linux-page .blog-post .post-title::before {
     content: "";
     position: absolute;
-    left: -20px;                                  /* bis zur Innenkante der Box */
+    left: -20px;                 /* bis zur Innenkante der Box */
+    right: -20px;                /* volle Titelzeilenbreite */
     top: 0;
     bottom: 0;
-    width: calc(20px + 50px + 12px);              /* Padding (20) + Icon (50) + Gap (12) */
     background: #ffffff;
-    border-radius: 0 8px 8px 0;                   /* rechte Ecken abgerundet */
+    border-radius: 0 8px 8px 0;  /* rechte Ecken abgerundet */
     z-index: 0;
 }
 
@@ -164,7 +164,15 @@ nav ul li a:hover {
     width: 50px;
     height: 50px;
     object-fit: contain;
-    position: relative;                           /* über dem Banner */
+    position: relative;          /* über dem Banner */
+    z-index: 1;
+}
+
+/* Titel im Banner: schwarz und über dem Banner */
+.linux-page .blog-post h2 {
+    color: #000;                 /* im weißen Banner */
+    margin-bottom: 10px;
+    position: relative;
     z-index: 1;
 }
 
@@ -187,22 +195,18 @@ nav ul li a:hover {
 }
 
 /* Textformatierung */
-.linux-page .blog-post h2 {
-    color: #ffffff;           /* hell für dunklen Hintergrund */
-    margin-bottom: 10px;
-}
-
 .linux-page .blog-post p {
     margin: 10px 0;
-    color: #e0e0e0;           /* helle Fließtextfarbe */
+    color: #e0e0e0;
     line-height: 1.6;
+    font-size: calc(1rem + 5px);  /* um 5px größer */
 }
 
 .linux-page .blog-post small {
     display: block;
     margin-top: 10px;
     font-size: 12px;
-    color: #aaaaaa;           /* dezenter auf dunkel */
+    color: #aaaaaa;
 }
 
 /* Responsive Design */
@@ -234,7 +238,7 @@ nav ul li a:hover {
     /* Banner an das kleinere Padding (15px) anpassen */
     .linux-page .blog-post .post-title::before {
         left: -15px;
-        width: calc(15px + 50px + 12px);
+        right: -15px;
     }
 
     .linux-page .blog-post h2 {
@@ -247,4 +251,3 @@ nav ul li a:hover {
         width: 100%;
     }
 }
-s
