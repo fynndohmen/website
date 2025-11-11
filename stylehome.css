@@ -139,27 +139,28 @@ nav ul li a:hover {
 
 /* Titelzeile mit Icon */
 .post-title {
-    display: inline-flex;       /* schrumpft auf Inhaltsbreite */
-    width: max-content;         /* Banner reicht nur so weit wie Icon+Titel */
+    display: inline-flex;          /* schrumpft auf Inhaltsbreite */
+    max-width: 100%;               /* nie breiter als Container-Inhalt */
+    flex-wrap: wrap;               /* Titel darf umbrechen */
     align-items: center;
     gap: 12px;
     margin-bottom: 10px;
-    position: relative;         /* für Banner-Positionierung */
+    position: relative;            /* für Banner-Positionierung */
     z-index: 0;
-    padding: 4px 12px 4px 0;    /* Abstand im Banner rechts (und etwas vertikal) */
+    padding: 4px 12px 4px 0;       /* etwas Innenabstand, rechts extra Platz */
 }
 
 /* Einziger weißer Banner hinter Icon + Titel
-   Start links an der Box-Innenkante, Ende exakt am Titelende (inkl. Padding) */
+   Start links an der Box-Innenkante, Ende exakt am Titelende */
 .linux-page .blog-post .post-title::before {
     content: "";
     position: absolute;
-    left: -20px;                 /* bis zur Innenkante der Box (Padding 20px) */
+    left: -20px;                   /* bis zur Innenkante der Box (Padding 20px) */
     top: 0;
     bottom: 0;
-    width: calc(100% + 20px);    /* Breite = (Icon + Gap + Titel + Post-Title-Padding) + linkes Padding */
+    width: calc(100% + 20px);      /* Bannerbreite = Icon + Gap + (umgebrochener) Titel + linkes Padding */
     background: #ffffff;
-    border-radius: 0 8px 8px 0;  /* rechts abgerundet, links gerade */
+    border-radius: 0 8px 8px 0;    /* rechts abgerundet, links gerade */
     z-index: 0;
 }
 
@@ -167,18 +168,19 @@ nav ul li a:hover {
     width: 50px;
     height: 50px;
     object-fit: contain;
-    position: relative;          /* über dem Banner */
+    position: relative;            /* über dem Banner */
     z-index: 1;
 }
 
-/* Titel: wieder Rubik, schwarz, ohne eigenen weißen Hintergrund */
+/* Titel: Rubik, schwarz, bricht um */
 .linux-page .blog-post .post-title h2 {
-    font-family: 'Rubik', 'Helvetica', sans-serif;  /* ursprüngliche Headline-Schrift */
+    font-family: 'Rubik', 'Helvetica', sans-serif;
     color: #000;
     margin: 0;
     font-weight: 700;
+    line-height: 1.2;
     position: relative;
-    z-index: 1;                  /* über dem Banner */
+    z-index: 1;                    /* über dem Banner */
 }
 
 /* Bilder */
@@ -204,7 +206,7 @@ nav ul li a:hover {
     margin: 10px 0;
     color: #e0e0e0;
     line-height: 1.6;
-    font-size: calc(1rem + 5px);  /* um 5px größer */
+    font-size: calc(1rem + 5px);   /* um 5px größer */
 }
 
 .linux-page .blog-post small {
