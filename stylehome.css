@@ -3,11 +3,7 @@ body {
     font-family: 'Helvetica', sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('website_pics/background6.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-color: #1e1e1e;
     color: #fff;
 }
 
@@ -228,4 +224,3 @@ nav ul li a:hover {
         width: 100%;
     }
 }
-
