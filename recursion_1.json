@@ -168,7 +168,53 @@
 "- **Space:** `O(n · n!)` for storing results; auxiliary recursion depth is `O(n)` plus temporary lists from slicing."
 ],
 "date": "2025-11-10"
+},
+  {
+"title": "In-Place Permutations via Backtracking (Swap-Based DFS)",
+"content": [
+"This Python implementation generates all permutations of an array **in place** by fixing positions left-to-right and exploring choices via swaps, then undoing each swap (backtracking)."
+],
+"images": ["algorithms_pics/permutations_inplace.png"],
+"description": [
+"### What the Code Does",
+"- `getPermutations(array)` returns a list of all permutations.",
+"- `permutationsHelper(i, array, permutations)` fixes the element at index `i` and recursively permutes the suffix.",
+"- `swap(array, i, j)` exchanges two positions so we can try a choice without extra arrays."
+,
+"---",
+"### How It Works (Backtracking)",
+"1. **Fix prefix:** At depth `i`, the first `i` elements are already chosen.",
+"2. **Enumerate choices:** For `j` from `i` to `len(array)-1`, swap `array[i]` with `array[j]`. Now the element at `i` is the next choice.",
+"3. **Recurse:** Call `permutationsHelper(i+1, ...)` to permute the remaining suffix.",
+"4. **Backtrack:** Swap back (`swap(array, i, j)`) to restore the array before trying the next `j`.",
+"5. **Leaf:** When `i == len(array)-1`, we’ve fixed all positions; append a copy `array[:]` to results."
+,
+"---",
+"### Tiny Walkthrough (array = [1,2,3])",
+"- At `i=0`, try `j=0` (no-op), recurse to `i=1`: produce `[1,2,3]`, `[1,3,2]`.",
+"- Backtrack to `i=0`, try `j=1` (swap → `[2,1,3]`), recurse: produce `[2,1,3]`, `[2,3,1]`.",
+"- Backtrack to `i=0`, try `j=2` (swap → `[3,2,1]`), recurse: produce `[3,2,1]`, `[3,1,2]`.",
+"- All `3!` permutations are explored systematically."
+,
+"---",
+"### Why It’s Correct",
+"- **Completeness:** For each position `i`, the loop tries **every** remaining element at that position; recursion covers all suffix orders.",
+"- **No duplicates from position reuse:** Swapping fixes one element per depth; backtracking restores state so future choices start from the same clean prefix.",
+"- **State restoration:** The second swap undoes the first, keeping the array valid for the next branch."
+,
+"---",
+"### Complexity",
+"- **Time:** `O(n · n!)` — there are `n!` leaves and copying each permutation costs `O(n)`.",
+"- **Space:** `O(n)` auxiliary for recursion depth (the array is reused in place). Result storage is `O(n · n!)` by definition."
+,
+"---",
+"### Practical Notes",
+"- Works with any comparable elements.",
+"- This swap-based approach avoids allocating new subarrays at each step, making it faster and more memory-friendly than slice-and-build methods."
+],
+"date": "2025-11-11"
 }
+
 
 
 ]
