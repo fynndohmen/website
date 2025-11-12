@@ -4,7 +4,7 @@
     "content": [
         "This Python function efficiently finds the value in a Binary Search Tree (BST) that is closest to a given target value."
     ],
-    "images": ["algorithms_pics/find_closest_bst0.png", "algorithms_pics/find_closest_bst1.png"],
+    "images": ["algorithms_pics/find_closest_bst.png"],
     "description": [
         "### Key Features of the Closest Value in BST Function:",
         "1. **Binary Search Tree Properties:**",
