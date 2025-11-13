@@ -30,48 +30,53 @@
         "- In a recursive approach, the space complexity would be **O(h)**, where `h` is the height of the tree (up to **O(n)** in the worst case)."
     ],
     "date": "2024-12-13"
-},{
-  "title": "Implementing a Binary Search Tree (BST) in Python",
-  "content": [
-    "This Python class implements a Binary Search Tree (BST) with support for insertion, search, and removal operations. The BST is a fundamental data structure that stores elements in an ordered manner, allowing efficient lookups and updates."
-  ],
-  "images": [
+},
+    {
+"title": "Binary Search Tree in Python: Insert, Search, and Delete (Iterative with Successor Trick)",
+"content": [
+"This class implements a classic **Binary Search Tree (BST)** with iterative `insert`, `contains`, and `remove` operations plus a helper `getMinValue`. Deletion uses the in-order **successor** (leftmost node in the right subtree) to handle nodes with two children."
+],
+ "images": [
     "algorithms_pics/bst_construction1.png",
     "algorithms_pics/bst_construction2.png"
   ],
-  "description": [
-    "### Key Features of the BST Class:",
-
-    "1. **Insert Method (`insert`)**",
-    "- Adds a new value to the BST while maintaining the binary search property.",
-    "- Traverses the tree from the root, placing the new value in the appropriate position based on comparisons.",
-
-    "2. **Search Method (`contains`)**",
-    "- Checks whether a given value exists in the BST.",
-    "- Starts at the root and follows the left or right child depending on whether the target value is smaller or larger.",
-
-    "3. **Remove Method (`remove`)**",
-    "- Removes a node from the BST while preserving the structure.",
-    "- Handles three cases: node with two children, one child, or no children.",
-    "- For a node with two children, it replaces the node's value with the smallest value from its right subtree (in-order successor).",
-    "- For root deletions with one child, it adjusts the root node to simulate in-place removal.",
-
-    "4. **Helper Method (`getMinValue`)**",
-    "- Traverses to the leftmost node of a subtree to find the minimum value (used during removal).",
-
-    "### Complexity Analysis:",
-
-    "**Time Complexity (Average Case):**",
-    "- Insertion, Search, and Deletion: O(log n)",
-
-    "**Time Complexity (Worst Case):**",
-    "- If the BST becomes unbalanced (e.g., resembles a linked list), operations degrade to O(n)",
-
-    "**Space Complexity:**",
-    "- O(1) auxiliary space for iterative methods, O(h) stack space for recursive removal where h is tree height."
-  ],
-  "date": "2025-03-16"
+"description": [
+"### What the Code Provides",
+"- **Node structure:** each node stores `value`, `left`, and `right`.",
+"- **Insert (iterative):** walks down from the root; values `< current` go left, otherwise right. Ties go to the **right**.",
+"- **Contains (iterative):** standard BST lookup by branching left/right until found or `None`.",
+"- **getMinValue:** follows `.left` pointers until the leftmost node and returns its value.",
+"",
+"---",
+"### Remove: All Cases Covered",
+"The method searches for the target while tracking `parentNode`.",
+"1) **Two children:** replace the node’s value with the **in-order successor** (minimum in right subtree via `getMinValue()`), then delete that successor from the right subtree (`currentNode.right.remove(...)`). The successor cannot have a left child, so its own removal is simple.",
+"2) **Deleting the root (no parent):** mutate the root **in place**:\n   - If only a left child exists, copy the left child’s value into root and rewire children (`right = left.right`, `left = left.left`).\n   - If only a right child exists, copy its value and rewire similarly.\n   - If the root is a **single leaf**, the code sets `currentNode.value = None` to represent an empty tree sentinel.",
+"3) **One child (non-root):** link the parent directly to the existing child (left or right).",
+"",
+"---",
+"### Why the Successor Approach Works",
+"- Replacing a node with the smallest value in its right subtree preserves the BST ordering: all left values remain `< newValue` and all right values remain `≥ newValue`.",
+"- The successor has no left child, making its own removal straightforward.",
+"",
+"---",
+"### Complexity",
+"- Let **h** be the tree height.\n  - **Insert / Contains / Remove:** average **O(h)** (→ **O(log n)** if balanced; **O(n)** in the worst case when skewed).\n  - **Space:** iterative traversal keeps auxiliary space **O(1)**. The code makes **one nested call** to `remove` when deleting the successor, which doesn’t grow with `n` beyond constant call depth.",
+"",
+"---",
+"### Edge Notes",
+"- **Duplicates:** `insert` routes equals to the **right**; `contains` will find them; `remove` will delete the first matching node encountered along the search path.",
+"- **Emptying the tree:** when the root is a lone leaf, the node’s `value` is set to `None`.",
+"",
+"---",
+"### Takeaways",
+"- Iterative operations keep memory usage minimal.",
+"- Using the in-order successor allows clean deletion for the two-children case without full subtree surgery.",
+"- Performance depends on height—balance the tree (e.g., AVL/Red-Black) if you need guaranteed `O(log n)`."
+],
+"date": "2025-03-16"
 },
+
     {
   "title": "Validating a Binary Search Tree (BST) in Python",
   "content": [
