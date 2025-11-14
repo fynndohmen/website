@@ -5,8 +5,7 @@
         "This Python script computes the sum of values along each branch from the root to the leaf nodes in a binary tree."
     ],
     "images": [
-        "algorithms_pics/branch_sums1.png",
-        "algorithms_pics/branch_sums2.png"
+        "algorithms_pics/branch_sums.png"
     ],
     "description": [
         "### Key Features of the Branch Sums Script:",
