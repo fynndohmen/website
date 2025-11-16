@@ -91,7 +91,7 @@
     "We build solutions bottom-up: the number of ways to form smaller amounts are stored and reused to form larger amounts. This reuse of overlapping subproblems is exactly what dynamic programming exploits."
   ],
   "date": "2025-07-01"
-,}
+},
 
 {
   "title": "Minimum Number of Coins for Change",
