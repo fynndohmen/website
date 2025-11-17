@@ -254,7 +254,7 @@
     "This Python algorithm reconstructs a Binary Search Tree (BST) from its preorder traversal using recursion and value bounds."
   ],
   "images": [
-    "algorithms_pics/bst_reconstruction.png"
+    "algorithms_pics/bst_reconstruction.png", "algorithms_pics/bst_reconstruction2.png"
   ],
   "description": [
     "### Why Preorder Traversal Reconstruction?",
