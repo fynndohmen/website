@@ -337,7 +337,7 @@
 "content": [
 "This Python solution computes the minimum number of passes required to turn all negative numbers in a matrix positive, where a negative becomes positive if it is adjacent (up, down, left, right) to a positive in the previous pass. It uses a single queue for a clean, level-by-level multi-source BFS."
 ],
-"images": ["algorithms_pics/minimum_passes_matrix.png"],
+"images": ["algorithms_pics/minimum_passes_matrix1.png", "algorithms_pics/minimum_passes_matrix2.png"],
 "description": [
 "### Problem Statement:",
 "- You’re given a matrix of integers (positive, zero, and negative).",
