@@ -371,7 +371,7 @@
     "This Python function checks whether a binary tree is symmetrical around its center using an iterative depth-first traversal approach."
   ],
   "images": [
-    "algorithms_pics/symmetrical_tree.png"
+    "algorithms_pics/symmetrical_tree.png", "algorithms_pics/symmetrical_tree2.png"
   ],
   "description": [
     "### What is a Symmetrical Tree?",
@@ -413,7 +413,7 @@
     "This Python function checks whether a binary tree is symmetrical around its center using a clean and efficient recursive approach."
   ],
   "images": [
-    "algorithms_pics/symmetrical_tree_recursive.png"
+    "algorithms_pics/symmetrical_tree_recursive.png", "algorithms_pics/symmetrical_tree_recursive2.png"
   ],
   "description": [
     "### What Is a Symmetrical Tree?",
