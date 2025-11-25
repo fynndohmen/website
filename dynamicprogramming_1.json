@@ -190,7 +190,7 @@
   "content": [
     "This implementation calculates the Levenshtein Distance (Edit Distance) between two strings while optimizing space complexity. It improves upon the standard dynamic programming approach by using only two 1D arrays instead of a full 2D matrix."
   ],
-  "images": ["algorithms_pics/levenshtein_distance_optimized.png"],
+  "images": ["algorithms_pics/levenshtein_distance_optimized.png", "algorithms_pics/levenshtein_distance_optimized2.png"],
   "description": [
     "### Problem Statement:",
     "- Given two strings `str1` and `str2`, determine the minimum number of edit operations (insertions, deletions, or substitutions) required to convert one string into the other.",
