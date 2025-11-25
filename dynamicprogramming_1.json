@@ -142,7 +142,7 @@
   "content": [
     "This Python function calculates the Levenshtein Distance between two strings — the minimum number of single-character edits (insertions, deletions, or substitutions) needed to transform one string into another."
   ],
-  "images": ["algorithms_pics/levenshtein_distance.png"],
+  "images": ["algorithms_pics/levenshtein_distance.png", "algorithms_pics/levenshtein_distance2.png"],
   "description": [
     "### Problem Statement:",
     "- Given two strings `str1` and `str2`, compute the minimum number of edit operations required to convert `str1` into `str2`.",
