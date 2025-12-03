@@ -1,4 +1,5 @@
-{
+[
+  {
 "title": "Habit Tracker — a tiny, offline-first Ionic/Angular app with smart reminders",
 "content": [
 "A personal project to learn Angular the practical way: I built a Habit Tracker with a clean dark UI, offline storage, and on-device notifications. Below I walk through what the app does, a few design decisions, and the little engineering bits that made it stable on Android (Capacitor) without needing any backend."
@@ -62,3 +63,4 @@
 ],
 "date": "2025-12-03"
 }
+]
