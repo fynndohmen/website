@@ -342,9 +342,7 @@
     "- You don’t always need a massive spaced-repetition engine. For some workflows, **manual difficulty control** plus filtering is enough—and actually more intuitive.",
     "- A tiny domain model (`Deck`, `Flashcard`, `CardSideContent`, `DifficultyLevel`) is powerful when combined with a good UI.",
     "- PWAs + GitHub Pages are underrated for personal tools: I get a cross-platform app with offline support without touching any backend.",
-    "- Multiple screenshots per card side turned out to be crucial for studying algorithms and code; the UI now treats images as first-class citizens, not just a decoration.",
-    "",
-    "Most importantly, this app is small and *mine*: I understand every part of it, can tweak it whenever I feel like it, and it fits perfectly into how I learn."
+    "- Multiple screenshots per card side turned out to be crucial for studying algorithms and code; the UI now treats images as first-class citizens, not just a decoration."
   ],
   "date": "2025-12-04"
 }
