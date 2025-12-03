@@ -91,47 +91,42 @@ nav ul li a:hover {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-    /* NEU: Grid für saubere Ausrichtung von Titel, Icon, Text */
-    display: grid;
-    grid-template-rows: auto auto 1fr;  /* 1: Titel, 2: Icon, 3: Text */
-    justify-items: center;
-    align-items: start;
-    row-gap: 8px;                       /* kleiner Abstand zwischen Titel/Icon/Text */
-    height: 220px;                      /* gleiche Höhe der Boxen auf Desktop */
+    /* gleiche Höhe auf Desktop */
+    height: 220px;
 }
 
-/* Titel in den Category-Boxen */
+/* Titel in den Category-Boxen – Abstand kontrolliert */
 .projects-page .category h3,
 .algorithmcategories-page .category h3 {
-    margin: 0;                          /* Abstand wird über row-gap geregelt */
+    margin: 0 0 12px 0;
 }
 
 /* Standard Icon-Größe auf der Projects-Seite */
 .projects-page .category img {
     width: 80px;
-    height: 80px;          /* feste Höhe */
-    margin: 0;             /* Abstand über row-gap */
-    object-fit: contain;   /* Bild einpassen */
+    height: 80px;          /* feste Größe */
+    margin: 0 auto 12px;   /* zentriert + Abstand nach unten */
+    object-fit: contain;
     display: block;
 }
 
 /* Icon-Größe auf der Algorithm Categories Seite */
 .algorithmcategories-page .category img {
     width: 80px;
-    height: 80px;          /* feste Höhe */
-    margin: 0;
+    height: 80px;          /* feste Größe */
+    margin: 0 auto 12px;
     object-fit: contain;
     display: block;
 }
 
-/* Description-Text in den Boxen */
+/* Description in den Boxen – immer zentriert, gleiche Start-Höhe */
 .projects-page .category p,
 .algorithmcategories-page .category p {
     margin: 0;
     text-align: center;
-    align-self: start;      /* Text beginnt oben in der dritten Grid-Zeile */
 }
 
+/* Hover-Effekt */
 .projects-page .category:hover,
 .algorithmcategories-page .category:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
