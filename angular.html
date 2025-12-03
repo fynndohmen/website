@@ -64,21 +64,41 @@
                     shortDescription.textContent = post.content[0];
                     postElement.appendChild(shortDescription);
 
-                    // Images
-                    post.images.forEach(image => {
-                        const img = document.createElement('img');
-                        img.src = image;
-                        img.alt = post.title;
-                        img.classList.add('blog-image');
-                        postElement.appendChild(img);
-                    });
+                    // Prüfen, ob description bereits Inline-Bilder enthält
+                    const hasInlineImages =
+                        Array.isArray(post.description) &&
+                        post.description.some(block => typeof block === 'object' && block.type === 'image');
 
-                    // Detailed description
-                    post.description.forEach(paragraph => {
-                        const para = document.createElement('p');
-                        para.textContent = paragraph;
-                        postElement.appendChild(para);
-                    });
+                    // Fallback: wenn keine Inline-Bilder vorhanden, alle post.images wie bisher oben einfügen
+                    if (!hasInlineImages && Array.isArray(post.images)) {
+                        post.images.forEach(image => {
+                            const img = document.createElement('img');
+                            img.src = image;
+                            img.alt = post.title;
+                            img.classList.add('blog-image');
+                            postElement.appendChild(img);
+                        });
+                    }
+
+                    // Detailed description: Strings und Image-Objekte verarbeiten
+                    if (Array.isArray(post.description)) {
+                        post.description.forEach(block => {
+                            // alter Fall: reiner String -> Absatz
+                            if (typeof block === 'string') {
+                                const para = document.createElement('p');
+                                para.textContent = block;
+                                postElement.appendChild(para);
+                            }
+                            // neuer Fall: Bildblock
+                            else if (block && block.type === 'image') {
+                                const img = document.createElement('img');
+                                img.src = block.src;
+                                img.alt = block.alt || post.title;
+                                img.classList.add('blog-image');
+                                postElement.appendChild(img);
+                            }
+                        });
+                    }
 
                     // Date (optional, wie bei Python auskommentiert)
                     // const date = document.createElement('small');
