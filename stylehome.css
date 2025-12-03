@@ -91,14 +91,19 @@ nav ul li a:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Projects-Seite: klassische Card, alles zentriert.
-   -> gleiche Höhe der Cards kommt über das Grid (höchste Card bestimmt Zeilenhöhe) */
+/* Projects-Seite:
+   - Card ist positioniert
+   - Text absolut ab fester Höhe
+   -> alle Descriptions starten exakt auf derselben Y-Position */
 .projects-page .category {
+    position: relative;
+    display: block;
     text-align: center;
-    display: block;            /* wichtig: KEIN flex/grid in der Card */
+    padding: 30px 20px 90px;  /* unten extra Platz für Description */
+    min-height: 230px;        /* genug Höhe für 2 Zeilen Description */
 }
 
-/* Algorithm-Categories-Seite: kompakter, Titel + Icon mittig */
+/* Algorithm-Categories-Seite: kompakt, nur Titel + Icon mittig */
 .algorithmcategories-page .category {
     text-align: center;
     display: flex;
@@ -110,7 +115,8 @@ nav ul li a:hover {
 /* Titel in den Category-Boxen */
 .projects-page .category h3,
 .algorithmcategories-page .category h3 {
-    margin: 0 0 18px 0;        /* gleicher Abstand zum Icon */
+    margin: 0;
+    font-weight: bold;
 }
 
 /* Icons auf der Projects-Seite */
@@ -119,7 +125,7 @@ nav ul li a:hover {
     height: 80px;              /* feste Größe */
     object-fit: contain;
     display: block;
-    margin: 0 auto 18px;       /* zentriert + Abstand zur Description */
+    margin: 24px auto 0;       /* Abstand zum Titel, KEIN margin-bottom */
 }
 
 /* Icons auf der Algorithm-Categories-Seite */
@@ -132,10 +138,25 @@ nav ul li a:hover {
 }
 
 /* Description-Text in den Boxen */
-.projects-page .category p,
-.algorithmcategories-page .category p {
+
+/* Projects-Seite:
+   - absolut positioniert
+   - gleiche top-Position in jeder Card
+   -> alle Descriptions beginnen exakt auf der gleichen Höhe */
+.projects-page .category p {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 185px;                     /* >> diesen Wert kannst du bei Bedarf 1–2px tweaken */
     margin: 0;
-    text-align: center;        /* EXPLIZIT zentriert */
+    width: calc(100% - 40px);       /* etwas Rand links/rechts */
+    text-align: center;
+}
+
+/* Algorithm-Categories-Seite: ganz normal */
+.algorithmcategories-page .category p {
+    margin: 12px 0 0 0;
+    text-align: center;
 }
 
 /* Hover-Effekt */
@@ -251,6 +272,25 @@ nav ul li a:hover {
     .algorithmcategories-page .categories {
         grid-template-columns: repeat(1, 1fr);
         padding: 0;
+    }
+
+    /* Auf kleinen Screens: wieder normales Flow-Layout,
+       damit nichts überlappt */
+    .projects-page .category {
+        position: static;
+        padding: 30px 20px;
+        min-height: auto;
+    }
+
+    .projects-page .category p {
+        position: static;
+        transform: none;
+        margin-top: 18px;
+        width: auto;
+    }
+
+    .projects-page .category img {
+        margin: 24px auto 0;
     }
 
     .projects-page .category,
