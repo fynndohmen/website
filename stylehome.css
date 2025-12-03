@@ -93,17 +93,16 @@ nav ul li a:hover {
 }
 
 /* Spezielles Layout: Projects-Seite
-   - gleiche Höhe
-   - Titel oben, Description unten, Icon dazwischen */
+   -> feste Zeilenhöhen, damit Descriptions gleich starten */
 .projects-page .category {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between; /* verteilt Titel, Icon, Text */
-    min-height: 230px;              /* alle Boxen mindestens gleich hoch */
+    display: grid;
+    grid-template-rows: 40px 120px auto; /* Titel, Icon, Description */
+    row-gap: 16px;
+    justify-items: center;
+    align-items: start;
 }
 
-/* Spezielles Layout: Algorithm Categories (kompakt) */
+/* Spezielles Layout: Algorithm Categories (kompakt, nur Titel + Icon) */
 .algorithmcategories-page .category {
     display: flex;
     flex-direction: column;
@@ -114,7 +113,7 @@ nav ul li a:hover {
 /* Titel in den Category-Boxen */
 .projects-page .category h3,
 .algorithmcategories-page .category h3 {
-    margin: 0 0 12px 0;
+    margin: 0;                      /* kein extra Margin, Höhe kommt aus der Grid-Zeile */
 }
 
 /* Icons auf der Projects-Seite */
@@ -123,7 +122,8 @@ nav ul li a:hover {
     height: 80px;          /* feste Größe */
     object-fit: contain;
     display: block;
-    margin-bottom: 16px;   /* Abstand zur Description (die unten steht) */
+    margin: 0;             /* Abstand wird über row-gap geregelt */
+    align-self: center;    /* Icon in seiner Zeile zentrieren */
 }
 
 /* Icons auf der Algorithm-Categories-Seite */
@@ -140,6 +140,7 @@ nav ul li a:hover {
 .algorithmcategories-page .category p {
     margin: 0;
     text-align: center;
+    align-self: start;      /* auf der Projects-Seite: oben in der dritten Zeile */
 }
 
 /* Hover-Effekt */
@@ -261,7 +262,6 @@ nav ul li a:hover {
     .algorithmcategories-page .category {
         max-width: 90%;
         margin-bottom: 20px;
-        min-height: auto;  /* auf kleinen Screens flexibel */
     }
 
     .linux-page .blog-post {
