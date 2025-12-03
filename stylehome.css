@@ -71,7 +71,7 @@ nav ul li a:hover {
 .projects-page .categories,
 .algorithmcategories-page .categories {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 20px;
     padding: 20px;
     max-width: 1200px;
@@ -84,26 +84,50 @@ nav ul li a:hover {
     text-align: center;
     background-color: #fff;
     border: 1px solid #ddd;
-    padding: 20px;
+    padding: 30px 20px;
     transition: box-shadow 0.3s ease-in-out;
     color: #000;
     text-decoration: none;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    /* NEU: alle Boxen gleich aufgebaut */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 220px; /* gleiche Höhe der Karten auf Desktop */
+}
+
+/* Titel in den Category-Boxen */
+.projects-page .category h3,
+.algorithmcategories-page .category h3 {
+    margin: 0 0 20px 0;
 }
 
 /* Standard Icon-Größe auf der Projects-Seite */
 .projects-page .category img {
     width: 80px;
-    height: auto;
-    margin-bottom: 10px;
+    height: 80px;          /* feste Höhe */
+    margin-bottom: 20px;   /* gleicher Abstand zum Text */
+    object-fit: contain;   /* Bild einpassen */
+    display: block;
 }
 
 /* Icon-Größe auf der Algorithm Categories Seite */
 .algorithmcategories-page .category img {
     width: 80px;
-    height: auto;
-    margin-bottom: 10px;
+    height: 80px;          /* feste Höhe */
+    margin-bottom: 20px;
+    object-fit: contain;
+    display: block;
+}
+
+/* Description-Text in den Boxen */
+.projects-page .category p,
+.algorithmcategories-page .category p {
+    margin: 0;
+    text-align: center;
 }
 
 .projects-page .category:hover,
@@ -224,6 +248,7 @@ nav ul li a:hover {
     .algorithmcategories-page .category {
         max-width: 90%;
         margin-bottom: 20px;
+        height: auto;  /* auf kleineren Screens Höhe wieder flexibel */
     }
 
     .linux-page .blog-post {
@@ -248,5 +273,3 @@ nav ul li a:hover {
         width: 100%;
     }
 }
-
-
