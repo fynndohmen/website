@@ -5,10 +5,10 @@
 "A personal project to learn Angular the practical way: I built a Habit Tracker with a clean dark UI, offline storage, and on-device notifications. Below I walk through what the app does, a few design decisions, and the little engineering bits that made it stable on Android (Capacitor) without needing any backend."
 ],
 "images": [
-"mht1.jpg",
-"mht2.jpg",
-"mht3.jpg",
-"mht4.jpg"
+"angular_pics/mht1.jpg",
+"angular_pics/mht2.jpg",
+"angular_pics/mht3.jpg",
+"angular_pics/mht4.jpg"
 ],
 "description": [
 "### Core features (what you can do)",
