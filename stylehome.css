@@ -91,25 +91,26 @@ nav ul li a:hover {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-    /* NEU: alle Boxen gleich aufgebaut */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    height: 220px; /* gleiche Höhe der Karten auf Desktop */
+    /* NEU: Grid für saubere Ausrichtung von Titel, Icon, Text */
+    display: grid;
+    grid-template-rows: auto auto 1fr;  /* 1: Titel, 2: Icon, 3: Text */
+    justify-items: center;
+    align-items: start;
+    row-gap: 8px;                       /* kleiner Abstand zwischen Titel/Icon/Text */
+    height: 220px;                      /* gleiche Höhe der Boxen auf Desktop */
 }
 
 /* Titel in den Category-Boxen */
 .projects-page .category h3,
 .algorithmcategories-page .category h3 {
-    margin: 0 0 20px 0;
+    margin: 0;                          /* Abstand wird über row-gap geregelt */
 }
 
 /* Standard Icon-Größe auf der Projects-Seite */
 .projects-page .category img {
     width: 80px;
     height: 80px;          /* feste Höhe */
-    margin-bottom: 20px;   /* gleicher Abstand zum Text */
+    margin: 0;             /* Abstand über row-gap */
     object-fit: contain;   /* Bild einpassen */
     display: block;
 }
@@ -118,7 +119,7 @@ nav ul li a:hover {
 .algorithmcategories-page .category img {
     width: 80px;
     height: 80px;          /* feste Höhe */
-    margin-bottom: 20px;
+    margin: 0;
     object-fit: contain;
     display: block;
 }
@@ -128,6 +129,7 @@ nav ul li a:hover {
 .algorithmcategories-page .category p {
     margin: 0;
     text-align: center;
+    align-self: start;      /* Text beginnt oben in der dritten Grid-Zeile */
 }
 
 .projects-page .category:hover,
@@ -248,7 +250,7 @@ nav ul li a:hover {
     .algorithmcategories-page .category {
         max-width: 90%;
         margin-bottom: 20px;
-        height: auto;  /* auf kleineren Screens Höhe wieder flexibel */
+        height: auto;  /* auf kleinen Screens flexibel */
     }
 
     .linux-page .blog-post {
