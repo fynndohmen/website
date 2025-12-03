@@ -71,19 +71,20 @@ nav ul li a:hover {
 .projects-page .categories,
 .algorithmcategories-page .categories {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-/* Gemeinsame Basis für alle Category-Boxen */
+/* Kategorie-Box (eckig) */
 .projects-page .category,
 .algorithmcategories-page .category {
+    text-align: center;
     background-color: #fff;
     border: 1px solid #ddd;
-    padding: 30px 20px;
+    padding: 20px;
     transition: box-shadow 0.3s ease-in-out;
     color: #000;
     text-decoration: none;
@@ -91,71 +92,20 @@ nav ul li a:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* === PROJECTS-SEITE =========================================
-   Jede Card ist ein Grid:
-   Zeile 1: Titel
-   Zeile 2: Icon
-   Zeile 3: Description
-
-   -> Start der Description (Oberkante der 3. Zeile) ist
-      für alle Cards IDENTISCH.
-   ========================================================== */
-.projects-page .category {
-    display: grid;
-    grid-template-rows: auto auto auto; /* 3 Zeilen, Höhe wird pro Zeile global bestimmt */
-    row-gap: 18px;
-    justify-items: center;
-    align-items: start;
-    text-align: center;
-    min-height: 230px;                 /* sorgt für optisch gleiche Box-Höhe */
-}
-
-/* Elemente in der Projects-Card */
-.projects-page .category h3 {
-    margin: 0;                         /* keine zusätzliche vertikale Verschiebung */
-}
-
+/* Standard Icon-Größe auf der Projects-Seite */
 .projects-page .category img {
     width: 80px;
-    height: 80px;                      /* feste Größe */
-    object-fit: contain;
-    display: block;
-    margin: 0;                         /* Abstand kommt aus row-gap */
+    height: auto;
+    margin-bottom: 10px;
 }
 
-.projects-page .category p {
-    margin: 0;                         /* WICHTIG: kein extra margin-top */
-    text-align: center;
-    align-self: start;                 /* oben in Zeile 3 beginnen */
-}
-
-/* === ALGORITHM-CATEGORIES-SEITE ============================ */
-.algorithmcategories-page .category {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.algorithmcategories-page .category h3 {
-    margin: 0 0 12px 0;
-}
-
+/* Icon-Größe auf der Algorithm Categories Seite */
 .algorithmcategories-page .category img {
     width: 80px;
-    height: 80px;
-    object-fit: contain;
-    display: block;
-    margin: 0;
+    height: auto;
+    margin-bottom: 10px;
 }
 
-.algorithmcategories-page .category p {
-    margin: 12px 0 0 0;
-    text-align: center;
-}
-
-/* Hover-Effekt */
 .projects-page .category:hover,
 .algorithmcategories-page .category:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -181,7 +131,7 @@ nav ul li a:hover {
     box-sizing: border-box;
     border: none;
     background-color: #1a1a1a;   /* minimal heller als Body */
-    color: #f0f0f0;              /* helle Grundschrift */
+    color: #f0f0f0;               /* helle Grundschrift */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: left;
     border-radius: 8px;
@@ -194,14 +144,14 @@ nav ul li a:hover {
     column-gap: 12px;
     align-items: center;
     max-width: calc(100% + 20px);        /* nie über den Post-Inhalt hinaus */
-    margin-left: -20px;                  /* Banner beginnt an Innenkante der Box */
-    padding-left: 20px;                  /* gleicht den negativen Rand aus */
-    padding-right: 12px;                 /* Luft rechts im Banner */
+    margin-left: -20px;                   /* Banner beginnt an Innenkante der Box */
+    padding-left: 20px;                   /* gleicht den negativen Rand aus */
+    padding-right: 12px;                  /* Luft rechts im Banner */
     padding-top: 4px;
     padding-bottom: 4px;
     margin-bottom: 10px;
-    background: #ffffff;                 /* der Banner */
-    border-radius: 0 8px 8px 0;          /* rechts rund, links gerade */
+    background: #ffffff;                  /* der Banner */
+    border-radius: 0 8px 8px 0;           /* rechts rund, links gerade */
     color: #000;
 }
 
@@ -212,7 +162,7 @@ nav ul li a:hover {
     object-fit: contain;
 }
 
-/* Titeltext im Banner */
+/* Titeltext im Banner: startet neben dem Icon, wrappt unter gleicher Startkante */
 .linux-page .blog-post .post-title h2 {
     font-family: 'Rubik', 'Helvetica', sans-serif;
     color: #000;
@@ -298,3 +248,6 @@ nav ul li a:hover {
         width: 100%;
     }
 }
+
+
+sieh dir die css an, liegts an ihr?
