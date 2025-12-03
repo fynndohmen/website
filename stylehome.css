@@ -78,7 +78,7 @@ nav ul li a:hover {
     margin: 0 auto;
 }
 
-/* Kategorie-Box (eckig) */
+/* Gemeinsame Basis für alle Category-Boxen */
 .projects-page .category,
 .algorithmcategories-page .category {
     text-align: center;
@@ -90,49 +90,56 @@ nav ul li a:hover {
     text-decoration: none;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-    /* NEU: Grid-Layout für perfekte Ausrichtung */
+/* Spezielles Layout: Projects-Seite (gleiche Höhe, Beschriftung gleich hoch) */
+.projects-page .category {
     display: grid;
-    grid-template-rows: auto 120px 1fr;  /* Titel, Icon-Zeile (fix), Text */
+    grid-template-rows: auto 120px 1fr;  /* Titel, Icon-Zeile, Text */
     row-gap: 12px;
     justify-items: center;
     align-items: start;
+    height: 240px;                        /* gleiche Gesamthöhe für alle Karten */
+}
 
-    height: 240px; /* gleiche Gesamthöhe für alle Karten (Desktop) */
+/* Spezielles Layout: Algorithm Categories (kompakt, nur Titel + Icon) */
+.algorithmcategories-page .category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;              /* Icon + Titel mittig in der Box */
 }
 
 /* Titel in den Category-Boxen */
 .projects-page .category h3,
 .algorithmcategories-page .category h3 {
-    margin: 0; /* Abstand wird über row-gap gesteuert */
+    margin: 0;                            /* Abstand wird über Grid/Flex geregelt */
 }
 
-/* Standard Icon-Größe auf der Projects-Seite */
+/* Icons auf der Projects-Seite */
 .projects-page .category img {
     width: 80px;
     height: 80px;          /* feste Größe */
     object-fit: contain;
     display: block;
-
-    /* Icon sitzt in der fixen Icon-Zeile, zentriert */
-    align-self: center;
+    align-self: center;    /* in der Icon-Zeile zentriert */
 }
 
-/* Icon-Größe auf der Algorithm Categories Seite */
+/* Icons auf der Algorithm-Categories-Seite */
 .algorithmcategories-page .category img {
     width: 80px;
     height: 80px;
     object-fit: contain;
     display: block;
-    align-self: center;
+    margin-top: 12px;      /* kleiner Abstand zum Titel */
 }
 
-/* Description-Text in den Boxen */
+/* Description-Text in den Boxen (nur Projects nutzen das aktuell) */
 .projects-page .category p,
 .algorithmcategories-page .category p {
     margin: 0;
     text-align: center;
-    align-self: start;  /* Text beginnt immer oben in der dritten Zeile */
+    align-self: start;      /* auf der Projects-Seite: Text beginnt oben in der dritten Zeile */
 }
 
 /* Hover-Effekt */
