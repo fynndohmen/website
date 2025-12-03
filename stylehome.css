@@ -91,19 +91,45 @@ nav ul li a:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Projects-Seite:
-   - Card ist positioniert
-   - Text absolut ab fester Höhe
-   -> alle Descriptions starten exakt auf derselben Y-Position */
+/* === PROJECTS-SEITE =========================================
+   Jede Card ist ein Grid:
+   Zeile 1: Titel
+   Zeile 2: Icon
+   Zeile 3: Description
+
+   -> Start der Description (Oberkante der 3. Zeile) ist
+      für alle Cards IDENTISCH.
+   ========================================================== */
 .projects-page .category {
-    position: relative;
-    display: block;
+    display: grid;
+    grid-template-rows: auto auto auto; /* 3 Zeilen, Höhe wird pro Zeile global bestimmt */
+    row-gap: 18px;
+    justify-items: center;
+    align-items: start;
     text-align: center;
-    padding: 30px 20px 90px;  /* unten extra Platz für Description */
-    min-height: 230px;        /* genug Höhe für 2 Zeilen Description */
+    min-height: 230px;                 /* sorgt für optisch gleiche Box-Höhe */
 }
 
-/* Algorithm-Categories-Seite: kompakt, nur Titel + Icon mittig */
+/* Elemente in der Projects-Card */
+.projects-page .category h3 {
+    margin: 0;                         /* keine zusätzliche vertikale Verschiebung */
+}
+
+.projects-page .category img {
+    width: 80px;
+    height: 80px;                      /* feste Größe */
+    object-fit: contain;
+    display: block;
+    margin: 0;                         /* Abstand kommt aus row-gap */
+}
+
+.projects-page .category p {
+    margin: 0;                         /* WICHTIG: kein extra margin-top */
+    text-align: center;
+    align-self: start;                 /* oben in Zeile 3 beginnen */
+}
+
+/* === ALGORITHM-CATEGORIES-SEITE ============================ */
 .algorithmcategories-page .category {
     text-align: center;
     display: flex;
@@ -112,48 +138,18 @@ nav ul li a:hover {
     justify-content: center;
 }
 
-/* Titel in den Category-Boxen */
-.projects-page .category h3,
 .algorithmcategories-page .category h3 {
-    margin: 0;
-    font-weight: bold;
+    margin: 0 0 12px 0;
 }
 
-/* Icons auf der Projects-Seite */
-.projects-page .category img {
-    width: 80px;
-    height: 80px;              /* feste Größe */
-    object-fit: contain;
-    display: block;
-    margin: 24px auto 0;       /* Abstand zum Titel, KEIN margin-bottom */
-}
-
-/* Icons auf der Algorithm-Categories-Seite */
 .algorithmcategories-page .category img {
     width: 80px;
     height: 80px;
     object-fit: contain;
     display: block;
-    margin-top: 12px;
-}
-
-/* Description-Text in den Boxen */
-
-/* Projects-Seite:
-   - absolut positioniert
-   - gleiche top-Position in jeder Card
-   -> alle Descriptions beginnen exakt auf der gleichen Höhe */
-.projects-page .category p {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 185px;                     /* >> diesen Wert kannst du bei Bedarf 1–2px tweaken */
     margin: 0;
-    width: calc(100% - 40px);       /* etwas Rand links/rechts */
-    text-align: center;
 }
 
-/* Algorithm-Categories-Seite: ganz normal */
 .algorithmcategories-page .category p {
     margin: 12px 0 0 0;
     text-align: center;
@@ -272,25 +268,6 @@ nav ul li a:hover {
     .algorithmcategories-page .categories {
         grid-template-columns: repeat(1, 1fr);
         padding: 0;
-    }
-
-    /* Auf kleinen Screens: wieder normales Flow-Layout,
-       damit nichts überlappt */
-    .projects-page .category {
-        position: static;
-        padding: 30px 20px;
-        min-height: auto;
-    }
-
-    .projects-page .category p {
-        position: static;
-        transform: none;
-        margin-top: 18px;
-        width: auto;
-    }
-
-    .projects-page .category img {
-        margin: 24px auto 0;
     }
 
     .projects-page .category,
