@@ -91,39 +91,48 @@ nav ul li a:hover {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-    /* gleiche Höhe auf Desktop */
-    height: 220px;
+    /* NEU: Grid-Layout für perfekte Ausrichtung */
+    display: grid;
+    grid-template-rows: auto 120px 1fr;  /* Titel, Icon-Zeile (fix), Text */
+    row-gap: 12px;
+    justify-items: center;
+    align-items: start;
+
+    height: 240px; /* gleiche Gesamthöhe für alle Karten (Desktop) */
 }
 
-/* Titel in den Category-Boxen – Abstand kontrolliert */
+/* Titel in den Category-Boxen */
 .projects-page .category h3,
 .algorithmcategories-page .category h3 {
-    margin: 0 0 12px 0;
+    margin: 0; /* Abstand wird über row-gap gesteuert */
 }
 
 /* Standard Icon-Größe auf der Projects-Seite */
 .projects-page .category img {
     width: 80px;
     height: 80px;          /* feste Größe */
-    margin: 0 auto 12px;   /* zentriert + Abstand nach unten */
     object-fit: contain;
     display: block;
+
+    /* Icon sitzt in der fixen Icon-Zeile, zentriert */
+    align-self: center;
 }
 
 /* Icon-Größe auf der Algorithm Categories Seite */
 .algorithmcategories-page .category img {
     width: 80px;
-    height: 80px;          /* feste Größe */
-    margin: 0 auto 12px;
+    height: 80px;
     object-fit: contain;
     display: block;
+    align-self: center;
 }
 
-/* Description in den Boxen – immer zentriert, gleiche Start-Höhe */
+/* Description-Text in den Boxen */
 .projects-page .category p,
 .algorithmcategories-page .category p {
     margin: 0;
     text-align: center;
+    align-self: start;  /* Text beginnt immer oben in der dritten Zeile */
 }
 
 /* Hover-Effekt */
@@ -183,7 +192,7 @@ nav ul li a:hover {
     object-fit: contain;
 }
 
-/* Titeltext im Banner: startet neben dem Icon, wrappt unter gleicher Startkante */
+/* Titeltext im Banner */
 .linux-page .blog-post .post-title h2 {
     font-family: 'Rubik', 'Helvetica', sans-serif;
     color: #000;
