@@ -30,7 +30,7 @@
 
         async function fetchPosts(page) {
             try {
-                const response = await fetch(`angularprojects_${page}.json`);
+                const response = await fetch(`angular_${page}.json`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
