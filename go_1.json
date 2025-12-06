@@ -5,12 +5,7 @@
     "This project is my first real step into the world of backend development, cloud-like setups, and databases using Go. I took an old i3 PC with 4GB RAM, installed Ubuntu Server on it, and turned it into a small home lab that exposes a JSON API built with Go and backed by a PostgreSQL database.",
     "The main goal was not just to get something working, but to really understand what each piece does: Linux as a server, PostgreSQL as a database server, Go as the HTTP backend, and how they all talk to each other over TCP, HTTP, and SQL."
   ],
-  "images": [
-    "go_projects_pics/server-ssh-setup.png",
-    "go_projects_pics/psql-todos-table.png",
-    "go_projects_pics/go-code-todos-handler.png",
-    "go_projects_pics/todos-endpoint-browser.png"
-  ],
+  "images": [],
   "description": [
     "### Goal & Overview",
     "- **Goal:** Turn an old PC into a small backend \"cloud lab\" with Go and PostgreSQL, and use it to learn how HTTP servers, databases, and contexts work together.",
@@ -21,6 +16,11 @@
     "",
     "---",
     "### 1. Hardware & Linux Setup",
+    {
+      "type": "image",
+      "src": "go_pics/server-ssh-setup.png",
+      "alt": "SSH connection to the Ubuntu Go server"
+    },
     "- I reused an old i3 PC with ~4GB RAM and installed **Ubuntu Server LTS** instead of a desktop environment.",
     "- The idea: keep it headless and manage everything over **SSH** from my main machine.",
     "- Steps:",
@@ -31,6 +31,11 @@
     "",
     "---",
     "### 2. PostgreSQL as the Database Server",
+    {
+      "type": "image",
+      "src": "go_pics/psql-todos-table.png",
+      "alt": "psql view of the todos table in the cloudlab database"
+    },
     "- On the Ubuntu server, I installed PostgreSQL and created:",
     "  - a **user** (role) for my Go app,",
     "  - a **database** called `cloudlab`,",
@@ -50,6 +55,11 @@
     "",
     "---",
     "### 3. Go Project Structure & Database Connection",
+    {
+      "type": "image",
+      "src": "go_pics/go-code-todos-handler.png",
+      "alt": "Go code for the main function and getTodosHandler"
+    },
     "- On the Go side, I created a small `main.go` with:",
     "  - `package main` as the entry point.",
     "  - Imports for `net/http`, `database/sql`, `encoding/json`, `context`, `time`, and the `pgx` PostgreSQL driver:",
@@ -146,7 +156,7 @@
     "      }",
     "  }",
     "  ```",
-    "- Key ideas I learned here:",
+    "- Things I understood better while building this:",
     "  - `w http.ResponseWriter` is how the server sends an HTTP response back to the client (status, headers, body).",
     "  - `r *http.Request` represents the incoming HTTP request from the browser (method, URL, headers, context, body).",
     "  - `context.WithTimeout` lets me limit how long the DB query is allowed to run (here: 5 seconds).",
@@ -154,26 +164,15 @@
     "",
     "---",
     "### 7. JSON API Endpoint",
+    {
+      "type": "image",
+      "src": "go_pics/todos-endpoint-browser.png",
+      "alt": "Browser showing the JSON response from the /todos endpoint"
+    },
     "- At the end of the handler, I:",
     "  - set the `Content-Type` header to `application/json`,",
     "  - use `json.NewEncoder(w).Encode(todos)` to serialize the slice of `Todo` structs into JSON and stream it directly into the HTTP response.",
-    "- A sample response from `GET /todos` looks like:",
-    "  ```json",
-    "  [",
-    "    {",
-    "      \"id\": 1,",
-    "      \"title\": \"Cloud lernen\",",
-    "      \"done\": false,",
-    "      \"created_at\": \"2025-12-06T10:15:00Z\"",
-    "    },",
-    "    {",
-    "      \"id\": 2,",
-    "      \"title\": \"Go + PostgreSQL verbinden\",",
-    "      \"done\": false,",
-    "      \"created_at\": \"2025-12-06T10:20:00Z\"",
-    "    }",
-    "  ]",
-    "  ```",
+    "- A request to `GET /todos` now returns a JSON array of todos that can be consumed by a browser, `curl`, or any frontend framework.",
     "",
     "---",
     "### 8. Learning Takeaways",
@@ -189,4 +188,5 @@
   ],
   "date": "2025-12-06"
 }
+
 ]
