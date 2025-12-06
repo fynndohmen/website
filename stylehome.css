@@ -195,7 +195,7 @@ nav ul li a:hover {
     margin: 10px 0;
     color: #e0e0e0;
     line-height: 1.6;
-    font-size: calc(1rem + 5px);   /* um 5px größer */
+    font-size: 1rem;   /* um 5px größer */
 }
 
 .linux-page .blog-post small {
@@ -251,3 +251,4 @@ nav ul li a:hover {
 
 
 sieh dir die css an, liegts an ihr?
+
