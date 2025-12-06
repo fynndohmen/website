@@ -1,5 +1,5 @@
 [
-{
+  {
   "title": "Turning an Old PC into a Go + PostgreSQL Cloud Lab",
   "content": [
     "This project is my first real step into the world of backend development, cloud-like setups, and databases using Go. I took an old i3 PC with 4GB RAM, installed Ubuntu Server on it, and turned it into a small home lab that exposes a JSON API built with Go and backed by a PostgreSQL database.",
@@ -57,8 +57,13 @@
     "### 3. Go Project Structure & Database Connection",
     {
       "type": "image",
-      "src": "go_pics/go-code-todos-handler.png",
-      "alt": "Go code for the main function and getTodosHandler"
+      "src": "go_pics/go-code-part1.png",
+      "alt": "First part of the Go code: imports, Todo struct, main and database setup"
+    },
+    {
+      "type": "image",
+      "src": "go_pics/go-code-part2.png",
+      "alt": "Second part of the Go code: getTodosHandler with context, query, loop and JSON response"
     },
     "- On the Go side, I created a small `main.go` with:",
     "  - `package main` as the entry point.",
@@ -188,5 +193,4 @@
   ],
   "date": "2025-12-06"
 }
-
 ]
