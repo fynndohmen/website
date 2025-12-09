@@ -213,163 +213,173 @@
     "- A tiny in-memory session store using a map",
     "- A `session_id` cookie that the browser sends with every request",
     "- A `/logout` route that kills the session and clears the cookie.",
-
-    {
-      "type": "image",
-      "src": "go_pics/login_flow_overview.png",
-      "alt": "Diagram of the login flow: browser -> /login -> DB lookup -> session + cookie -> protected /todos"
-    },
-
-    "This post walks through those pieces step by step, focusing on the backend logic rather than UI polish.",
+    "The hero screenshot at the top of the post (`go_login_overview.png`) shows my setup: VS Code with `main.go` on the left and the login page running in the browser on the right.",
 
     "---",
-    "### 1. Users Table in PostgreSQL",
+    "### 1. Users Table and Password Hashes",
     "First, I added a `users` table to my existing `cloudlab` database. The important part is that I store a password hash, not the raw password.",
-    "The DDL for the `users` table (columns like id, username, password_hash, created_at) can be seen in the screenshot below. I highlighted the new table definition compared to my previous setup.",
+    "The screenshot below shows the users table in `psql`: the table definition with `id`, `username`, `password_hash`, `created_at`, plus one row for the user `fynn` with a long bcrypt hash in the `password_hash` column.",
 
     {
       "type": "image",
       "src": "go_pics/users_table_psql.png",
-      "alt": "psql screenshot showing the users table with id, username and password_hash columns"
+      "alt": "psql screenshot showing the users table with id, username and password_hash columns and one row for user fynn"
     },
 
-    "On the screenshot you can see one user in the `users` table, with a long bcrypt hash string in the `password_hash` column instead of a plaintext password.",
-
-    "---",
-    "### 2. Hashing Passwords with bcrypt",
-    "To avoid storing plaintext passwords I use `golang.org/x/crypto/bcrypt`.",
-    "I wrote a tiny helper program in Go that takes a hard-coded password, hashes it with bcrypt and prints the result to the terminal. That printed hash is what I then copy into the `password_hash` column in PostgreSQL.",
-    "The screenshot below shows the small helper file in VS Code: it imports the bcrypt package, defines a password string, calls the bcrypt hash function and prints the resulting hash. The core bcrypt-related lines are highlighted.",
+    "To generate these hashes I wrote a tiny helper program in Go. It takes a string password, calls bcrypt to hash it and prints the result. I run this once, copy the output and paste it into the `password_hash` column in PostgreSQL.",
+    "The next screenshot shows this helper file in VS Code:",
 
     {
       "type": "image",
       "src": "go_pics/bcrypt_helper_code.png",
-      "alt": "VS Code screenshot of the small Go helper that generates a bcrypt hash from a password"
+      "alt": "VS Code screenshot of a small Go program that imports bcrypt, defines a password, calls GenerateFromPassword and prints the resulting hash"
     },
 
-    "Key idea:",
-    "- I never store the raw password in the database.",
-    "- I only store the bcrypt hash string that the helper program prints.",
-    "- During login, I use bcrypt's comparison function in the Go code to check whether the entered password matches the stored hash.",
+    "Inside my main Go server, I had to pull in bcrypt as a new dependency. In the import block of `main.go` I added one extra line for the bcrypt package, which is highlighted in the following screenshot:",
+
+    {
+      "type": "image",
+      "src": "go_pics/bcrypt0.png",
+      "alt": "VS Code screenshot of the import block in main.go with the golang.org/x/crypto/bcrypt import highlighted"
+    },
+
+    "In the login handler I then use bcrypt to compare the password the user typed with the stored hash from the database. Instead of comparing plain strings, the handler now calls `bcrypt.CompareHashAndPassword`. If that returns an error, the login fails.",
+    "The bcrypt comparison is visible in this snippet from the POST branch of the login handler (highlighted in red in the screenshot):",
+
+    {
+      "type": "image",
+      "src": "go_pics/bcrypt1.png",
+      "alt": "VS Code screenshot of the login handler section where bcrypt.CompareHashAndPassword is called to verify the password"
+    },
 
     "---",
-    "### 3. The Login HTML Form",
-    "For the UI I kept things minimal: a simple HTML form served from `static/login.html`.",
-    "It contains inputs for username and password and posts to `/login` using the POST method. There is also a separate CSS file to style the page a bit.",
-    "The screenshot below shows the relevant part of the HTML file in my editor: the `<form>` element with `method=\"POST\"` and `action=\"/login\"`, the labels and input fields for `username` and `password`, and the login button. The form section is highlighted so you can see exactly what the browser submits.",
+    "### 2. Login Page: HTML, CSS and Routing",
+    "For the UI I kept things minimal: a simple HTML form served from `static/login.html` plus a small CSS file for styling.",
+    "The HTML file defines a basic page with a title, a link to `static/login.css` and a form that posts to `/login` using the POST method. The form has two fields (`username` and `password`) and a submit button.",
+    "The next screenshot shows the relevant part of `login.html` in VS Code:",
 
     {
       "type": "image",
       "src": "go_pics/login_html_code.png",
-      "alt": "VS Code screenshot showing the HTML code of the login page with a username and password form"
+      "alt": "VS Code screenshot of login.html showing the Cloud Login title and the POST form with username and password inputs"
     },
 
-    "When I open `/login` in the browser, I see the styled form with two fields and a login button as seen here:",
+    "When I point my browser at `/login`, I see the styled login box with two input fields and a login button, as shown here:",
 
     {
       "type": "image",
       "src": "go_pics/login_page_browser.png",
-      "alt": "Browser screenshot of the simple login form with username and password input"
+      "alt": "Browser screenshot of the Cloud Login page with username and password fields and a blue login button"
     },
 
-    "---",
-    "### 4. The Login Handler in Go (GET + POST)",
-    "On the Go side I added a `loginPageHandler` that handles both the GET and the POST method.",
-    "- For GET it simply serves the `static/login.html` file.",
-    "- For POST it parses the form, reads `username` and `password`, looks up the user in the database by username and then compares the entered password with the stored bcrypt hash.",
-    "The screenshot below shows the core part of `loginPageHandler` in `main.go`: the `switch` on `r.Method`, the GET branch that serves the HTML, and the POST branch that calls `ParseForm`, queries the `users` table and calls the bcrypt comparison. The new login-related lines are highlighted so you can distinguish them from existing code.",
+    "On the Go side, I needed to wire the static files and the new `/login` route into `main()`. I use `http.FileServer` to serve everything under `./static` and then register three handlers: `/login`, `/todos` and `/logout`.",
+    "The screenshot below shows the part of `main()` where the file server and the three routes are registered. The new lines are highlighted:",
 
     {
       "type": "image",
-      "src": "go_pics/login_handler_code.png",
-      "alt": "VS Code screenshot of the loginPageHandler showing GET and POST branches and bcrypt comparison"
+      "src": "go_pics/login0.png",
+      "alt": "VS Code screenshot of main.go showing the http.FileServer for ./static and the HandleFunc registrations for /login, /todos and /logout, with this block highlighted"
     },
 
-    "If the login fails, the handler returns an HTTP 401. If it succeeds, the next step is to create a session and set a cookie, which you will see in the next section.",
-
-    "---",
-    "### 5. Sessions: Map + Random Session IDs + Cookies",
-    "To remember that a client is logged in, I added a very small in-memory session store and a helper to generate secure session IDs.",
-    "At the top of `main.go` I introduced a global map from session IDs to user IDs, and a function that uses a crypto-safe random source to generate a random byte slice and convert it to a hex string.",
-    "The screenshot below shows the new global `sessions` map and the `generateSessionID` helper function in VS Code. The new declarations are highlighted so you can clearly see what was added compared to the initial version of the project.",
+    "The core logic for handling logins lives in `loginPageHandler`. It acts as both a GET and a POST handler:",
+    "- `GET /login` serves the HTML file.",
+    "- `POST /login` reads the form fields, queries the `users` table and then runs the bcrypt check.",
+    "The next screenshot shows the upper part of `loginPageHandler`: the method switch, the GET branch that serves `static/login.html` and the POST branch that parses the form, reads `username` and `password` and performs the database query. This is all highlighted so you can see how the handler is structured:",
 
     {
       "type": "image",
-      "src": "go_pics/session_map_and_generator.png",
-      "alt": "VS Code screenshot showing the global sessions map and the generateSessionID function"
+      "src": "go_pics/login1.png",
+      "alt": "VS Code screenshot of the upper part of loginPageHandler showing the method switch, the GET branch and the POST branch that parses the form and queries the users table"
     },
 
-    "After a successful login in the POST branch of the login handler, I:",
-    "- generate a new random session ID,",
+    "At the end of the POST branch, once the password has been verified, the handler creates a session and sets a cookie before redirecting to `/todos`. That session and cookie logic is part of the next section, but you can already see it in context here:",
+
+    {
+      "type": "image",
+      "src": "go_pics/login2.png",
+      "alt": "VS Code screenshot of the lower part of loginPageHandler showing the code that generates a session ID, stores it in the map, sets the session_id cookie and redirects to /todos"
+    },
+
+    "---",
+    "### 3. Sessions and Cookies in Go",
+    "To remember that a client is logged in, I added a very small in-memory session store and a helper to generate secure random session IDs.",
+    "First, I pulled in two extra packages in the import block of `main.go`: `crypto/rand` for secure random bytes and `encoding/hex` to turn them into a human-readable string. These imports are highlighted in the following screenshot:",
+
+    {
+      "type": "image",
+      "src": "go_pics/cookies&sessions0.png",
+      "alt": "VS Code screenshot of the imports in main.go with crypto/rand and encoding/hex highlighted"
+    },
+
+    "Then I declared a global map `sessions` and added a function `generateSessionID()` which uses `rand.Read` to fill a 32-byte slice with random data and encodes it as a hex string. This gives me a random session ID that is hard to guess.",
+    "The next screenshot shows the new global `sessions` map and the `generateSessionID` helper directly under the `Todo` struct. The new code is outlined in red:",
+
+    {
+      "type": "image",
+      "src": "go_pics/cookies&sessions1.png",
+      "alt": "VS Code screenshot showing the global sessions map and the generateSessionID function highlighted under the Todo struct"
+    },
+
+    "The final step is to create a session after a successful login and send it back to the browser in a cookie. In the POST branch of `loginPageHandler`, after bcrypt has accepted the password, I:",
+    "- call `generateSessionID()` to get a new ID,",
     "- store `sessionID -> userID` in the `sessions` map,",
-    "- and send a `session_id` cookie back to the browser.",
-    "The screenshot below shows the small block of code inside the login handler where the session ID is generated, stored in the map and written into an `HttpOnly` cookie via `http.SetCookie`. The session-related lines are highlighted and the surrounding context is shown for orientation.",
+    "- and send a `session_id` cookie with `HttpOnly` set to true.",
+    "The screenshot below shows this block of code inside the login handler, with the new session-related lines highlighted:",
 
     {
       "type": "image",
-      "src": "go_pics/session_creation_and_setcookie.png",
-      "alt": "VS Code screenshot showing the session creation code and the call to http.SetCookie with session_id"
+      "src": "go_pics/cookies&sessions2.png",
+      "alt": "VS Code screenshot of loginPageHandler where the session ID is generated, stored in the sessions map, and written into an HttpOnly session_id cookie, all highlighted"
     },
 
-    "In the browser devtools you can see the resulting `session_id` cookie after a successful login:",
-
-    {
-      "type": "image",
-      "src": "go_pics/session_cookie_devtools.png",
-      "alt": "Browser devtools screenshot showing the session_id cookie set after a successful login"
-    },
+    "From this point on, every request from that browser will carry the `session_id` cookie. The next step is to protect `/todos` using that information.",
 
     "---",
-    "### 6. Protecting `/todos` with a Session Check",
-    "Originally, `/todos` was wide open. Now I want it to only work for logged-in users who have a valid session.",
+    "### 4. Protecting `/todos` with a Session Check",
+    "Originally, `/todos` was wide open: anyone who knew the URL could hit it and see the JSON response. Now I want it to only work for logged-in users who have a valid session.",
     "To achieve that, I added a session check at the very top of `getTodosHandler`:",
-    "- It first tries to read the `session_id` cookie from the request.",
+    "- It tries to read the `session_id` cookie from the request.",
     "- If there is no cookie, it redirects to `/login`.",
     "- If there is a cookie, it looks up the session ID in the `sessions` map.",
     "- If the session ID is unknown, it also redirects to `/login`.",
     "Only if both checks pass does the handler continue with the existing database query and JSON response.",
-    "The screenshot below shows the top part of `getTodosHandler` in VS Code: the newly added session cookie check (highlighted) and a bit of the existing DB + JSON logic underneath so you can see where the new code is inserted in the flow.",
+    "The next screenshot shows the top of `getTodosHandler`: the new cookie and session checks are highlighted in red, with the existing database and JSON code visible underneath for context:",
 
     {
       "type": "image",
-      "src": "go_pics/gettodos_handler_with_session_check.png",
-      "alt": "VS Code screenshot of getTodosHandler showing the session cookie check before querying the database"
+      "src": "go_pics/protecttodos.png",
+      "alt": "VS Code screenshot of getTodosHandler showing the new session_id cookie lookup and sessions map check highlighted above the existing database query and JSON response code"
     },
 
-    "When I now try to open `/todos` directly in a fresh browser (without logging in first), I get redirected to the login page instead of seeing the JSON:",
-
-    {
-      "type": "image",
-      "src": "go_pics/todos_redirect_to_login.png",
-      "alt": "Browser screenshot of trying to open /todos directly and being redirected to the login page"
-    },
+    "In practice this means: if I open a fresh browser (no cookies) and try to access `/todos` directly, the server responds with a redirect to `/login`. Only after logging in and receiving a valid `session_id` cookie can I successfully call `/todos`.",
 
     "---",
-    "### 7. Logout: Killing the Session and the Cookie",
-    "To avoid staying logged in forever in one browser session, I also added a simple `/logout` route.",
-    "The logout handler does three things:",
-    "- Tries to read the `session_id` cookie.",
+    "### 5. Logout: Killing the Session and Clearing the Cookie",
+    "To avoid staying logged in forever in one browser session, I added a simple `/logout` route that cleans up both the server-side session and the client-side cookie.",
+    "First, I registered the new route in `main()` alongside the existing `/login` and `/todos` handlers. The highlighted line in the next screenshot shows the `HandleFunc` call for `/logout`:",
+
+    {
+      "type": "image",
+      "src": "go_pics/logout0.png",
+      "alt": "VS Code screenshot of main.go with the http.HandleFunc call that registers the /logout route highlighted"
+    },
+
+    "The actual logic lives in `logoutHandler`. It does three things:",
+    "- Tries to read the `session_id` cookie from the request.",
     "- If it exists, removes the corresponding entry from the `sessions` map.",
-    "- Sends a new `session_id` cookie with an empty value and a negative MaxAge so that the browser deletes it.",
-    "The screenshot below shows the `logoutHandler` in `main.go`, including the lines that delete the session from the map and clear the cookie. The new logout-related code is highlighted, with a small amount of context around it.",
+    "- Sends a new `session_id` cookie with an empty value and `MaxAge: -1` so that the browser deletes it.",
+    "The screenshot below shows the whole `logoutHandler` function, with its core logic clearly visible:",
 
     {
       "type": "image",
-      "src": "go_pics/logout_handler_code.png",
-      "alt": "VS Code screenshot showing the Go logoutHandler that deletes the session and clears the cookie"
+      "src": "go_pics/logout1.png",
+      "alt": "VS Code screenshot of logoutHandler showing how the session_id cookie is read, the sessions entry deleted, a new empty cookie with MaxAge -1 set, and a redirect to /login performed"
     },
 
-    "In `main()` I also register the `/logout` route so that visiting that path triggers the handler. After calling `/logout` in the browser, a request to `/todos` again results in a redirect to `/login`, because the session and cookie are gone.",
-    "The screenshot below shows this flow in the browser: first hitting `/logout`, then being redirected back to the login page.",
-
-    {
-      "type": "image",
-      "src": "go_pics/logout_flow.png",
-      "alt": "Browser screenshots showing visiting /logout and then being redirected back to the login page"
-    },
+    "After visiting `/logout` in the browser, I am redirected back to `/login`. Any further request to `/todos` behaves as if I had never logged in: the handler checks the cookie and the sessions map, finds nothing valid and responds with another redirect to `/login`.",
 
     "---",
-    "### 8. Limitations & Next Steps",
+    "### 6. Limitations & Next Steps",
     "This is still a learning project, so there are a few things I am aware of:",
     "- Sessions are stored in memory. When I restart the Go server, all sessions are gone and existing cookies become invalid.",
     "- I don't use HTTPS yet. For something exposed to the public internet I would put a reverse proxy (like Caddy or Nginx) with TLS in front and set the `Secure` flag on the cookie.",
@@ -386,6 +396,8 @@
     "- and move sessions from the in-memory map into the database."
   ],
   "date": "2025-12-09"
+}
+
 }
 
 
