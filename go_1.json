@@ -192,5 +192,200 @@
     "- This is just the starting point. From here I can extend the API with `POST /todos`, authentication, more tables, or even deploy a similar Go + PostgreSQL setup on a real cloud provider later."
   ],
   "date": "2025-12-06"
+},
+  {
+  "title": "Adding Login, bcrypt and Sessions to My Go + PostgreSQL Cloud Lab",
+  "content": [
+    "This post builds on top of my first Go + PostgreSQL cloud lab, where I exposed a /todos endpoint backed by a Postgres database.",
+    "Here I turn that open endpoint into a simple authenticated mini-app: I add a users table, hash passwords with bcrypt, create sessions with secure random IDs and cookies, protect /todos so it only works after login, and add a basic logout route."
+  ],
+  "images": [
+    "go_pics/go_login_overview.png"
+  ],
+  "description": [
+    "### Context: From Open `/todos` to a Real Login",
+    "In the first version of my Go cloud lab, `/todos` was completely open: if you knew the server IP and port, you could just call `/todos` and get the JSON list of todos.",
+    "That was okay for a private learning setup, but not for anything that even remotely looks like a real app.",
+    "In this iteration I added:",
+    "- A `users` table in PostgreSQL",
+    "- Password hashing using bcrypt (no more plaintext passwords in the DB)",
+    "- A `POST /login` handler in Go that checks username + password",
+    "- A tiny in-memory session store using a map",
+    "- A `session_id` cookie that the browser sends with every request",
+    "- A `/logout` route that kills the session and clears the cookie.",
+
+    {
+      "type": "image",
+      "src": "go_pics/login_flow_overview.png",
+      "alt": "Diagram of the login flow: browser -> /login -> DB lookup -> session + cookie -> protected /todos"
+    },
+
+    "This post walks through those pieces step by step, focusing on the backend logic rather than UI polish.",
+
+    "---",
+    "### 1. Users Table in PostgreSQL",
+    "First, I added a `users` table to my existing `cloudlab` database. The important part is that I store a password hash, not the raw password.",
+    "The DDL for the `users` table (columns like id, username, password_hash, created_at) can be seen in the screenshot below.",
+
+    {
+      "type": "image",
+      "src": "go_pics/users_table_psql.png",
+      "alt": "psql screenshot showing the users table with id, username and password_hash columns"
+    },
+
+    "On the screenshot you can see one user in the `users` table, with a long bcrypt hash string in the `password_hash` column instead of a plaintext password.",
+
+    "---",
+    "### 2. Hashing Passwords with bcrypt",
+    "To avoid storing plaintext passwords I use `golang.org/x/crypto/bcrypt`.",
+    "I wrote a tiny helper program in Go that takes a hard-coded password, hashes it with bcrypt and prints the result to the terminal. That printed hash is what I then copy into the `password_hash` column in PostgreSQL.",
+    "The full helper code, including the bcrypt import, the password variable, the call to the hash function and printing the resulting hash, is shown in the screenshot below.",
+
+    {
+      "type": "image",
+      "src": "go_pics/bcrypt_helper_code.png",
+      "alt": "VS Code screenshot of the small Go helper that generates a bcrypt hash from a password"
+    },
+
+    "Key idea:",
+    "- I never store the raw password in the database.",
+    "- I only store the bcrypt hash string that the helper program prints.",
+    "- During login, I use bcrypt's comparison function in the Go code to check whether the entered password matches the stored hash.",
+
+    "---",
+    "### 3. The Login HTML Form",
+    "For the UI I kept things minimal: a simple HTML form served from `static/login.html`.",
+    "It contains inputs for username and password and posts to `/login` using the POST method. There is also a separate CSS file to style the page a bit.",
+    "The complete HTML structure (head, link to the CSS, form element, labels and inputs) is visible in the following screenshot from my editor:",
+
+    {
+      "type": "image",
+      "src": "go_pics/login_html_code.png",
+      "alt": "VS Code screenshot showing the HTML code of the login page with a username and password form"
+    },
+
+    "When I open `/login` in the browser, I see the styled form with two fields and a login button as seen here:",
+
+    {
+      "type": "image",
+      "src": "go_pics/login_page_browser.png",
+      "alt": "Browser screenshot of the simple login form with username and password input"
+    },
+
+    "---",
+    "### 4. The Login Handler in Go (GET + POST)",
+    "On the Go side I added a `loginPageHandler` that handles both the GET and the POST method.",
+    "- For GET it simply serves the `static/login.html` file.",
+    "- For POST it parses the form, reads `username` and `password`, looks up the user in the database by username and then compares the entered password with the stored bcrypt hash.",
+    "The full Go handler, including the switch on `r.Method`, the database query for `id` and `password_hash`, the bcrypt comparison and the error handling, is shown in this screenshot:",
+
+    {
+      "type": "image",
+      "src": "go_pics/login_handler_code.png",
+      "alt": "VS Code screenshot of the loginPageHandler showing GET and POST branches and bcrypt comparison"
+    },
+
+    "If the login fails, the handler returns an HTTP 401. If it succeeds, the next step is to create a session and set a cookie, which you will see in the next section.",
+
+    "---",
+    "### 5. Sessions: Map + Random Session IDs + Cookies",
+    "To remember that a client is logged in, I added a very small in-memory session store and a helper to generate secure session IDs.",
+    "At the top of `main.go` I introduced a global map from session IDs to user IDs, and a function that uses a crypto-safe random source to generate a random byte slice and convert it to a hex string.",
+    "Both the session map declaration and the session ID generator function are visible in the screenshot below:",
+
+    {
+      "type": "image",
+      "src": "go_pics/session_map_and_generator.png",
+      "alt": "VS Code screenshot showing the global sessions map and the generateSessionID function"
+    },
+
+    "After a successful login in the POST branch of the login handler, I:",
+    "- generate a new random session ID,",
+    "- store `sessionID -> userID` in the `sessions` map,",
+    "- and send a `session_id` cookie back to the browser.",
+    "The code that does this (session ID generation, error handling, map assignment and the `http.SetCookie` call with `HttpOnly` set to true) is shown in this screenshot:",
+
+    {
+      "type": "image",
+      "src": "go_pics/session_creation_and_setcookie.png",
+      "alt": "VS Code screenshot showing the session creation code and the call to http.SetCookie with session_id"
+    },
+
+    "In the browser devtools you can see the resulting `session_id` cookie after a successful login:",
+
+    {
+      "type": "image",
+      "src": "go_pics/session_cookie_devtools.png",
+      "alt": "Browser devtools screenshot showing the session_id cookie set after a successful login"
+    },
+
+    "---",
+    "### 6. Protecting `/todos` with a Session Check",
+    "Originally, `/todos` was wide open. Now I want it to only work for logged-in users who have a valid session.",
+    "To achieve that, I added a session check at the very top of `getTodosHandler`:",
+    "- It first tries to read the `session_id` cookie from the request.",
+    "- If there is no cookie, it redirects to `/login`.",
+    "- If there is a cookie, it looks up the session ID in the `sessions` map.",
+    "- If the session ID is unknown, it also redirects to `/login`.",
+    "Only if both checks pass does the handler continue with the existing database query and JSON response.",
+    "The full handler with the new session-checking code at the top and the existing DB + JSON logic below is shown in this screenshot:",
+
+    {
+      "type": "image",
+      "src": "go_pics/gettodos_handler_with_session_check.png",
+      "alt": "VS Code screenshot of getTodosHandler showing the session cookie check before querying the database"
+    },
+
+    "When I now try to open `/todos` directly in a fresh browser (without logging in first), I get redirected to the login page instead of seeing the JSON:",
+
+    {
+      "type": "image",
+      "src": "go_pics/todos_redirect_to_login.png",
+      "alt": "Browser screenshot of trying to open /todos directly and being redirected to the login page"
+    },
+
+    "---",
+    "### 7. Logout: Killing the Session and the Cookie",
+    "To avoid staying logged in forever in one browser session, I also added a simple `/logout` route.",
+    "The logout handler does three things:",
+    "- Tries to read the `session_id` cookie.",
+    "- If it exists, removes the corresponding entry from the `sessions` map.",
+    "- Sends a new `session_id` cookie with an empty value and a negative MaxAge so that the browser deletes it.",
+    "The complete `logoutHandler` implementation is visible in this screenshot:",
+
+    {
+      "type": "image",
+      "src": "go_pics/logout_handler_code.png",
+      "alt": "VS Code screenshot showing the Go logoutHandler that deletes the session and clears the cookie"
+    },
+
+    "In `main()` I wired it up with a simple handler registration for `/logout`, which is also visible in the screenshot.",
+    "Right now I trigger the logout by manually visiting `/logout` in the browser. After that, if I try to access `/todos` again, I get redirected back to `/login` because the session and cookie are gone.",
+
+    {
+      "type": "image",
+      "src": "go_pics/logout_flow.png",
+      "alt": "Browser screenshots showing visiting /logout and then being redirected back to the login page"
+    },
+
+    "---",
+    "### 8. Limitations & Next Steps",
+    "This is still a learning project, so there are a few things I am aware of:",
+    "- Sessions are stored in memory. When I restart the Go server, all sessions are gone and existing cookies become invalid.",
+    "- I don't use HTTPS yet. For something exposed to the public internet I would put a reverse proxy (like Caddy or Nginx) with TLS in front and set the `Secure` flag on the cookie.",
+    "- There is no rate limiting, CSRF protection or per-user todos yet.",
+    "",
+    "But for a personal cloud lab running on an old Linux box, this setup already feels much more like a real app compared to the original open `/todos` endpoint:",
+    "- passwords are hashed with bcrypt,",
+    "- `/todos` is only reachable after a successful login,",
+    "- and I can explicitly log out to drop the session.",
+    "",
+    "In the next iteration I might:",
+    "- build a small HTML dashboard that consumes the `/todos` JSON and shows it nicely,",
+    "- add per-user todos by linking the `todos` table to `users`,",
+    "- and move sessions from the in-memory map into the database."
+  ],
+  "date": "2025-12-09"
 }
+
 ]
