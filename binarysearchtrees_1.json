@@ -286,6 +286,62 @@
     "  - O(n) for the space required to actually store the reconstructed BST with `n` nodes."
   ],
   "date": "2025-06-20"
+},
+    {
+  "title": "Binary Search Trees – Fundamentals, Use Cases, Pros and Cons",
+  "content": [
+    "A Binary Search Tree (BST) is a binary tree that keeps its elements in sorted order, enabling efficient searches, insertions and deletions.",
+    "This post explains what BSTs are, when to use them, their advantages and disadvantages, and the time and space complexity of key operations."
+  ],
+  "images": [],
+  "description": [
+    "## What is a Binary Search Tree?",
+    "A Binary Search Tree (BST) is a binary tree where each node stores a key and satisfies the **BST property**: all keys in the left subtree are strictly smaller than the node's key, and all keys in the right subtree are strictly larger. This ordering allows efficient search operations by repeatedly deciding whether to go left or right.",
+    "",
+    "In many discussions, BSTs are assumed to be **balanced** (for example AVL trees or Red-Black trees), meaning the height of the tree is O(log n). A plain, unbalanced BST can degrade to a skewed, almost linear structure with height O(n) in the worst case, which directly affects performance.",
+    "",
+    "## Typical use cases",
+    "- Storing a dynamic set of values that must remain **sorted**.",
+    "- Implementing ordered collections like **sets** and **maps** with efficient insert/delete/search.",
+    "- Quickly finding the **minimum, maximum, predecessor, successor** of elements.",
+    "- Implementing operations like \"find the smallest element greater than x\" or \"iterate all keys in sorted order\".",
+    "- Situations where you need **ordered iteration** and not just membership tests (where you might choose a hash table instead).",
+    "",
+    "## Advantages of Binary Search Trees",
+    "- **Efficient search, insert and delete** (balanced BST): O(log n) time on average.",
+    "- **Sorted order is built in:** inorder traversal visits keys from smallest to largest.",
+    "- Supports powerful operations such as finding **min/max**, **predecessor/successor**, and range queries (e.g. \"all keys between a and b\").",
+    "- Easy to traverse in different orders (inorder, preorder, postorder) for various algorithmic needs.",
+    "",
+    "## Disadvantages of Binary Search Trees",
+    "- **Unbalanced BSTs can be slow:** in the worst case (already sorted inserts) the height becomes O(n), and search/insert/delete degrade to O(n).",
+    "- Implementation of **balanced** BSTs (AVL, Red-Black, etc.) is more complex than arrays or linked lists.",
+    "- Pointer-heavy structure: usually more memory overhead than arrays or compact hash tables.",
+    "- Poorer cache locality than arrays, because nodes are often scattered in memory.",
+    "",
+    "## Comparison to arrays, linked lists and hash tables",
+    "- **Arrays:** arrays offer O(1) random access by index but O(n) insert/delete in the middle; BSTs offer O(log n) search/insert/delete by key but do not support O(1) random access.",
+    "- **Linked lists:** linked lists are good at insert/delete when you already have a pointer to a node, but searching is O(n); BSTs give you O(log n) search, insert and delete (when balanced) and maintain sorted order.",
+    "- **Hash tables:** hash tables provide average O(1) search/insert/delete but do not maintain keys in sorted order; BSTs are slower per operation (O(log n)) but preserve ordering and support operations like predecessor/successor and sorted iteration.",
+    "",
+    "## Key operations and complexities (n = number of nodes)",
+    "Let h be the height of the tree.",
+    "- In a **balanced BST**, h = O(log n).",
+    "- In the **worst case** (unbalanced), h = O(n).",
+    "",
+    "- **search(key)** – O(h) time, typically O(log n) for balanced trees and O(n) in the worst case; extra space O(1) for an iterative implementation or O(h) for a recursive one.",
+    "- **insert(key)** – O(h) time: find the correct position with a search, then attach a new node. For balanced trees this is O(log n), worst case O(n); extra space O(1) per insert (plus O(1) for rotations in self-balancing trees).",
+    "- **delete(key)** – O(h) time: locate the node, restructure the tree if needed (for example replacing with inorder successor), and possibly rebalance; extra space O(1) iterative or O(h) recursive.",
+    "- **findMin() / findMax()** – O(h) time: follow left pointers down to the minimum, right pointers to the maximum; O(1) extra space if implemented iteratively.",
+    "- **successor(key) / predecessor(key)** – O(h) time: typically follow parent pointers or walk down from the root again; extra space O(1) iterative or O(h) recursive.",
+    "- **inorder / preorder / postorder traversal** – O(n) time to visit every node once; extra space O(h) due to recursion or O(h) for an explicit stack in an iterative version.",
+    "",
+    "## Summary",
+    "Binary Search Trees provide a powerful way to maintain a dynamic, sorted set of keys with reasonably efficient operations. When balanced, they support search, insert and delete in O(log n) time and enable operations that arrays, linked lists and hash tables cannot provide as naturally, such as efficient predecessor/successor queries and ordered iteration. However, they require careful implementation to avoid becoming unbalanced and typically use more memory and have poorer cache locality than array-based structures."
+  ],
+  "date": "2025-12-10",
+  "pinned": true
 }
+
 
 ]
