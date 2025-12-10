@@ -37,7 +37,11 @@
                 }
                 const data = await response.json();
                 allPosts = allPosts.concat(data);
+
+                // Sort all posts by date (newest first)
                 allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                // Render posts with pinned ones on top
                 renderPosts(allPosts);
             } catch (error) {
                 console.error('Error loading blog posts:', error);
@@ -47,34 +51,36 @@
             }
         }
 
-        function renderPosts(posts) {
-            blogContainer.innerHTML = '';
-            posts.forEach(post => {
-                const postElement = document.createElement('div');
-                postElement.classList.add('blog-post');
+        // Helper to create a single post element
+        function createPostElement(post) {
+            const postElement = document.createElement('div');
+            postElement.classList.add('blog-post');
 
-                // Title with Icon
-                const titleContainer = document.createElement('div');
-                titleContainer.classList.add('post-title');
+            // Title with Icon
+            const titleContainer = document.createElement('div');
+            titleContainer.classList.add('post-title');
 
-                const icon = document.createElement('img');
-                icon.src = post.icon || "website_pics/bst_logo.png"; // fallback icon
-                icon.alt = "Category Icon";
-                icon.classList.add('title-icon');
+            const icon = document.createElement('img');
+            icon.src = post.icon || "website_pics/bst_logo.png"; // fallback icon
+            icon.alt = "Category Icon";
+            icon.classList.add('title-icon');
 
-                const title = document.createElement('h2');
-                title.textContent = post.title;
+            const title = document.createElement('h2');
+            title.textContent = post.title;
 
-                titleContainer.appendChild(icon);
-                titleContainer.appendChild(title);
-                postElement.appendChild(titleContainer);
+            titleContainer.appendChild(icon);
+            titleContainer.appendChild(title);
+            postElement.appendChild(titleContainer);
 
-                // Short description
+            // Short description
+            if (post.content && post.content.length > 0) {
                 const shortDescription = document.createElement('p');
                 shortDescription.textContent = post.content[0];
                 postElement.appendChild(shortDescription);
+            }
 
-                // Images
+            // Images
+            if (post.images && Array.isArray(post.images)) {
                 post.images.forEach(image => {
                     const img = document.createElement('img');
                     img.src = image;
@@ -82,19 +88,39 @@
                     img.classList.add('blog-image');
                     postElement.appendChild(img);
                 });
+            }
 
-                // Detailed description
+            // Detailed description
+            if (post.description && Array.isArray(post.description)) {
                 post.description.forEach(paragraph => {
                     const para = document.createElement('p');
                     para.textContent = paragraph;
                     postElement.appendChild(para);
                 });
+            }
 
-                // Date
-                //const date = document.createElement('small');
-                //date.textContent = `Posted on: ${post.date}`;
-                //postElement.appendChild(date);
+            // Date (optional)
+            // const date = document.createElement('small');
+            // date.textContent = `Posted on: ${post.date}`;
+            // postElement.appendChild(date);
 
+            return postElement;
+        }
+
+        // Render pinned posts first, then the rest
+        function renderPosts(posts) {
+            blogContainer.innerHTML = '';
+
+            const pinnedPosts = posts.filter(post => post.pinned);
+            const regularPosts = posts.filter(post => !post.pinned);
+
+            pinnedPosts.forEach(post => {
+                const postElement = createPostElement(post);
+                blogContainer.appendChild(postElement);
+            });
+
+            regularPosts.forEach(post => {
+                const postElement = createPostElement(post);
                 blogContainer.appendChild(postElement);
             });
         }
@@ -109,6 +135,7 @@
             }
         }
 
+        // To pin a post, add "pinned": true to that post's JSON object
         fetchPosts(currentPage);
         window.addEventListener('scroll', handleScroll);
     </script>
