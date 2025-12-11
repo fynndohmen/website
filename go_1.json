@@ -327,6 +327,79 @@
     "- and move sessions from the in-memory map into the database."
   ],
   "date": "2025-12-09"
+},
+  {
+  "title": "Running my Go Cloudlab as a systemd Service",
+  "content": [
+    "After building my first Go + PostgreSQL cloud lab, I still had to start the server manually with `go run .` or by running the binary. In this mini step I turned my Go program into a proper systemd service so it starts automatically when the server boots.",
+    "Now I can just press the power button on my old Ubuntu box and my Go backend comes up on port 8080 without any manual login."
+  ],
+  "images": [
+    "go_pics/cloudlab_service_status.png"
+  ],
+  "description": [
+    "### Goal",
+    "- Make the Go HTTP server start automatically on boot, just like PostgreSQL.",
+    "- Run it as a normal Linux service managed by **systemd**, not as a random process started in an SSH session.",
+    "",
+    "---",
+    "### 1. Build the Go binary",
+    "On the server I went into my Go project folder and built a binary called `cloudlab`:",
+    "- `cd ~/go-playground`",
+    "- `go build -o cloudlab`",
+    "- Quick test with `./cloudlab` to make sure it still runs on `:8080`.",
+    "",
+    "---",
+    "### 2. Create the systemd unit file",
+    {
+      "type": "image",
+      "src": "go_pics/cloudlab_service_unit.png",
+      "alt": "nano showing the cloudlab.service systemd unit file"
+    },
+    "Then I created `/etc/systemd/system/cloudlab.service` with the following structure:",
+    "- `[Unit]` section: description and dependencies, e.g. `After=network-online.target postgresql.service` so the database and network are ready.",
+    "- `[Service]` section:",
+    "  - `User=fynn` – run the service as my normal user.",
+    "  - `WorkingDirectory=/home/fynn/go-playground` – where the binary lives.",
+    "  - `ExecStart=/home/fynn/go-playground/cloudlab` – the actual Go server binary.",
+    "  - `Restart=on-failure` – systemd restarts it if it crashes.",
+    "- `[Install]` section: `WantedBy=multi-user.target` so it participates in the normal multi-user boot target.",
+    "",
+    "---",
+    "### 3. Tell systemd about it and start it",
+    "After saving the unit file, I ran:",
+    "- `sudo systemctl daemon-reload` – let systemd re-read unit files.",
+    "- `sudo systemctl start cloudlab.service` – start the service once.",
+    "- `sudo systemctl status cloudlab.service` – check that it's `active (running)`.",
+    "",
+    {
+      "type": "image",
+      "src": "go_pics/cloudlab_service_status.png",
+      "alt": "terminal output showing cloudlab.service active (running) and listening on :8080"
+    },
+    "Seeing it green and running feels much more like a \"real\" backend than just a `go run` process in a shell.",
+    "",
+    "---",
+    "### 4. Enable autostart on boot",
+    "To make the service come up after every reboot I enabled it:",
+    "- `sudo systemctl enable cloudlab.service`",
+    "",
+    "This creates a symlink so that when the system reaches the `multi-user` target during boot, systemd automatically starts `cloudlab.service`.",
+    "",
+    "---",
+    "### 5. Result",
+    "- Now the flow is:",
+    "  1. Press the power button on my old server PC.",
+    "  2. Ubuntu boots, PostgreSQL starts, then `cloudlab.service` starts.",
+    "  3. From my main machine I can go straight to `http://SERVER_IP:8080/login` without logging into the server first.",
+    "- When I want to update the backend, I rebuild the binary and restart the service:",
+    "  - `go build -o cloudlab`",
+    "  - `sudo systemctl restart cloudlab.service`",
+    "",
+    "It’s a small change, but it makes the whole project feel much closer to how real services are run on servers."
+  ],
+  "date": "2025-12-11"
 }
+
 
 ]
