@@ -399,7 +399,130 @@
     "It’s a small change, but it makes the whole project feel much closer to how real services are run on servers."
   ],
   "date": "2025-12-11"
+},
+  {
+  "title": "File Browser Foundation: A Filesystem-Backed Browser for My Go Cloud",
+  "content": [
+    "In my previous Go + PostgreSQL cloud lab posts I ended up with a small authenticated mini-app: a /login page, bcrypt password hashes, in-memory sessions, and a protected /todos endpoint backed by Postgres.",
+    "In this post I move away from purely database-backed data and start treating my Linux server like a tiny private cloud: I pick a storage folder on disk, expose it via a new GET /api/files endpoint in Go, and build a simple /cloud page that lists folders and files. It’s still read-only, but it’s a real filesystem browser running over HTTP.",
+    "The hero screenshot at the top of the post shows what I’m aiming for here: a dark-themed /cloud page with a toolbar and a list of folders and files (code, photos, notes.txt, readme.txt) coming directly from my storage directory on the server."
+  ],
+  "images": [
+    "go_pics/cloud_files_ui.png"
+  ],
+  "description": [
+    "### Context: From `/todos` JSON to a Filesystem Browser",
+    "Up to now my Go lab was mostly about the database side: a /todos endpoint, a users table in PostgreSQL, bcrypt password hashing, sessions, and a login + logout flow. All of that is nice, but it doesn’t yet feel like the file-based “cloud drive” I actually want to build.",
+    "For this step I decided to ignore the database for a moment and treat a plain directory on my Ubuntu server as the root of a future cloud drive. The Go server should:",
+    "- treat a fixed directory like `/home/fynn/cloud-storage` as a storage root,",
+    "- expose a GET /api/files?path=/... endpoint that returns JSON,",
+    "- protect it with the same session/cookie mechanism I already use for /todos,",
+    "- and render a small /cloud page that consumes this JSON and shows a list of entries.",
+    "The screenshot at the top of the post (`go_pics/cloud_files_ui.png`) shows the result: the browser is on /cloud, the toolbar is at the top, and the list below is populated from the Go backend calling into the filesystem.",
+
+    "---",
+    "### 1. Storage Root and the `FileEntry` Type",
+    "First I picked a folder on the server that should act as the root of my little cloud. On my Ubuntu box that is:",
+    "- `/home/fynn/cloud-storage`",
+    "I created it once on the server and then referenced it in Go as a constant right next to my global `db` and `sessions` variables.",
+    "At the same time I introduced a simple struct that describes a single directory entry for the frontend: `FileEntry`. It has four fields: name, path, type (file or dir) and size in bytes.",
+    "The screenshot below shows the relevant part of `main.go` in my editor: the `FileEntry` struct with JSON tags and the `storageRoot` constant underneath it.",
+
+    {
+      "type": "image",
+      "src": "go_pics/cloud_fileentry_storage_root.png",
+      "alt": "Editor screenshot showing the FileEntry struct with Name, Path, Type and Size fields plus JSON tags, and the storageRoot constant set to /home/fynn/cloud-storage underneath the global db and sessions variables"
+    },
+
+    "The JSON tags on `FileEntry` ensure that the JSON response has lower-case field names (`name`, `path`, `type`, `size`), which is more idiomatic for APIs. The `Path` field is always relative to the storage root, starting with a single leading slash, for example `/photos/cat.png`.",
+
+    "---",
+    "### 2. Implementing `GET /api/files` in Go",
+    "With the struct and storage root in place, the next step is the core backend endpoint: GET /api/files. The idea is simple:",
+    "- the client passes a `path` query parameter that is always relative to the storage root,",
+    "- the handler resolves that path under `storageRoot`,",
+    "- it reads the directory entries using `os.ReadDir`,",
+    "- and it returns a JSON array of `FileEntry` objects.",
+    "Because the same server already hosts a login feature, I reuse the session logic from there: /api/files is only reachable if the request carries a valid `session_id` cookie that exists in the in-memory `sessions` map.",
+    "The first half of `apiFilesHandler` deals with authentication, HTTP method checking and path sanitizing. The screenshot below shows this upper half of the handler in my editor:",
+
+    {
+      "type": "image",
+      "src": "go_pics/cloud_apifileshandler_top.png",
+      "alt": "Editor screenshot showing the upper half of apiFilesHandler: it reads the session_id cookie, checks the sessions map, rejects non-GET methods, reads the path query parameter, normalizes it with filepath.Clean and blocks any paths that contain .. segments before joining it with storageRoot"
+    },
+    {
+      "type": "image",
+      "src": "go_pics/cloud_apifileshandler_bottom.png",
+      "alt": "Editor screenshot showing the lower half of apiFilesHandler: it calls os.ReadDir on the computed fullPath, iterates over entries, calls entry.Info(), decides between type file or dir, builds the relative path, appends FileEntry values to a slice and finally encodes the slice as JSON with the application/json Content-Type set"
+    },
+
+    "The handler starts by reading the `session_id` cookie from the request and checking the ID in the `sessions` map. If there is no cookie or the ID is unknown, it simply redirects back to /login. That way, the filesystem API is only usable after a successful login.",
+    "Then it enforces that only GET is allowed, because this endpoint is purely for reading. Any other HTTP method gets a 405 Method Not Allowed.",
+    "The next interesting bit is the path handling. The handler reads the `path` query parameter from the URL (for example `/`, `/photos`, `/code/snippets`) and normalizes it with `filepath.Clean`. Internally, an empty path or `/` is mapped to `.` to represent the storage root. To avoid path traversal attacks, the code explicitly rejects any path that equals `..`, starts with `../` or contains `/../` anywhere.",
+    "Only after this cleaning step does the handler join `storageRoot` and the cleaned relative path using `filepath.Join`, giving it a safe absolute path on disk.",
+    "Once the absolute path is known, the lower half of the handler calls `os.ReadDir` to list directory contents. For each entry it calls `entry.Info()` to obtain metadata, checks `entry.IsDir()` to decide the `type` field (`file` or `dir`), calculates the relative path under the storage root, and appends a `FileEntry` value to a slice. At the end the handler sets `Content-Type: application/json` and uses `json.NewEncoder(w).Encode(files)` to stream the slice to the client as JSON.",
+
+    "---",
+    "### 3. Cloud Page Handler and Static Files",
+    "To turn the filesystem API into something nice to look at, I added a new route `/cloud`. This route does not return JSON; it simply serves an HTML file that lives under `static/cloud.html` and contains a minimal frontend.",
+    "In `main()` I already had a file server for everything under `./static` and routes for `/login`, `/todos` and `/logout`. I added another handler registration:",
+    "- `/api/files` → `apiFilesHandler` (the JSON API),",
+    "- `/cloud` → `cloudPageHandler` (the HTML UI).",
+    "The `cloudPageHandler` itself is intentionally small: it only allows GET, checks the `session_id` cookie using the same `sessions` map logic as other handlers, and then calls `http.ServeFile` to return `static/cloud.html`.",
+    "The screenshot below shows the full `cloudPageHandler` function in my editor:",
+
+    {
+      "type": "image",
+      "src": "go_pics/cloud_page_handler.png",
+      "alt": "Editor screenshot of cloudPageHandler showing the GET method check, the session_id cookie lookup and sessions map validation, and the final http.ServeFile call that serves static/cloud.html"
+    },
+
+    "By protecting `/cloud` with the same session logic as `/api/files`, I make sure that both the HTML UI and the JSON API are only usable for logged-in users. After fixing my login redirect to point to `/cloud` instead of `/todos`, a successful login drops me straight onto the new cloud view.",
+
+    "---",
+    "### 4. Inspecting `/api/files` Directly in the Browser",
+    "Before wiring up any frontend JavaScript I like to test backend endpoints directly in the browser. Because `/api/files` returns JSON and is protected by the session cookie, it is perfect for that.",
+    "After logging in, I can manually navigate to `/api/files?path=/` and see the JSON response for the root of my storage directory. It contains one object per file or folder, with the fields defined by `FileEntry`.",
+    "The screenshot below shows this JSON response in the browser: it lists my `code` and `photos` folders plus `notes.txt` and `readme.txt` as files, each with a `name`, `path`, `type` and `size` field.",
+
+    {
+      "type": "image",
+      "src": "go_pics/cloud_api_files_json.png",
+      "alt": "Browser screenshot of the /api/files?path=/ endpoint showing a prettified JSON array with entries for code, notes.txt, photos and readme.txt including name, path, type and size fields"
+    },
+
+    "This direct view is especially helpful while debugging path handling and permissions: if something is wrong with my path cleaning or filesystem permissions, I immediately see an error instead of an empty UI.",
+
+    "---",
+    "### 5. A Simple `/cloud` UI on Top of the API",
+    "With `/api/files` working and `/cloud` serving an HTML shell, I added a very small frontend on top:",
+    "- `static/cloud.html` defines the basic layout: a dark header with the current path label (for now I keep the technical \"Path: /\" look), two buttons for future features (Upload File, Refresh), and an empty container for the file list.",
+    "- `static/cloud.css` gives it a simple modern look: dark background, rounded bars for each row, subtle hover effects.",
+    "- `static/cloud.js` contains a tiny amount of vanilla JavaScript that calls GET /api/files?path=/ when the page loads, parses the JSON and renders one row per `FileEntry`. Double-clicking on a directory row calls /api/files with the corresponding path to navigate deeper.",
+    "Because this series is primarily about Go and backend concepts, I’m not showing the full HTML/CSS/JS code here. The important part is that the /cloud UI is just a thin layer on top of the Go endpoint: all file information comes from `/api/files`, and all access control logic still lives on the server.",
+    "The hero screenshot at the top of this post is exactly this UI in action: each row in the list corresponds to a `FileEntry` produced by the Go handler, and the text `Path: /` is driven by the current path that the JavaScript passes into the endpoint.",
+
+    "---",
+    "### 6. Limitations and Next Steps",
+    "Right now, my little cloud is purely a filesystem viewer:",
+    "- `/api/files` only supports GET and only lists entries,",
+    "- there is no way to upload, download, rename or delete anything yet,",
+    "- and there is no thumbnail generation for images or any kind of preview mode.",
+    "That’s intentional: I wanted a solid, well-understood foundation first. I now have:",
+    "- a dedicated storage root on disk,",
+    "- a simple `FileEntry` model,",
+    "- a secure, session-protected JSON API for listing directories,",
+    "- and a `/cloud` page that consumes this API and shows real files from my server.",
+    "From here the path is clear. In future posts I plan to build on this file browser foundation and add:",
+    "- a POST /api/upload endpoint plus download links,",
+    "- a grid layout with thumbnails and a simple image preview overlay,",
+    "- endpoints and UI actions for mkdir, rename and move,",
+    "- and eventually a trash system and multi-select to make my Go cloud feel more like a real, personal drive."
+  ],
+  "date": "2025-12-09"
 }
+
 
 
 ]
