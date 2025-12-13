@@ -400,7 +400,7 @@
   ],
   "date": "2025-12-11"
 },
-  {
+ {
   "title": "File Browser Foundation: A Filesystem-Backed Browser for My Go Cloud",
   "content": [
     "In my previous Go + PostgreSQL cloud lab posts I ended up with a small authenticated mini-app: a /login page, bcrypt password hashes, in-memory sessions, and a protected /todos endpoint backed by Postgres.",
@@ -412,13 +412,18 @@
   ],
   "description": [
     "### Context: From `/todos` JSON to a Filesystem Browser",
-    "Up to now my Go lab was mostly about the database side: a /todos endpoint, a users table in PostgreSQL, bcrypt password hashing, sessions, and a login + logout flow. All of that is nice, but it doesn’t yet feel like the file-based “cloud drive” I actually want to build.",
+    "Up to now my Go lab was mostly about the database side: a /todos endpoint, a users table in PostgreSQL, bcrypt password hashing, sessions, and a login + logout flow. All of that is nice, but it doesn’t yet feel like the file-based \"cloud drive\" I actually want to build.",
     "For this step I decided to ignore the database for a moment and treat a plain directory on my Ubuntu server as the root of a future cloud drive. The Go server should:",
     "- treat a fixed directory like `/home/fynn/cloud-storage` as a storage root,",
     "- expose a GET /api/files?path=/... endpoint that returns JSON,",
     "- protect it with the same session/cookie mechanism I already use for /todos,",
     "- and render a small /cloud page that consumes this JSON and shows a list of entries.",
-    "The screenshot at the top of the post (`go_pics/cloud_files_ui.png`) shows the result: the browser is on /cloud, the toolbar is at the top, and the list below is populated from the Go backend calling into the filesystem.",
+    {
+      "type": "image",
+      "src": "go_pics/cloud_files_ui.png",
+      "alt": "Browser screenshot of the /cloud page showing the dark themed toolbar and file list loaded from the Go backend"
+    },
+    "The screenshot above (`go_pics/cloud_files_ui.png`) shows the result: the browser is on /cloud, the toolbar is at the top, and the list below is populated from the Go backend calling into the filesystem.",
 
     "---",
     "### 1. Storage Root and the `FileEntry` Type",
@@ -501,12 +506,12 @@
     "- `static/cloud.css` gives it a simple modern look: dark background, rounded bars for each row, subtle hover effects.",
     "- `static/cloud.js` contains a tiny amount of vanilla JavaScript that calls GET /api/files?path=/ when the page loads, parses the JSON and renders one row per `FileEntry`. Double-clicking on a directory row calls /api/files with the corresponding path to navigate deeper.",
     "Because this series is primarily about Go and backend concepts, I’m not showing the full HTML/CSS/JS code here. The important part is that the /cloud UI is just a thin layer on top of the Go endpoint: all file information comes from `/api/files`, and all access control logic still lives on the server.",
-    "The hero screenshot at the top of this post is exactly this UI in action: each row in the list corresponds to a `FileEntry` produced by the Go handler, and the text `Path: /` is driven by the current path that the JavaScript passes into the endpoint.",
+    "The screenshot above is exactly this UI in action: each row in the list corresponds to a `FileEntry` produced by the Go handler, and the text `Path: /` is driven by the current path that the JavaScript passes into the endpoint.",
 
     "---",
     "### 6. Limitations and Next Steps",
     "Right now, my little cloud is purely a filesystem viewer:",
-    "- `/api/files` only supports GET and only lists entries,",
+    "- `/api.files` only supports GET and only lists entries,",
     "- there is no way to upload, download, rename or delete anything yet,",
     "- and there is no thumbnail generation for images or any kind of preview mode.",
     "That’s intentional: I wanted a solid, well-understood foundation first. I now have:",
@@ -521,6 +526,8 @@
     "- and eventually a trash system and multi-select to make my Go cloud feel more like a real, personal drive."
   ],
   "date": "2025-12-12"
+}
+
 }
 
 
