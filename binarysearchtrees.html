@@ -51,6 +51,14 @@
             }
         }
 
+        function createImage(src, alt, className = 'blog-image') {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = alt || '';
+            img.classList.add(className);
+            return img;
+        }
+
         // Helper to create a single post element
         function createPostElement(post) {
             const postElement = document.createElement('div');
@@ -79,30 +87,35 @@
                 postElement.appendChild(shortDescription);
             }
 
-            // Images
-            if (post.images && Array.isArray(post.images)) {
+            /**
+             * IMPORTANT (legacy behavior):
+             * Always render post.images HERE (right after content[0]),
+             * even if description contains inline image blocks.
+             */
+            if (post.images && Array.isArray(post.images) && post.images.length > 0) {
                 post.images.forEach(image => {
-                    const img = document.createElement('img');
-                    img.src = image;
-                    img.alt = post.title;
-                    img.classList.add('blog-image');
+                    const img = createImage(image, post.title);
                     postElement.appendChild(img);
                 });
             }
 
-            // Detailed description
+            /**
+             * Detailed description:
+             * - string -> <p>
+             * - { type: "image", src: "...", alt?: "..." } -> <img>
+             */
             if (post.description && Array.isArray(post.description)) {
-                post.description.forEach(paragraph => {
-                    const para = document.createElement('p');
-                    para.textContent = paragraph;
-                    postElement.appendChild(para);
+                post.description.forEach(block => {
+                    if (typeof block === 'string') {
+                        const para = document.createElement('p');
+                        para.textContent = block;
+                        postElement.appendChild(para);
+                    } else if (block && typeof block === 'object' && block.type === 'image' && block.src) {
+                        const img = createImage(block.src, block.alt || post.title);
+                        postElement.appendChild(img);
+                    }
                 });
             }
-
-            // Date (optional)
-            // const date = document.createElement('small');
-            // date.textContent = `Posted on: ${post.date}`;
-            // postElement.appendChild(date);
 
             return postElement;
         }
@@ -114,15 +127,8 @@
             const pinnedPosts = posts.filter(post => post.pinned);
             const regularPosts = posts.filter(post => !post.pinned);
 
-            pinnedPosts.forEach(post => {
-                const postElement = createPostElement(post);
-                blogContainer.appendChild(postElement);
-            });
-
-            regularPosts.forEach(post => {
-                const postElement = createPostElement(post);
-                blogContainer.appendChild(postElement);
-            });
+            pinnedPosts.forEach(post => blogContainer.appendChild(createPostElement(post)));
+            regularPosts.forEach(post => blogContainer.appendChild(createPostElement(post)));
         }
 
         function handleScroll() {
@@ -135,7 +141,6 @@
             }
         }
 
-        // To pin a post, add "pinned": true to that post's JSON object
         fetchPosts(currentPage);
         window.addEventListener('scroll', handleScroll);
     </script>
