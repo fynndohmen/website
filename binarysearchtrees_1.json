@@ -1,4 +1,5 @@
 [
+  {
 "description": [
   "## What is a Binary Search Tree?",
   "A Binary Search Tree (BST) is a binary tree where each node's key splits the remaining keys into a left and a right subtree: keys in the left subtree are smaller than the node key, and keys in the right subtree are greater (or greater/equal depending on how duplicates are handled). This property enables search-like operations by repeatedly deciding whether to go left or right.",
@@ -55,7 +56,7 @@
   "## Summary",
   "Binary Search Trees provide a powerful way to maintain a dynamic set of keys in sorted order with efficient searching, insertion, and deletion when the tree height stays small (balanced). They also enable order-based operations such as predecessor/successor and range queries. However, a plain BST can degrade to O(n) behavior when unbalanced, and node-based storage has higher memory overhead and poorer cache locality than array-based structures."
 ]
-
+  }
 ,
 {
     "title": "Finding the Closest Value in a Binary Search Tree (BST)",
