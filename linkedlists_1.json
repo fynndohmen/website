@@ -9,8 +9,12 @@
   "description": [
     "## What is a linked list?",
     "A linked list is a sequence of nodes, where each node holds a value and a reference (pointer) to the next node in the sequence. The structure is accessed via a head pointer that points to the first node; the last node points to null.",
+    "Figure: A linked list is accessed via a head pointer; nodes link to the next node and the last node points to null.",
+    { "type": "image", "src": "algorithms_pics/whats_a_linked_list.png", "alt": "What is a linked list? head -> A -> B -> C -> null" },
     "",
     "The most common variant is the **singly linked list** (each node has a `next` pointer). There is also the **doubly linked list**, where each node has both `next` and `prev` pointers, making certain operations (like deletion at the end) simpler at the cost of extra memory.",
+    "Figure: Singly vs doubly linked list (next vs next+prev pointers).",
+    { "type": "image", "src": "algorithms_pics/singly_vs_doubly.png", "alt": "Singly vs doubly linked list" },
     "",
     "Unlike arrays, linked lists do **not** store elements contiguously in memory and do **not** support O(1) random access by index. Instead, you traverse the list node by node.",
     "",
@@ -27,6 +31,12 @@
     "- **Dynamic size**: the list grows and shrinks as needed without preallocating a large block of memory and without costly resizes.",
     "- Can be easier to rearrange nodes (for example splicing sublists, merging lists) because you only change pointers instead of moving elements in memory.",
     "",
+    "Figure: push_front(X) is O(1) because only a constant number of pointers change (X.next = head, then head = X).",
+    { "type": "image", "src": "algorithms_pics/push_front.png", "alt": "push_front(X): X.next = head; head = X" },
+    "",
+    "Figure: pop_front() is O(1) because head moves to head.next (old head becomes unreachable/removed).",
+    { "type": "image", "src": "algorithms_pics/pop_front.png", "alt": "pop_front(): head = head.next" },
+    "",
     "## Disadvantages of linked lists",
     "- **No random access**: to get the i-th element you must traverse from the head through i nodes, which is O(n) time.",
     "- **Linear-time search**: finding a value requires a full or partial traversal (O(n)), unlike balanced trees or hash tables.",
@@ -39,6 +49,9 @@
     "- **Insert/delete in the middle:** arrays require shifting elements (O(n) time); linked lists can insert/delete in O(1) time if you already have a pointer to the preceding node.",
     "- **Memory layout:** arrays store elements in one contiguous block (good for cache); linked lists store nodes scattered across memory, which is slower in practice.",
     "- **Resizing:** dynamic arrays occasionally perform an O(n) resize when growing; linked lists never need to move existing elements, they just allocate or free nodes as needed.",
+    "",
+    "Figure: Arrays have O(1) random access and contiguous memory; linked lists require pointer chasing for random access (O(n)).",
+    { "type": "image", "src": "algorithms_pics/array_vs_linkedlist.png", "alt": "Array vs linked list: random access and memory layout" },
     "",
     "In practice, arrays (or dynamic arrays) are often the default choice for sequences. Linked lists become attractive in situations where pointer-based insert/delete operations dominate and random access is less important.",
     "",
@@ -57,12 +70,16 @@
     "- **delete after a given node** – O(1) time / O(1) extra space: bypass the node to be removed and free it.",
     "- **traverse / iterate all elements** – O(n) time / O(1) extra space when done iteratively.",
     "",
+    "Cheat sheet (summary table of common operations):",
+    { "type": "image", "src": "algorithms_pics/linkedlist_complexity_cheatsheet.png", "alt": "Linked list operations complexity cheat sheet" },
+    "",
     "## Summary",
     "Linked lists trade away fast random access for flexibility in insertions and deletions. They shine when you frequently add or remove elements at known positions (especially at the beginning of the structure) and when you want a dynamically sized sequence without costly resizes. However, for workloads dominated by random reads and searches, or where memory locality is important, arrays or other data structures are usually a better fit."
   ],
   "date": "2025-12-10",
   "pinned": true
 }
+
 ,
 
 {
