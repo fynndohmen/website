@@ -1,5 +1,5 @@
 [
-     {
+{
   "title": "Arrays – Fundamentals, Use Cases, Pros and Cons",
   "content": [
     "Arrays are one of the most fundamental data structures: they store elements in a contiguous block of memory and allow fast access via indices.",
@@ -9,6 +9,8 @@
   "description": [
     "## What is an array?",
     "An array stores a finite number of elements consecutively in memory. Each element has an integer index, and using that index you can access the element in constant time (a[i]). Arrays are the foundation for many other data structures and algorithms.",
+    "Figure: Index-based access a[i] (constant time) and the mapping from indices to elements.",
+    { "type": "image", "src": "algorithms_pics/array_index_access.png", "alt": "Array index access a[i]" },
     "",
     "### Static vs dynamic arrays",
     "**Static array:**",
@@ -19,6 +21,12 @@
     "- Internally still uses an array, but manages a separate *capacity* and *current length*.",
     "- When capacity is full and another element is appended, a larger array is allocated and all elements are copied over.",
     "- Because of this, a single append can be expensive, but on average (amortized) append is still constant time.",
+    "",
+    "Figure: Static arrays have a fixed size, while dynamic arrays track length vs capacity (unused capacity is still allocated).",
+    { "type": "image", "src": "algorithms_pics/static_vs_dynamic.png", "alt": "Static vs dynamic array (length vs capacity)" },
+    "",
+    "Figure: What happens on a dynamic array resize (allocate bigger array, copy elements, append, switch reference).",
+    { "type": "image", "src": "algorithms_pics/dynamic_resize.png", "alt": "Dynamic array resize: allocate, copy, append, switch reference" },
     "",
     "## Typical use cases",
     "- Storing sequences where fast access by index is important (results of computations, tables, buffers).",
@@ -38,11 +46,17 @@
     "- **Dynamic array:** occasional resizes require copying all elements (O(n)), which can cause latency spikes.",
     "- No built-in notion of ordering by key or hierarchy; for that you need extra algorithms or other data structures.",
     "",
+    "Figure: Inserting in the middle requires shifting elements to the right (O(n)).",
+    { "type": "image", "src": "algorithms_pics/insert_shift.png", "alt": "Insert at index i: shift elements right (O(n))" },
+    "",
     "## Short comparison with linked lists",
     "- **Access by index:** array O(1), linked list O(n) – arrays clearly win when you read many random positions.",
     "- **Insert/delete in the middle:** array O(n) (elements must be shifted), linked list O(1) if you already have a pointer to the node – lists are better when you frequently modify the middle.",
     "- **Memory layout:** array uses one contiguous block (great for cache), linked list uses many small nodes scattered in memory.",
     "In many practical situations you start with an array, and only switch to a linked list if insertions and deletions in the middle dominate.",
+    "",
+    "Figure: Arrays allow direct random access and are cache-friendly; linked lists require pointer chasing for random access.",
+    { "type": "image", "src": "algorithms_pics/array_vs_linkedlist.png", "alt": "Array vs linked list: random access and memory layout" },
     "",
     "## Key operations and complexities (n = number of elements)",
     "- **initialize(size n)** – static array: O(n) time / O(n) space for allocating and optionally initializing the block; dynamic array: typically O(n) space, with initialization cost depending on language and implementation.",
@@ -54,12 +68,16 @@
     "- **insert at index i** – both variants: O(n) time to shift elements, O(1) extra space.",
     "- **delete at index i** – both variants: O(n) time to close the gap, O(1) extra space.",
     "",
+    "Cheat sheet (summary table of common operations):",
+    { "type": "image", "src": "algorithms_pics/complexity_cheatsheet.png", "alt": "Array operations complexity cheat sheet" },
+    "",
     "## Summary",
     "Arrays are the right choice when you need a simple, very fast structure for sequential data with frequent index access. Static arrays are ideal when the size is known in advance, while dynamic arrays add flexibility with almost the same performance. When your workload is dominated by insertions and deletions in the middle, it is worth looking at alternative data structures such as linked lists."
   ],
   "date": "2025-12-10",
   "pinned": true
-},
+}
+,
     {
         "title": "Finding Two Numbers That Sum to a Target",
         "content": [
