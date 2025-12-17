@@ -852,7 +852,108 @@
     "The next logical step is to extend this model to moving entries between folders and, later on, to implement a trash system that moves items into a special area instead of deleting them outright. Thanks to the groundwork laid in the rename handler, those features will be mostly about combining the same validation and security checks with slightly different target paths."
   ],
   "date": "2025-12-17"
+},
+  {
+  "title": "Moving Files Between Folders in My Go Cloud (`POST /api/move`)",
+  "content": [
+    "My Go cloud can now move files and folders between directories, similar to how Google Drive lets you reorganize your content.",
+    "In this post I add a `POST /api/move` endpoint to the backend and wire it up to a new “Move” action in the card context menu in the UI."
+  ],
+  "images": [],
+  "description": [
+    "### 1. UX: Move from the Card Context Menu",
+    "I already had a per-item context menu on each card (opened by the three-dot button in the bottom-right corner). To add moving, I simply inserted a new menu item called **Move** between **Download** and **Move to Trash (coming soon)**.",
+    {
+      "type": "image",
+      "src": "go_pics/cloud_move_menu.png",
+      "alt": "Cloud UI screenshot showing the context menu for an image card with the options Rename, Download, Move and Move to Trash (coming soon)"
+    },
+    "Clicking **Move** now opens a small browser prompt that asks for a destination folder. The prompt accepts simple, root-relative paths like `/`, `/photos` or `/code`. Under the hood the frontend sends these two pieces of information to the backend:",
+    "- `source_path`: the current path of the selected file or folder, for example `/palmtrees.jpg` or `/code/snippets`,",
+    "- `target_dir`: the folder where it should be moved to, for example `/photos`.",
+    {
+      "type": "image",
+      "src": "go_pics/cloud_move_prompt.png",
+      "alt": "Browser prompt asking for the target folder path with /photos filled in as an example"
+    },
+    "After confirming, the request goes to the new `POST /api/move` endpoint. If everything works, the UI refreshes the current directory and the moved item disappears from the old location. When I navigate into the destination folder, the file is there:",
+    {
+      "type": "image",
+      "src": "go_pics/cloud_move_result.png",
+      "alt": "Cloud UI screenshot of the /photos folder, now containing several image cards including palmtrees.jpg"
+    },
+
+    "---",
+    "### 2. Request Shape: `moveRequest`",
+    "On the Go side I introduced a small struct to describe the JSON body of the move request:",
+    "- it has a `SourcePath` field for the original location,",
+    "- and a `TargetDir` field for the destination folder.",
+    "The frontend sends a JSON object with `source_path` and `target_dir` keys, and Go’s JSON decoder maps those into the struct fields. The first thing the handler does is:",
+    "- enforce `POST` only,",
+    "- check the `session_id` cookie and the in-memory `sessions` map (same as other API endpoints),",
+    "- decode the JSON body into this `moveRequest` value.",
+    "If decoding fails, the handler responds with **400 Bad Request** and a short error message.",
+
+    "---",
+    "### 3. Validating the Source Path",
+    "Next, the handler validates the source path. It trims whitespace, rejects an empty value and normalizes the path using `filepath.Clean`. This keeps things predictable and removes redundant `.` segments.",
+    "Because all paths in my cloud API are defined as **relative to the storage root but start with a leading slash**, the handler makes sure there is exactly one leading `/` before continuing. Root itself (`/` or `.`) is not allowed as a source, so the code explicitly rejects attempts to move the storage root.",
+    "Then there is the usual security check against path traversal:",
+    "- any `..` segments, or patterns like `../` or `/../`, cause the handler to return **400 Invalid source path**.",
+    "Only after these checks does the handler join the relative path with `storageRoot` and call `os.Stat` on that absolute path to ensure that the source actually exists. If the file or folder is missing, the server returns **404 Source not found**.",
+    {
+      "type": "image",
+      "src": "go_pics/cloud_move_handler_top.png",
+      "alt": "Editor screenshot showing the upper part of apiMoveHandler: it checks the HTTP method and session, decodes the JSON body into moveRequest, validates and normalizes source_path, rejects .. segments and ensures the source exists with os.Stat"
+    },
+
+    "---",
+    "### 4. Validating the Target Directory",
+    "The target directory gets a similar treatment. The handler:",
+    "- trims the `target_dir` string,",
+    "- treats an empty value or `/` as the storage root,",
+    "- passes it through `filepath.Clean`,",
+    "- converts `/` back to `.` as the internal representation for the root folder,",
+    "- and, if it is not `.` already, makes sure it starts with a single leading slash.",
+    "Again, any `..` segments are rejected to prevent escaping from the configured storage root.",
+    {
+      "type": "image",
+      "src": "go_pics/cloud_move_handler_middle.png",
+      "alt": "Editor screenshot showing the middle part of apiMoveHandler: it normalizes target_dir, ensures it is either . or starts with a slash, rejects .. segments and computes the absolute target directory path"
+    },
+    "Once the relative target directory is considered safe, the handler builds its absolute path under `storageRoot` and calls `os.Stat` on it. Two more conditions must hold:",
+    "- the target must exist; otherwise the handler returns **400 Target directory does not exist**,",
+    "- the target must be a directory; if not, the handler returns **400 Target is not a directory**.",
+    "Only if all of this passes is the move actually attempted.",
+
+    "---",
+    "### 5. Avoiding Overwrites and Performing the Move",
+    "Before moving anything, the handler constructs the final destination path by combining:",
+    "- the target directory path, and",
+    "- the base name of the source entry (taken from the source’s `FileInfo.Name()`).",
+    "That way the name of the file or folder stays the same; only its parent directory changes.",
+    "To avoid silent overwrites, the handler calls `os.Stat` on the computed destination path:",
+    "- if something already exists there, it returns **409 Destination already exists**,",
+    "- if `os.Stat` fails with any other error, it returns a generic **500 Error checking destination**.",
+    "Finally, the actual move is just a call to `os.Rename(srcFull, destFull)`. On success the handler writes **204 No Content** and the frontend refreshes the current directory.",
+    {
+      "type": "image",
+      "src": "go_pics/cloud_move_handler_bottom.png",
+      "alt": "Editor screenshot showing the lower part of apiMoveHandler: it checks the target directory, builds the destination path from baseName, ensures it does not exist yet and finally calls os.Rename before returning 204 No Content"
+    },
+
+    "---",
+    "### 6. Limitations and Future Improvements",
+    "The current move implementation already feels very usable: I can right-click or use the three-dot menu on any card, choose **Move**, type a target folder and watch the file jump to its new home.",
+    "At the same time there are a few obvious limitations:",
+    "- The path input is a raw text prompt; a dedicated move dialog with a clickable folder tree would be much nicer.",
+    "- Moves are single-item only. Multi-select and bulk moves will come later.",
+    "- There is still no trash system: a failed move is never destructive, but real deletions will need more care.",
+    "Still, `POST /api/move` is a big step: my Go cloud is no longer just a static viewer. I can reorganize files and folders purely through my own backend and filesystem logic, without touching the server via SSH or a file manager."
+  ],
+  "date": "2025-12-18"
 }
+
 
 
 
