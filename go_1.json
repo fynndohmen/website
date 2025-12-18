@@ -952,6 +952,107 @@
     "Still, `POST /api/move` is a big step: my Go cloud is no longer just a static viewer. I can reorganize files and folders purely through my own backend and filesystem logic, without touching the server via SSH or a file manager."
   ],
   "date": "2025-12-18"
+},
+  {
+"title": "Soft Delete: Moving Files and Folders to a Trash Folder in My Go Cloud",
+"content": [
+"In my previous Go cloud posts I added upload, download, a grid view, image preview and basic file operations like New Folder and Rename.",
+"In this part I finally stop deleting things for real. Instead, I introduce a Trash folder under my storage root. Every file or folder that I delete is now moved into /trash, similar to how Google Drive or most desktop file managers work.",
+"On the backend this is implemented as a dedicated POST /api/trash handler. On the frontend I added a "Move to Trash" entry to the card context menu. If a name already exists in the Trash, the server automatically renames the new entry (foo (1).jpg, foo (2).jpg, …) instead of failing."
+],
+"images": [
+"go_pics/cloud_trash_menu.png"
+],
+"description": [
+"### 1. UX: Move to Trash in the context menu",
+"On the UI side this feature appears as an additional item in the card context menu. When I click the three dots on a file or folder, the menu now shows Download, Rename, Move and Move to Trash.",
+{
+"type": "image",
+"src": "go_pics/cloud_trash_menu.png",
+"alt": "Cloud UI screenshot showing the card context menu with Download, Rename, Move and Move to Trash entries"
+},
+"When I choose Move to Trash, the browser sends a small JSON body to the Go server containing just one field:",
+"- path: the path of the selected entry (for example /leaf.jpg or /code/snippets).",
+"If the request succeeds, the item disappears from the current folder. I can still get it back later by browsing the Trash.",
+"---",
+"### 2. Representing the Trash in the filesystem",
+"I decided not to model Trash in PostgreSQL. Instead, the Trash is just another directory under my storage root:",
+"- storage root: /home/fynn/cloud-storage",
+"- Trash folder: /home/fynn/cloud-storage/trash",
+"The important part: the Trash directory is hidden from the normal root listing so it does not clutter the dashboard grid. But I can still browse it by explicitly going to /cloud?path=/trash (or later via a left-hand explorer tree).",
+"The screenshot below shows my Trash view at /trash: one image and two folders that have been moved there.",
+{
+"type": "image",
+"src": "go_pics/cloud_trash_view.png",
+"alt": "Cloud UI screenshot showing the /trash path with one image and two folders inside the Trash"
+},
+"---",
+"### 3. Generating unique names in Trash",
+"One subtle problem: what happens if I move testfolder to Trash multiple times? I do not want to overwrite older entries. Instead I want names like:",
+"- testfolder/",
+"- testfolder (1)/",
+"- testfolder (2)/",
+"To solve this I wrote a helper function called uniqueTrashPath(trashRoot, baseName string) (string, error). It:",
+"- splits the original name into nameOnly and ext (for example leaf and .jpg),",
+"- first tries the original name (leaf.jpg),",
+"- if that already exists, loops with leaf (1).jpg, leaf (2).jpg, and so on until it finds a free name or hits a safety limit.",
+"Here is the part of the function that builds and checks candidates, visualized in my editor:",
+{
+"type": "image",
+"src": "go_pics/cloud_trash_uniquename.png",
+"alt": "Editor screenshot of the uniqueTrashPath function which uses filepath.Ext, strings.TrimSuffix and a loop with fmt.Sprintf to find a free name in the Trash directory"
+},
+"The end result is simple but effective: I can move the same file or folder into Trash again and again and each version gets a unique name.",
+"---",
+"### 4. Backend: POST /api/trash handler",
+"The heart of this feature is a new HTTP handler: apiTrashHandler, mounted at POST /api/trash.",
+"The handler performs several steps:",
+"1. Method and auth check – only POST is allowed, and the request must carry a valid session_id cookie (same mechanism as all other protected endpoints).",
+"2. Disable caching – sets Cache-Control: no-store, no-cache, must-revalidate so browsers do not cache responses.",
+"3. Parse JSON body – decodes { "path": "/something" } into a small trashRequest struct.",
+"4. Validate and sanitize the path – trims spaces, normalizes it with filepath.Clean, enforces a leading slash, and then converts to a safe relative path inside storageRoot.",
+"5. Block dangerous or invalid paths – refuses .. segments and forbids trashing the storage root itself.",
+"The upper part of the handler, with the method check, cookie lookup, JSON decoding and path validation, looks like this in my editor:",
+{
+"type": "image",
+"src": "go_pics/cloud_trash_handler_top.png",
+"alt": "Editor screenshot of the upper part of apiTrashHandler showing the POST check, session validation, JSON body decoding and path cleaning plus security checks against .. segments"
+},
+"Once the path is clean, the lower half of the handler does the actual move:",
+"6. Check the source – calls os.Stat on the computed absolute path and returns 404 if the file or folder does not exist.",
+"7. Ensure the Trash directory exists – uses os.MkdirAll(trashRoot, 0755) for /home/fynn/cloud-storage/trash.",
+"8. Pick a unique target name – calls uniqueTrashPath with the source base name to get a free path under the Trash directory.",
+"9. Move the entry – calls os.Rename(srcFull, dstFull). If that fails, the handler logs the error and returns HTTP 500.",
+"10. Respond with 204 – on success the handler returns StatusNoContent (204) without a body.",
+"This lower part is captured in the following screenshot:",
+{
+"type": "image",
+"src": "go_pics/cloud_trash_handler_bottom.png",
+"alt": "Editor screenshot of the lower part of apiTrashHandler showing os.Stat on the source, creation of the Trash directory, calling uniqueTrashPath, and finally os.Rename followed by a 204 response"
+},
+"Because it uses os.Rename, the implementation works for both files and whole folders (including everything inside them).",
+"---",
+"### 5. Frontend wiring: calling /api/trash from JavaScript",
+"On the frontend, the context menu entry Move to Trash is wired to a small helper function in cloud.js. When I click it, the browser:",
+"- asks for confirmation via a confirm() dialog,",
+"- sends POST /api/trash with { path: file.path } as JSON,",
+"- if the response is OK (204), reloads the current folder via the existing loadFiles(currentPath) function,",
+"- otherwise shows an alert with the HTTP status code.",
+"From the user’s perspective this is instant: the card disappears from the current view, and if I manually navigate to /trash, I see the same entry sitting there, possibly with a (1), (2) or similar suffix if there were older copies.",
+"---",
+"### 6. Where this goes next",
+"Right now my Trash implementation is minimal but already useful:",
+"- Trash is just a real folder under the storage root.",
+"- Every file or folder is moved there instead of being deleted permanently.",
+"- Name collisions are handled automatically by uniqueTrashPath.",
+"",
+"In future iterations I want to expand this into something closer to a full recycle bin:",
+"- a sidebar explorer on the left with a dedicated Trash entry (like in Google Drive),",
+"- a Restore action that moves entries back from Trash to their original location (or a chosen folder),",
+"- and a Delete permanently action to really free disk space when I am sure I am done with the files.",
+"But even in its current form, this Trash handler already makes my Go-based cloud feel much safer to use: I can experiment, move and rename aggressively, knowing that a mistake is just one browser tab away in /trash."
+],
+"date": "2025-12-19"
 }
 
 
