@@ -1049,7 +1049,115 @@
     "- and maybe add automatic cleanup rules for very old entries."
   ],
   "date": "2025-12-19"
+},
+  {
+  "title": "Completing the Trash in My Go Cloud: Restore, Delete Forever, and Empty Trash",
+  "content": [
+    "My Go cloud already supported soft delete by moving files into a filesystem-based /trash directory. The next step was making that Trash usable: restoring items, deleting them permanently, and emptying the entire Trash.",
+    "In this post I add three new backend endpoints (/api/trash/restore, /api/trash/delete, /api/trash/empty) and wire them into the UI so the same /cloud page can act as both the normal drive view and the Trash view.",
+    "Trash stays “hidden” and is reachable only via URL (/cloud?path=/trash), while the UI automatically switches to Trash-specific actions when you’re inside that path."
+  ],
+  "images": [],
+  "description": [
+    {
+      "type": "image",
+      "src": "go_pics/cloud_trash_empty_button.png",
+      "alt": "Browser screenshot of the Go cloud UI on the /trash path showing a red 'Empty Trash' button next to '+ New' and 'Logout', and one image card inside the trash"
+    },
+    "### 1. Context: Soft delete is nice, but Trash needs actions",
+    "In the previous step I implemented a simple Trash system by moving items into a `/trash` folder under my storage root. That already made delete much safer than calling `os.RemoveAll` directly on user content.",
+    "But a Trash that only collects items is not enough — I needed the same three operations that every real drive has:",
+    "- **Restore** a trashed item back into a normal folder,",
+    "- **Delete forever** (permanently remove one entry),",
+    "- **Empty Trash** (wipe everything in one click).",
+    "I also wanted Trash to stay *hidden* in the normal UI: there is no Trash button in the dashboard yet. For now it’s reachable only via URL: `/cloud?path=/trash`.",
+    "",
+    "---",
+    "### 2. UX: Same /cloud page, but Trash-only context menu",
+    "To keep the frontend simple, I reuse the same `cloud.html` and `cloud.js` for both normal browsing and Trash browsing. The only trick is: if `currentPath` is `/trash` (or starts with it), the UI switches modes.",
+    "In Trash mode the card context menu only shows **Restore** and **Delete forever**. Everything else (Download, Rename, Move, Move to Trash) is hidden so there is no confusion.",
+    "Restore uses a deliberately minimal prompt: I type the destination folder as a cloud path like `/` or `/photos`.",
+    {
+      "type": "image",
+      "src": "go_pics/cloud_trash_restore_prompt.png",
+      "alt": "Screenshot of the /trash view with the context menu open showing Restore and Delete forever, plus a browser prompt asking for the restore target folder with /photos filled in"
+    },
+    "",
+    "---",
+    "### 3. Backend: `POST /api/trash/restore`",
+    "The restore endpoint takes two fields in a JSON body:",
+    "- `path`: the trash entry path (must be inside `/trash/...`)",
+    "- `target_dir`: the destination folder (like `/`, `/photos`, `/code/snippets`)",
+    "Just like the rest of my cloud API it enforces:",
+    "- **POST only**",
+    "- a valid `session_id` cookie",
+    "- strict path cleaning with `filepath.Clean`",
+    "- rejection of `..` traversal patterns",
+    "Here is the top part of my `apiTrashRestoreHandler`, showing the method/session checks, JSON decoding into `trashRestoreRequest`, and the validation that the source path is really in Trash:",
+    {
+      "type": "image",
+      "src": "go_pics/cloud_trash_restore_handler_top.png",
+      "alt": "Editor screenshot of apiTrashRestoreHandler showing POST enforcement, session validation, JSON decode into trashRestoreRequest, and checks that the provided path is inside trash/"
+    },
+    "The middle part of the handler focuses on the destination folder: it normalizes `/` to the root, cleans the string, rejects traversal, and maps it to an absolute directory under `storageRoot`:",
+    {
+      "type": "image",
+      "src": "go_pics/cloud_trash_restore_handler_middle.png",
+      "alt": "Editor screenshot of apiTrashRestoreHandler showing target_dir cleaning and validation, rejection of traversal patterns, and building the absolute destination directory path under the storage root"
+    },
+    "",
+    "### 4. Avoiding overwrites on restore with `uniqueNameInDir`",
+    "Restore has the same collision problem as moving to Trash: if the destination folder already contains a file called `leaf.jpg`, I don’t want to overwrite it silently.",
+    "To solve that, restore uses a helper that finds a free name inside the destination directory (e.g. `leaf (1).jpg`, `leaf (2).jpg`, …). This is the helper function as it exists in my codebase:",
+    {
+      "type": "image",
+      "src": "go_pics/cloud_unique_name_in_dir.png",
+      "alt": "Editor screenshot of the uniqueNameInDir helper function which tries the original base name first and then loops to find a free name like 'name (1).ext' using os.Stat"
+    },
+    "After validating source + target and computing a collision-free destination path, the handler performs the restore with `os.Rename(srcFull, dstFull)` and returns `204 No Content`.",
+    {
+      "type": "image",
+      "src": "go_pics/cloud_trash_restore_handler_bottom.png",
+      "alt": "Editor screenshot of the lower part of apiTrashRestoreHandler showing os.Stat checks for the target directory, calling uniqueNameInDir, then os.Rename to move the entry out of trash, followed by a 204 response"
+    },
+    "",
+    "---",
+    "### 5. Backend: `POST /api/trash/delete` (Delete forever)",
+    "For permanent deletion I added a dedicated endpoint that only accepts entries inside the Trash. The request shape is the same as moving to Trash: a JSON body with `{ \"path\": \"/trash/...\" }`.",
+    "The handler again enforces POST + session + path safety and rejects anything not under `/trash/`.",
+    {
+      "type": "image",
+      "src": "go_pics/cloud_trash_delete_handler_top.png",
+      "alt": "Editor screenshot of apiTrashDeleteHandler showing POST enforcement, session validation, decoding trashRequest, cleaning the path, and rejecting requests that are not inside the trash"
+    },
+    "Once the entry is verified to exist, deletion is performed using `os.RemoveAll(full)`, which works for both files and directories. On success it returns `204 No Content`.",
+    {
+      "type": "image",
+      "src": "go_pics/cloud_trash_delete_handler_bottom.png",
+      "alt": "Editor screenshot of apiTrashDeleteHandler showing os.Stat handling and os.RemoveAll(full) to permanently delete the trash entry, followed by a 204 response"
+    },
+    "",
+    "---",
+    "### 6. Backend: `POST /api/trash/empty` (Empty Trash)",
+    "Empty Trash is basically a batch delete: it ensures the trash directory exists, reads all entries under `/trash`, and removes each entry recursively.",
+    "In my handler the core loop iterates over `os.ReadDir(trashRoot)` and calls `os.RemoveAll` on every name in that directory.",
+    {
+      "type": "image",
+      "src": "go_pics/cloud_trash_empty_handler.png",
+      "alt": "Editor screenshot of apiTrashEmptyHandler showing POST enforcement, session validation, creating/accessing the trash directory, reading entries with os.ReadDir, and deleting each entry with os.RemoveAll before returning 204"
+    },
+    "",
+    "---",
+    "### 7. Frontend: showing 'Empty Trash' only in Trash mode",
+    "Finally, I wired this into the UI without adding a permanent Trash button to the dashboard:",
+    "- The Trash view is still accessed via `/cloud?path=/trash`.",
+    "- The red **Empty Trash** button is present in the HTML but hidden by default.",
+    "- When the UI detects `currentPath` is `/trash` (or starts with it), it reveals the button and binds it to `POST /api/trash/empty`.",
+    "Together with the Trash-only context menu, this makes the `/trash` page feel like a dedicated mode while still reusing the same page and renderer logic as the rest of the cloud."
+  ],
+  "date": "2025-12-20"
 }
+
 
 
 
