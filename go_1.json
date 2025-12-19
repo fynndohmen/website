@@ -1156,7 +1156,63 @@
     "Together with the Trash-only context menu, this makes the `/trash` page feel like a dedicated mode while still reusing the same page and renderer logic as the rest of the cloud."
   ],
   "date": "2025-12-20"
+},
+  {
+  "title": "Folder Upload with Preserved Subfolders (relpath) in My Go Cloud",
+  "content": [
+    "After building the Trash feature set, the next missing piece in my Go cloud was a proper **folder upload** — not just uploading the files, but keeping the complete directory structure (top-level folder + all nested subfolders).",
+    "The UI already had an “Upload Folder” entry under “+ New”, so this step was mainly about wiring it up correctly and making sure the backend can reliably recreate the folder tree."
+  ],
+  "images": [],
+  "description": [
+    "### 1. Upload Folder in the “+ New” menu",
+    "The entry was already there — now it’s connected to the hidden `<input webkitdirectory>` so selecting a folder triggers a real upload instead of a placeholder.",
+    {
+      "type": "image",
+      "src": "go_pics/upload_folder_menu.png",
+      "alt": "UI screenshot of the + New dropdown showing New Folder, Upload File, and Upload Folder"
+    },
+    "",
+    "---",
+    "### 2. Result in the dashboard: the new top-level folder appears",
+    "After selecting a folder from my PC, the cloud shows the uploaded directory as a normal folder at the current path. In my test upload, the top-level folder is called `layer1`.",
+    {
+      "type": "image",
+      "src": "go_pics/upload_folder_result_root.png",
+      "alt": "Cloud root view showing folders like code, layer1, and photos"
+    },
+    "",
+    "---",
+    "### 3. Inside `layer1`: files + the next subfolder",
+    "Opening `layer1` shows that the upload wasn’t flattened — the folder content is preserved, including subfolders.",
+    {
+      "type": "image",
+      "src": "go_pics/upload_folder_result_layer1.png",
+      "alt": "Cloud view inside /layer1 showing an uploaded image file and a subfolder named layer2"
+    },
+    "",
+    "---",
+    "### 4. Inside `layer2`: deeper nesting still intact",
+    "Going one level deeper (`/layer1/layer2`) confirms that nested folders are also recreated correctly (here: `layer3`), alongside files stored in that same directory.",
+    {
+      "type": "image",
+      "src": "go_pics/upload_folder_result_layer2.png",
+      "alt": "Cloud view inside /layer1/layer2 showing a folder named layer3 and an image file named plants.jpg"
+    },
+    "",
+    "---",
+    "### 5. The backend change: `relpath` is the reliable key",
+    "My first attempt tried to encode the relative path in the multipart filename (so Go could read it from `fh.Filename`). In practice that can be unreliable, and it caused uploads to lose the folder structure in some cases.",
+    "The fix is simple: send the relative path as its own field (`relpath`) next to each file. The backend then processes both arrays in order (`files[i]` belongs to `relpaths[i]`), cleans/validates the path, creates the needed subdirectories with `os.MkdirAll`, and saves the file into the correct location.",
+    {
+      "type": "image",
+      "src": "go_pics/upload_folder_relpaths_handler.png",
+      "alt": "Code screenshot from uploadHandler showing preserve_paths switch, reading relpaths from r.MultipartForm.Value[\"relpath\"], cleaning/validating relName, creating subdirectories with os.MkdirAll, and building dstPath"
+    }
+  ],
+  "date": "2025-12-21"
 }
+
 
 
 
