@@ -1211,12 +1211,91 @@
     }
   ],
   "date": "2025-12-21"
+},
+  {
+  "title": "Server-Side Sorting in My Go Cloud (Name + Date, With Folders First)",
+  "content": [
+    "My Go-powered cloud UI has become genuinely usable: folders on the left, a clean grid on the right, and a simple set of file operations (upload, rename, move, trash). But one thing was still missing for day-to-day use: sorting.",
+    "In this post I add server-side sorting to `GET /api/files` (by name or by modified date), keep directories pinned above files, and wire it into the UI with a small dropdown + direction toggle.",
+    "The result is a cloud view that behaves like a real file manager: you can quickly switch between alphabetical and “latest first” views without the frontend needing to re-implement filesystem semantics."
+  ],
+  "images": [],
+  "description": [
+    "### 1. Why sorting belongs on the server (for my setup)",
+    "At first glance, sorting looks like a frontend-only feature: just sort the array you get back from `/api/files` and re-render.",
+    "But I wanted a few guarantees that are easiest to enforce server-side:",
+    "- **Folders should always appear before files** (regardless of sort order).",
+    "- Sorting should be **stable and consistent**, so the UI always reflects what the backend considers the “correct” ordering.",
+    "- The server should remain the source of truth as the project grows (multi-select, pagination, search, etc.).",
+    "",
+    "---",
+    "### 2. UI: a tiny sort bar that doesn’t clutter the header",
+    "I added a simple sort control in the header: a dropdown for the sort key (Name or Date) and a direction toggle (ascending/descending). The current folder is still visible via breadcrumbs on the left.",
+    "Here is **Name (ascending)** in action — note how the URL carries the sorting state:",
+    {
+      "type": "image",
+      "src": "go_pics/cloud_sort_name_asc.png",
+      "alt": "Cloud UI screenshot showing the /photos/wallpapers folder with the sort dropdown set to Name and the direction toggle set to ascending"
+    },
+    "And here is the same folder sorted by **Date (descending)** — newest items first:",
+    {
+      "type": "image",
+      "src": "go_pics/cloud_sort_date_desc.png",
+      "alt": "Cloud UI screenshot showing the /photos/wallpapers folder with the sort dropdown set to Date and the direction toggle set to descending"
+    },
+    "In practice the frontend now calls `/api/files` like this:",
+    "- `GET /api/files?path=/photos/wallpapers&sort=name&dir=asc`",
+    "- `GET /api/files?path=/photos/wallpapers&sort=date&dir=desc`",
+    "",
+    "---",
+    "### 3. Backend: extending `/api/files` without breaking the existing model",
+    "My existing `/api/files` already produced a simple JSON array of entries with `{ name, path, type, size }`.",
+    "To sort by date I needed access to each entry’s modification time — but I did **not** want to change the JSON response shape yet.",
+    "So I introduced a small internal helper struct (`entryMeta`) used only while building and sorting the list. It wraps the original `FileEntry` plus `mtime` and a boolean for directory checks.",
+    "This screenshot shows the top of the updated handler: building `entryMeta` items while keeping the public response format unchanged:",
+    {
+      "type": "image",
+      "src": "go_pics/cloud_api_files_sort_top.png",
+      "alt": "Editor screenshot of apiFilesHandler showing entryMeta (FileEntry + mtime + isDir) and how the items slice is built from os.ReadDir entries"
+    },
+    "",
+    "---",
+    "### 4. Sorting rules: folders first, then name/date, then deterministic tie-breakers",
+    "The core rule I wanted is: **directories always come first**. After that, sort either:",
+    "- by **name** (case-insensitive), or",
+    "- by **mtime** (for the Date mode).",
+    "I also used a stable sort and deterministic tie-breakers so the ordering doesn’t “jump” unexpectedly when values are equal.",
+    "This screenshot shows the sorting logic and comparison strategy:",
+    {
+      "type": "image",
+      "src": "go_pics/cloud_api_files_sort_mid.png",
+      "alt": "Editor screenshot of apiFilesHandler showing sort key validation, direction parsing (dir=desc), cmpTime helper, and sort.SliceStable with folders-first logic and name/date comparisons"
+    },
+    "One detail I like here: the handler still returns a plain `[]FileEntry` to the client. The metadata exists only long enough to sort correctly.",
+    "",
+    "---",
+    "### 5. Returning the original response type (clean boundary)",
+    "After sorting the internal `entryMeta` slice, the handler maps it back into the original public list type (`[]FileEntry`) and encodes JSON exactly like before.",
+    "This keeps the API stable for the frontend and avoids spreading “sorting-only metadata” into the rest of the codebase.",
+    {
+      "type": "image",
+      "src": "go_pics/cloud_api_files_sort_bottom.png",
+      "alt": "Editor screenshot of apiFilesHandler showing mapping entryMeta back to []FileEntry and writing the JSON response"
+    },
+    "",
+    "---",
+    "### 6. Result and what I want to build next",
+    "With sorting in place, browsing folders with lots of photos finally feels like a real drive:",
+    "- alphabetical when I’m looking for something specific,",
+    "- newest-first when I want to see what I uploaded last,",
+    "- and folders always stay at the top so navigation never gets buried.",
+    "Next, I want to move further into “real file manager” territory:",
+    "- multi-select + bulk actions (move/trash/restore),",
+    "- drag & drop to move items onto folders in the sidebar,",
+    "- and eventually search/filter once the library grows."
+  ],
+  "date": "2025-12-22"
 }
-
-
-
-
-
 
 
 ]
