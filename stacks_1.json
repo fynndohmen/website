@@ -216,7 +216,7 @@
     "",
     "### Complexity",
     "- **Time:** `O(n)` (one pass)",
-    "- **Space:** `O(k)` for the output list (auxiliary space is `O(1)`)",
+    "- **Space:** `O(n)` for the output list (auxiliary space is `O(1)`)",
     "",
     "---",
     "## Solution 2: Monotonic Stack (Candidate Maintenance)",
