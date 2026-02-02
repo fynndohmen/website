@@ -509,7 +509,6 @@
   ],
   "date": "2026-02-08"
 },
-  [
   {
     "title": "Reverse Polish Notation in O(n): Evaluating Postfix Expressions with a Stack",
     "content": [
@@ -612,11 +611,3 @@
   }
 ]
 
-
-
-
-
-
-
-
-]
