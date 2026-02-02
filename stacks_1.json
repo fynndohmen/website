@@ -440,7 +440,78 @@
     "It’s a clean demonstration of how recursion can replace an explicit auxiliary stack, at the cost of `O(n^2)` time and `O(n)` call-stack space."
   ],
   "date": "2026-02-07"
+},
+  {
+  "title": "Next Greater Element in a Circular Array (Two Monotonic-Stack Strategies)",
+  "content": [
+    "We want, for every element, the first greater value we encounter when scanning to the right—wrapping around at the end.",
+    "This post explains two O(n) solutions using a monotonic stack: a forward double-pass (stack of indices) and a backward double-pass (stack of values)."
+  ],
+  "images": [
+    "algorithms_pics/next_greater_element_circular.png"
+  ],
+  "description": [
+    "![Next Greater Element in a Circular Array](algorithms_pics/next_greater_element_circular.png)",
+    "",
+    "## Problem in one sentence",
+    "Given an array, return a new array where `result[i]` is the **next greater element to the right** of `array[i]`. If none exists, return `-1` for that position. The array is **circular**, so after the last index you continue at index `0`.",
+    "",
+    "## The key trick: simulate circularity with a double pass",
+    "A circular scan can be simulated by iterating **twice** over the array (length `n` → `2n` steps) and mapping every step back into `[0..n-1]` using:",
+    "",
+    "- `circularIdx = idx % n`",
+    "",
+    "That way, each position “sees” the elements to its right **including** the wrap-around part.",
+    "",
+    "## Why a monotonic stack works here",
+    "In both solutions, we maintain a stack that is **monotonic decreasing** (in terms of values).",
+    "",
+    "- While the current value is **greater** than what’s represented at the stack top, we can resolve that top element’s answer: the current value is its next greater element.",
+    "- Each element is pushed and popped at most a constant number of times, which keeps the overall runtime linear.",
+    "",
+    "## Algorithm 1: forward double pass (stack holds indices)",
+    "### What the stack represents",
+    "- The stack stores **indices** whose next greater element hasn’t been found yet.",
+    "- The indices on the stack are arranged so that their values are **strictly decreasing** from bottom to top.",
+    "",
+    "### How it progresses",
+    "1. Iterate `idx` from `0` to `2n - 1` and compute `circularIdx` via modulo.",
+    "2. While the stack isn’t empty and `array[stackTop] < array[circularIdx]`:",
+    "   - Pop `top` and set `result[top] = array[circularIdx]` (we found the next greater value for that index).",
+    "3. Push `circularIdx` onto the stack.",
+    "",
+    "### Notes",
+    "- Initializing `result` with `-1` means “no greater element found”.",
+    "- This version pushes indices even in the second pass; it still works, but it may push duplicates. The time remains O(n) because each push/pop is bounded by the `2n` loop.",
+    "",
+    "## Algorithm 2: backward double pass (stack holds values)",
+    "### What the stack represents",
+    "- The stack stores **candidate values** that could be the next greater element for earlier positions.",
+    "- After cleanup, the top of the stack is the **closest** value to the right that is strictly greater than the current element (in the circular sense).",
+    "",
+    "### How it progresses",
+    "1. Iterate `idx` from `2n - 1` down to `0` and compute `circularIdx` via modulo.",
+    "2. Pop from the stack while the top value is `<= array[circularIdx]`:",
+    "   - Those values can’t be the *next greater* for the current element (they’re not greater).",
+    "3. If the stack is not empty now, its top is the next greater value → write it into `result[circularIdx]`.",
+    "4. Push `array[circularIdx]` onto the stack.",
+    "",
+    "### Why `<=` matters here",
+    "Using `<=` ensures duplicates don’t count as “greater”. If the next value is equal, we pop it and continue searching for a *strictly* greater one.",
+    "",
+    "## Complexity",
+    "Let `n` be the length of the array:",
+    "",
+    "- **Time:** `O(n)` (the loop runs `2n` steps, and each element is pushed/popped a bounded number of times).",
+    "- **Space:** `O(n)` for the stack and output array.",
+    "",
+    "## When to prefer which version",
+    "- **Forward (indices):** feels very direct—when you see a bigger number, you immediately resolve smaller ones waiting on the stack.",
+    "- **Backward (values):** often reads nicely as “maintain the next-greater candidates to the right”; also avoids storing indices by storing values directly."
+  ],
+  "date": "2026-02-08"
 }
+
 
 
 
