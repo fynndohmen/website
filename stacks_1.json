@@ -451,8 +451,6 @@
     "algorithms_pics/next_greater_element_circular.png"
   ],
   "description": [
-    "![Next Greater Element in a Circular Array](algorithms_pics/next_greater_element_circular.png)",
-    "",
     "## Problem in one sentence",
     "Given an array, return a new array where `result[i]` is the **next greater element to the right** of `array[i]`. If none exists, return `-1` for that position. The array is **circular**, so after the last index you continue at index `0`.",
     "",
