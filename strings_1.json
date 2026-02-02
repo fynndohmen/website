@@ -332,7 +332,7 @@
       "",
       "It runs in `O(n^2)` time, uses `O(1)` auxiliary space, and `O(n)` total space when counting the returned substring."
     ],
-    "date": "2026-02-09"
+    "date": "2026-02-11"
   }
 
 
