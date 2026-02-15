@@ -49,7 +49,7 @@
 
         async function fetchPosts(page) {
             try {
-                const response = await fetch(`machine_learning_${page}.json`);
+                const response = await fetch(`machinelearning_${page}.json`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
