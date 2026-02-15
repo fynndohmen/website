@@ -16,7 +16,7 @@
     "",
     {
       "type": "image",
-      "src": "machine_learning_pics/decorators_timeit_logcalls.png",
+      "src": "machinelearning_pics/decorators_timeit_logcalls.png",
       "alt": "Python code showing two decorators: timeit and log_calls, using TypeVar T, Callable[..., T], and functools.wraps"
     },
     "",
