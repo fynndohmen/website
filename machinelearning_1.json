@@ -64,5 +64,55 @@
     "This script is small, but it demonstrates a pattern that scales: decorators let you add reusable infrastructure around ML code (timing, logging, caching, validation) while keeping the model and data logic focused and uncluttered."
   ],
   "date": "2026-02-15"
+},
+  {
+  "title": "Streaming CSV Rows with a Generator: My First `read_rows()` Data Pipeline Building Block",
+  "content": [
+    "This tiny function looks almost too simple, but it taught me one of the most practical lessons about generators: you can process huge datasets row-by-row without loading everything into memory.",
+    "`read_rows()` is a generator that reads a CSV file lazily and yields one dictionary per row. That single idea (streaming instead of materializing) shows up everywhere in machine learning—data preprocessing, batching, training loops, and model serving."
+  ],
+  "images": [],
+  "description": [
+    "### The function",
+    {
+      "type": "image",
+      "src": "machinelearning_pics/read_rows_generator.png",
+      "alt": "Python generator function read_rows() using csv.DictReader and yield to stream CSV rows"
+    },
+    "",
+    "---",
+    "### What I learned about generators from this",
+    "**1) A generator does not compute all results upfront**",
+    "Because the function contains `yield`, calling `read_rows(path)` does *not* read the whole CSV. It returns a generator object, and the file is only read when someone starts iterating over it.",
+    "",
+    "**2) `yield` pauses execution and resumes later**",
+    "Each time the loop hits `yield row`, the function pauses and hands the current row to the caller. On the next iteration, execution continues exactly after that `yield` line, reading the next CSV row.",
+    "",
+    "**3) It is naturally one-pass (streaming)**",
+    "The generator reads the file forward, row by row. Once the iterator reaches the end, it’s done. No list of all rows is created unless I explicitly build one (like `list(read_rows(...))`).",
+    "",
+    "**4) The return type tells the story**",
+    "`Iterator[Dict[str, str]]` means: “you’ll receive one dictionary at a time.” Each dict maps CSV headers to cell values, which is perfect for cleaning and feature extraction steps that want named columns instead of numeric indices.",
+    "",
+    "---",
+    "### Why `csv.DictReader` fits this pattern",
+    "`csv.DictReader` already reads the file incrementally. It takes the header row as keys and turns each subsequent line into a `dict`. Combined with `yield`, this becomes a clean streaming interface: one row in, one row out.",
+    "",
+    "---",
+    "### Why this matters for Machine Learning",
+    "In ML, data is often the biggest thing in your project. If your dataset is large (logs, click data, sensor streams, scraped text, image metadata), loading everything into RAM is either slow or impossible.",
+    "",
+    "**This generator pattern helps because:**",
+    "- **Low memory usage:** you only hold one row (or one small batch) at a time.",
+    "- **Pipeline-friendly:** you can chain steps like read → clean → filter → batch without intermediate giant lists.",
+    "- **Faster feedback loop:** you can start processing immediately instead of waiting for the full dataset to load.",
+    "- **Matches real training workflows:** frameworks and dataloaders are built around iterating over samples/batches (one-pass streams are normal).",
+    "",
+    "---",
+    "### Key takeaway",
+    "`read_rows()` is my first reusable building block for streaming data. It’s small, but it teaches the core generator mindset: **pull data only when you need it**. That mindset scales directly into ML preprocessing and training pipelines."
+  ],
+  "date": "2026-02-16"
 }
+
 ]
