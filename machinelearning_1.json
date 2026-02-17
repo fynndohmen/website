@@ -173,7 +173,83 @@
     "This single dict comprehension taught me a pattern I’ll reuse constantly: apply one consistent transformation across a whole row of data in a clean, Pythonic way. In ML, where data preprocessing is everything, being fluent with comprehensions is a real productivity boost."
   ],
   "date": "2026-02-17"
+},
+  {
+  "title": "My Second Generator: Building a `batcher()` That Turns Streams into Mini-Batches",
+  "content": [
+    "After writing my first generator (`read_rows()`), I realized that streaming a dataset is only half the story. In machine learning you rarely process samples one-by-one all the way through — you usually group them into batches.",
+    "`batcher()` became my second generator in this project. It takes any iterable input, collects elements into fixed-size lists, and yields those lists one at a time. Even though the code is short, it taught me a lot about generators, `TypeVar`, and why `Iterable` is often a better function input type than `Iterator`."
+  ],
+  "images": [],
+  "description": [
+    "### The generator",
+    {
+      "type": "image",
+      "src": "machinelearning_pics/batcher_generator.png",
+      "alt": "Python batcher() generator that yields list batches from an iterable input"
+    },
+    "",
+    "---",
+    "### What `batcher()` does",
+    "`batcher(items, batch_size)` groups a stream of items into lists of length `batch_size`:",
+    "- It appends incoming items to a list called `batch`.",
+    "- Once the list reaches `batch_size`, it `yield`s that list.",
+    "- Then it starts a fresh list and continues.",
+    "- At the end, it yields the remaining items if the final batch isn’t full.",
+    "",
+    "Example: input `[1, 2, 3, 4, 5]` with `batch_size = 2` yields:",
+    "- `[1, 2]`",
+    "- `[3, 4]`",
+    "- `[5]`",
+    "",
+    "---",
+    "### What I learned from this generator",
+    "**1) Generators aren’t only for reading files — they’re great for transforming streams**",
+    "Just like `read_rows()` streams rows from disk, `batcher()` streams *batches* downstream. This keeps memory usage predictable because the program only stores the current batch list.",
+    "",
+    "**2) Why the parameter is `Iterable[T]` (not `Iterator[T]`)**",
+    "This was an important distinction:",
+    "- An **Iterable** is anything you can loop over (lists, sets, file objects, generators…).",
+    "- An **Iterator** is what you get after calling `iter(...)`, and it supports `next(...)` and gets consumed.",
+    "",
+    "A `for` loop works with an iterable because Python automatically does:",
+    "- `it = iter(items)`",
+    "- then repeatedly `next(it)`",
+    "",
+    "So typing the input as `Iterable[T]` makes `batcher()` more flexible: it can accept both lists and generators without extra wrapping.",
+    "",
+    "**3) What `T` means here (and why it appears again)**",
+    "`T = TypeVar(\"T\")` is a generic placeholder. In `batcher()`, it means: “whatever element type flows through this function.”",
+    "",
+    "- If `items` yields `int`, then `T = int` and the output is `Iterator[List[int]]`.",
+    "- If `items` yields `Dict[str, str]` (like cleaned CSV rows), then `T = Dict[str, str]` and the output is `Iterator[List[Dict[str, str]]]`.",
+    "",
+    "This is separate from how `T` is used in my decorators — it’s the same placeholder name, but each function call gets its own inferred `T` type.",
+    "",
+    "**4) Why `batch: List[T]` is typed with `T`**",
+    "Because the batch list should hold exactly the same thing that comes from `items`. Using `List[T]` preserves that relationship and helps the IDE/type checker understand what’s inside each batch.",
+    "",
+    "**5) The leftover batch matters**",
+    "The final part:",
+    "`if batch: yield batch`",
+    "prevents silently dropping the last few elements if the dataset size isn’t divisible by the batch size. That detail is critical in real data pipelines.",
+    "",
+    "---",
+    "### Why batching is important in Machine Learning",
+    "Batching is basically the default operating mode in ML:",
+    "- Neural networks train on **mini-batches** for efficiency and stable gradient updates.",
+    "- Preprocessing steps often work batch-by-batch to avoid huge memory spikes.",
+    "- Even outside deep learning, batching makes large-scale transformations faster and easier to manage.",
+    "",
+    "This generator helped me internalize the ML pipeline shape: **stream samples → group into batches → process batch-by-batch**.",
+    "",
+    "---",
+    "### Key takeaway",
+    "`batcher()` taught me how generators can be used not just to *read* data, but to *structure* a streaming pipeline. The combination of `Iterable[T]` input and `Iterator[List[T]]` output keeps the function flexible while preserving type information — exactly what you want when building ML-style data processing code."
+  ],
+  "date": "2026-02-18"
 }
+
 
 
 ]
