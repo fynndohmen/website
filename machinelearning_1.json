@@ -113,6 +113,67 @@
     "`read_rows()` is my first reusable building block for streaming data. It’s small, but it teaches the core generator mindset: **pull data only when you need it**. That mindset scales directly into ML preprocessing and training pipelines."
   ],
   "date": "2026-02-16"
+},
+  {
+  "title": "Cleaning CSV Rows with a Dict Comprehension: Why List Comprehensions Matter in ML",
+  "content": [
+    "While building my CSV cleaning script, I used a compact Python feature that shows up constantly in real data workflows: comprehensions.",
+    "In this part of the code I normalize whitespace across every column using a dictionary comprehension (same family as list comprehensions). It’s a small line of code, but it captures a powerful idea: transform data in a clear, readable, and efficient way."
+  ],
+  "images": [],
+  "description": [
+    "### The snippet",
+    {
+      "type": "image",
+      "src": "machinelearning_pics/clean_row_dict_comprehension.png",
+      "alt": "Python clean_row() function showing a dict comprehension that strips whitespace from all string values in a CSV row"
+    },
+    "",
+    "---",
+    "### Is this a list comprehension?",
+    "Strictly speaking, the highlighted block is a **dictionary comprehension**, not a list comprehension:",
+    "",
+    "- **List comprehension:** `[expr for x in items if cond]` → builds a `list`",
+    "- **Dict comprehension:** `{k: v for k, v in items}` → builds a `dict`",
+    "",
+    "They follow the same idea and syntax style, but the output container is different.",
+    "",
+    "---",
+    "### What the dict comprehension does",
+    "This block creates a new dictionary called `cleaned` from the original CSV row:",
+    "",
+    "- It loops through every `(k, v)` pair in `row.items()`.",
+    "- If the value `v` is a string, it applies `v.strip()` to remove leading/trailing whitespace.",
+    "- Otherwise, it keeps `v` unchanged.",
+    "",
+    "In other words, it performs a consistent normalization step across all columns, even those I didn’t explicitly name (like `email`, `city`, `department`, etc.).",
+    "",
+    "---",
+    "### Why do this if I already stripped some fields?",
+    "Earlier in the function I strip `name` and `country` (and I parse `age` and `salary`). That part is about **validation and correct parsing**.",
+    "The comprehension is about **global normalization**: making sure every text column in the row is clean and predictable.",
+    "",
+    "Afterwards I overwrite the important fields (`name`, `country`, `age`, `salary`) with the validated/parsed values so the final row is both clean and consistent.",
+    "",
+    "---",
+    "### Why comprehensions are useful in Machine Learning",
+    "Machine learning is data-heavy, and most ML bugs are data bugs: inconsistent strings, weird whitespace, missing values, unexpected formats.",
+    "Comprehensions are a practical tool for writing small, readable transformations that you apply everywhere in a pipeline.",
+    "",
+    "**Where they help in ML workflows:**",
+    "- **Data cleaning:** trim whitespace, normalize casing, remove bad rows, map categories.",
+    "- **Feature engineering:** build feature vectors, apply transformations, filter features.",
+    "- **Fast prototyping:** express a transformation in one clear line instead of a verbose loop.",
+    "- **Readable pipelines:** it’s easier to reason about `new = [f(x) for x in data if ok(x)]` than many lines of mutation-heavy code.",
+    "",
+    "One important caveat: for very large datasets, you often prefer **generator expressions** (streaming) over list comprehensions (materializing), because list comprehensions build the full list in memory. But for small-to-medium transformations, comprehensions are a great balance of clarity and speed.",
+    "",
+    "---",
+    "### Key takeaway",
+    "This single dict comprehension taught me a pattern I’ll reuse constantly: apply one consistent transformation across a whole row of data in a clean, Pythonic way. In ML, where data preprocessing is everything, being fluent with comprehensions is a real productivity boost."
+  ],
+  "date": "2026-02-17"
 }
+
 
 ]
