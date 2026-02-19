@@ -456,7 +456,7 @@
   ],
   "date": "2026-02-20"
 },
-  [
+  
   {
     "title": "Concurrency v2 in My CSV Toolkit: Dataclass Jobs + executor.map() (and the Tradeoffs)",
     "content": [
@@ -564,12 +564,4 @@
     ],
     "date": "2026-02-21"
   }
-]
-
-
-
-
-
-
-
 ]
