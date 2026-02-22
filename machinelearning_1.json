@@ -564,7 +564,7 @@
     ],
     "date": "2026-02-21"
   },
-  {
+{
   "title": "Producer–Consumer Pipeline in Python: Queue, Sentinel, Event & Locks (and when it’s worth it)",
   "content": [
     "After I built my CSV cleaner as a clean streaming pipeline using generators, I moved on to the next learning step: a Producer–Consumer pipeline using `queue.Queue` (Reader → Worker → Writer). The goal wasn’t “maximum speed at all costs”, but understanding how threads communicate safely, how to handle cancellation/errors robustly, and why a correct end-of-stream signal (a sentinel) is critical.",
@@ -580,7 +580,7 @@
     "",
     {
       "type": "image",
-      "src": "Screenshot 2026-02-22 105121.png",
+      "src": "pipeline-setup-queues-event-locks.png",
       "alt": "process_csv_pipeline signature: parameters, sentinel = object(), in_q/out_q as Queue(maxsize=...), stop_event, locks, first_exc and stats"
     },
     "",
@@ -594,7 +594,7 @@
     "",
     {
       "type": "image",
-      "src": "Screenshot 2026-02-20 191450.png",
+      "src": "event-vs-lock-syntax-highlighting.png",
       "alt": "Code snippet: stop_event = threading.Event() and exc_lock = threading.Lock() (different syntax highlighting)"
     },
     "",
@@ -633,7 +633,7 @@
     "",
     {
       "type": "image",
-      "src": "Screenshot 2026-02-22 105207.png",
+      "src": "reader-thread-finally-sentinels.png",
       "alt": "record_exc() guarded by exc_lock and reader_thread(): reads read_rows(), put(row), stop_event check, and finally: in_q.put(sentinel) for each worker"
     },
     "",
@@ -659,7 +659,7 @@
     "",
     {
       "type": "image",
-      "src": "Screenshot 2026-02-22 105227.png",
+      "src": "worker-thread-stop-event-cast-sentinel.png",
       "alt": "worker_thread(): in_q.get(), sentinel handling, stop_event.is_set(): continue, cast(Dict[str,str], item), clean_row(), out_q.put(cleaned), exception handling with out_q.put_nowait(sentinel)"
     },
     "",
@@ -682,7 +682,7 @@
     "",
     {
       "type": "image",
-      "src": "Screenshot 2026-02-22 105253.png",
+      "src": "writer-thread-batching-sentinels.png",
       "alt": "writer_thread(): out_q.get(), count sentinels, write header on first row, collect rows into batch and write in batch_size chunks"
     },
     "",
@@ -715,7 +715,7 @@
     "",
     {
       "type": "image",
-      "src": "Screenshot 2026-02-22 105312.png",
+      "src": "thread-start-join-order-and-error-propagation.png",
       "alt": "Thread creation (reader/writer/workers), start order, join order, error re-raise via first_exc and final stats print"
     },
     "",
