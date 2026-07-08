@@ -1382,7 +1382,7 @@
     "",
     {
       "type": "image",
-      "src": "iris_load_dataset.png",
+      "src": "machinelearning_pics/iris_load_dataset.png",
       "alt": "JupyterLab notebook cell loading the Iris dataset with load_iris(as_frame=True) and displaying df.head()"
     },
     "",
@@ -1407,7 +1407,7 @@
     "",
     {
       "type": "image",
-      "src": "iris_dataframe_head.png",
+      "src": "machinelearning_pics/iris_dataframe_head.png",
       "alt": "pandas DataFrame head output showing the first rows of the Iris dataset with sepal, petal, and target columns"
     },
     "",
@@ -1438,7 +1438,7 @@
     "",
     {
       "type": "image",
-      "src": "iris_dataframe_info.png",
+      "src": "machinelearning_pics/iris_dataframe_info.png",
       "alt": "pandas df.info() output showing column names, non-null counts, and data types for the Iris dataset"
     },
     "",
@@ -1466,7 +1466,7 @@
     "",
     {
       "type": "image",
-      "src": "iris_dataframe_describe.png",
+      "src": "machinelearning_pics/iris_dataframe_describe.png",
       "alt": "pandas df.describe() output showing summary statistics for the numeric Iris dataset columns"
     },
     "",
@@ -1502,7 +1502,7 @@
     "",
     {
       "type": "image",
-      "src": "iris_species_column.png",
+      "src": "machinelearning_pics/iris_species_column.png",
       "alt": "Iris DataFrame with an added species column mapping target values to setosa, versicolor, and virginica"
     },
     "",
@@ -1527,7 +1527,7 @@
     "",
     {
       "type": "image",
-      "src": "iris_species_countplot.png",
+      "src": "machinelearning_pics/iris_species_countplot.png",
       "alt": "Seaborn countplot showing that the Iris dataset has 50 samples for each species"
     },
     "",
