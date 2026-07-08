@@ -1291,14 +1291,14 @@
     "import matplotlib.pyplot as plt",
     "import seaborn as sns",
     "",
-    "print(\"Setup funktioniert!\")",
+    "print(\"Setup works!\")",
     "",
     "If this cell runs without errors, the environment is ready.",
     "",
     {
       "type": "image",
       "src": "machinelearning_pics/jupyterlab_import_test.png",
-      "alt": "JupyterLab notebook cell importing numpy, pandas, matplotlib, and seaborn successfully"
+      "alt": "JupyterLab notebook cell importing numpy, pandas, matplotlib, and seaborn with the output Setup works"
     },
     "",
     "---",
